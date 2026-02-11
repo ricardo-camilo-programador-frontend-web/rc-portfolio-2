@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Github, Linkedin, ArrowUpRight, Instagram, Layers, Code, Zap, 
-  ShieldCheck, Terminal, Cpu, Globe, ChevronRight, ExternalLink, Award, ChevronDown
+  ShieldCheck, Terminal, Cpu, Globe, ChevronRight, ExternalLink, Award, ChevronDown, MessageCircle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from './types';
@@ -44,7 +44,7 @@ const TRANSLATIONS: Partial<Record<LanguageCode, any>> = {
     work: { title: 'Selected', subtitle: 'Works', viewAll: 'View Full GitHub', comingSoon: 'Coming Soon' },
     career: { title: 'Professional', subtitle: 'History', present: 'Present' },
     certs: { title: 'Recognition', subtitle: '& Certifications' },
-    cta: { title: 'Upgrade your', subtitle: 'Digital Product', desc: 'Ready to collaborate with brands seeking elite engineering and world-class design.', button: 'Get in touch' }
+    cta: { title: 'Upgrade your', subtitle: 'Digital Product', desc: 'Ready to collaborate with brands seeking elite engineering and world-class design.', button: 'Email Me', whatsapp: 'WhatsApp Me' }
   },
   pt: {
     seo: { title: 'Ricardo Camilo | Engenheiro Frontend Sênior', desc: 'Engenheiro Frontend de Elite com 4+ anos de experiência. Especialista em React, Vue e Next.js.' },
@@ -55,7 +55,7 @@ const TRANSLATIONS: Partial<Record<LanguageCode, any>> = {
     work: { title: 'Trabalhos', subtitle: 'Selecionados', viewAll: 'Ver GitHub Completo', comingSoon: 'Em Breve' },
     career: { title: 'Histórico', subtitle: 'Profissional', present: 'Atualmente' },
     certs: { title: 'Reconhecimento', subtitle: '& Certificações' },
-    cta: { title: 'Eleve o nível do seu', subtitle: 'Produto Digital', desc: 'Pronto para colaborar com marcas que buscam engenharia de elite e design de classe mundial.', button: 'Vamos conversar' }
+    cta: { title: 'Eleve o nível do seu', subtitle: 'Produto Digital', desc: 'Pronto para colaborar com marcas que buscam engenharia de elite e design de classe mundial.', button: 'Enviar E-mail', whatsapp: 'Conversar no WhatsApp' }
   }
 };
 
@@ -96,6 +96,7 @@ const TIMELINE = [
 ];
 
 const USER_PHOTO = "https://persona-nextjs-chronicles-part-2.netlify.app/_next/static/media/ricardo-camilo-programador-frontend-web-developer-frontend-engineer-software-engineer-web-developer-vuejs-vue-reactjs-react-javascript-typescript.cebcabde.png";
+const WHATSAPP_URL = "https://wa.me/5514996765389";
 
 const App: React.FC = () => {
   const [langCode, setLangCode] = useState<LanguageCode>(() => (localStorage.getItem('lang') as LanguageCode) || 'pt');
@@ -127,6 +128,23 @@ const App: React.FC = () => {
 
   return (
     <div className={`min-h-screen bg-[#0A0A0A] selection:bg-[#E5D5C0] selection:text-[#0A0A0A] ${isRtl ? 'font-serif text-right' : 'text-left'}`}>
+      
+      {/* WhatsApp Floating Button */}
+      <motion.a 
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        whileHover={{ scale: 1.1, y: -5 }}
+        className="fixed bottom-8 right-8 z-[150] w-16 h-16 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-[0_10px_40px_rgba(37,211,102,0.4)] group transition-all"
+      >
+        <MessageCircle size={32} />
+        <div className="absolute right-full mr-4 bg-[#0A0A0A] border border-white/10 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest text-[#E5D5C0] opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity pointer-events-none">
+          {t.cta.whatsapp}
+        </div>
+      </motion.a>
+
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-[100] glass h-20 flex items-center px-6 md:px-12 border-b border-white/5">
         <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
@@ -213,8 +231,8 @@ const App: React.FC = () => {
           </p>
           
           <div className="flex flex-col items-center gap-8">
-            <a href="#contact" className="px-12 py-5 rounded-full border border-[#E5D5C0] text-[#0A0A0A] bg-[#E5D5C0] text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-transparent hover:text-[#E5D5C0] transition-all mb-8 shadow-2xl">
-              {t.hero.cta}
+            <a href="#contact" className="px-12 py-5 rounded-full border border-[#E5D5C0] text-[#0A0A0A] bg-[#E5D5C0] text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-transparent hover:text-[#E5D5C0] transition-all mb-8 shadow-2xl flex items-center gap-3">
+              <MessageCircle size={18} /> {t.hero.cta}
             </a>
             <motion.a href="#services" animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="w-px h-24 bg-gradient-to-b from-[#E5D5C0]/40 to-transparent block cursor-pointer" />
           </div>
@@ -395,10 +413,29 @@ const App: React.FC = () => {
             <p className="max-w-md mx-auto text-[#E5D5C0]/40 text-xs md:text-sm uppercase tracking-[0.3em] font-medium leading-loose">
               {t.cta.desc}
             </p>
-            <motion.a href="mailto:ricardo.camilo.dev@gmail.com" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-6 px-16 py-7 rounded-full accent-bg font-bold text-xs uppercase tracking-[0.3em] shadow-2xl hover:bg-white transition-all group">
-              {t.cta.button}
-              <ArrowUpRight size={20} className={`group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ${isRtl ? 'rotate-[-90deg]' : ''}`} />
-            </motion.a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <motion.a 
+                href={WHATSAPP_URL} 
+                target="_blank"
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }} 
+                className="inline-flex items-center gap-6 px-16 py-7 rounded-full bg-[#25D366] text-white font-bold text-xs uppercase tracking-[0.3em] shadow-2xl hover:bg-white hover:text-[#25D366] transition-all group"
+              >
+                <MessageCircle size={20} />
+                {t.cta.whatsapp}
+                <ArrowUpRight size={20} className={`group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ${isRtl ? 'rotate-[-90deg]' : ''}`} />
+              </motion.a>
+              
+              <motion.a 
+                href="mailto:ricardo.camilo.dev@gmail.com" 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }} 
+                className="inline-flex items-center gap-6 px-16 py-7 rounded-full accent-bg font-bold text-xs uppercase tracking-[0.3em] shadow-2xl hover:bg-white transition-all group"
+              >
+                {t.cta.button}
+                <ArrowUpRight size={20} className={`group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ${isRtl ? 'rotate-[-90deg]' : ''}`} />
+              </motion.a>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -408,6 +445,7 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 mb-20 text-[10px] font-bold uppercase tracking-[0.4em] text-[#E5D5C0]/40">
             <a href="mailto:ricardo.camilo.dev@gmail.com" className="hover:text-[#E5D5C0] transition-colors">EMAIL</a>
+            <a href={WHATSAPP_URL} target="_blank" className="hover:text-[#E5D5C0] transition-colors">WHATSAPP</a>
             <a href="https://linkedin.com/in/ricardo-camilo-frontend-web-developer/" target="_blank" className="hover:text-[#E5D5C0] transition-colors">LINKEDIN</a>
             <a href="https://github.com/ricardo-camilo-programador-frontend-web" target="_blank" className="hover:text-[#E5D5C0] transition-colors">GITHUB</a>
           </div>
