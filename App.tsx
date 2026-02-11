@@ -1,368 +1,369 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
-  Terminal, Code2, Rocket, MessageSquare, 
-  Github, Linkedin, Instagram, Twitter, 
-  ChevronRight, ArrowRight, Zap, Trophy, 
-  Layers, User, Mail, Send, Sparkles, X, Bot, Menu
+  Github, Linkedin, ArrowRight, Mail, Send, X, 
+  Bot, Menu, ExternalLink, Calendar, Briefcase, 
+  TrendingUp, Instagram, Smartphone, GraduationCap, Globe, ChevronRight
 } from 'lucide-react';
-import { Project, Skill, Testimonial } from './types';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Project, Skill } from './types';
 import { askCamiloAI } from './services/geminiService';
 
-const PROJECTS: Project[] = [
-  {
-    id: '1',
-    title: 'Breath Natural',
-    category: 'Next.js',
-    description: 'E-commerce sustentável com foco em performance extrema e UX fluida.',
-    image: 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&q=80&w=800',
-    tags: ['Next.js', 'TypeScript', 'Tailwind'],
-    link: '#',
-    metrics: '+40% Performance'
+type Language = 'pt' | 'en' | 'it' | 'es';
+
+const TRANSLATIONS = {
+  pt: {
+    nav: { home: 'Início', career: 'Carreira', projects: 'Projetos', skills: 'Skills', contact: 'Contato' },
+    hero: { badge: 'Engenheiro Frontend Sênior', title: 'Soluções Digitais', subtitle: 'de Elite.', desc: 'Transformando complexidade técnica em elegância visual e performance extrema. Foco em interfaces que convertem.', cta: 'Ver Portfolio', stats: { exp: 'Anos Exp', degree: 'FATEC Jaú', eng: 'Inglês C1', profile: 'Investigador' } },
+    career: { title: 'Jornada Profissional', subtitle: 'Experiência & Evolução', fatec: 'Bacharel em Gestão da TI', fatecDesc: 'Formação em governança, arquitetura e gestão de infraestrutura tech.', freelance: 'Freelancer Sênior', freelanceDesc: 'Desenvolvimento de soluções personalizadas para RvOne, Itú Pneus e Dra. Adriana Rezende usando Next.js 15.' },
+    projects: { title: 'Trabalhos Selecionados', subtitle: 'Engenharia de Performance', tabs: { corporate: 'Corporativos', personal: 'Pessoais' }, visit: 'Visitar Site' },
+    skills: { title: 'Arsenal Técnico', subtitle: 'Tecnologias Dominadas' },
+    contact: { title: 'Conecte-se com o', subtitle: 'Especialista.', desc: 'Disponível para novos desafios profissionais e projetos freelance de alto nível.', footer: 'Engenheiro Frontend Sênior • Jaú, SP' },
+    ai: { title: 'Camilo AI', sub: 'Especialista Advisor v4.0', placeholder: 'Investigar perfil...', prompts: ['Diferenciais técnicos', 'Freelance 2025', 'Projetos na Labi9', 'Como contratar'] }
   },
-  {
-    id: '2',
-    title: 'Food Hut',
-    category: 'React',
-    description: 'Plataforma de delivery com gestão de estado complexa e busca em tempo real.',
-    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800',
-    tags: ['React', 'Context API', 'Axios'],
-    link: '#',
-    metrics: 'Gestão de Estado'
+  en: {
+    nav: { home: 'Home', career: 'Career', projects: 'Projects', skills: 'Skills', contact: 'Contact' },
+    hero: { badge: 'Senior Frontend Engineer', title: 'Elite Digital', subtitle: 'Solutions.', desc: 'Transforming technical complexity into visual elegance and extreme performance. Focused on high-converting UIs.', cta: 'View Portfolio', stats: { exp: 'Years Exp', degree: 'FATEC Degree', eng: 'English C1', profile: 'Investigator' } },
+    career: { title: 'Professional Journey', subtitle: 'Experience & Evolution', fatec: 'B.S. in IT Management', fatecDesc: 'Degree focused on governance, architecture, and tech infrastructure management.', freelance: 'Senior Freelancer', freelanceDesc: 'Developed custom solutions for RvOne, Itú Pneus, and Dra. Adriana Rezende using Next.js 15.' },
+    projects: { title: 'Selected Works', subtitle: 'Performance Engineering', tabs: { corporate: 'Corporate', personal: 'Personal' }, visit: 'Visit Site' },
+    skills: { title: 'Technical Arsenal', subtitle: 'Mastered Tech' },
+    contact: { title: 'Connect with the', subtitle: 'Expert.', desc: 'Available for new professional challenges and high-end freelance projects.', footer: 'Senior Frontend Engineer • Jaú, SP' },
+    ai: { title: 'Camilo AI', sub: 'Senior Advisor v4.0', placeholder: 'Investigate profile...', prompts: ['Technical edge', 'Freelance 2025', 'Labi9 projects', 'How to hire'] }
   },
-  {
-    id: '3',
-    title: 'Savana Nuxt',
-    category: 'Vue',
-    description: 'Plataforma internacionalizada com SEO avançado e arquitetura Nuxt 3.',
-    image: 'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&q=80&w=800',
-    tags: ['Vue 3', 'Nuxt', 'i18n'],
-    link: '#',
-    metrics: 'SEO 100/100'
+  it: {
+    nav: { home: 'Inizio', career: 'Carriera', projects: 'Progetti', skills: 'Skill', contact: 'Contatto' },
+    hero: { badge: 'Ingegnere Frontend Senior', title: 'Soluzioni Digitali', subtitle: 'di Élite.', desc: 'Trasformare la complessità tecnica in eleganza visiva e prestazioni estreme. Focus su interfacce che convertono.', cta: 'Vedi Portfolio', stats: { exp: 'Anni Exp', degree: 'FATEC Jaú', eng: 'Inglese C1', profile: 'Investigatore' } },
+    career: { title: 'Percorso Professionale', subtitle: 'Esperienza ed Evoluzione', fatec: 'Laurea in Gestione TI', fatecDesc: 'Formazione in governance, architettura e gestione dell’infrastruttura tecnologica.', freelance: 'Freelancer Senior', freelanceDesc: 'Sviluppo di soluzioni personalizzate per RvOne, Itú Pneus e Dra. Adriana Rezende utilizzando Next.js 15.' },
+    projects: { title: 'Opere Selezionate', subtitle: 'Ingegneria delle Prestazioni', tabs: { corporate: 'Aziendali', personal: 'Personali' }, visit: 'Visita il Sito' },
+    skills: { title: 'Arsenale Tecnico', subtitle: 'Tecnologie Padroneggiate' },
+    contact: { title: 'Connettiti con', subtitle: 'l’Esperto.', desc: 'Disponibile per nuove sfide professionali e progetti freelance di alto livello.', footer: 'Ingegnere Frontend Senior • Jaú, SP' },
+    ai: { title: 'Assistente Camilo', sub: 'Consulente Senior v4.0', placeholder: 'Indagare sul profilo...', prompts: ['Vantaggio tecnico', 'Freelance 2025', 'Progetti Labi9', 'Come assumere'] }
+  },
+  es: {
+    nav: { home: 'Inicio', career: 'Carrera', projects: 'Proyectos', skills: 'Skills', contact: 'Contacto' },
+    hero: { badge: 'Ingeniero Frontend Senior', title: 'Soluciones Digitales', subtitle: 'de Élite.', desc: 'Transformando la complejidad técnica en elegancia visual y rendimiento extremo. Foco en interfaces que convierten.', cta: 'Ver Portfolio', stats: { exp: 'Años Exp', degree: 'Título FATEC', eng: 'Inglés C1', profile: 'Investigador' } },
+    career: { title: 'Trayectoria Profesional', subtitle: 'Experiencia y Evolución', fatec: 'Grado en Gestión de TI', fatecDesc: 'Formación en gobernanza, arquitectura y gestión de infraestructura tecnológica.', freelance: 'Freelancer Senior', freelanceDesc: 'Desarrollo de soluciones personalizadas para RvOne, Itú Pneus y Dra. Adriana Rezende usando Next.js 15.' },
+    projects: { title: 'Obras Seleccionadas', subtitle: 'Ingeniería de Rendimiento', tabs: { corporate: 'Corporativos', personal: 'Personales' }, visit: 'Visitar Sitio' },
+    skills: { title: 'Arsenal Técnico', subtitle: 'Tecnologías Dominadas' },
+    contact: { title: 'Conecta con el', subtitle: 'Experto.', desc: 'Disponible para nuevos desafíos profesionales y proyectos freelance de alto nivel.', footer: 'Ingeniero Frontend Senior • Jaú, SP' },
+    ai: { title: 'Asistente Camilo', sub: 'Asesor Senior v4.0', placeholder: 'Investigar perfil...', prompts: ['Diferenciales técnicos', 'Freelance 2025', 'Proyectos Labi9', 'Cómo contratar'] }
   }
+};
+
+const CORPORATE_PROJECTS: Project[] = [
+  { id: 'c1', title: 'Loor.vc Dashboard', category: 'React', description: 'Dashboard financeiro complexo para investidores de startups. Integração de APIs e visualização de dados em tempo real.', image: 'https://images.unsplash.com/photo-1551288049-bbdac8626ad1?auto=format&fit=crop&q=80&w=800', tags: ['React', 'Tailwind', 'Redux', 'REST API'], link: 'https://painel.loor.vc/investor/login', metrics: '+40% Engagement' },
+  { id: 'c2', title: 'Tipp Bank Fintech', category: 'Vue', description: 'Plataforma completa de soluções de pagamento com foco em UX fluida e segurança.', image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800', tags: ['Nuxt.js', 'Vite', 'VueUse'], link: 'https://tippbank.com.br/', metrics: 'Fintech Scale' },
+  { id: 'c3', title: 'Global Liberty Bank', category: 'Next.js', description: 'Interface bancária moderna focada em performance e acessibilidade para o mercado internacional.', image: 'https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&q=80&w=800', tags: ['Astro', 'Vue', 'Tailwind'], link: 'https://www.glbk.com.br/', metrics: 'Banking UI' }
+];
+
+const PERSONAL_PROJECTS: Project[] = [
+  { id: 'p1', title: 'Breath Natural', category: 'Next.js', description: 'Arquitetura limpa para exposição de plantas. Uso de NestJS, TypeScript e Axios no ecossistema Chronicles.', image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&q=80&w=800', tags: ['NestJS', 'TypeScript', 'Axios'], link: 'https://breath-natural-nest-chronicles-part1.netlify.app', metrics: 'Clean Arch' },
+  { id: 'p2', title: 'Food Hut', category: 'React', description: 'Aplicação de delivery responsiva explorando o ecossistema Angular e PWA.', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=800', tags: ['Angular', 'PWA', 'Tailwind'], link: 'https://food-hut-angular-chronicles-1.netlify.app/', metrics: 'UX Mobile' },
+  { id: 'p3', title: 'Savana NuxtJS', category: 'Vue', description: 'E-commerce interativo com i18n e gerenciamento de estado global via Pinia.', image: 'https://images.unsplash.com/photo-1546213258-380eb0692b42?auto=format&fit=crop&q=80&w=800', tags: ['Nuxt 3', 'Pinia', 'i18n'], link: 'https://savana-nuxtjs-chronicles-part-1.netlify.app/en', metrics: 'Global State' }
 ];
 
 const SKILLS: Skill[] = [
-  { name: 'React.js', level: 95, icon: '⚛️', category: 'Frontend' },
-  { name: 'Vue.js', level: 90, icon: '🟢', category: 'Frontend' },
-  { name: 'TypeScript', level: 85, icon: '📘', category: 'Frontend' },
-  { name: 'Next.js', level: 92, icon: '▲', category: 'Frontend' },
-  { name: 'Tailwind CSS', level: 98, icon: '🌊', category: 'Frontend' },
-  { name: 'Node.js', level: 70, icon: '📦', category: 'Backend' },
+  { name: 'React / Next.js', level: 95, icon: '⚛️', category: 'Frontend' },
+  { name: 'Vue / Nuxt.js', level: 93, icon: '🟢', category: 'Frontend' },
+  { name: 'TypeScript', level: 90, icon: '📘', category: 'Frontend' },
+  { name: 'NestJS / Node', level: 82, icon: '🦁', category: 'Frontend' },
+  { name: 'Clean Code', level: 95, icon: '🧹', category: 'Tools' },
+  { name: 'Performance', level: 95, icon: '⚡', category: 'Tools' },
 ];
 
 const App: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [lang, setLang] = useState<Language>(() => (localStorage.getItem('lang') as Language) || 'pt');
+  const [activeTab, setActiveTab] = useState<'Corporate' | 'Personal'>('Corporate');
   const [chatOpen, setChatOpen] = useState(false);
   const [chatInput, setChatInput] = useState('');
   const [chatMessages, setChatMessages] = useState<{role: 'user' | 'bot', text: string}[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const t = TRANSLATIONS[lang];
+  const projectsToDisplay = activeTab === 'Corporate' ? CORPORATE_PROJECTS : PERSONAL_PROJECTS;
 
   useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = (window.scrollY / totalScroll) * 100;
-      setScrollProgress(currentProgress);
-      
-      const reveals = document.querySelectorAll('.section-reveal');
-      reveals.forEach(el => {
-        const windowHeight = window.innerHeight;
-        const revealTop = el.getBoundingClientRect().top;
-        if (revealTop < windowHeight * 0.85) el.classList.add('visible');
-      });
-    };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    localStorage.setItem('lang', lang);
+  }, [lang]);
 
   const handleChatSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!chatInput.trim()) return;
-
+    if (!chatInput.trim() || isTyping) return;
     const userMsg = chatInput;
     setChatInput('');
     setChatMessages(prev => [...prev, { role: 'user', text: userMsg }]);
     setIsTyping(true);
-
     try {
-      const response = await askCamiloAI(userMsg, chatMessages);
-      setChatMessages(prev => [...prev, { role: 'bot', text: response || 'Olá! Como posso ajudar?' }]);
-    } catch (error) {
-      setChatMessages(prev => [...prev, { role: 'bot', text: 'Ops, tive um problema de conexão. Ricardo está codando algo épico agora!' }]);
-    } finally {
-      setIsTyping(false);
-    }
+      const response = await askCamiloAI(userMsg, chatMessages, lang);
+      setChatMessages(prev => [...prev, { role: 'bot', text: response }]);
+    } catch (err) {
+      setChatMessages(prev => [...prev, { role: 'bot', text: 'Error.' }]);
+    } finally { setIsTyping(false); }
   };
 
-  const filteredProjects = activeFilter === 'All' ? PROJECTS : PROJECTS.filter(p => p.category === activeFilter);
+  const linkLinkedIn = "https://www.linkedin.com/in/ricardo-camilo-programador-frontend-web-developer/";
+  const linkGitHub = "https://github.com/ricardo564";
+  const phoneNumber = "+55 14 996765389";
+
+  const TIMELINE = [
+    { period: 'Jul 2025 - Presente', company: 'Consir Informática', role: 'Desenvolvedor Frontend Pleno', desc: 'Engenharia de software focada em Vue.js e TypeScript para sistemas de alta demanda.', type: 'CLT' },
+    { period: 'Jan 2025 - Jul 2025', company: t.career.freelance, role: 'Frontend Specialist', desc: t.career.freelanceDesc, type: 'PJ / Freelance' },
+    { period: 'Jan 2021 - Dez 2024', company: 'Labi9.com', role: 'Desenvolvedor Frontend', desc: '4 anos liderando o frontend de fintechs e dashboards de investimento corporativos.', type: 'CLT' },
+    { period: 'Set 2019 - Dez 2019', company: 'SIALOG Software', role: 'Estagiário Frontend', desc: 'Início na programação com Ruby on Rails para sistemas de logística.', type: 'Estágio' }
+  ];
 
   return (
-    <div className="relative">
-      {/* Progress Bar */}
-      <div className="fixed top-0 left-0 h-1 accent-gradient z-[100] transition-all duration-300" style={{ width: `${scrollProgress}%` }} />
-
-      {/* Header */}
-      <header className="fixed top-0 w-full z-50 border-b border-white/5 glass transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2 group cursor-pointer" onClick={() => window.scrollTo(0, 0)}>
-            <div className="w-10 h-10 accent-gradient rounded-xl flex items-center justify-center font-bold text-xl group-hover:rotate-12 transition-transform">R</div>
-            <span className="font-bold tracking-tight text-xl max-sm:hidden">RICARDO <span className="text-teal-400">CAMILO</span></span>
+    <div className="min-h-screen relative selection:bg-teal-500/30">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full z-50 glass border-b border-white/5 h-20 flex items-center px-6 md:px-12">
+        <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <div className="w-10 h-10 accent-gradient rounded-xl flex items-center justify-center font-bold text-xl group-hover:rotate-12 transition-all shadow-lg">R</div>
+            <span className="font-bold tracking-tight text-xl max-sm:hidden uppercase tracking-tighter">RICARDO <span className="text-teal-400 font-black">CAMILO</span></span>
+          </motion.div>
+          
+          <div className="hidden lg:flex gap-10 text-[10px] font-black text-zinc-400 uppercase tracking-[0.2em]">
+            {Object.keys(t.nav).map((key) => (
+              <a key={key} href={`#${key}`} className="hover:text-white transition-colors relative group">
+                {t.nav[key as keyof typeof t.nav]}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-400 transition-all group-hover:w-full" />
+              </a>
+            ))}
           </div>
 
-          <nav className="hidden md:flex items-center gap-8 font-medium text-sm text-zinc-400">
-            {['Início', 'Jornada', 'Projetos', 'Contato'].map(item => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-white transition-colors">{item}</a>
-            ))}
-            <button className="px-5 py-2.5 rounded-full accent-gradient text-white text-xs font-bold hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all">
-              DOWNLOAD CV
-            </button>
-          </nav>
-
-          <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <Menu size={24} />
-          </button>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 glass px-3 py-1.5 rounded-full border border-white/5">
+              <Globe size={14} className="text-teal-400" />
+              {(['pt', 'en', 'it', 'es'] as const).map((l) => (
+                <button key={l} onClick={() => setLang(l)} className={`text-[10px] font-black uppercase transition-all px-2 py-0.5 rounded-md ${lang === l ? 'bg-teal-500 text-white shadow-lg' : 'text-zinc-500 hover:text-white'}`}>{l}</button>
+              ))}
+            </div>
+            <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="mailto:ricardo.camilo.dev@gmail.com" className="px-6 py-2.5 rounded-full accent-gradient text-white text-[10px] font-black shadow-lg uppercase tracking-widest hidden sm:block">Hire Ricardo</motion.a>
+          </div>
         </div>
-      </header>
+      </nav>
 
-      {/* Hero Section */}
-      <section id="início" className="min-h-screen pt-40 pb-20 px-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-teal-500/5 blur-[120px] rounded-full -z-10" />
+      {/* Hero */}
+      <section id="home" className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-500/5 blur-[150px] rounded-full -z-10" />
         
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-teal-500/20 text-teal-400 text-xs font-bold mb-8 float">
-          <Sparkles size={14} /> DISPONÍVEL PARA NOVOS PROJETOS
-        </div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-teal-500/20 text-teal-400 text-[9px] font-black mb-10 uppercase tracking-[0.2em]">
+          <GraduationCap size={12} /> {t.hero.badge}
+        </motion.div>
 
-        <h1 className="text-5xl md:text-8xl font-extrabold mb-6 tracking-tighter leading-tight text-gradient max-w-5xl">
-          Construindo Experiências <span className="text-teal-400 underline decoration-teal-400/30 underline-offset-8">Extraordinárias</span> na Web
+        <h1 className="text-5xl md:text-[8rem] font-black text-gradient leading-[0.85] tracking-tighter mb-10 text-center max-w-6xl uppercase">
+          {t.hero.title} <br/><span className="text-teal-400 italic">{t.hero.subtitle}</span>
         </h1>
-        
-        <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-12 leading-relaxed">
-          Especialista Frontend transformando desafios empresariais em soluções digitais de alto impacto. Interfaces intuitivas, performance 100/100 e foco em conversão.
+
+        <p className="text-zinc-500 text-lg md:text-xl max-w-2xl text-center mb-16 leading-relaxed font-medium">
+          {t.hero.desc}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4">
-          <a href="#projetos" className="px-8 py-4 rounded-xl accent-gradient text-white font-bold flex items-center gap-2 hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all">
-            VER PROJETOS <ArrowRight size={18} />
+        <div className="flex flex-col sm:flex-row gap-5">
+          <a href="#projects" className="px-12 py-5 rounded-2xl accent-gradient text-white font-black flex items-center gap-3 hover:shadow-[0_0_40px_rgba(45,212,191,0.4)] transition-all uppercase text-xs tracking-widest">
+            {t.hero.cta} <ArrowRight size={18} />
           </a>
-          <button onClick={() => setChatOpen(true)} className="px-8 py-4 rounded-xl glass border border-white/10 hover:border-teal-500/30 text-white font-bold transition-all">
-            FALAR COM ASSISTENTE IA
+          <button onClick={() => setChatOpen(true)} className="px-12 py-5 rounded-2xl glass border border-white/10 hover:border-teal-400/30 text-white font-black transition-all uppercase text-xs tracking-widest">
+            AI Assistant
           </button>
         </div>
 
-        <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl w-full">
-          <Stat label="4+ Anos" desc="De Experiência" />
-          <Stat label="Sites 40%" desc="Mais Rápidos" />
-          <Stat label="60% Mais" desc="Eficiência Dev" />
-          <Stat label="100%" desc="Foco em Resultados" />
+        <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-12 w-full max-w-5xl border-t border-white/5 pt-16">
+          <HeroStat label="4+" desc={t.hero.stats.exp} />
+          <HeroStat label="FATEC" desc={t.hero.stats.degree} />
+          <HeroStat label="C1" desc={t.hero.stats.eng} />
+          <HeroStat label="DISC" desc={t.hero.stats.profile} />
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projetos" className="py-24 px-6 bg-zinc-950/50">
-        <div className="max-w-7xl mx-auto section-reveal">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-            <div>
-              <p className="text-teal-400 font-bold tracking-widest text-xs uppercase mb-4">Trabalhos Selecionados</p>
-              <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-gradient">Resultados Reais</h2>
+      {/* Timeline */}
+      <section id="career" className="py-32 px-6 bg-zinc-950/40">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-black text-gradient uppercase tracking-tighter">{t.career.title}</h2>
+            <p className="text-zinc-600 font-mono text-[10px] mt-4 uppercase tracking-[0.3em]">{t.career.subtitle}</p>
+          </div>
+
+          <div className="space-y-12 relative">
+            <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-zinc-900 hidden md:block" />
+            {TIMELINE.map((exp, i) => (
+              <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="relative pl-12 group">
+                <div className="absolute left-0 top-0 w-10 h-10 accent-gradient rounded-xl flex items-center justify-center text-white shadow-xl z-10 group-hover:scale-110 transition-all border-4 border-zinc-900">
+                  <Briefcase size={18} />
+                </div>
+                <div className="glass p-10 rounded-[2.5rem] hover:border-teal-400/30 transition-all cursor-default group">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div>
+                      <h3 className="text-xl font-black text-white mb-1 group-hover:text-teal-400 transition-colors">{exp.role}</h3>
+                      <p className="text-teal-400/80 font-black text-[10px] uppercase tracking-widest">{exp.company} • {exp.type}</p>
+                    </div>
+                    <div className="flex items-center gap-2 text-zinc-600 font-mono text-[10px] uppercase">
+                      <Calendar size={14} /> {exp.period}
+                    </div>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed">{exp.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+            <div className="relative pl-12">
+               <div className="absolute left-0 top-0 w-10 h-10 bg-zinc-800 rounded-xl flex items-center justify-center text-zinc-400 border-4 border-zinc-900"><GraduationCap size={18} /></div>
+               <div className="glass p-10 rounded-[2.5rem] border border-white/5 group hover:border-teal-400/30 transition-all">
+                 <h3 className="text-xl font-black text-white mb-2 uppercase tracking-tighter">{t.career.fatec}</h3>
+                 <p className="text-zinc-500 font-black text-[10px] uppercase tracking-widest">FATEC Jaú • 2017 — 2023</p>
+                 <p className="text-zinc-400 text-sm mt-4">{t.career.fatecDesc}</p>
+               </div>
             </div>
-            
-            <div className="flex gap-2 flex-wrap">
-              {['All', 'React', 'Vue', 'Next.js'].map(cat => (
-                <button 
-                  key={cat}
-                  onClick={() => setActiveFilter(cat)}
-                  className={`px-6 py-2 rounded-full text-xs font-bold transition-all ${activeFilter === cat ? 'accent-gradient text-white' : 'glass text-zinc-500 hover:text-white border-white/5'}`}
-                >
-                  {cat.toUpperCase()}
-                </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+            <div>
+              <h2 className="text-4xl md:text-7xl font-black text-gradient uppercase tracking-tighter">{t.projects.title}</h2>
+              <p className="text-zinc-600 font-mono text-[10px] mt-4 uppercase tracking-[0.3em]">{t.projects.subtitle}</p>
+            </div>
+            <div className="flex p-1 bg-white/5 rounded-2xl glass">
+              {(['Corporate', 'Personal'] as const).map(tab => (
+                <button key={tab} onClick={() => setActiveTab(tab)} className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === tab ? 'accent-gradient text-white shadow-xl' : 'text-zinc-500 hover:text-white'}`}>{t.projects.tabs[tab.toLowerCase() as keyof typeof t.projects.tabs]}</button>
               ))}
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map(project => (
-              <div key={project.id} className="group relative glass rounded-2xl overflow-hidden hover:border-teal-500/40 transition-all hover-lift">
-                <div className="h-56 overflow-hidden">
-                  <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <span className="px-3 py-1 rounded-md bg-teal-500/10 text-teal-400 text-[10px] font-bold uppercase tracking-widest border border-teal-500/20">{project.category}</span>
-                    <span className="text-[10px] font-mono text-zinc-500">{project.metrics}</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <AnimatePresence mode="popLayout">
+              {projectsToDisplay.map((project) => (
+                <motion.div layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} key={project.id} className="group glass rounded-[3rem] overflow-hidden hover:border-teal-400/30 transition-all cursor-pointer shadow-2xl">
+                  <div className="h-64 relative overflow-hidden">
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" />
+                    <div className="absolute inset-0 bg-zinc-950/40" />
+                    <div className="absolute bottom-4 left-6 right-6 flex justify-between items-center">
+                      <span className="text-[9px] font-black text-teal-400 bg-black/60 px-3 py-1.5 rounded-lg border border-teal-400/20 uppercase tracking-widest">{project.metrics}</span>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-teal-400 transition-colors">{project.title}</h3>
-                  <p className="text-sm text-zinc-400 mb-6 line-clamp-2 leading-relaxed">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="text-[10px] font-mono text-zinc-500">#{tag}</span>
-                    ))}
+                  <div className="p-8">
+                    <h3 className="text-xl font-black mb-3 text-white group-hover:text-teal-400 transition-all uppercase">{project.title}</h3>
+                    <p className="text-zinc-500 text-xs leading-relaxed mb-6 line-clamp-2">{project.description}</p>
+                    <div className="flex gap-2 mb-6">{project.tags.slice(0, 3).map(tag => <span key={tag} className="text-[8px] font-black text-zinc-600 uppercase tracking-tighter px-2 py-1 bg-white/5 rounded border border-white/5">{tag}</span>)}</div>
+                    <a href={project.link} target="_blank" className="text-teal-400 font-black text-[10px] uppercase flex items-center gap-2 tracking-widest hover:gap-4 transition-all">{t.projects.visit} <ExternalLink size={12} /></a>
                   </div>
-                  <a href={project.link} className="flex items-center gap-2 text-sm font-bold text-white group-hover:gap-4 transition-all uppercase tracking-widest">
-                    Explorar Case <ChevronRight size={16} />
-                  </a>
-                </div>
-              </div>
-            ))}
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       </section>
 
-      {/* Tech Stack & Expertise */}
-      <section id="jornada" className="py-24 px-6 overflow-hidden">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-20 section-reveal">
-          <div className="flex-1">
-            <p className="text-teal-400 font-bold tracking-widest text-xs uppercase mb-4">Tech Stack & Mastery</p>
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-gradient mb-8 leading-tight">Soluções que não <br/>apenas funcionam, <br/><span className="text-teal-400">performam.</span></h2>
-            <p className="text-lg text-zinc-400 mb-12 max-w-xl leading-relaxed">
-              Minha abordagem foca em código limpo, arquitetura escalável e SEO técnico. Graduado pela FATEC, busco a excelência em cada linha de código para garantir que seu negócio tenha a melhor fundação digital possível.
-            </p>
-            
-            <div className="grid grid-cols-2 gap-6">
-              <div className="glass p-6 rounded-2xl border-l-4 border-teal-500">
-                <div className="flex items-center gap-3 mb-2">
-                  <Zap className="text-teal-400" size={20} />
-                  <span className="font-bold">Alta Performance</span>
-                </div>
-                <p className="text-xs text-zinc-500">Redução drástica no tempo de carregamento e melhoria de Core Web Vitals.</p>
-              </div>
-              <div className="glass p-6 rounded-2xl border-l-4 border-cyan-500">
-                <div className="flex items-center gap-3 mb-2">
-                  <Layers className="text-cyan-400" size={20} />
-                  <span className="font-bold">Arquitetura Moderna</span>
-                </div>
-                <p className="text-xs text-zinc-500">Uso de Next.js, Nuxt e Micro-frontends para escalabilidade real.</p>
-              </div>
-            </div>
+      {/* Skills */}
+      <section id="skills" className="py-32 px-6 bg-zinc-950/40">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-24">
+            <h2 className="text-4xl md:text-6xl font-black text-gradient uppercase">{t.skills.title}</h2>
+            <p className="text-zinc-600 font-mono text-[10px] mt-4 uppercase tracking-[0.3em]">{t.skills.subtitle}</p>
           </div>
-
-          <div className="flex-1 grid grid-cols-2 gap-4">
-            {SKILLS.map(skill => (
-              <div key={skill.name} className="glass p-8 rounded-2xl hover:bg-white/5 transition-all group hover-lift">
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-6">
+            {SKILLS.map((skill, idx) => (
+              <motion.div key={skill.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.05 }} className="glass p-8 rounded-[2rem] text-center hover:bg-teal-400/5 transition-all group">
                 <div className="text-4xl mb-6 grayscale group-hover:grayscale-0 transition-all">{skill.icon}</div>
-                <h4 className="font-bold text-lg mb-4">{skill.name}</h4>
-                <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden">
-                  <div className="h-full accent-gradient group-hover:opacity-100 transition-all" style={{ width: `${skill.level}%` }} />
+                <h4 className="font-black text-[10px] text-zinc-400 group-hover:text-white uppercase tracking-widest leading-tight">{skill.name}</h4>
+                <div className="mt-4 w-full h-0.5 bg-white/5 rounded-full overflow-hidden">
+                  <motion.div initial={{ width: 0 }} whileInView={{ width: `${skill.level}%` }} className="h-full accent-gradient shadow-[0_0_10px_rgba(45,212,191,0.5)]" />
                 </div>
-                <span className="text-[10px] font-mono text-zinc-600 mt-2 block">{skill.level}% Mastery</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section id="contato" className="py-24 px-6 relative">
-        <div className="max-w-4xl mx-auto glass p-12 md:p-20 rounded-[3rem] text-center border-teal-500/20 shadow-[0_0_80px_rgba(45,212,191,0.1)] section-reveal">
-          <h2 className="text-4xl md:text-7xl font-extrabold text-gradient mb-8 tracking-tighter">Vamos criar algo <br/><span className="text-teal-400">Extraordinário?</span></h2>
-          <p className="text-zinc-400 text-lg mb-12 max-w-xl mx-auto leading-relaxed">
-            Como desenvolvedor metódico e dedicado, transformo ideias em experiências digitais memoráveis. Seu próximo projeto merece o melhor.
-          </p>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-            <a href="mailto:ricardo.camilo.dev@gmail.com" className="px-10 py-5 rounded-full accent-gradient text-white font-bold flex items-center gap-3 hover:scale-105 transition-all text-lg">
-              <Mail size={20} /> ricardo.camilo.dev@gmail.com
-            </a>
-            <div className="flex gap-4">
-              <SocialIcon icon={<Github size={20} />} href="https://github.com/ricardo-camilo-programador-frontend-web" />
-              <SocialIcon icon={<Linkedin size={20} />} href="https://www.linkedin.com/in/ricardo-camilo-programador-frontend-web-developer/" />
-              <SocialIcon icon={<Twitter size={20} />} href="#" />
+      {/* Contact */}
+      <section id="contact" className="py-32 px-6">
+        <div className="max-w-5xl mx-auto glass p-16 md:p-32 rounded-[4rem] text-center border-teal-500/10 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-teal-400/5 blur-[120px] rounded-full" />
+          <h2 className="text-5xl md:text-8xl font-black text-gradient leading-[0.85] tracking-tighter mb-10 uppercase">
+            {t.contact.title} <br/><span className="text-teal-400 italic">{t.contact.subtitle}</span>
+          </h2>
+          <p className="text-zinc-500 text-lg mb-16 max-w-xl mx-auto font-medium">{t.contact.desc}</p>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-10">
+            <div className="text-left space-y-4">
+              <ContactLink icon={<Mail />} label="ricardo.camilo.dev@gmail.com" href="mailto:ricardo.camilo.dev@gmail.com" />
+              <ContactLink icon={<Smartphone />} label={phoneNumber} href={`tel:${phoneNumber.replace(/\s+/g, '')}`} />
+            </div>
+            <div className="flex gap-6">
+              <SocialIcon icon={<Linkedin size={24} />} href={linkLinkedIn} />
+              <SocialIcon icon={<Github size={24} />} href={linkGitHub} />
+              <SocialIcon icon={<Instagram size={24} />} href="https://www.instagram.com/ricardo.camilo.dev/" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-white/5 glass">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-zinc-500 text-xs font-mono">© 2026 RICARDO CAMILO. BUILT WITH ☕ & REACT 19</p>
-          <div className="flex gap-8 text-xs font-bold text-zinc-500">
-            <a href="#" className="hover:text-teal-400 transition-colors uppercase tracking-widest">Privacy Policy</a>
-            <a href="#" className="hover:text-teal-400 transition-colors uppercase tracking-widest">Sitemap</a>
-            <a href="#" className="hover:text-teal-400 transition-colors uppercase tracking-widest">Legal</a>
-          </div>
-        </div>
-      </footer>
-
-      {/* AI Assistant Bubble */}
-      <div className="fixed bottom-8 right-8 z-[100] group">
-        <button 
-          onClick={() => setChatOpen(!chatOpen)}
-          className={`w-16 h-16 rounded-2xl accent-gradient text-white shadow-2xl flex items-center justify-center transition-all hover:scale-110 active:scale-95 ${chatOpen ? 'rotate-90' : ''}`}
-        >
+      {/* AI Assistant */}
+      <div className="fixed bottom-8 right-8 z-[200]">
+        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => setChatOpen(!chatOpen)} className="w-16 h-16 rounded-2xl accent-gradient text-white shadow-2xl flex items-center justify-center transition-all">
           {chatOpen ? <X size={28} /> : <Bot size={28} />}
-        </button>
-        <div className="absolute right-20 bottom-0 glass px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity translate-x-4 group-hover:translate-x-0 pointer-events-none">
-          Pergunte ao Camilo AI!
-        </div>
+        </motion.button>
+        <AnimatePresence>
+          {chatOpen && (
+            <motion.div initial={{ opacity: 0, y: 20, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.9 }} className="absolute bottom-20 right-0 w-80 md:w-[420px] glass rounded-[3rem] shadow-2xl flex flex-col overflow-hidden border border-teal-500/20">
+              <div className="p-8 accent-gradient text-white">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center"><Bot size={22} /></div>
+                  <div>
+                    <h4 className="font-black text-sm uppercase tracking-widest">{t.ai.title}</h4>
+                    <p className="text-[8px] opacity-70 font-black uppercase tracking-[0.2em]">{t.ai.sub}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="h-[420px] overflow-y-auto p-8 space-y-6 bg-zinc-950/30">
+                {chatMessages.length === 0 && (
+                  <div className="text-center py-10 flex flex-col gap-3">
+                    <p className="text-zinc-500 text-[9px] uppercase tracking-[0.3em] font-black opacity-50 mb-4">Investigator Mode Active</p>
+                    {t.ai.prompts.map(p => <button key={p} onClick={() => setChatInput(p)} className="px-5 py-3 rounded-2xl bg-white/5 border border-white/5 text-zinc-400 text-[9px] font-black uppercase tracking-[0.2em] hover:bg-teal-400/10 hover:text-teal-400 transition-all text-left">{p}</button>)}
+                  </div>
+                )}
+                {chatMessages.map((m, i) => (
+                  <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-[85%] p-5 rounded-3xl text-xs leading-relaxed font-medium ${m.role === 'user' ? 'bg-teal-500 text-white shadow-xl' : 'glass border-white/5 text-zinc-300 shadow-xl'}`}>{m.text}</div>
+                  </div>
+                ))}
+                {isTyping && <div className="flex justify-start animate-pulse"><div className="glass p-4 rounded-2xl flex gap-1.5"><div className="w-1.5 h-1.5 bg-teal-400 rounded-full" /><div className="w-1.5 h-1.5 bg-teal-400 rounded-full" /><div className="w-1.5 h-1.5 bg-teal-400 rounded-full" /></div></div>}
+              </div>
+              <form onSubmit={handleChatSubmit} className="p-6 bg-black/40 flex gap-3 border-t border-white/5">
+                <input type="text" value={chatInput} onChange={e => setChatInput(e.target.value)} placeholder={t.ai.placeholder} className="flex-1 bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-xs focus:outline-none focus:border-teal-500 transition-all font-medium text-white" />
+                <button className="p-4 accent-gradient rounded-2xl text-white hover:scale-105 transition-all"><Send size={20}/></button>
+              </form>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
-      {/* Chat Window */}
-      {chatOpen && (
-        <div className="fixed bottom-28 right-8 w-80 md:w-96 glass rounded-[2rem] shadow-2xl z-[100] flex flex-col overflow-hidden border border-teal-500/20 animate-in fade-in slide-in-from-bottom-10 duration-500">
-          <div className="p-6 accent-gradient text-white flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-                <Bot size={18} />
-              </div>
-              <div>
-                <h4 className="font-bold text-sm">Camilo AI</h4>
-                <p className="text-[10px] opacity-80 uppercase tracking-widest">Assistente Virtual</p>
-              </div>
-            </div>
-            <button onClick={() => setChatOpen(false)} className="hover:bg-black/10 p-1 rounded-md transition-colors"><X size={18} /></button>
-          </div>
-          
-          <div className="flex-1 h-80 overflow-y-auto p-6 space-y-4 bg-zinc-950/20">
-            {chatMessages.length === 0 && (
-              <p className="text-zinc-500 text-xs italic text-center py-10">Olá! Eu sou o assistente do Ricardo. Como posso te ajudar hoje?</p>
-            )}
-            {chatMessages.map((m, i) => (
-              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[80%] p-3 rounded-2xl text-xs leading-relaxed ${m.role === 'user' ? 'bg-teal-500 text-white font-semibold' : 'glass border-white/5 text-zinc-300'}`}>
-                  {m.text}
-                </div>
-              </div>
-            ))}
-            {isTyping && (
-              <div className="flex justify-start">
-                <div className="glass p-3 rounded-2xl flex gap-1">
-                  <div className="w-1 h-1 bg-teal-400 rounded-full animate-bounce" />
-                  <div className="w-1 h-1 bg-teal-400 rounded-full animate-bounce [animation-delay:0.2s]" />
-                  <div className="w-1 h-1 bg-teal-400 rounded-full animate-bounce [animation-delay:0.4s]" />
-                </div>
-              </div>
-            )}
-          </div>
-
-          <form onSubmit={handleChatSubmit} className="p-4 bg-black/20 flex gap-2">
-            <input 
-              type="text" 
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
-              placeholder="Digite sua dúvida..." 
-              className="flex-1 bg-white/5 border border-white/10 rounded-xl py-2 px-4 text-xs focus:outline-none focus:border-teal-500"
-            />
-            <button className="p-2 accent-gradient rounded-xl text-white hover:scale-105 transition-all"><Send size={16} /></button>
-          </form>
-        </div>
-      )}
+      <footer className="py-20 border-t border-white/5 text-center px-6">
+        <p className="text-zinc-700 text-[10px] font-black uppercase tracking-[0.5em]">© 2026 RICARDO CAMILO • {t.contact.footer}</p>
+      </footer>
     </div>
   );
 };
 
-const Stat: React.FC<{ label: string, desc: string }> = ({ label, desc }) => (
-  <div className="text-center group">
-    <div className="text-3xl font-black text-white group-hover:text-teal-400 transition-colors">{label}</div>
-    <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mt-1">{desc}</div>
+const ContactLink: React.FC<{ icon: React.ReactNode, label: string, href: string }> = ({ icon, label, href }) => (
+  <a href={href} className="flex items-center gap-3 text-zinc-400 hover:text-teal-400 transition-all font-mono text-sm tracking-tighter group">
+    <span className="p-2 glass rounded-lg group-hover:bg-teal-400/10 group-hover:text-teal-400 transition-all">{icon}</span>
+    {label}
+  </a>
+);
+
+const HeroStat: React.FC<{ label: string, desc: string }> = ({ label, desc }) => (
+  <div className="text-center group cursor-default">
+    <div className="text-3xl md:text-5xl font-black text-white group-hover:text-teal-400 transition-all tracking-tighter">{label}</div>
+    <div className="text-[9px] font-black text-zinc-600 uppercase tracking-widest mt-3">{desc}</div>
   </div>
 );
 
 const SocialIcon: React.FC<{ icon: React.ReactNode, href: string }> = ({ icon, href }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-xl glass flex items-center justify-center hover:bg-teal-500/20 hover:border-teal-500/40 transition-all hover-lift text-zinc-400 hover:text-teal-400">
+  <motion.a whileHover={{ y: -5, scale: 1.1 }} href={href} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-2xl glass flex items-center justify-center text-zinc-400 hover:text-teal-400 border border-white/5 shadow-2xl transition-all">
     {icon}
-  </a>
+  </motion.a>
 );
 
 export default App;
