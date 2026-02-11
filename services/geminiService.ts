@@ -16,7 +16,7 @@ Ricardo Camilo:
 - Idiomas: Português (Nativo), Inglês (C1), Italiano (Básico), Espanhol (Intermediário).
 - Contato: +55 (14) 99676-5389 | ricardo.camilo.dev@gmail.com
 - LinkedIn: https://www.linkedin.com/in/ricardo-camilo-programador-frontend-web-developer/
-- GitHub: https://github.com/ricardo564
+- GitHub: https://github.com/ricardo-camilo-programador-frontend-web
 - Perfil DISC: Investigador (Focado, Estratégico, Perfeccionista, Técnico).
 `;
 

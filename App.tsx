@@ -42,7 +42,7 @@ const TRANSLATIONS = {
   es: {
     nav: { home: 'Inicio', career: 'Carrera', projects: 'Proyectos', skills: 'Skills', contact: 'Contacto' },
     hero: { badge: 'Ingeniero Frontend Senior', title: 'Soluciones Digitales', subtitle: 'de Élite.', desc: 'Transformando la complejidad técnica en elegancia visual y rendimiento extremo. Foco en interfaces que convierten.', cta: 'Ver Portfolio', stats: { exp: 'Años Exp', degree: 'Título FATEC', eng: 'Inglés C1', profile: 'Investigador' } },
-    career: { title: 'Trayectoria Profesional', subtitle: 'Experiencia y Evolución', fatec: 'Grado en Gestión de TI', fatecDesc: 'Formación en gobernanza, arquitectura y gestión de infraestructura tecnológica.', freelance: 'Freelancer Senior', freelanceDesc: 'Desarrollo de soluciones personalizadas para RvOne, Itú Pneus y Dra. Adriana Rezende usando Next.js 15.' },
+    career: { title: 'Trayectoria Profesional', subtitle: 'Experiencia y Evolución', fatec: 'Grado en Gestión de TI', fatecDesc: 'Formación en gobernanza, arquitectura y gestión de infraestructura tecnológica.', freelance: 'Freelancer Senior', freelanceDesc: 'Desarrollo de soluciones personalizadas para RvOne, El Itú Pneus y la Dra. Adriana Rezende usando Next.js 15.' },
     projects: { title: 'Obras Seleccionadas', subtitle: 'Ingeniería de Rendimiento', tabs: { corporate: 'Corporativos', personal: 'Personales' }, visit: 'Visitar Sitio' },
     skills: { title: 'Arsenal Técnico', subtitle: 'Tecnologías Dominadas' },
     contact: { title: 'Conecta con el', subtitle: 'Experto.', desc: 'Disponible para nuevos desafíos profesionales y proyectos freelance de alto nivel.', footer: 'Ingeniero Frontend Senior • Jaú, SP' },
@@ -103,7 +103,7 @@ const App: React.FC = () => {
   };
 
   const linkLinkedIn = "https://www.linkedin.com/in/ricardo-camilo-programador-frontend-web-developer/";
-  const linkGitHub = "https://github.com/ricardo564";
+  const linkGitHub = "https://github.com/ricardo-camilo-programador-frontend-web";
   const phoneNumber = "+55 14 996765389";
 
   const TIMELINE = [
