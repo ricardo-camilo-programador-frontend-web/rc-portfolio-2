@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Github, Linkedin, ArrowUpRight, Instagram, Layers, Code, Zap, 
   ShieldCheck, Terminal, Cpu, Globe, ChevronRight, ExternalLink, Award, ChevronDown, MessageCircle
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { Project } from './types';
 
 type LanguageCode = 
@@ -25,7 +24,7 @@ const LANGUAGES: { code: LanguageCode; label: string; native: string; rtl?: bool
   { code: 'id', label: 'Indonesian', native: 'Bahasa Indonesia' },
   { code: 'de', label: 'German', native: 'Deutsch' },
   { code: 'ja', label: 'Japanese', native: '日本語' },
-  { code: 'mr', label: 'Marathi', native: 'मराठी' },
+  { code: 'mr', label: 'Marathi', native: 'مراठी' },
   { code: 'te', label: 'Telugu', native: 'తెలుగు' },
   { code: 'tr', label: 'Turkish', native: 'Türkçe' },
   { code: 'ta', label: 'Tamil', native: 'தமிழ்' },
@@ -102,6 +101,12 @@ const App: React.FC = () => {
   const [langCode, setLangCode] = useState<LanguageCode>(() => (localStorage.getItem('lang') as LanguageCode) || 'pt');
   const [isLangOpen, setIsLangOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
   
   const currentLang = LANGUAGES.find(l => l.code === langCode) || LANGUAGES[0];
   const t = TRANSLATIONS[langCode] || TRANSLATIONS.en;
@@ -126,9 +131,17 @@ const App: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const scrollToTop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className={`min-h-screen bg-[#0A0A0A] selection:bg-[#E5D5C0] selection:text-[#0A0A0A] ${isRtl ? 'font-serif text-right' : 'text-left'}`}>
       
+      {/* Scroll Progress Bar for Engagement */}
+      <motion.div className="fixed top-0 left-0 right-0 h-1 bg-[#E5D5C0] origin-left z-[1000]" style={{ scaleX }} />
+
       {/* WhatsApp Floating Button */}
       <motion.a 
         href={WHATSAPP_URL}
@@ -145,7 +158,7 @@ const App: React.FC = () => {
         </div>
       </motion.a>
 
-      {/* Navigation */}
+      {/* Navigation - Anchors pointed to internal IDs */}
       <nav className="fixed top-0 w-full z-[100] glass h-20 flex items-center px-6 md:px-12 border-b border-white/5">
         <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
           <motion.a 
@@ -221,9 +234,9 @@ const App: React.FC = () => {
             <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80">{t.hero.badge}</span>
           </div>
           
-          <h1 className="text-6xl md:text-[11rem] font-serif leading-[0.8] tracking-tighter mb-10 text-gradient">
-            {t.hero.title} <br/>
-            <span className="italic font-light opacity-60">{t.hero.subtitle}</span>
+          <h1 className="text-6xl md:text-[11rem] font-serif leading-[0.8] tracking-tighter mb-10">
+            <span className="text-gradient">{t.hero.title}</span> <br/>
+            <span className="italic font-light opacity-60 text-[#E5D5C0]">{t.hero.subtitle}</span>
           </h1>
           
           <p className="max-w-xl mx-auto text-[#E5D5C0]/40 text-xs md:text-sm uppercase tracking-[0.2em] font-medium leading-relaxed mb-16 px-4">
@@ -402,13 +415,13 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Fixed invisibility issue on "Produto Digital" */}
       <section id="contact" className="py-56 px-6 text-center relative overflow-hidden scroll-mt-20">
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="space-y-16">
-            <h2 className="text-7xl md:text-[13rem] font-serif leading-[0.8] tracking-tighter mb-12 text-gradient">
-              {t.cta.title} <br/>
-              <span className="italic font-light opacity-50">{t.cta.subtitle}</span>
+            <h2 className="text-7xl md:text-[13rem] font-serif leading-[0.8] tracking-tighter mb-12">
+              <span className="text-gradient block">{t.cta.title}</span>
+              <span className="italic font-light opacity-100 text-[#E5D5C0] block mt-4">{t.cta.subtitle}</span>
             </h2>
             <p className="max-w-md mx-auto text-[#E5D5C0]/40 text-xs md:text-sm uppercase tracking-[0.3em] font-medium leading-loose">
               {t.cta.desc}
@@ -440,7 +453,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer - Finalized "TO TOP" fix and anchor integration */}
       <footer className="py-24 px-6 border-t border-white/5 bg-[#080808]">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 mb-20 text-[10px] font-bold uppercase tracking-[0.4em] text-[#E5D5C0]/40">
@@ -451,11 +464,16 @@ const App: React.FC = () => {
           </div>
           
           <div className="w-full flex flex-col md:flex-row justify-between items-center gap-10">
-            <div className="text-[9px] font-bold uppercase tracking-[0.5em] text-[#E5D5C0]/20 order-2 md:order-1">
+            <div className="text-[9px] font-bold uppercase tracking-[0.5em] text-[#E5D5C0]/20 order-2 md:order-1 text-center md:text-left">
               © 2026 RICARDO CAMILO • ELITE FRONTEND ENGINEERING
             </div>
             
-            <a href="#home" className="flex flex-col items-center gap-4 cursor-pointer order-1 md:order-2 group">
+            <a 
+              href="#home" 
+              onClick={scrollToTop}
+              className="flex flex-col items-center gap-4 cursor-pointer order-1 md:order-2 group"
+              aria-label="Scroll to top"
+            >
               <div className="w-px h-12 bg-white/10 group-hover:bg-[#E5D5C0]/40 transition-colors" />
               <span className="text-[8px] font-bold uppercase tracking-[0.6em] text-[#E5D5C0]/30 group-hover:text-[#E5D5C0] transition-colors">TO TOP</span>
             </a>
