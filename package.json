@@ -1,5 +1,5 @@
 {
-  "name": "ricardo-camilo---frontend-portfolio-v2",
+  "name": "ricardo-camilo---senior-frontend-portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,9 +11,9 @@
   "dependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "lucide-react": "0.463.0",
-    "@google/genai": "1.40.0",
-    "framer-motion": "^12.34.0"
+    "framer-motion": "^12.34.0",
+    "@google/genai": "^1.40.0",
+    "lucide-react": "^0.563.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
