@@ -47,7 +47,7 @@ const TRANSLATIONS = {
     career: { title: 'Trayectoria Profesional', subtitle: 'Experiencia y Evolución', fatec: 'Grado en Gestión de TI', fatecDesc: 'Formación en gobernanza, arquitectura y gestión de infraestructura tecnológica.', freelance: 'Freelancer Senior', freelanceDesc: 'Desarrollo de soluciones personalizadas para RvOne, El Itú Pneus y la Dra. Adriana Rezende usando Next.js 15.' },
     projects: { title: 'Obras Seleccionadas', subtitle: 'Ingeniería de Rendimiento', tabs: { corporate: 'Corporativos', personal: 'Personales' }, visit: 'Visitar Sitio' },
     skills: { title: 'Arsenal Técnico', subtitle: 'Tecnologías Dominadas' },
-    contact: { title: 'Conecta con el', subtitle: 'Experto.', desc: 'Disponible para nuevos desafíos profesionales y proyectos freelance de alto nivel.', footer: 'Ingeniero Frontend Senior • Jaú, SP' }
+    contact: { title: 'Conecta con el', subtitle: 'Experto.', desc: 'Disponible para nuevos desafíos profesionales y proyectos freelance de alto nível.', footer: 'Ingeniero Frontend Senior • Jaú, SP' }
   }
 };
 
@@ -203,7 +203,7 @@ const App: React.FC = () => {
       </nav>
 
       {/* Hero */}
-      <section id="home" className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden pt-20">
+      <section id="home" className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden pt-20 scroll-mt-20">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-500/5 blur-[150px] rounded-full -z-10" />
         
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-teal-500/20 text-teal-400 text-[9px] font-black mb-10 uppercase tracking-[0.2em]">
@@ -233,7 +233,7 @@ const App: React.FC = () => {
       </section>
 
       {/* Timeline */}
-      <section id="career" className="py-32 px-6 bg-zinc-950/40">
+      <section id="career" className="py-32 px-6 bg-zinc-950/40 scroll-mt-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-gradient uppercase tracking-tighter">{t.career.title}</h2>
@@ -274,7 +274,7 @@ const App: React.FC = () => {
       </section>
 
       {/* Projects */}
-      <section id="projects" className="py-32 px-6">
+      <section id="projects" className="py-32 px-6 scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
             <div>
@@ -312,7 +312,7 @@ const App: React.FC = () => {
       </section>
 
       {/* Skills */}
-      <section id="skills" className="py-32 px-6 bg-zinc-950/40">
+      <section id="skills" className="py-32 px-6 bg-zinc-950/40 scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-6xl font-black text-gradient uppercase">{t.skills.title}</h2>
@@ -333,7 +333,7 @@ const App: React.FC = () => {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-32 px-6">
+      <section id="contact" className="py-32 px-6 scroll-mt-20">
         <div className="max-w-5xl mx-auto glass p-16 md:p-32 rounded-[4rem] text-center border-teal-500/10 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-teal-400/5 blur-[120px] rounded-full" />
           <h2 className="text-5xl md:text-8xl font-black text-gradient leading-[0.85] tracking-tighter mb-10 uppercase">
