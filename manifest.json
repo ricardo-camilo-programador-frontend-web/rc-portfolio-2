@@ -1,0 +1,22 @@
+
+{
+  "name": "Ricardo Camilo | Senior Frontend Engineer",
+  "short_name": "Camilo AI",
+  "description": "Portfólio de engenharia frontend de elite para Ricardo Camilo.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
+  "icons": [
+    {
+      "src": "https://ricardo-camilo-dev-frontend-web.netlify.app/_next/static/media/ricardo-camilo-programador-frontend-web-developer-frontend-engineer-software-engineer-web-developer-vuejs-vue-reactjs-react-javascript-typescript.cebcabde.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://ricardo-camilo-dev-frontend-web.netlify.app/_next/static/media/ricardo-camilo-programador-frontend-web-developer-frontend-engineer-software-engineer-web-developer-vuejs-vue-reactjs-react-javascript-typescript.cebcabde.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

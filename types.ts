@@ -2,12 +2,13 @@
 export interface Project {
   id: string;
   title: string;
-  category: 'React' | 'Vue' | 'Next.js' | 'Mobile';
+  category: string;
   description: string;
   image: string;
   tags: string[];
   link: string;
   metrics?: string;
+  comingSoon?: boolean;
 }
 
 export interface Skill {
