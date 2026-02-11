@@ -1,7 +1,5 @@
 {
   "name": "Ricardo Camilo - Frontend Portfolio v2",
   "description": "Portfólio de alta conversão para Ricardo Camilo, Especialista Frontend em React & Vue.js. Focado em performance e engajamento interativo.",
-  "requestFramePermissions": [
-    "microphone"
-  ]
+  "requestFramePermissions": []
 }

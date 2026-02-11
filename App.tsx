@@ -1,15 +1,20 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Github, Linkedin, ArrowRight, Mail, Send, X, 
-  Bot, Menu, ExternalLink, Calendar, Briefcase, 
-  TrendingUp, Instagram, Smartphone, GraduationCap, Globe, ChevronRight
+  Github, Linkedin, ArrowRight, Mail, Menu, ExternalLink, Calendar, Briefcase, 
+  Instagram, Smartphone, GraduationCap, Globe, ChevronDown
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project, Skill } from './types';
-import { askCamiloAI } from './services/geminiService';
 
 type Language = 'pt' | 'en' | 'it' | 'es';
+
+const LANGUAGES: { code: Language; label: string; flag: string; native: string }[] = [
+  { code: 'pt', label: 'Português', flag: '🇧🇷', native: 'BR' },
+  { code: 'en', label: 'English', flag: '🇺🇸', native: 'US' },
+  { code: 'it', label: 'Italiano', flag: '🇮🇹', native: 'IT' },
+  { code: 'es', label: 'Español', flag: '🇪🇸', native: 'ES' }
+];
 
 const TRANSLATIONS = {
   pt: {
@@ -18,8 +23,7 @@ const TRANSLATIONS = {
     career: { title: 'Jornada Profissional', subtitle: 'Experiência & Evolução', fatec: 'Bacharel em Gestão da TI', fatecDesc: 'Formação em governança, arquitetura e gestão de infraestrutura tech.', freelance: 'Freelancer Sênior', freelanceDesc: 'Desenvolvimento de soluções personalizadas para RvOne, Itú Pneus e Dra. Adriana Rezende usando Next.js 15.' },
     projects: { title: 'Trabalhos Selecionados', subtitle: 'Engenharia de Performance', tabs: { corporate: 'Corporativos', personal: 'Pessoais' }, visit: 'Visitar Site' },
     skills: { title: 'Arsenal Técnico', subtitle: 'Tecnologias Dominadas' },
-    contact: { title: 'Conecte-se com o', subtitle: 'Especialista.', desc: 'Disponível para novos desafios profissionais e projetos freelance de alto nível.', footer: 'Engenheiro Frontend Sênior • Jaú, SP' },
-    ai: { title: 'Camilo AI', sub: 'Especialista Advisor v4.0', placeholder: 'Investigar perfil...', prompts: ['Diferenciais técnicos', 'Freelance 2025', 'Projetos na Labi9', 'Como contratar'] }
+    contact: { title: 'Conecte-se com o', subtitle: 'Especialista.', desc: 'Disponível para novos desafios profissionais e projetos freelance de alto nível.', footer: 'Engenheiro Frontend Sênior • Jaú, SP' }
   },
   en: {
     nav: { home: 'Home', career: 'Career', projects: 'Projects', skills: 'Skills', contact: 'Contact' },
@@ -27,17 +31,15 @@ const TRANSLATIONS = {
     career: { title: 'Professional Journey', subtitle: 'Experience & Evolution', fatec: 'B.S. in IT Management', fatecDesc: 'Degree focused on governance, architecture, and tech infrastructure management.', freelance: 'Senior Freelancer', freelanceDesc: 'Developed custom solutions for RvOne, Itú Pneus, and Dra. Adriana Rezende using Next.js 15.' },
     projects: { title: 'Selected Works', subtitle: 'Performance Engineering', tabs: { corporate: 'Corporate', personal: 'Personal' }, visit: 'Visit Site' },
     skills: { title: 'Technical Arsenal', subtitle: 'Mastered Tech' },
-    contact: { title: 'Connect with the', subtitle: 'Expert.', desc: 'Available for new professional challenges and high-end freelance projects.', footer: 'Senior Frontend Engineer • Jaú, SP' },
-    ai: { title: 'Camilo AI', sub: 'Senior Advisor v4.0', placeholder: 'Investigate profile...', prompts: ['Technical edge', 'Freelance 2025', 'Labi9 projects', 'How to hire'] }
+    contact: { title: 'Connect with the', subtitle: 'Expert.', desc: 'Available for new professional challenges and high-end freelance projects.', footer: 'Senior Frontend Engineer • Jaú, SP' }
   },
   it: {
     nav: { home: 'Inizio', career: 'Carriera', projects: 'Progetti', skills: 'Skill', contact: 'Contatto' },
     hero: { badge: 'Ingegnere Frontend Senior', title: 'Soluzioni Digitali', subtitle: 'di Élite.', desc: 'Trasformare la complessità tecnica in eleganza visiva e prestazioni estreme. Focus su interfacce che convertono.', cta: 'Vedi Portfolio', stats: { exp: 'Anni Exp', degree: 'FATEC Jaú', eng: 'Inglese C1', profile: 'Investigatore' } },
     career: { title: 'Percorso Professionale', subtitle: 'Esperienza ed Evoluzione', fatec: 'Laurea in Gestione TI', fatecDesc: 'Formazione in governance, architettura e gestione dell’infrastruttura tecnologica.', freelance: 'Freelancer Senior', freelanceDesc: 'Sviluppo di soluzioni personalizzate per RvOne, Itú Pneus e Dra. Adriana Rezende utilizzando Next.js 15.' },
     projects: { title: 'Opere Selezionate', subtitle: 'Ingegneria delle Prestazioni', tabs: { corporate: 'Aziendali', personal: 'Personali' }, visit: 'Visita il Sito' },
-    skills: { title: 'Arsenale Tecnico', subtitle: 'Tecnologie Padroneggiate' },
-    contact: { title: 'Connettiti con', subtitle: 'l’Esperto.', desc: 'Disponibile per nuove sfide professionali e progetti freelance di alto livello.', footer: 'Ingegnere Frontend Senior • Jaú, SP' },
-    ai: { title: 'Assistente Camilo', sub: 'Consulente Senior v4.0', placeholder: 'Indagare sul profilo...', prompts: ['Vantaggio tecnico', 'Freelance 2025', 'Progetti Labi9', 'Come assumere'] }
+    skills: { title: 'Arsenale Técnico', subtitle: 'Tecnologie Padroneggiate' },
+    contact: { title: 'Connettiti con', subtitle: 'l’Esperto.', desc: 'Disponibile per nuove sfide professionali e progetti freelance di alto livello.', footer: 'Ingegnere Frontend Senior • Jaú, SP' }
   },
   es: {
     nav: { home: 'Inicio', career: 'Carrera', projects: 'Proyectos', skills: 'Skills', contact: 'Contacto' },
@@ -45,8 +47,7 @@ const TRANSLATIONS = {
     career: { title: 'Trayectoria Profesional', subtitle: 'Experiencia y Evolución', fatec: 'Grado en Gestión de TI', fatecDesc: 'Formación en gobernanza, arquitectura y gestión de infraestructura tecnológica.', freelance: 'Freelancer Senior', freelanceDesc: 'Desarrollo de soluciones personalizadas para RvOne, El Itú Pneus y la Dra. Adriana Rezende usando Next.js 15.' },
     projects: { title: 'Obras Seleccionadas', subtitle: 'Ingeniería de Rendimiento', tabs: { corporate: 'Corporativos', personal: 'Personales' }, visit: 'Visitar Sitio' },
     skills: { title: 'Arsenal Técnico', subtitle: 'Tecnologías Dominadas' },
-    contact: { title: 'Conecta con el', subtitle: 'Experto.', desc: 'Disponible para nuevos desafíos profesionales y proyectos freelance de alto nivel.', footer: 'Ingeniero Frontend Senior • Jaú, SP' },
-    ai: { title: 'Asistente Camilo', sub: 'Asesor Senior v4.0', placeholder: 'Investigar perfil...', prompts: ['Diferenciales técnicos', 'Freelance 2025', 'Proyectos Labi9', 'Cómo contratar'] }
+    contact: { title: 'Conecta con el', subtitle: 'Experto.', desc: 'Disponible para nuevos desafíos profesionales y proyectos freelance de alto nivel.', footer: 'Ingeniero Frontend Senior • Jaú, SP' }
   }
 };
 
@@ -71,14 +72,90 @@ const SKILLS: Skill[] = [
   { name: 'Performance', level: 95, icon: '⚡', category: 'Tools' },
 ];
 
+const LanguageDropdown: React.FC<{ current: Language; onSelect: (lang: Language) => void }> = ({ current, onSelect }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const currentLang = LANGUAGES.find(l => l.code === current) || LANGUAGES[0];
+
+  return (
+    <div className="relative" ref={containerRef}>
+      <motion.button
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-3 glass px-5 py-2.5 rounded-2xl border border-white/10 hover:border-teal-400/30 transition-all shadow-xl group"
+      >
+        <span className="text-lg grayscale group-hover:grayscale-0 transition-all">{currentLang.flag}</span>
+        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-300 group-hover:text-white">{currentLang.native}</span>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ type: "spring", stiffness: 200, damping: 15 }}
+        >
+          <ChevronDown size={14} className="text-teal-400" />
+        </motion.div>
+      </motion.button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ type: "spring", duration: 0.4, bounce: 0.3 }}
+            className="absolute top-full mt-3 right-0 w-52 glass rounded-[2rem] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-[100]"
+          >
+            <div className="p-3 space-y-1">
+              {LANGUAGES.map((l, i) => (
+                <motion.button
+                  initial={{ x: -10, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: i * 0.05 }}
+                  key={l.code}
+                  onClick={() => {
+                    onSelect(l.code);
+                    setIsOpen(false);
+                  }}
+                  className={`w-full flex items-center justify-between gap-4 px-4 py-3 rounded-xl transition-all group ${
+                    current === l.code 
+                      ? 'bg-teal-500/10 border border-teal-500/20' 
+                      : 'hover:bg-white/5 border border-transparent'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-base grayscale group-hover:grayscale-0 transition-all">{l.flag}</span>
+                    <span className={`text-[10px] font-black uppercase tracking-wider transition-colors ${
+                      current === l.code ? 'text-teal-400' : 'text-zinc-500 group-hover:text-zinc-200'
+                    }`}>
+                      {l.label}
+                    </span>
+                  </div>
+                  {current === l.code && (
+                    <motion.div layoutId="activeLang" className="w-1.5 h-1.5 rounded-full bg-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.8)]" />
+                  )}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 const App: React.FC = () => {
   const [lang, setLang] = useState<Language>(() => (localStorage.getItem('lang') as Language) || 'pt');
   const [activeTab, setActiveTab] = useState<'Corporate' | 'Personal'>('Corporate');
-  const [chatOpen, setChatOpen] = useState(false);
-  const [chatInput, setChatInput] = useState('');
-  const [chatMessages, setChatMessages] = useState<{role: 'user' | 'bot', text: string}[]>([]);
-  const [isTyping, setIsTyping] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const t = TRANSLATIONS[lang];
   const projectsToDisplay = activeTab === 'Corporate' ? CORPORATE_PROJECTS : PERSONAL_PROJECTS;
@@ -86,21 +163,6 @@ const App: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('lang', lang);
   }, [lang]);
-
-  const handleChatSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!chatInput.trim() || isTyping) return;
-    const userMsg = chatInput;
-    setChatInput('');
-    setChatMessages(prev => [...prev, { role: 'user', text: userMsg }]);
-    setIsTyping(true);
-    try {
-      const response = await askCamiloAI(userMsg, chatMessages, lang);
-      setChatMessages(prev => [...prev, { role: 'bot', text: response }]);
-    } catch (err) {
-      setChatMessages(prev => [...prev, { role: 'bot', text: 'Error.' }]);
-    } finally { setIsTyping(false); }
-  };
 
   const linkLinkedIn = "https://www.linkedin.com/in/ricardo-camilo-programador-frontend-web-developer/";
   const linkGitHub = "https://github.com/ricardo-camilo-programador-frontend-web";
@@ -132,20 +194,16 @@ const App: React.FC = () => {
             ))}
           </div>
 
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 glass px-3 py-1.5 rounded-full border border-white/5">
-              <Globe size={14} className="text-teal-400" />
-              {(['pt', 'en', 'it', 'es'] as const).map((l) => (
-                <button key={l} onClick={() => setLang(l)} className={`text-[10px] font-black uppercase transition-all px-2 py-0.5 rounded-md ${lang === l ? 'bg-teal-500 text-white shadow-lg' : 'text-zinc-500 hover:text-white'}`}>{l}</button>
-              ))}
-            </div>
+          <div className="flex items-center gap-4 sm:gap-6">
+            <LanguageDropdown current={lang} onSelect={setLang} />
+            
             <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="mailto:ricardo.camilo.dev@gmail.com" className="px-6 py-2.5 rounded-full accent-gradient text-white text-[10px] font-black shadow-lg uppercase tracking-widest hidden sm:block">Hire Ricardo</motion.a>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <section id="home" className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
+      <section id="home" className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden pt-20">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-500/5 blur-[150px] rounded-full -z-10" />
         
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-teal-500/20 text-teal-400 text-[9px] font-black mb-10 uppercase tracking-[0.2em]">
@@ -164,9 +222,6 @@ const App: React.FC = () => {
           <a href="#projects" className="px-12 py-5 rounded-2xl accent-gradient text-white font-black flex items-center gap-3 hover:shadow-[0_0_40px_rgba(45,212,191,0.4)] transition-all uppercase text-xs tracking-widest">
             {t.hero.cta} <ArrowRight size={18} />
           </a>
-          <button onClick={() => setChatOpen(true)} className="px-12 py-5 rounded-2xl glass border border-white/10 hover:border-teal-400/30 text-white font-black transition-all uppercase text-xs tracking-widest">
-            AI Assistant
-          </button>
         </div>
 
         <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-12 w-full max-w-5xl border-t border-white/5 pt-16">
@@ -298,46 +353,6 @@ const App: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* AI Assistant */}
-      <div className="fixed bottom-8 right-8 z-[200]">
-        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => setChatOpen(!chatOpen)} className="w-16 h-16 rounded-2xl accent-gradient text-white shadow-2xl flex items-center justify-center transition-all">
-          {chatOpen ? <X size={28} /> : <Bot size={28} />}
-        </motion.button>
-        <AnimatePresence>
-          {chatOpen && (
-            <motion.div initial={{ opacity: 0, y: 20, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.9 }} className="absolute bottom-20 right-0 w-80 md:w-[420px] glass rounded-[3rem] shadow-2xl flex flex-col overflow-hidden border border-teal-500/20">
-              <div className="p-8 accent-gradient text-white">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center"><Bot size={22} /></div>
-                  <div>
-                    <h4 className="font-black text-sm uppercase tracking-widest">{t.ai.title}</h4>
-                    <p className="text-[8px] opacity-70 font-black uppercase tracking-[0.2em]">{t.ai.sub}</p>
-                  </div>
-                </div>
-              </div>
-              <div className="h-[420px] overflow-y-auto p-8 space-y-6 bg-zinc-950/30">
-                {chatMessages.length === 0 && (
-                  <div className="text-center py-10 flex flex-col gap-3">
-                    <p className="text-zinc-500 text-[9px] uppercase tracking-[0.3em] font-black opacity-50 mb-4">Investigator Mode Active</p>
-                    {t.ai.prompts.map(p => <button key={p} onClick={() => setChatInput(p)} className="px-5 py-3 rounded-2xl bg-white/5 border border-white/5 text-zinc-400 text-[9px] font-black uppercase tracking-[0.2em] hover:bg-teal-400/10 hover:text-teal-400 transition-all text-left">{p}</button>)}
-                  </div>
-                )}
-                {chatMessages.map((m, i) => (
-                  <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-[85%] p-5 rounded-3xl text-xs leading-relaxed font-medium ${m.role === 'user' ? 'bg-teal-500 text-white shadow-xl' : 'glass border-white/5 text-zinc-300 shadow-xl'}`}>{m.text}</div>
-                  </div>
-                ))}
-                {isTyping && <div className="flex justify-start animate-pulse"><div className="glass p-4 rounded-2xl flex gap-1.5"><div className="w-1.5 h-1.5 bg-teal-400 rounded-full" /><div className="w-1.5 h-1.5 bg-teal-400 rounded-full" /><div className="w-1.5 h-1.5 bg-teal-400 rounded-full" /></div></div>}
-              </div>
-              <form onSubmit={handleChatSubmit} className="p-6 bg-black/40 flex gap-3 border-t border-white/5">
-                <input type="text" value={chatInput} onChange={e => setChatInput(e.target.value)} placeholder={t.ai.placeholder} className="flex-1 bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-xs focus:outline-none focus:border-teal-500 transition-all font-medium text-white" />
-                <button className="p-4 accent-gradient rounded-2xl text-white hover:scale-105 transition-all"><Send size={20}/></button>
-              </form>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
 
       <footer className="py-20 border-t border-white/5 text-center px-6">
         <p className="text-zinc-700 text-[10px] font-black uppercase tracking-[0.5em]">© 2026 RICARDO CAMILO • {t.contact.footer}</p>
