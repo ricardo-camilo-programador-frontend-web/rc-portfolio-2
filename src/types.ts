@@ -1,4 +1,3 @@
-
 export interface Project {
   id: string;
   title: string;
@@ -25,7 +24,6 @@ export interface Testimonial {
   avatar: string;
 }
 
-// Added missing Character interface to fix import error in CharacterSheet.tsx
 export interface Character {
   name: string;
   archetype: string;
@@ -40,4 +38,13 @@ export interface Character {
     luck: number;
   };
   inventory: string[];
+}
+
+export interface TimelineItem {
+  id: number;
+  period: string;
+  company: string;
+  role: string;
+  desc: string;
+  tags: string[];
 }
