@@ -35,26 +35,26 @@ const LANGUAGES: { code: LanguageCode; label: string; native: string; rtl?: bool
 
 const TRANSLATIONS: Partial<Record<LanguageCode, any>> = {
   en: {
-    seo: { title: 'Ricardo Camilo | Senior Frontend Engineer', desc: 'Elite Frontend Engineer with 4+ years of experience. Expert in React, Vue, and Next.js.' },
+    seo: { title: 'Ricardo Camilo | Frontend Engineer', desc: 'Frontend Engineer & Vue.js/TypeScript Specialist with 6+ years of experience. Expert in Vue 3, React, and Next.js.' },
     nav: { work: 'Portfolio', about: 'About', services: 'Services', career: 'Career', contact: 'Contact' },
-    hero: { title: 'Frontend Engineer', subtitle: '& UI/UX Strategist', desc: '4+ years of turning business challenges into high-impact digital solutions. Expert in React, Vue ecosystems, and extreme performance architectures.', cta: 'Let\'s Talk', badge: 'Available for High-End Projects' },
-    about: { quote: 'Technical excellence is the result of intention and flawless execution.', bio: 'I am Ricardo Camilo, B.S. in IT Management. My approach blends the "Boy Scout Rule" with a manic focus on performance (Core Web Vitals) and accessibility (WCAG).', details: 'DISC Profile: Investigator — Focus on technical precision and scalable solutions.', stats: { exp: '4+ Years', projects: '20+ Delivered', eng: 'English C1' } },
-    services: { s1: { title: 'Luxury Web Design', desc: 'Interfaces that breathe exclusivity, focused on elevating your brand\'s perceived value.' }, s2: { title: 'Frontend Engineering', desc: 'Robust applications with Next.js, Nuxt, and Angular. Clean code, tested and ready for scale.' }, s3: { title: 'Performance & SEO', desc: 'Extreme optimization ensuring instant loading and maximum organic visibility.' } },
+    hero: { title: 'Frontend Engineer', subtitle: '& Vue.js Specialist', desc: '6+ years of experience turning business challenges into high-impact digital solutions. Expert in Vue.js, TypeScript, and extreme performance architectures.', cta: 'Let\'s Talk', badge: 'Available for Freelance' },
+    about: { quote: 'Technical excellence is the result of intention and flawless execution.', bio: 'I am Ricardo Camilo, Frontend Developer with 6+ years of experience. I specialize in Vue.js and TypeScript, combining solid technical expertise with exceptional discipline to deliver high-quality solutions.', details: 'DISC Profile: Investigator — Focus on technical precision and scalable solutions.', stats: { exp: '6+ Years', projects: '20+ Delivered', eng: 'English C1' } },
+    services: { s1: { title: 'Vue.js & React Development', desc: 'Robust applications with Vue 3, Next.js, and Nuxt. Clean code, tested and ready for scale.' }, s2: { title: 'Legacy System Modernization', desc: 'Expertise in migrating legacy systems to modern stacks like Vue 3 and TypeScript.' }, s3: { title: 'Performance & SEO', desc: 'Extreme optimization ensuring instant loading and maximum organic visibility.' } },
     work: { title: 'Selected', subtitle: 'Works', viewAll: 'View Full GitHub', comingSoon: 'Coming Soon' },
     career: { title: 'Professional', subtitle: 'History', present: 'Present' },
     certs: { title: 'Recognition', subtitle: '& Certifications' },
-    cta: { title: 'Upgrade your', subtitle: 'Digital Product', desc: 'Ready to collaborate with brands seeking elite engineering and world-class design.', button: 'Email Me', whatsapp: 'WhatsApp Me' }
+    cta: { title: 'Upgrade your', subtitle: 'Digital Product', desc: 'Ready to collaborate with brands seeking elegant engineering and world-class design.', button: 'Email Me', whatsapp: 'WhatsApp Me' }
   },
   pt: {
-    seo: { title: 'Ricardo Camilo | Engenheiro Frontend Sênior', desc: 'Engenheiro Frontend de Elite com 4+ anos de experiência. Especialista em React, Vue e Next.js.' },
+    seo: { title: 'Ricardo Camilo | Desenvolvedor Frontend Pleno', desc: 'Desenvolvedor Frontend Pleno & Especialista Vue.js/TypeScript com 6+ anos de experiência. Expert em Vue 3, React e Next.js.' },
     nav: { work: 'Portfolio', about: 'Sobre', services: 'Serviços', career: 'Carreira', contact: 'Contato' },
-    hero: { title: 'Frontend Engineer', subtitle: '& UI/UX Strategist', desc: '4+ anos transformando desafios de negócios em soluções digitais de alto impacto. Especialista em ecossistemas React, Vue e arquiteturas de performance extrema.', cta: 'Iniciar Conversa', badge: 'Disponível para Projetos High-End' },
-    about: { quote: 'Excelência técnica é o resultado de intenção e execução impecável.', bio: 'Sou Ricardo Camilo, Bacharel em Gestão de TI pela FATEC Jaú. Minha abordagem une a "Boy Scout Rule" (sempre deixar o código melhor do que encontrei) com um foco maníaco em performance (Core Web Vitals) e acessibilidade (WCAG).', details: 'Perfil DISC: Investigador — Foco em precisão técnica e soluções escaláveis.', stats: { exp: '4+ Anos', projects: '20+ Entregues', eng: 'Inglês C1' } },
-    services: { s1: { title: 'Web Design de Luxo', desc: 'Interfaces que respiram exclusividade, focadas em elevar o valor percebido da sua marca.' }, s2: { title: 'Engenharia Frontend', desc: 'Aplicações robustas com Next.js, Nuxt e Angular. Código limpo, testado e pronto para escala.' }, s3: { title: 'Performance & SEO', desc: 'Otimização extrema para garantir carregamento instantâneo e visibilidade orgânica máxima.' } },
+    hero: { title: 'Desenvolvedor Frontend Pleno', subtitle: '& Especialista Vue.js', desc: '6+ anos transformando desafios de negócios em soluções digitais de alto impacto. Especialista em Vue.js, TypeScript e arquiteturas de performance extrema.', cta: 'Iniciar Conversa', badge: 'Disponível para Freelance' },
+    about: { quote: 'Excelência técnica é o resultado de intenção e execução impecável.', bio: 'Sou Ricardo Camilo, Desenvolvedor Front-end Pleno com 6+ anos de experiência. Especialista em Vue.js e TypeScript, combino expertise técnica sólida com disciplina excepcional para entregas de qualidade.', details: 'Perfil DISC: Investigador — Foco em precisão técnica e soluções escaláveis.', stats: { exp: '6+ Anos', projects: '20+ Entregues', eng: 'Inglês C1' } },
+    services: { s1: { title: 'Desenvolvimento Vue.js & React', desc: 'Aplicações robustas com Vue 3, Next.js e Nuxt. Código limpo, testado e pronto para escala.' }, s2: { title: 'Modernização de Sistemas Legados', desc: 'Expertise em migrar sistemas legados para stacks modernos como Vue 3 e TypeScript.' }, s3: { title: 'Performance & SEO', desc: 'Otimização extrema para garantir carregamento instantâneo e visibilidade orgânica máxima.' } },
     work: { title: 'Trabalhos', subtitle: 'Selecionados', viewAll: 'Ver GitHub Completo', comingSoon: 'Em Breve' },
     career: { title: 'Histórico', subtitle: 'Profissional', present: 'Atualmente' },
     certs: { title: 'Reconhecimento', subtitle: '& Certificações' },
-    cta: { title: 'Eleve o nível do seu', subtitle: 'Produto Digital', desc: 'Pronto para colaborar com marcas que buscam engenharia de elite e design de classe mundial.', button: 'Enviar E-mail', whatsapp: 'Conversar no WhatsApp' }
+    cta: { title: 'Eleve o nível do seu', subtitle: 'Produto Digital', desc: 'Pronto para colaborar com marcas que buscam engenharia elegante e design de classe mundial.', button: 'Enviar E-mail', whatsapp: 'Conversar no WhatsApp' }
   }
 };
 
@@ -88,10 +88,11 @@ const PROJECTS: Project[] = [
 ];
 
 const TIMELINE = [
-  { id: 1, period: 'Jul 2025 — Present', company: 'Consir Informática', role: 'Pleno Frontend Engineer', desc: 'Engenharia de sistemas corporativos escaláveis focada em Vue.js, TypeScript e manutenção de alto nível.', tags: ['Vue.js', 'TypeScript', 'Enterprise'] },
-  { id: 2, period: 'Jan 2025 — Jul 2025', company: 'Freelance Specialist', role: 'Frontend Consultant', desc: 'Liderança técnica em projetos de alto impacto (Itu Pneus, RvOne, Cajuscript) com foco em conversão e performance.', tags: ['Next.js 15', 'SEO', 'Consultancy'] },
-  { id: 3, period: 'Oct 2021 — Dec 2024', company: 'Labi9 Tecnologia', role: 'Frontend Developer', desc: '3+ anos em ecossistema de fintechs. Desenvolvimento de interfaces complexas com React, Qwik e Nuxt.', tags: ['React', 'Nuxt', 'Fintech'] },
-  { id: 4, period: '2019', company: 'SIALOG Software', role: 'Tech Intern', desc: 'Fundamentos em Ruby on Rails e JasperReports para logística.', tags: ['Ruby on Rails', 'Git'] }
+  { id: 1, period: 'Nov 2025 — Present', company: 'Consir Informática', role: 'Frontend Engineer', desc: 'Liderança técnica na modernização de sistema legado de gestão sindical para Vue.js 3 + TypeScript. Implementação de arquitetura base store com Pinia e PWA.', tags: ['Vue 3', 'TypeScript', 'Pinia', 'PWA'] },
+  { id: 2, period: 'Jul 2025 — Nov 2025', company: 'Consir Informática', role: 'Pleno Frontend Engineer', desc: 'Engenharia de sistemas corporativos escaláveis focada em Vue.js, TypeScript e manutenção de alto nível.', tags: ['Vue.js', 'TypeScript', 'Enterprise'] },
+  { id: 3, period: 'Jan 2025 — Jul 2025', company: 'Freelance Specialist', role: 'Frontend Consultant', desc: 'Liderança técnica em projetos de alto impacto (Itu Pneus, RvOne, Cajuscript) com foco em conversão e performance.', tags: ['Next.js 15', 'SEO', 'Consultancy'] },
+  { id: 4, period: 'Oct 2021 — Dec 2024', company: 'Labi9 Tecnologia', role: 'Frontend Developer', desc: '3+ anos em ecossistema de fintechs. Desenvolvimento de interfaces complexas com React, Qwik e Nuxt.', tags: ['React', 'Nuxt', 'Fintech'] },
+  { id: 5, period: '2019', company: 'SIALOG Software', role: 'Tech Intern', desc: 'Fundamentos em Ruby on Rails e JasperReports para logística.', tags: ['Ruby on Rails', 'Git'] }
 ];
 
 const USER_PHOTO = "https://persona-nextjs-chronicles-part-2.netlify.app/_next/static/media/ricardo-camilo-programador-frontend-web-developer-frontend-engineer-software-engineer-web-developer-vuejs-vue-reactjs-react-javascript-typescript.cebcabde.png";
@@ -267,7 +268,7 @@ const App: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="relative group">
               <div className="aspect-[4/5] overflow-hidden rounded-sm accent-border relative z-10 shadow-2xl bg-[#1A1A1A]">
-                <img src={USER_PHOTO} alt="Ricardo Camilo Portrait" className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0" />
+                <img src={USER_PHOTO} alt="Ricardo Camilo Portrait" className="w-full h-full object-cover grayscale-[20%] transition-all duration-1000 group-hover:grayscale-0" />
               </div>
               <div className="absolute -top-10 -left-10 w-40 h-40 border-l border-t border-[#E5D5C0]/20 -z-0" />
               <div className="absolute -bottom-10 -right-10 w-40 h-40 border-r border-b border-[#E5D5C0]/20 -z-0" />
@@ -358,7 +359,7 @@ const App: React.FC = () => {
                       <span className="text-[10px] font-bold uppercase tracking-[0.6em]">{t.work.comingSoon}</span>
                     </div>
                   ) : (
-                    <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-1000" />
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top grayscale-[20%] opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-1000" />
                   )}
                   
                   <div className={`absolute top-6 ${isRtl ? 'right-6' : 'left-6'} flex gap-2`}>
