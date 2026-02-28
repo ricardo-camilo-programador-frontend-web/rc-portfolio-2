@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import type { FC } from 'react';
+import { memo, useState, useEffect, useCallback } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { Project } from '../types';
 
@@ -7,56 +7,120 @@ interface ProjectCardProps {
   project: Project;
   comingSoonLabel: string;
   isRtl: boolean;
+  isVisible: boolean;
+  loadDelay: number;
+  onImageLoad: (imageUrl: string) => void;
+  isLoaded: boolean;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({
+const optimizeImageUrl = (url: string): string => {
+  if (url.startsWith('https://raw.githubusercontent.com')) {
+    return `${url}?format=webp`;
+  }
+  return url;
+};
+
+const generateSrcSet = (baseUrl: string): string => {
+  if (baseUrl.startsWith('https://raw.githubusercontent.com')) {
+    const base = `${baseUrl}?format=webp`;
+    return `${base} 400w, ${base} 800w, ${base} 1200w`;
+  }
+  return `${baseUrl} 400w, ${baseUrl} 800w`;
+};
+
+export const ProjectCard: FC<ProjectCardProps> = memo(({
   project,
   comingSoonLabel,
   isRtl,
+  isVisible,
+  loadDelay,
+  onImageLoad,
+  isLoaded,
 }) => {
+  const [imageError, setImageError] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    if (isVisible && !project.comingSoon && project.image) {
+      const timer = setTimeout(() => {
+        setShouldLoad(true);
+      }, loadDelay);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, loadDelay, project.comingSoon, project.image]);
+
+  const handleImageLoad = useCallback(() => {
+    if (project.image) {
+      onImageLoad(project.image);
+    }
+  }, [project.image, onImageLoad]);
+
+  const cardProps = {
+    className: "group relative aspect-[4/3] overflow-hidden rounded-sm accent-border fade-in-on-scroll hover:-translate-y-1 transition-transform duration-300 contain-layout focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]",
+    dir: isRtl ? 'rtl' : 'ltr' as const,
+    style: { contentVisibility: isVisible ? 'auto' : 'hidden', containIntrinsicSize: '400px 300px' } as React.CSSProperties,
+    role: 'article' as const,
+  };
+
   if (project.comingSoon || !project.image) {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-50px' }}
-        className="group relative aspect-[4/3] overflow-hidden rounded-sm accent-border bg-[#1A1A1A]"
-        dir={isRtl ? 'rtl' : 'ltr'}
+      <div
+        {...cardProps}
+        aria-label={`${project.title} - ${project.category} project coming soon`}
+        tabIndex={0}
       >
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-          <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#E5D5C0]/40 mb-3">
+          <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#E5D5C0]/70 mb-3">
             {project.category}
           </span>
           <h3 className="text-lg font-bold text-[#E5D5C0] mb-2">{project.title}</h3>
-          <span className="text-[8px] uppercase tracking-widest text-[#E5D5C0]/30">
+          <span className="text-[8px] uppercase tracking-widest text-[#E5D5C0]/60">
             {comingSoonLabel}
           </span>
         </div>
-      </motion.div>
+      </div>
     );
   }
 
+  const optimizedImage = optimizeImageUrl(project.image);
+  const srcSet = generateSrcSet(project.image);
+
   return (
-    <motion.a
+    <a
+      {...cardProps}
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      whileHover={{ y: -5 }}
-      className="group relative aspect-[4/3] overflow-hidden rounded-sm accent-border"
-      dir={isRtl ? 'rtl' : 'ltr'}
+      aria-label={`View ${project.title} project in ${project.category} category`}
     >
-      <img
-        src={project.image}
-        alt={`${project.title} - ${project.category}`}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-        loading="lazy"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A1A] via-[#0F0F0F] to-[#0A0A0A]" aria-hidden="true" />
+
+      {shouldLoad && !imageError && (
+        <>
+          <img
+            src={optimizedImage}
+            srcSet={srcSet}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            alt=""
+            role="presentation"
+            className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+            loading="lazy"
+            decoding="async"
+            width={400}
+            height={300}
+            onLoad={handleImageLoad}
+            onError={() => setImageError(true)}
+            fetchPriority="low"
+          />
+          {!isLoaded && (
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A1A] via-[#0F0F0F] to-[#0A0A0A] animate-pulse" aria-hidden="true" />
+          )}
+        </>
+      )}
+
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
       <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-        <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/60 mb-2 block">
+        <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80 mb-2 block">
           {project.category}
         </span>
         <h3 className="text-lg font-bold text-[#E5D5C0] mb-3">{project.title}</h3>
@@ -65,6 +129,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           <ArrowUpRight size={14} aria-hidden="true" />
         </div>
       </div>
-    </motion.a>
+    </a>
   );
-};
+});
+
+ProjectCard.displayName = 'ProjectCard';

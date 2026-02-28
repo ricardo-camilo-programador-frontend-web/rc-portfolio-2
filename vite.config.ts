@@ -8,7 +8,15 @@ export default defineConfig(() => {
       port: 3000,
       host: '0.0.0.0',
     },
-    plugins: [react()],
+    plugins: [
+      react({
+        babel: {
+          parserOpts: {
+            plugins: ['decorators-legacy', 'classProperties'],
+          },
+        },
+      }),
+    ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
@@ -21,10 +29,25 @@ export default defineConfig(() => {
         },
         output: {
           manualChunks: {
-            'react-vendor': ['react', 'react-dom'],
-            'motion-vendor': ['framer-motion'],
+            'react-vendor': ['react', 'react-dom', 'react/jsx-runtime'],
             'icons-vendor': ['lucide-react'],
+            'about': ['./src/components/About'],
+            'career': ['./src/components/Career'],
+            'cta': ['./src/components/CTA'],
+            'projects': ['./src/components/Projects'],
+            'project-card': ['./src/components/ProjectCard'],
+            'services': ['./src/components/Services'],
+            'service-card': ['./src/components/ServiceCard'],
+            'hero': ['./src/components/Hero'],
+            'navigation': ['./src/components/Navigation'],
+            'footer': ['./src/components/Footer'],
+            'certificates': ['./src/components/Certificates'],
           },
+          format: 'es',
+          sourcemap: false,
+          entryFileNames: 'assets/[name]-[hash].js',
+          chunkFileNames: 'assets/[name]-[hash].js',
+          assetFileNames: 'assets/[name]-[hash].[ext]',
         },
       },
       target: 'esnext',
@@ -32,7 +55,38 @@ export default defineConfig(() => {
       sourcemap: false,
       assetsDir: 'assets',
       assetsInlineLimit: 4096,
+      cssCodeSplit: true,
+      chunkSizeWarningLimit: 500,
+      reportCompressedSize: true,
+      modulePreload: {
+        polyfill: false,
+      },
+    },
+    esbuild: {
+      legalComments: 'none',
+      minifyIdentifiers: true,
+      minifySyntax: true,
+      minifyWhitespace: true,
+      drop: ['console', 'debugger'],
+      pure: ['console.log', 'console.debug'],
+      target: 'esnext',
     },
     publicDir: 'public',
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'lucide-react'],
+      esbuildOptions: {
+        target: 'esnext',
+      },
+    },
+    worker: {
+      format: 'es',
+    },
+    preview: {
+      port: 3002,
+      host: '0.0.0.0',
+    },
+    css: {
+      devSourcemap: false,
+    },
   };
 });

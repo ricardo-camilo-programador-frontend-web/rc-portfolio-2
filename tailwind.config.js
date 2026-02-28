@@ -4,6 +4,9 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     extend: {
       colors: {
@@ -26,5 +29,18 @@ export default {
       },
     },
   },
+  corePlugins: {
+    preflight: true,
+  },
   plugins: [],
+  safelist: [
+    'font-serif',
+    'font-sans',
+    'text-gradient',
+    'glass',
+    'accent-border',
+    'animate-fade-in',
+    'animate-bounce-slow',
+    'fade-in-on-scroll',
+  ],
 }

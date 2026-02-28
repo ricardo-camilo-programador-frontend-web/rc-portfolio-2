@@ -1,64 +1,51 @@
 #!/usr/bin/env node
 
-/**
- * Image Optimization Script
- * 
- * This script helps optimize images for the portfolio.
- * 
- * Usage:
- * 1. Install dependencies: npm install -D sharp
- * 2. Place your source images in: public/projects/
- * 3. Run: node scripts/optimize-images.js
- * 
- * This will:
- * - Convert images to WebP format
- * - Create responsive variants (thumbnail, medium, large)
- * - Optimize compression for web
- */
-
 import sharp from 'sharp';
-import { readdir, mkdir, access } from 'fs/promises';
-import { join, dirname } from 'path';
+import { readdir, mkdir, writeFile } from 'fs/promises';
+import { join, dirname, extname, basename } from 'path';
 import { fileURLToPath } from 'url';
 import { existsSync } from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = join(__dirname, '..');
 const SOURCE_DIR = join(PROJECT_ROOT, 'public', 'projects');
-const OUTPUT_DIR = join(PROJECT_ROOT, 'public', 'projects');
+const OUTPUT_DIR = join(PROJECT_ROOT, 'public', 'optimized');
+const MAX_WIDTH = 1920;
+const WEBP_QUALITY = 75;
 
 const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp'];
 
-async function optimizeImage(inputPath, outputPath) {
-  const filename = inputPath.split('/').pop().split('.')[0];
-  
+async function optimizeImage(inputPath, outputDir) {
+  const filename = basename(inputPath, extname(inputPath));
+  const urlMapping = {};
+
   try {
     const metadata = await sharp(inputPath).metadata();
-    console.log(`Processing: ${filename} (${metadata.width}x${metadata.height})`);
+    const originalWidth = metadata.width || MAX_WIDTH;
+    const originalHeight = metadata.height || 0;
+    const targetWidth = Math.min(originalWidth, MAX_WIDTH);
 
-    const sizes = [
-      { name: 'thumbnail', width: 400 },
-      { name: 'medium', width: 800 },
-      { name: 'large', width: 1200 },
-    ];
+    console.log(`Processing: ${filename} (${originalWidth}x${originalHeight})`);
 
-    for (const size of sizes) {
-      const output = join(outputPath, `${filename}-${size.name}.webp`);
-      await sharp(inputPath)
-        .resize({ width: size.width, withoutEnlargement: true })
-        .webp({ quality: 80, effort: 6 })
-        .toFile(output);
-      console.log(`  ✓ Created ${size.name}: ${output}`);
-    }
-
-    const avifOutput = join(outputPath, `${filename}.avif`);
+    const webpOutput = join(outputDir, `${filename}.webp`);
     await sharp(inputPath)
-      .webp({ quality: 80, effort: 6 })
-      .toFile(join(outputPath, `${filename}.webp`));
-    console.log(`  ✓ Created WebP: ${outputPath}/${filename}.webp`);
+      .resize({
+        width: targetWidth,
+        withoutEnlargement: true,
+        fit: 'inside',
+      })
+      .webp({ quality: WEBP_QUALITY, effort: 6 })
+      .toFile(webpOutput);
 
+    const outputUrl = `/optimized/${filename}.webp`;
+    urlMapping[`${filename}${extname(inputPath)}`] = outputUrl;
+
+    console.log(`  ✓ Created WebP: ${outputUrl}`);
+
+    return { original: `${filename}${extname(inputPath)}`, optimized: outputUrl, width: targetWidth };
   } catch (error) {
     console.error(`Error processing ${filename}:`, error.message);
+    return null;
   }
 }
 
@@ -72,6 +59,11 @@ async function main() {
     return;
   }
 
+  if (!existsSync(OUTPUT_DIR)) {
+    await mkdir(OUTPUT_DIR, { recursive: true });
+    console.log(`Created output directory: ${OUTPUT_DIR}\n`);
+  }
+
   const files = await readdir(SOURCE_DIR);
   const images = files.filter(f => IMAGE_EXTENSIONS.some(ext => f.toLowerCase().endsWith(ext)));
 
@@ -82,15 +74,31 @@ async function main() {
 
   console.log(`Found ${images.length} images to optimize\n`);
 
+  const optimizationResults = [];
+  const urlMapping = {};
+
   for (const image of images) {
     const inputPath = join(SOURCE_DIR, image);
-    await optimizeImage(inputPath, OUTPUT_DIR);
+    const result = await optimizeImage(inputPath, OUTPUT_DIR);
+    if (result) {
+      optimizationResults.push(result);
+      urlMapping[result.original] = result.optimized;
+    }
   }
 
+  const mappingJson = JSON.stringify(urlMapping, null, 2);
+  await writeFile(join(OUTPUT_DIR, 'image-mapping.json'), mappingJson, 'utf-8');
+
   console.log('\n✅ Optimization complete!');
+  console.log(`\n📊 Summary:`);
+  console.log(`   - Processed: ${optimizationResults.length} images`);
+  console.log(`   - Output: ${OUTPUT_DIR}`);
+  console.log(`   - Max width: ${MAX_WIDTH}px`);
+  console.log(`   - WebP quality: ${WEBP_QUALITY}%`);
+  console.log(`\n📄 Mapping saved to: /public/optimized/image-mapping.json`);
   console.log('\nNext steps:');
   console.log('1. Update the PROJECTS array in src/constants/data.ts');
-  console.log('2. Use the optimized image paths (e.g., /projects/image-thumbnail.webp)');
+  console.log('2. Use optimized paths from image-mapping.json');
 }
 
 main().catch(console.error);

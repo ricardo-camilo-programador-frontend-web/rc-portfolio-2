@@ -1,7 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ShieldCheck } from 'lucide-react';
-import { Linkedin, Github, Instagram } from 'lucide-react';
+import type { FC } from 'react';
+import { memo } from 'react';
+import { ShieldCheck, Linkedin, Github, Instagram } from 'lucide-react';
 
 interface AboutProps {
   quote: string;
@@ -16,7 +15,7 @@ interface AboutProps {
   isRtl: boolean;
 }
 
-export const About: React.FC<AboutProps> = ({
+export const About: FC<AboutProps> = memo(({
   quote,
   bio,
   details,
@@ -33,26 +32,26 @@ export const About: React.FC<AboutProps> = ({
       id="about"
       className="py-40 px-6 bg-[#0E0E0E] scroll-mt-20 overflow-hidden border-y border-white/5"
       aria-label="About section"
+      style={{ contain: 'layout style paint' }}
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-50px' }}
-            className="relative group"
-          >
+          <div className="relative group" style={{ contain: 'layout style' }}>
             <div className="aspect-[4/5] overflow-hidden rounded-sm accent-border relative z-10 shadow-2xl bg-[#1A1A1A]">
               <img
                 src={userPhoto}
                 alt="Ricardo Camilo Portrait"
-                className="w-full h-full object-cover grayscale-[20%] transition-all duration-1000 group-hover:grayscale-0"
+                className="w-full h-full object-cover grayscale-[20%] transition-all duration-1000 hover:grayscale-0"
                 loading="lazy"
+                decoding="async"
+                width={400}
+                height={500}
+                sizes="(max-width: 768px) 100vw, 400px"
               />
             </div>
             <div className="absolute -top-10 -left-10 w-40 h-40 border-l border-t border-[#E5D5C0]/20 -z-0" />
             <div className="absolute -bottom-10 -right-10 w-40 h-40 border-r border-b border-[#E5D5C0]/20 -z-0" />
-          </motion.div>
+          </div>
 
           <div className="space-y-16" dir={isRtl ? 'rtl' : 'ltr'}>
             <div className="space-y-8">
@@ -60,16 +59,16 @@ export const About: React.FC<AboutProps> = ({
                 {firstWord}{' '}
                 <span className="italic opacity-60 font-light">{rest}</span>
               </h2>
-              <p className="text-[#E5D5C0]/60 text-lg md:text-xl font-light leading-relaxed max-w-xl">
+              <p className="text-[#E5D5C0]/80 text-lg md:text-xl font-light leading-relaxed max-w-xl">
                 {bio}
               </p>
               <div className="flex items-center gap-3 py-4 border-y border-white/5">
                 <ShieldCheck
                   size={18}
-                  className="text-[#E5D5C0]/40"
+                  className="text-[#E5D5C0]/70"
                   aria-hidden="true"
                 />
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#E5D5C0]/50">
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#E5D5C0]/70">
                   {details}
                 </span>
               </div>
@@ -105,20 +104,22 @@ export const About: React.FC<AboutProps> = ({
       </div>
     </section>
   );
-};
+});
 
-export default About;
+About.displayName = 'About';
 
-const StatItem: React.FC<{ value: string; label: string }> = ({ value, label }) => (
-  <div className="text-center">
+const StatItem: FC<{ value: string; label: string }> = memo(({ value, label }) => (
+  <div className="text-center" style={{ contain: 'layout style' }}>
     <div className="text-3xl md:text-4xl font-serif font-bold text-[#E5D5C0] mb-2">
       {value}
     </div>
-    <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/40">
+    <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/70">
       {label}
     </div>
   </div>
-);
+));
+
+StatItem.displayName = 'StatItem';
 
 interface SocialLinkProps {
   icon: React.ReactNode;
@@ -126,14 +127,18 @@ interface SocialLinkProps {
   label: string;
 }
 
-const SocialLink: React.FC<SocialLinkProps> = ({ icon, href, label }) => (
+const SocialLink: FC<SocialLinkProps> = memo(({ icon, href, label }) => (
   <a
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="text-[#E5D5C0]/40 hover:text-[#E5D5C0] transition-colors"
+    className="text-[#E5D5C0]/70 hover:text-[#E5D5C0] transition-colors"
     aria-label={label}
   >
     {icon}
   </a>
-);
+));
+
+SocialLink.displayName = 'SocialLink';
+
+export default About;

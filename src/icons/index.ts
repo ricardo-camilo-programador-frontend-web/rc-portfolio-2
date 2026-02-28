@@ -1,0 +1,11 @@
+export { Github } from './Github';
+export { Linkedin } from './Linkedin';
+export { Instagram } from './Instagram';
+export { Globe } from './Globe';
+export { ChevronDown } from './ChevronDown';
+export { ChevronUp } from './ChevronUp';
+export { MessageCircle } from './MessageCircle';
+export { ShieldCheck } from './ShieldCheck';
+export { Layers } from './Layers';
+export { Code } from './Code';
+export { Zap } from './Zap';
