@@ -26,7 +26,7 @@ export const PROJECTS: Array<Project> = [
     description: 'Professional-grade investment management platform.',
     image: '/projects/loor-admin.png',
     tags: ['React', 'Redux', 'Vite'],
-    link: 'https://painel.loor.vc/investor/login',
+    link: 'https://web.archive.org/web/20250108164137/https://loor.vc/',
   },
   {
     id: 'c4',
@@ -35,7 +35,7 @@ export const PROJECTS: Array<Project> = [
     description: 'Modern banking interface with elegant financial sector aesthetics.',
     image: '/projects/glbk.png',
     tags: ['Astro', 'Vue.js', 'Tailwind'],
-    link: 'https://www.glbk.com.br/',
+    link: 'https://web.archive.org/web/20250415133508/https://www.glbk.com.br/',
   },
   {
     id: 'c5',
@@ -44,7 +44,7 @@ export const PROJECTS: Array<Project> = [
     description: 'Financial planning and payment solutions platform.',
     image: '/projects/tippbank.png',
     tags: ['Astro', 'Vue', 'Tailwind'],
-    link: 'https://tippbank.com.br/',
+    link: 'https://web.archive.org/web/20240324074834/https://tippbank.com.br/',
   },
   {
     id: 'f1',
