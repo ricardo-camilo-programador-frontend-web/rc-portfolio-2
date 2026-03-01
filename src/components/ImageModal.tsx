@@ -70,10 +70,27 @@ export const ImageModal: FC<ImageModalProps> = memo(
       onClose()
     }, [handleResetZoom, onClose])
 
+    useEffect(() => {
+      if (!isOpen) return
+
+      const handleEscape = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          handleClose()
+        }
+      }
+
+      window.addEventListener('keydown', handleEscape)
+
+      return () => {
+        window.removeEventListener('keydown', handleEscape)
+      }
+    }, [isOpen, handleClose])
+
     return (
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
+          open={isOpen}
           className="relative z-50 focus:outline-none"
           onClose={handleClose}
         >
