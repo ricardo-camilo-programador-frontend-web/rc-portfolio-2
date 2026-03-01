@@ -23,7 +23,11 @@ export function useScrollProgress() {
   useEffect(() => {
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = window.scrollY / totalHeight;
+      if (totalHeight <= 0) {
+        setProgress(0);
+        return;
+      }
+      const currentProgress = Math.max(0, Math.min(1, window.scrollY / totalHeight));
       setProgress(currentProgress);
     };
 

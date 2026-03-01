@@ -14,9 +14,10 @@ interface ProjectsProps {
 
 const INITIAL_VISIBLE_COUNT = 6;
 
-const useIntersectionObserver = (options: IntersectionObserverInit = {}) => {
+const useIntersectionObserver = (options?: IntersectionObserverInit) => {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const targetRef = useRef<HTMLDivElement | null>(null);
+  const { threshold = 0.1, rootMargin = '50px' } = options || {};
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -26,14 +27,14 @@ const useIntersectionObserver = (options: IntersectionObserverInit = {}) => {
           observer.unobserve(targetRef.current);
         }
       }
-    }, { threshold: 0.1, rootMargin: '50px', ...options });
+    }, { threshold, rootMargin });
 
     if (targetRef.current) {
       observer.observe(targetRef.current);
     }
 
     return () => observer.disconnect();
-  }, [options]);
+  }, [threshold, rootMargin]);
 
   return [targetRef, isIntersecting] as const;
 };

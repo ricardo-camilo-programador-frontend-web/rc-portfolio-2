@@ -17,32 +17,39 @@ class AnalyticsService {
   private readonly FLUSH_INTERVAL = 5000;
   private readonly MAX_QUEUE_SIZE = 10;
   private isLoaded = false;
+  private isLoading = false;
   private hasInteracted = false;
   private loadTimeout: ReturnType<typeof setTimeout> | null = null;
+  private abortController: AbortController | null = null;
 
   init(): void {
+    this.abortController = new AbortController();
     this.setupInteractionListener();
     this.scheduleLoad();
   }
 
   private setupInteractionListener(): void {
+    this.abortController = new AbortController();
     const markInteraction = (): void => {
       this.hasInteracted = true;
-      if (!this.isLoaded) {
+      if (!this.isLoaded && !this.isLoading) {
         this.loadAnalytics();
       }
       this.removeInteractionListeners();
     };
 
     ['click', 'scroll', 'keydown', 'touchstart'].forEach((event) => {
-      document.addEventListener(event, markInteraction, { once: true, passive: true });
+      if (this.abortController) {
+        document.addEventListener(event, markInteraction, { once: true, passive: true, signal: this.abortController.signal });
+      }
     });
   }
 
   private removeInteractionListeners(): void {
-    ['click', 'scroll', 'keydown', 'touchstart'].forEach((event) => {
-      document.removeEventListener(event, () => {});
-    });
+    if (this.abortController) {
+      this.abortController.abort();
+      this.abortController = null;
+    }
   }
 
   private scheduleLoad(): void {
@@ -61,7 +68,8 @@ class AnalyticsService {
   }
 
   private loadAnalytics(): void {
-    if (this.isLoaded) return;
+    if (this.isLoaded || this.isLoading) return;
+    this.isLoading = true;
 
     const counterScript = document.createElement('script');
     counterScript.src = 'https://cdn.counter.dev/script.js';

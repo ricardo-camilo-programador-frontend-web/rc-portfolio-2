@@ -137,67 +137,8 @@
       ]
     }
     </script>
-
-    <script>
-      (function() {
-        var loaded = false;
-        var loadTimeout = null;
-
-        function loadAnalytics() {
-          if (loaded) return;
-          loaded = true;
-
-          var script = document.createElement('script');
-          script.src = 'https://cdn.counter.dev/script.js';
-          script.setAttribute('data-id', 'f30df6f3-776d-4154-959d-0210ac8a8325');
-          script.setAttribute('data-utcoffset', '-3');
-          script.defer = true;
-          document.head.appendChild(script);
-
-          var gtmScript = document.createElement('script');
-          gtmScript.async = true;
-          gtmScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-CONVERSION_ID';
-          document.head.appendChild(gtmScript);
-          gtmScript.onload = function() {
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-CONVERSION_ID');
-          };
-        }
-
-        function scheduleLoad() {
-          if ('requestIdleCallback' in window) {
-            requestIdleCallback(function() { loadAnalytics(); }, { timeout: 3000 });
-          } else {
-            loadTimeout = setTimeout(loadAnalytics, 2000);
-          }
-        }
-
-        var interactionHandled = false;
-        function onInteraction() {
-          if (interactionHandled) return;
-          interactionHandled = true;
-          loadAnalytics();
-          ['click', 'scroll', 'keydown', 'touchstart'].forEach(function(e) {
-            document.removeEventListener(e, onInteraction);
-          });
-        }
-
-        ['click', 'scroll', 'keydown', 'touchstart'].forEach(function(e) {
-          document.addEventListener(e, onInteraction, { once: true, passive: true });
-        });
-
-        if (document.readyState === 'complete') {
-          scheduleLoad();
-        } else {
-          window.addEventListener('load', scheduleLoad);
-        }
-      })();
-    </script>
 </head>
 <body class="overflow-x-hidden selection:bg-[#E5D5C0] selection:text-[#0A0A0A]">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <div id="root"></div>
 

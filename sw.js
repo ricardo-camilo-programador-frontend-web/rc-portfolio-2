@@ -88,7 +88,11 @@ async function cacheFirst(request, cacheName, maxAge) {
     return networkResponse;
   } catch (error) {
     console.log('SW: Network failed, using cached response');
-    return cachedResponse;
+    return cachedResponse || new Response('Offline', {
+      status: 503,
+      statusText: 'Service Unavailable',
+      headers: { 'Content-Type': 'text/plain' },
+    });
   }
 }
 
@@ -113,9 +117,14 @@ async function staleWhileRevalidate(request, cacheName) {
     })
     .catch(() => {
       console.log('SW: Network failed for stale-while-revalidate');
+      return null;
     });
 
-  return cachedResponse || fetchPromise;
+  return cachedResponse || fetchPromise || new Response('Offline', {
+    status: 503,
+    statusText: 'Service Unavailable',
+    headers: { 'Content-Type': 'text/plain' },
+  });
 }
 
 async function networkFirst(request, cacheName, maxAge) {
@@ -219,7 +228,11 @@ self.addEventListener('fetch', (event) => {
         return networkResponse;
       } catch (error) {
         console.log('SW: Fetch failed, checking cache');
-        return cachedResponse;
+        return cachedResponse || new Response('Offline', {
+          status: 503,
+          statusText: 'Service Unavailable',
+          headers: { 'Content-Type': 'text/plain' },
+        });
       }
     })
   );

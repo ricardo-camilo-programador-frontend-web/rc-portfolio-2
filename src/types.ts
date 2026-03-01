@@ -48,3 +48,57 @@ export interface TimelineItem {
   desc: string;
   tags: string[];
 }
+
+export interface Language {
+  code: string;
+  name: string;
+  flag?: string;
+}
+
+export interface Translation {
+  lang: string;
+  direction: 'ltr' | 'rtl';
+  nav: {
+    about: string;
+    skills: string;
+    projects: string;
+    experience: string;
+    contact: string;
+  };
+  hero: {
+    role: string;
+    cta: string;
+  };
+  projects: {
+    title: string;
+    subtitle: string;
+    viewAll: string;
+    comingSoon: string;
+  };
+  skills: {
+    title: string;
+    subtitle: string;
+  };
+  experience: {
+    title: string;
+    subtitle: string;
+  };
+  contact: {
+    title: string;
+    subtitle: string;
+    email: string;
+    copyEmail: string;
+    emailCopied: string;
+  };
+  footer: {
+    built: string;
+    with: string;
+    in: string;
+  };
+}
+
+export interface NavItem {
+  label: string;
+  href: string;
+  icon?: string;
+}

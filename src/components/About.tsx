@@ -34,8 +34,8 @@ export const About: FC<AboutProps> = memo(({
       aria-label="About section"
       style={{ contain: 'layout style paint' }}
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid items-center grid-cols-1 gap-24 lg:grid-cols-2">
           <div className="relative group" style={{ contain: 'layout style' }}>
             <div className="aspect-[4/5] overflow-hidden rounded-sm accent-border relative z-10 shadow-2xl bg-[#1A1A1A]">
               <img
@@ -57,7 +57,7 @@ export const About: FC<AboutProps> = memo(({
             <div className="space-y-8">
               <h2 className="text-5xl md:text-8xl font-serif leading-[0.9] tracking-tighter">
                 {firstWord}{' '}
-                <span className="italic opacity-60 font-light">{rest}</span>
+                <span className="italic font-light opacity-60">{rest}</span>
               </h2>
               <p className="text-[#E5D5C0]/80 text-lg md:text-xl font-light leading-relaxed max-w-xl">
                 {bio}
@@ -80,11 +80,11 @@ export const About: FC<AboutProps> = memo(({
               <StatItem value={stats.eng} label="Proficiency" />
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-12">
+            <div className="flex flex-col items-start gap-12 sm:flex-row sm:items-center">
               <div className="flex gap-6">
                 <SocialLink
                   icon={<Linkedin size={22} />}
-                  href="https://www.linkedin.com/in/ricardo-camilo-frontend-web-developer/"
+                  href="https://www.linkedin.com/in/ricardo-camilo-programador-frontend-web-developer/"
                   label="LinkedIn"
                 />
                 <SocialLink

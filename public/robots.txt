@@ -29,7 +29,7 @@ Disallow: /private/
 # Common bot specific rules
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 0.5
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
@@ -57,11 +57,5 @@ Allow: /
 User-agent: Twitterbot
 Allow: /
 
-# Rate limiting
-Request-rate: 1/5s
-
-# Visit-time (optional)
-Visit-time: 0600-2200
-
 # Host (preferred domain)
-Host: https://ricardo-camilo-dev-frontend-web.netlify.app
+Host: ricardo-camilo-dev-frontend-web.netlify.app

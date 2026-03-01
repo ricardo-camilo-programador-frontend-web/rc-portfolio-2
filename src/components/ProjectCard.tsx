@@ -38,16 +38,15 @@ export const ProjectCard: FC<ProjectCardProps> = memo(({
   isLoaded,
 }) => {
   const [imageError, setImageError] = useState(false);
-  const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
     if (isVisible && !project.comingSoon && project.image) {
       const timer = setTimeout(() => {
-        setShouldLoad(true);
+        onImageLoad(project.image);
       }, loadDelay);
       return () => clearTimeout(timer);
     }
-  }, [isVisible, loadDelay, project.comingSoon, project.image]);
+  }, [isVisible, loadDelay, project.comingSoon, project.image, onImageLoad]);
 
   const handleImageLoad = useCallback(() => {
     if (project.image) {
@@ -56,9 +55,9 @@ export const ProjectCard: FC<ProjectCardProps> = memo(({
   }, [project.image, onImageLoad]);
 
   const cardProps = {
-    className: "group relative aspect-[4/3] overflow-hidden rounded-sm accent-border fade-in-on-scroll hover:-translate-y-1 transition-transform duration-300 contain-layout focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]",
+    className: "group relative aspect-[4/3] overflow-hidden rounded-sm accent-border fade-in-on-scroll -translate-y-1 transition-transform duration-300 contain-layout focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]",
     dir: isRtl ? 'rtl' : 'ltr' as const,
-    style: { contentVisibility: isVisible ? 'auto' : 'hidden', containIntrinsicSize: '400px 300px' } as React.CSSProperties,
+    style: { contentVisibility: 'auto', containIntrinsicSize: '400px 300px' } as React.CSSProperties,
     role: 'article' as const,
   };
 
@@ -93,9 +92,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(({
       rel="noopener noreferrer"
       aria-label={`View ${project.title} project in ${project.category} category`}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A1A] via-[#0F0F0F] to-[#0A0A0A]" aria-hidden="true" />
-
-      {shouldLoad && !imageError && (
+      {!imageError && project.image && (
         <>
           <img
             src={optimizedImage}
@@ -103,7 +100,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             alt=""
             role="presentation"
-            className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className="object-cover w-full h-full transition-opacity duration-300"
             loading="lazy"
             decoding="async"
             width={400}
@@ -112,14 +109,11 @@ export const ProjectCard: FC<ProjectCardProps> = memo(({
             onError={() => setImageError(true)}
             fetchPriority="low"
           />
-          {!isLoaded && (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A1A] via-[#0F0F0F] to-[#0A0A0A] animate-pulse" aria-hidden="true" />
-          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent transition-opacity duration-300" aria-hidden="true" />
         </>
       )}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
-      <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+      <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-300">
         <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80 mb-2 block">
           {project.category}
         </span>

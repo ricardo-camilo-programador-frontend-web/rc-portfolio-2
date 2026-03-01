@@ -1,17 +1,17 @@
 import { Project } from '../types';
 
 export const PROJECTS: Project[] = [
-  { id: 'c1', title: 'Labi9.com', category: 'Qwik', description: 'Corporate website for software development leader.', image: '/projects/labi9.webp', tags: ['Qwik', 'PWA', 'Tailwind'], link: 'https://labi9.com/' },
-  { id: 'c2', title: 'Loor.vc', category: 'Astro', description: 'Connecting investors with high-potential startups.', image: '/projects/loor.webp', tags: ['Astro', 'Vue', 'Tailwind'], link: 'https://loor.vc/' },
-  { id: 'c3', title: 'Loor Dashboard', category: 'React', description: 'Professional-grade investment management platform.', image: '/projects/loor-admin.webp', tags: ['React', 'Redux', 'Vite'], link: 'https://painel.loor.vc/investor/login' },
-  { id: 'c4', title: 'Global Liberty Bank', category: 'Astro/Vue', description: 'Modern banking interface with elegant financial sector aesthetics.', image: '/projects/glbk.webp', tags: ['Astro', 'Vue.js', 'Tailwind'], link: 'https://www.glbk.com.br/' },
-  { id: 'c5', title: 'Tippbank', category: 'Astro/Vue', description: 'Financial planning and payment solutions platform.', image: '/projects/tippbank.webp', tags: ['Astro', 'Vue', 'Tailwind'], link: 'https://tippbank.com.br/' },
-  { id: 'f1', title: 'Edifício Canadá', category: 'Next.js', description: 'Luxury real estate landing page with Lighthouse 90+.', image: '/projects/edificio-canada.webp', tags: ['Next.js 13', 'SSR', 'SEO'], link: 'https://edificio-canada-freelance-langing.netlify.app/' },
-  { id: 'ch1', title: 'Breath Natural', category: 'Next.js', description: 'Premium e-commerce for indoor plants with fluid UX.', image: '/projects/breath-natural.webp', tags: ['Next.js 15', 'Framer Motion', 'Tailwind'], link: 'https://breath-natural-nextjs-chronicles.netlify.app' },
-  { id: 'ch2', title: 'Food Hut', category: 'Angular', description: 'Restaurant landing page with mobile-first PWA capabilities.', image: '/projects/food-hut.webp', tags: ['Angular', 'PWA', 'Tailwind'], link: 'https://food-hut-angular-chronicles-1.netlify.app/' },
+  { id: 'c1', title: 'Labi9.com', category: 'Qwik', description: 'Corporate website for software development leader.', image: '/projects/labi9.png', tags: ['Qwik', 'PWA', 'Tailwind'], link: 'https://labi9.com/' },
+  { id: 'c2', title: 'Loor.vc', category: 'Astro', description: 'Connecting investors with high-potential startups.', image: '/projects/loor.png', tags: ['Astro', 'Vue', 'Tailwind'], link: 'https://loor.vc/' },
+  { id: 'c3', title: 'Loor Dashboard', category: 'React', description: 'Professional-grade investment management platform.', image: '/projects/loor-admin.png', tags: ['React', 'Redux', 'Vite'], link: 'https://painel.loor.vc/investor/login' },
+  { id: 'c4', title: 'Global Liberty Bank', category: 'Astro/Vue', description: 'Modern banking interface with elegant financial sector aesthetics.', image: '/projects/glbk.png', tags: ['Astro', 'Vue.js', 'Tailwind'], link: 'https://www.glbk.com.br/' },
+  { id: 'c5', title: 'Tippbank', category: 'Astro/Vue', description: 'Financial planning and payment solutions platform.', image: '/projects/tippbank.png', tags: ['Astro', 'Vue', 'Tailwind'], link: 'https://tippbank.com.br/' },
+  { id: 'f1', title: 'Edifício Canadá', category: 'Next.js', description: 'Luxury real estate landing page with Lighthouse 90+.', image: '/projects/edificio-canada-rvone-freelance.png', tags: ['Next.js 13', 'SSR', 'SEO'], link: 'https://edificio-canada-freelance-langing.netlify.app/' },
+  { id: 'ch1', title: 'Breath Natural', category: 'Next.js', description: 'Premium e-commerce for indoor plants with fluid UX.', image: '/projects/breath-natural.png', tags: ['Next.js 15', 'Framer Motion', 'Tailwind'], link: 'https://breath-natural-nextjs-chronicles.netlify.app' },
+  { id: 'ch2', title: 'Food Hut', category: 'Angular', description: 'Restaurant landing page with mobile-first PWA capabilities.', image: '/projects/food-hut.png', tags: ['Angular', 'PWA', 'Tailwind'], link: 'https://food-hut-angular-chronicles-1.netlify.app/' },
   { id: 'ch3', title: 'Savana Nuxt', category: 'Vue', description: 'Multi-language e-commerce with global state management.', image: '/projects/savana.webp', tags: ['Nuxt 3', 'Pinia', 'i18n'], link: 'https://savana-nuxtjs-chronicles-part-1.netlify.app/en' },
-  { id: 'ch4', title: 'Persona NextJS', category: 'Next.js', description: 'Elite engineering portfolio showcasing 4+ years of expertise.', image: '/projects/persona.webp', tags: ['Next.js', 'Lighthouse', 'PWA'], link: 'https://persona-nextjs-chronicles-2.netlify.app' },
-  { id: 'ch5', title: 'Zenith Node', category: 'Node.js', description: 'Fundamental backend informational site with native HTTP.', image: '/projects/zenith-node.webp', tags: ['Node.js', 'FS', 'HTTP'], link: 'https://replit.com/@ricardo564/zenith-node-chronicles-part-1' },
+  { id: 'ch4', title: 'Persona NextJS', category: 'Next.js', description: 'Elite engineering portfolio showcasing 4+ years of expertise.', image: '/projects/persona.png', tags: ['Next.js', 'Lighthouse', 'PWA'], link: 'https://persona-nextjs-chronicles-2.netlify.app' },
+  { id: 'ch5', title: 'Zenith Node', category: 'Node.js', description: 'Fundamental backend informational site with native HTTP.', image: '/projects/zenith-node-chronicles-part-1.png', tags: ['Node.js', 'FS', 'HTTP'], link: 'https://replit.com/@ricardo564/zenith-node-chronicles-part-1' },
   { id: 'o1', title: 'Cigana Lila', category: 'Astro', description: 'Spiritual services website with WhatsApp integration.', image: '', comingSoon: true, tags: ['Astro', 'TypeScript', 'Netlify'], link: 'https://cigana-lila.netlify.app/' },
   { id: 'o2', title: 'Lembre de Mim', category: 'Python', description: 'Visual Novel game combining storytelling and technical implementation.', image: '', comingSoon: true, tags: ['RenPy', 'Python', 'Game'], link: 'https://lembredemin.netlify.app/' }
 ];
@@ -24,5 +24,5 @@ export const TIMELINE = [
   { id: 5, period: '2019', company: 'SIALOG Software', role: 'Tech Intern', desc: 'Fundamentos em Ruby on Rails e JasperReports para logística.', tags: ['Ruby on Rails', 'Git'] }
 ];
 
-export const USER_PHOTO = '/images/profile.webp';
+export const USER_PHOTO = '/images/ricardo-camilo-programador-frontend-web-developer-frontend-engineer-software-engineer-web-developer-vuejs-vue-reactjs-react-javascript-typescript.png';
 export const WHATSAPP_URL = 'https://wa.me/5514996765389';
