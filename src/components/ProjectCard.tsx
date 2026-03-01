@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import type { Project } from '../types'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, ZoomIn } from 'lucide-react'
 import { memo, useCallback, useEffect, useState } from 'react'
 
 interface ProjectCardProps {
@@ -10,6 +10,7 @@ interface ProjectCardProps {
   isVisible: boolean
   loadDelay: number
   onImageLoad: (imageUrl: string) => void
+  onOpenModal: (image: string, title: string, category: string) => void
 }
 
 const optimizeImageUrl = (url: string): string => {
@@ -28,7 +29,7 @@ const generateSrcSet = (baseUrl: string): string => {
 }
 
 export const ProjectCard: FC<ProjectCardProps> = memo(
-  ({ project, comingSoonLabel, isRtl, isVisible, loadDelay, onImageLoad }) => {
+  ({ project, comingSoonLabel, isRtl, isVisible, loadDelay, onImageLoad, onOpenModal }) => {
     const [imageError, setImageError] = useState(false)
 
     useEffect(() => {
@@ -86,6 +87,26 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
       >
         {!imageError && project.image && (
           <>
+            {project.year && (
+              <span className="absolute top-2 right-2 text-[8px] bg-[#E5D5C0]/90 text-[#0A0A0A] px-2 py-1 rounded font-bold z-10">
+                {project.year}
+              </span>
+            )}
+
+            <button
+              onClick={e => {
+                e.preventDefault()
+                e.stopPropagation()
+                onOpenModal(project.image, project.title, project.category)
+              }}
+              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"
+              aria-label={`View full size image of ${project.title}`}
+            >
+              <div className="bg-[#E5D5C0]/90 rounded-full p-3 hover:scale-110 transition-transform">
+                <ZoomIn size={20} className="text-[#0A0A0A]" />
+              </div>
+            </button>
+
             <img
               src={optimizedImage}
               srcSet={srcSet}

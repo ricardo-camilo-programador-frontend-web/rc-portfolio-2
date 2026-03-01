@@ -8,6 +8,7 @@ export interface Project {
   link: string
   metrics?: string
   comingSoon?: boolean
+  year?: string
 }
 
 export interface Skill {

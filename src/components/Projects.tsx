@@ -2,6 +2,7 @@ import type { FC } from 'react'
 import type { Project } from '../types'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ProjectCard } from './ProjectCard'
+import { ImageModal } from './ImageModal'
 
 interface ProjectsProps {
   title: string
@@ -49,6 +50,13 @@ export const Projects: FC<ProjectsProps> = memo(
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
     const loadMoreRef = useRef<HTMLDivElement | null>(null)
 
+    const [modalState, setModalState] = useState<{
+      isOpen: boolean
+      image: string
+      title: string
+      category: string
+    }>({ isOpen: false, image: '', title: '', category: '' })
+
     const handleImageLoad = useCallback((imageUrl: string) => {
       setLoadedImages(prev => new Set(prev).add(imageUrl))
     }, [])
@@ -56,6 +64,14 @@ export const Projects: FC<ProjectsProps> = memo(
     const handleLoadMore = useCallback(() => {
       setVisibleCount(prev => Math.min(prev + INITIAL_VISIBLE_COUNT, projects.length))
     }, [projects.length])
+
+    const handleOpenModal = useCallback((image: string, title: string, category: string) => {
+      setModalState({ isOpen: true, image, title, category })
+    }, [])
+
+    const handleCloseModal = useCallback(() => {
+      setModalState(prev => ({ ...prev, isOpen: false }))
+    }, [])
 
     useEffect(() => {
       if (!loadMoreRef.current || visibleCount >= projects.length) return
@@ -124,6 +140,7 @@ export const Projects: FC<ProjectsProps> = memo(
                 isVisible={isVisible}
                 loadDelay={index * 100}
                 onImageLoad={handleImageLoad}
+                onOpenModal={handleOpenModal}
               />
             ))}
           </div>
@@ -134,6 +151,15 @@ export const Projects: FC<ProjectsProps> = memo(
             </div>
           )}
         </div>
+
+        <ImageModal
+          image={modalState.image}
+          alt={modalState.title}
+          isOpen={modalState.isOpen}
+          onClose={handleCloseModal}
+          title={modalState.title}
+          category={modalState.category}
+        />
       </section>
     )
   },

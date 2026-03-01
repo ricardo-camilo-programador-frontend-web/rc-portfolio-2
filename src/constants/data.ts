@@ -4,6 +4,7 @@ export const PROJECTS: Array<Project> = [
   {
     id: 'c1',
     title: 'Labi9.com',
+    year: '2024',
     category: 'Qwik',
     description: 'Corporate website for software development leader.',
     image: '/projects/labi9.png',
@@ -13,6 +14,7 @@ export const PROJECTS: Array<Project> = [
   {
     id: 'c2',
     title: 'Loor.vc',
+    year: '2024',
     category: 'Astro',
     description: 'Connecting investors with high-potential startups.',
     image: '/projects/loor.png',
@@ -22,6 +24,7 @@ export const PROJECTS: Array<Project> = [
   {
     id: 'c3',
     title: 'Loor Dashboard',
+    year: '2024',
     category: 'React',
     description: 'Professional-grade investment management platform.',
     image: '/projects/loor-admin.png',
@@ -31,6 +34,7 @@ export const PROJECTS: Array<Project> = [
   {
     id: 'c4',
     title: 'Global Liberty Bank',
+    year: '2024',
     category: 'Astro/Vue',
     description: 'Modern banking interface with elegant financial sector aesthetics.',
     image: '/projects/glbk.png',
@@ -40,6 +44,7 @@ export const PROJECTS: Array<Project> = [
   {
     id: 'c5',
     title: 'Tippbank',
+    year: '2024',
     category: 'Astro/Vue',
     description: 'Financial planning and payment solutions platform.',
     image: '/projects/tippbank.png',
