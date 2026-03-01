@@ -1,20 +1,18 @@
-import type { FC } from 'react';
-import { memo, useCallback } from 'react';
-import { ChevronUp, Github } from 'lucide-react';
+import type { FC } from 'react'
+import { ChevronUp, Github } from 'lucide-react'
+import { memo, useCallback } from 'react'
 
 export const Footer: FC = memo(() => {
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear()
 
   const scrollToTop = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+    e.preventDefault()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
 
   return (
     <footer
       className="py-12 px-6 border-t border-white/5 bg-[#0A0A0A]"
-      role="contentinfo"
-      aria-label="Site footer"
       style={{ contain: 'layout style paint' }}
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
@@ -22,31 +20,34 @@ export const Footer: FC = memo(() => {
           © {currentYear} Ricardo Camilo. All rights reserved.
         </div>
 
-        <div className="flex items-center gap-6" role="list" aria-label="Footer links">
-          <a
-            href="https://github.com/ricardo-camilo-programador-frontend-web"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] rounded px-2 py-1"
-            aria-label="Visit GitHub profile"
-            role="listitem"
-          >
-            <Github size={16} aria-hidden="true" />
-            <span className="text-[9px] font-bold uppercase tracking-widest">GitHub</span>
-          </a>
+        <ul className="flex items-center gap-6" aria-label="Footer links">
+          <li>
+            <a
+              href="https://github.com/ricardo-camilo-programador-frontend-web"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] rounded px-2 py-1"
+              aria-label="Visit GitHub profile"
+            >
+              <Github size={16} aria-hidden="true" />
+              <span className="text-[9px] font-bold uppercase tracking-widest">GitHub</span>
+            </a>
+          </li>
 
-          <button
-            onClick={scrollToTop}
-            className="w-10 h-10 rounded-full border border-[#E5D5C0]/20 flex items-center justify-center text-[#E5D5C0]/80 hover:text-[#E5D5C0] hover:border-[#E5D5C0] transition-all hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]"
-            aria-label="Scroll to top of page"
-            role="listitem"
-          >
-            <ChevronUp size={18} aria-hidden="true" />
-          </button>
-        </div>
+          <li>
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="w-10 h-10 rounded-full border border-[#E5D5C0]/20 flex items-center justify-center text-[#E5D5C0]/80 hover:text-[#E5D5C0] hover:border-[#E5D5C0] transition-all hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]"
+              aria-label="Scroll to top of page"
+            >
+              <ChevronUp size={18} aria-hidden="true" />
+            </button>
+          </li>
+        </ul>
       </div>
     </footer>
-  );
-});
+  )
+})
 
-Footer.displayName = 'Footer';
+Footer.displayName = 'Footer'

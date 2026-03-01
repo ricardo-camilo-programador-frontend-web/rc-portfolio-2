@@ -4,9 +4,9 @@
 
 @layer base {
   :root {
-    --accent: #E5D5C0;
+    --accent: #e5d5c0;
     --accent-dark: #b8a082;
-    --bg: #0A0A0A;
+    --bg: #0a0a0a;
   }
 
   html {
@@ -23,7 +23,8 @@
   }
 
   body {
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family:
+      "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background-color: var(--bg);
     color: var(--accent);
     margin: 0;
@@ -35,12 +36,13 @@
 
 @layer components {
   .font-serif {
-    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
     font-display: swap;
   }
 
   .font-sans {
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family:
+      "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-display: swap;
   }
 
@@ -52,7 +54,7 @@
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #E5D5C0 0%, #A1A1AA 100%);
+    background: linear-gradient(135deg, #e5d5c0 0%, #a1a1aa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -63,8 +65,8 @@
   }
 
   .accent-bg {
-    background: #E5D5C0;
-    color: #0A0A0A;
+    background: #e5d5c0;
+    color: #0a0a0a;
   }
 
   .line-clamp-2 {
@@ -121,15 +123,33 @@
     will-change: opacity, transform;
   }
 
-  .fade-in-on-scroll:nth-child(1) { animation-delay: 0ms; }
-  .fade-in-on-scroll:nth-child(2) { animation-delay: 100ms; }
-  .fade-in-on-scroll:nth-child(3) { animation-delay: 200ms; }
-  .fade-in-on-scroll:nth-child(4) { animation-delay: 300ms; }
-  .fade-in-on-scroll:nth-child(5) { animation-delay: 400ms; }
-  .fade-in-on-scroll:nth-child(6) { animation-delay: 500ms; }
-  .fade-in-on-scroll:nth-child(7) { animation-delay: 600ms; }
-  .fade-in-on-scroll:nth-child(8) { animation-delay: 700ms; }
-  .fade-in-on-scroll:nth-child(9) { animation-delay: 800ms; }
+  .fade-in-on-scroll:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .fade-in-on-scroll:nth-child(2) {
+    animation-delay: 100ms;
+  }
+  .fade-in-on-scroll:nth-child(3) {
+    animation-delay: 200ms;
+  }
+  .fade-in-on-scroll:nth-child(4) {
+    animation-delay: 300ms;
+  }
+  .fade-in-on-scroll:nth-child(5) {
+    animation-delay: 400ms;
+  }
+  .fade-in-on-scroll:nth-child(6) {
+    animation-delay: 500ms;
+  }
+  .fade-in-on-scroll:nth-child(7) {
+    animation-delay: 600ms;
+  }
+  .fade-in-on-scroll:nth-child(8) {
+    animation-delay: 700ms;
+  }
+  .fade-in-on-scroll:nth-child(9) {
+    animation-delay: 800ms;
+  }
 }
 
 @layer base {
@@ -138,16 +158,16 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #0A0A0A;
+    background: #0a0a0a;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #1A1A1A;
+    background: #1a1a1a;
     border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #E5D5C0;
+    background: #e5d5c0;
   }
 
   :focus-visible {
@@ -173,7 +193,8 @@
 }
 
 @keyframes bounce-slow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {

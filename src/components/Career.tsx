@@ -1,24 +1,23 @@
-import type { FC } from 'react';
-import { memo } from 'react';
+import type { FC } from 'react'
+import { memo } from 'react'
 
 interface TimelineItem {
-  id: number;
-  period: string;
-  company: string;
-  role: string;
-  desc: string;
-  tags: string[];
+  id: number
+  period: string
+  company: string
+  role: string
+  desc: string
+  tags: Array<string>
 }
 
 interface CareerProps {
-  title: string;
-  subtitle: string;
-  present: string;
-  timeline: TimelineItem[];
-  isRtl: boolean;
+  title: string
+  subtitle: string
+  timeline: Array<TimelineItem>
+  isRtl: boolean
 }
 
-export const Career: FC<CareerProps> = memo(({ title, subtitle, present, timeline, isRtl }) => {
+export const Career: FC<CareerProps> = memo(({ title, subtitle, timeline, isRtl }) => {
   return (
     <section
       id="career"
@@ -27,12 +26,15 @@ export const Career: FC<CareerProps> = memo(({ title, subtitle, present, timelin
       style={{ contain: 'layout style paint' }}
     >
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-5xl md:text-7xl font-serif mb-20 text-center" style={{ willChange: 'transform' }}>
+        <h2
+          className="text-5xl md:text-7xl font-serif mb-20 text-center"
+          style={{ willChange: 'transform' }}
+        >
           {title} <span className="italic opacity-50">{subtitle}</span>
         </h2>
 
         <div className="space-y-12" dir={isRtl ? 'rtl' : 'ltr'}>
-          {timeline.map((item, index) => (
+          {timeline.map((item, _index) => (
             <div
               key={item.id}
               className="relative pl-8 md:pl-12 border-l border-[#E5D5C0]/10"
@@ -42,15 +44,11 @@ export const Career: FC<CareerProps> = memo(({ title, subtitle, present, timelin
               <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/70 mb-2">
                 {item.period}
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-[#E5D5C0] mb-1">
-                {item.role}
-              </h3>
+              <h3 className="text-xl md:text-2xl font-bold text-[#E5D5C0] mb-1">{item.role}</h3>
               <div className="text-sm text-[#E5D5C0]/80 mb-3">{item.company}</div>
-              <p className="text-[#E5D5C0]/80 text-sm leading-relaxed mb-4">
-                {item.desc}
-              </p>
+              <p className="text-[#E5D5C0]/80 text-sm leading-relaxed mb-4">{item.desc}</p>
               <div className="flex flex-wrap gap-2">
-                {item.tags.map((tag) => (
+                {item.tags.map(tag => (
                   <span
                     key={tag}
                     className="text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-[#E5D5C0]/10 text-[#E5D5C0]/70"
@@ -64,7 +62,7 @@ export const Career: FC<CareerProps> = memo(({ title, subtitle, present, timelin
         </div>
       </div>
     </section>
-  );
-});
+  )
+})
 
-Career.displayName = 'Career';
+Career.displayName = 'Career'

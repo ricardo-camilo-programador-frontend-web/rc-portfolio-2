@@ -1,5 +1,4 @@
-
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI } from '@google/genai'
 
 const RICARDO_PROFILE = `
 Ricardo Camilo:
@@ -16,19 +15,23 @@ Ricardo Camilo:
 - Idiomas: Português (Nativo), Inglês (C1 - EF SET 66/100), Italiano (Básico), Espanhol (Intermediário).
 - Localização: Jaú, SP - Brasil.
 - Perfil DISC: Investigador (Preciso, Técnico, Analítico, Perfeccionista).
-`;
+`
 
-export const askCamiloAI = async (query: string, history: {role: 'user' | 'bot', text: string}[], lang: string = 'pt') => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+export const askCamiloAI = async (
+  query: string,
+  history: Array<{ role: 'user' | 'bot'; text: string }>,
+  lang: string = 'pt',
+) => {
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY })
   const formattedHistory = history.map(msg => ({
-    role: msg.role === 'user' ? 'user' : 'model' as const,
-    parts: [{ text: msg.text }]
-  }));
+    role: msg.role === 'user' ? 'user' : ('model' as const),
+    parts: [{ text: msg.text }],
+  }))
 
   const systemInstructions = {
-    pt: "Você é o Camilo AI. Responda em Português Brasileiro de forma técnica, estratégica e vendedora. Seu objetivo é convencer recrutadores e clientes de que Ricardo é o melhor engenheiro frontend para projetos premium.",
-    en: "You are Camilo AI. Respond in English with a professional, technical, and persuasive tone. Your goal is to convince recruiters and clients that Ricardo is the best frontend engineer for premium projects."
-  };
+    pt: 'Você é o Camilo AI. Responda em Português Brasileiro de forma técnica, estratégica e vendedora. Seu objetivo é convencer recrutadores e clientes de que Ricardo é o melhor engenheiro frontend para projetos premium.',
+    en: 'You are Camilo AI. Respond in English with a professional, technical, and persuasive tone. Your goal is to convince recruiters and clients that Ricardo is the best frontend engineer for premium projects.',
+  }
 
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
@@ -36,7 +39,7 @@ export const askCamiloAI = async (query: string, history: {role: 'user' | 'bot',
     config: {
       systemInstruction: `${systemInstructions[lang as keyof typeof systemInstructions] || systemInstructions.en}\n\nContexto sobre Ricardo:\n${RICARDO_PROFILE}`,
       temperature: 0.7,
-    }
-  });
-  return response.text;
-};
+    },
+  })
+  return response.text
+}

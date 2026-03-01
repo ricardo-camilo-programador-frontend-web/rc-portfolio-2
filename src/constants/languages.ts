@@ -1,15 +1,33 @@
 export type LanguageCode =
-  | 'en' | 'zh' | 'hi' | 'es' | 'fr' | 'ar' | 'bn' | 'pt' | 'ru' | 'ur'
-  | 'id' | 'de' | 'ja' | 'mr' | 'te' | 'tr' | 'ta' | 'vi' | 'ko' | 'it';
+  | 'en'
+  | 'zh'
+  | 'hi'
+  | 'es'
+  | 'fr'
+  | 'ar'
+  | 'bn'
+  | 'pt'
+  | 'ru'
+  | 'ur'
+  | 'id'
+  | 'de'
+  | 'ja'
+  | 'mr'
+  | 'te'
+  | 'tr'
+  | 'ta'
+  | 'vi'
+  | 'ko'
+  | 'it'
 
 export interface Language {
-  code: LanguageCode;
-  label: string;
-  native: string;
-  rtl?: boolean;
+  code: LanguageCode
+  label: string
+  native: string
+  rtl?: boolean
 }
 
-export const LANGUAGES: Language[] = [
+export const LANGUAGES: Array<Language> = [
   { code: 'en', label: 'English', native: 'English' },
   { code: 'zh', label: 'Chinese', native: '中文' },
   { code: 'hi', label: 'Hindi', native: 'हिन्दी' },
@@ -30,4 +48,4 @@ export const LANGUAGES: Language[] = [
   { code: 'vi', label: 'Vietnamese', native: 'Tiếng Việt' },
   { code: 'ko', label: 'Korean', native: '한국어' },
   { code: 'it', label: 'Italian', native: 'Italiano' },
-];
+]

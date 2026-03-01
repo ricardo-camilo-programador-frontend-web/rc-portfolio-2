@@ -1,10 +1,10 @@
-import type { FC } from 'react';
-import { memo } from 'react';
+import type { FC } from 'react'
+import { memo } from 'react'
 
 interface IconProps {
-  size?: number;
-  className?: string;
-  'aria-hidden'?: boolean;
+  size?: number
+  className?: string
+  'aria-hidden'?: boolean
 }
 
 export const Globe: FC<IconProps> = memo(({ size = 24, className = '', ...props }) => (
@@ -19,12 +19,13 @@ export const Globe: FC<IconProps> = memo(({ size = 24, className = '', ...props 
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
+    aria-hidden={true}
     {...props}
   >
     <circle cx="12" cy="12" r="10" />
     <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
     <path d="M2 12h20" />
   </svg>
-));
+))
 
-Globe.displayName = 'Globe';
+Globe.displayName = 'Globe'

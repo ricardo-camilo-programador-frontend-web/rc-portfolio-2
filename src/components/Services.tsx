@@ -1,62 +1,62 @@
-import type { FC } from 'react';
-import { memo, useEffect, useRef, useCallback } from 'react';
-import { Layers, Code, Zap } from 'lucide-react';
-import { ServiceCard } from './ServiceCard';
+import type { FC } from 'react'
+import { Code, Layers, Zap } from 'lucide-react'
+import { memo, useCallback, useEffect, useRef } from 'react'
+import { ServiceCard } from './ServiceCard'
 
 interface ServicesProps {
-  s1: { title: string; desc: string };
-  s2: { title: string; desc: string };
-  s3: { title: string; desc: string };
-  isRtl: boolean;
+  s1: { title: string; desc: string }
+  s2: { title: string; desc: string }
+  s3: { title: string; desc: string }
+  isRtl: boolean
 }
 
 interface ServiceItem {
-  num: string;
-  title: string;
-  desc: string;
-  icon: React.ReactNode;
+  num: string
+  title: string
+  desc: string
+  icon: React.ReactNode
 }
 
 export const Services: FC<ServicesProps> = memo(({ s1, s2, s3, isRtl }) => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const observerRef = useRef<IntersectionObserver | null>(null);
+  const sectionRef = useRef<HTMLElement>(null)
+  const observerRef = useRef<IntersectionObserver | null>(null)
 
-  const services: ServiceItem[] = [
+  const services: Array<ServiceItem> = [
     { num: '01', title: s1.title, desc: s1.desc, icon: <Layers size={22} /> },
     { num: '02', title: s2.title, desc: s2.desc, icon: <Code size={22} /> },
     { num: '03', title: s3.title, desc: s3.desc, icon: <Zap size={22} /> },
-  ];
+  ]
 
-  const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
-    entries.forEach((entry) => {
+  const handleIntersection = useCallback((entries: Array<IntersectionObserverEntry>) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('services-visible');
+        entry.target.classList.add('services-visible')
       }
-    });
-  }, []);
+    })
+  }, [])
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const section = sectionRef.current
+    if (!section) return
 
     observerRef.current = new IntersectionObserver(handleIntersection, {
       root: null,
       rootMargin: '0px',
       threshold: 0.1,
-    });
+    })
 
-    const cards = section.querySelectorAll('.service-card');
+    const cards = section.querySelectorAll('.service-card')
     cards.forEach((card, index) => {
-      card.setAttribute('data-delay', String(index * 150));
-      observerRef.current?.observe(card);
-    });
+      card.setAttribute('data-delay', String(index * 150))
+      observerRef.current?.observe(card)
+    })
 
     return () => {
       if (observerRef.current) {
-        observerRef.current.disconnect();
+        observerRef.current.disconnect()
       }
-    };
-  }, [handleIntersection]);
+    }
+  }, [handleIntersection])
 
   return (
     <section
@@ -66,10 +66,9 @@ export const Services: FC<ServicesProps> = memo(({ s1, s2, s3, isRtl }) => {
       aria-label="Services section"
       style={{ contain: 'layout style paint' }}
     >
-      <div
-        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12"
+      <ul
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 list-none"
         dir={isRtl ? 'rtl' : 'ltr'}
-        role="list"
         aria-label="List of services"
       >
         {services.map((service, index) => (
@@ -81,10 +80,9 @@ export const Services: FC<ServicesProps> = memo(({ s1, s2, s3, isRtl }) => {
             icon={service.icon}
             isRtl={isRtl}
             delay={index * 150}
-            role="listitem"
           />
         ))}
-      </div>
+      </ul>
 
       <style>{`
         .service-card {
@@ -101,7 +99,7 @@ export const Services: FC<ServicesProps> = memo(({ s1, s2, s3, isRtl }) => {
         }
       `}</style>
     </section>
-  );
-});
+  )
+})
 
-Services.displayName = 'Services';
+Services.displayName = 'Services'

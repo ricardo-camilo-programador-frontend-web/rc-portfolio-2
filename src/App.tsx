@@ -1,81 +1,86 @@
-import type { FC } from 'react';
-import { useState, useEffect, lazy, Suspense, useCallback, useMemo } from 'react';
-import { LANGUAGES, type LanguageCode } from './constants/languages';
-import { TRANSLATIONS } from './constants/translations';
-import { PROJECTS, TIMELINE, USER_PHOTO, WHATSAPP_URL } from './constants/data';
-import { Navigation } from './components/Navigation';
-import { Hero } from './components/Hero';
-import { Services } from './components/Services';
-import { Projects } from './components/Projects';
-import { Certificates } from './components/Certificates';
-import { Footer } from './components/Footer';
-import { analytics } from './services/analytics';
+import type { FC } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
+import { Certificates } from './components/Certificates'
+import { Footer } from './components/Footer'
+import { Hero } from './components/Hero'
+import { Navigation } from './components/Navigation'
+import { Projects } from './components/Projects'
+import { Services } from './components/Services'
+import { PROJECTS, TIMELINE, USER_PHOTO, WHATSAPP_URL } from './constants/data'
+import { LANGUAGES, type LanguageCode } from './constants/languages'
+import { TRANSLATIONS } from './constants/translations'
+import { analytics } from './services/analytics'
 
-const About = lazy(() => import('./components/About').then(m => ({ default: m.About })));
-const Career = lazy(() => import('./components/Career').then(m => ({ default: m.Career })));
-const CTA = lazy(() => import('./components/CTA').then(m => ({ default: m.CTA })));
+const About = lazy(() => import('./components/About').then(m => ({ default: m.About })))
+const Career = lazy(() => import('./components/Career').then(m => ({ default: m.Career })))
+const CTA = lazy(() => import('./components/CTA').then(m => ({ default: m.CTA })))
 
 interface LoadingFallbackProps {
-  height?: string;
+  height?: string
 }
 
 const LoadingFallback: FC<LoadingFallbackProps> = ({ height = 'h-96' }) => (
   <div className={`${height} flex items-center justify-center`}>
     <div className="w-8 h-8 border-2 border-[#E5D5C0]/30 border-t-[#E5D5C0] rounded-full animate-spin" />
   </div>
-);
+)
 
 const App: FC = () => {
-  const [langCode, setLangCode] = useState<LanguageCode>('pt');
-  const [isLangOpen, setIsLangOpen] = useState(false);
+  const [langCode, setLangCode] = useState<LanguageCode>('pt')
+  const [isLangOpen, setIsLangOpen] = useState(false)
 
   useEffect(() => {
-    const stored = localStorage.getItem('lang') as LanguageCode | null;
+    const stored = localStorage.getItem('lang') as LanguageCode | null
     if (stored && TRANSLATIONS[stored]) {
-      setLangCode(stored);
+      setLangCode(stored)
     } else {
-      const browserLang = navigator.language.split('-')[0] as LanguageCode;
+      const browserLang = navigator.language.split('-')[0] as LanguageCode
       if (TRANSLATIONS[browserLang]) {
-        setLangCode(browserLang);
+        setLangCode(browserLang)
       }
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    localStorage.setItem('lang', langCode);
-    const isRtl = ['ar', 'ur'].includes(langCode);
-    document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
-    document.documentElement.lang = langCode;
+    localStorage.setItem('lang', langCode)
+    const isRtl = ['ar', 'ur'].includes(langCode)
+    document.documentElement.dir = isRtl ? 'rtl' : 'ltr'
+    document.documentElement.lang = langCode
 
-    const t = TRANSLATIONS[langCode] || TRANSLATIONS.en;
-    document.title = t.seo.title;
-    const descTag = document.querySelector('meta[name="description"]');
+    const t = TRANSLATIONS[langCode] || TRANSLATIONS.en
+    document.title = t.seo.title
+    const descTag = document.querySelector('meta[name="description"]')
     if (descTag) {
-      descTag.setAttribute('content', t.seo.desc);
+      descTag.setAttribute('content', t.seo.desc)
     }
 
-    analytics.trackPageView(window.location.hash || '/');
-  }, [langCode]);
+    analytics.trackPageView(window.location.hash || '/')
+  }, [langCode])
 
   useEffect(() => {
     const handleHashChange = (): void => {
-      analytics.trackNavigation(window.location.hash.replace('#', '') || 'home');
-    };
+      analytics.trackNavigation(window.location.hash.replace('#', '') || 'home')
+    }
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
 
   const handleLangChange = useCallback((code: LanguageCode) => {
-    setLangCode(code);
-  }, []);
+    setLangCode(code)
+  }, [])
 
-  const t = useMemo(() => TRANSLATIONS[langCode] || TRANSLATIONS.en, [langCode]);
-  const currentLang = useMemo(() => LANGUAGES.find((l) => l.code === langCode) || LANGUAGES[0], [langCode]);
-  const isRtl = useMemo(() => ['ar', 'ur'].includes(langCode), [langCode]);
+  const t = useMemo(() => TRANSLATIONS[langCode] || TRANSLATIONS.en, [langCode])
+  const currentLang = useMemo(
+    () => LANGUAGES.find(l => l.code === langCode) || LANGUAGES[0],
+    [langCode],
+  )
+  const isRtl = useMemo(() => ['ar', 'ur'].includes(langCode), [langCode])
 
   return (
-    <div className={`min-h-screen bg-[#0A0A0A] selection:bg-[#E5D5C0] selection:text-[#0A0A0A] ${isRtl ? 'font-serif text-right' : 'text-left'}`}>
+    <div
+      className={`min-h-screen bg-[#0A0A0A] selection:bg-[#E5D5C0] selection:text-[#0A0A0A] ${isRtl ? 'font-serif text-right' : 'text-left'}`}
+    >
       <Navigation
         nav={t.nav}
         currentLang={currentLang}
@@ -84,7 +89,6 @@ const App: FC = () => {
         setLangCode={handleLangChange}
         isLangOpen={isLangOpen}
         setIsLangOpen={setIsLangOpen}
-        isRtl={isRtl}
         whatsappLabel={t.cta.whatsapp}
         whatsappUrl={WHATSAPP_URL}
       />
@@ -128,7 +132,6 @@ const App: FC = () => {
           <Career
             title={t.career.title}
             subtitle={t.career.subtitle}
-            present={t.career.present}
             timeline={TIMELINE}
             isRtl={isRtl}
           />
@@ -149,7 +152,7 @@ const App: FC = () => {
 
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -1,10 +1,10 @@
-import type { FC } from 'react';
-import { memo } from 'react';
+import type { FC } from 'react'
+import { memo } from 'react'
 
 interface IconProps {
-  size?: number;
-  className?: string;
-  'aria-hidden'?: boolean;
+  size?: number
+  className?: string
+  'aria-hidden'?: boolean
 }
 
 export const ChevronDown: FC<IconProps> = memo(({ size = 24, className = '', ...props }) => (
@@ -19,10 +19,11 @@ export const ChevronDown: FC<IconProps> = memo(({ size = 24, className = '', ...
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
+    aria-hidden={true}
     {...props}
   >
     <path d="m6 9 6 6 6-6" />
   </svg>
-));
+))
 
-ChevronDown.displayName = 'ChevronDown';
+ChevronDown.displayName = 'ChevronDown'

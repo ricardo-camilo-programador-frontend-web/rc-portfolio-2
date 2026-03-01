@@ -1,16 +1,23 @@
-import type { FC } from 'react';
-import { memo } from 'react';
-import { Award } from 'lucide-react';
+import type { FC } from 'react'
+import { Award } from 'lucide-react'
+import { memo } from 'react'
 
 interface CertificatesProps {
-  title: string;
-  subtitle: string;
+  title: string
+  subtitle: string
 }
 
 export const Certificates: FC<CertificatesProps> = memo(({ title, subtitle }) => {
   return (
-    <section className="py-32 px-6 bg-[#0B0B0B]" aria-label="Certificates section" style={{ contain: 'layout style paint' }}>
-      <div className="max-w-4xl mx-auto p-12 glass accent-border rounded-[3rem] text-center" style={{ contain: 'layout style' }}>
+    <section
+      className="py-32 px-6 bg-[#0B0B0B]"
+      aria-label="Certificates section"
+      style={{ contain: 'layout style paint' }}
+    >
+      <div
+        className="max-w-4xl mx-auto p-12 glass accent-border rounded-[3rem] text-center"
+        style={{ contain: 'layout style' }}
+      >
         <Award size={48} className="mx-auto mb-8 text-[#E5D5C0]" aria-hidden="true" />
         <h2 className="text-4xl md:text-6xl font-serif mb-6" style={{ willChange: 'transform' }}>
           {title} <span className="italic opacity-50">{subtitle}</span>
@@ -28,9 +35,9 @@ export const Certificates: FC<CertificatesProps> = memo(({ title, subtitle }) =>
         </div>
       </div>
     </section>
-  );
-});
+  )
+})
 
-Certificates.displayName = 'Certificates';
+Certificates.displayName = 'Certificates'
 
-export default Certificates;
+export default Certificates

@@ -1,10 +1,10 @@
-import type { FC } from 'react';
-import { memo } from 'react';
+import type { FC } from 'react'
+import { memo } from 'react'
 
 interface IconProps {
-  size?: number;
-  className?: string;
-  'aria-hidden'?: boolean;
+  size?: number
+  className?: string
+  'aria-hidden'?: boolean
 }
 
 export const Code: FC<IconProps> = memo(({ size = 24, className = '', ...props }) => (
@@ -19,11 +19,12 @@ export const Code: FC<IconProps> = memo(({ size = 24, className = '', ...props }
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
+    aria-hidden={true}
     {...props}
   >
     <polyline points="16 18 22 12 16 6" />
     <polyline points="8 6 2 12 8 18" />
   </svg>
-));
+))
 
-Code.displayName = 'Code';
+Code.displayName = 'Code'

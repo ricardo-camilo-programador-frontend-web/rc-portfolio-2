@@ -1,104 +1,104 @@
 export interface Project {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  image: string;
-  tags: string[];
-  link: string;
-  metrics?: string;
-  comingSoon?: boolean;
+  id: string
+  title: string
+  category: string
+  description: string
+  image: string
+  tags: Array<string>
+  link: string
+  metrics?: string
+  comingSoon?: boolean
 }
 
 export interface Skill {
-  name: string;
-  level: number;
-  icon: string;
-  category: 'Frontend' | 'Backend' | 'Tools';
+  name: string
+  level: number
+  icon: string
+  category: 'Frontend' | 'Backend' | 'Tools'
 }
 
 export interface Testimonial {
-  author: string;
-  role: string;
-  content: string;
-  avatar: string;
+  author: string
+  role: string
+  content: string
+  avatar: string
 }
 
 export interface Character {
-  name: string;
-  archetype: string;
-  level: number;
-  hp: number;
-  maxHp: number;
-  xp: number;
+  name: string
+  archetype: string
+  level: number
+  hp: number
+  maxHp: number
+  xp: number
   stats: {
-    strength: number;
-    intelligence: number;
-    charisma: number;
-    luck: number;
-  };
-  inventory: string[];
+    strength: number
+    intelligence: number
+    charisma: number
+    luck: number
+  }
+  inventory: Array<string>
 }
 
 export interface TimelineItem {
-  id: number;
-  period: string;
-  company: string;
-  role: string;
-  desc: string;
-  tags: string[];
+  id: number
+  period: string
+  company: string
+  role: string
+  desc: string
+  tags: Array<string>
 }
 
 export interface Language {
-  code: string;
-  name: string;
-  flag?: string;
+  code: string
+  name: string
+  flag?: string
 }
 
 export interface Translation {
-  lang: string;
-  direction: 'ltr' | 'rtl';
+  lang: string
+  direction: 'ltr' | 'rtl'
   nav: {
-    about: string;
-    skills: string;
-    projects: string;
-    experience: string;
-    contact: string;
-  };
+    about: string
+    skills: string
+    projects: string
+    experience: string
+    contact: string
+  }
   hero: {
-    role: string;
-    cta: string;
-  };
+    role: string
+    cta: string
+  }
   projects: {
-    title: string;
-    subtitle: string;
-    viewAll: string;
-    comingSoon: string;
-  };
+    title: string
+    subtitle: string
+    viewAll: string
+    comingSoon: string
+  }
   skills: {
-    title: string;
-    subtitle: string;
-  };
+    title: string
+    subtitle: string
+  }
   experience: {
-    title: string;
-    subtitle: string;
-  };
+    title: string
+    subtitle: string
+  }
   contact: {
-    title: string;
-    subtitle: string;
-    email: string;
-    copyEmail: string;
-    emailCopied: string;
-  };
+    title: string
+    subtitle: string
+    email: string
+    copyEmail: string
+    emailCopied: string
+  }
   footer: {
-    built: string;
-    with: string;
-    in: string;
-  };
+    built: string
+    with: string
+    in: string
+  }
 }
 
 export interface NavItem {
-  label: string;
-  href: string;
-  icon?: string;
+  label: string
+  href: string
+  icon?: string
 }

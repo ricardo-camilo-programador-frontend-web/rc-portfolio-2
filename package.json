@@ -8,24 +8,31 @@
     "build": "tsc && vite build && node scripts/copy-sw.js",
     "build:analyze": "vite build --mode analyze",
     "preview": "vite preview",
-    "optimize:images": "node scripts/optimize-images.js"
+    "optimize:images": "node scripts/optimize-images.js",
+    "lint": "biome check --write --unsafe . --max-diagnostics=4293000000",
+    "lint:check": "biome check .",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "dependencies": {
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
     "@google/genai": "^1.40.0",
-    "lucide-react": "^0.563.0"
+    "lucide-react": "^0.563.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.4",
     "@types/node": "^22.14.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.21",
+    "eslint-config-prettier": "^10.1.8",
     "postcss": "^8.5.3",
+    "prettier": "^3.8.1",
+    "sharp": "^0.33.5",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.8.2",
-    "vite": "^6.2.0",
-    "sharp": "^0.33.5"
+    "vite": "^6.2.0"
   }
 }

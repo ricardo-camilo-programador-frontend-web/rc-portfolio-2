@@ -1,31 +1,24 @@
-import type { FC } from 'react';
-import { memo } from 'react';
-import { ShieldCheck, Linkedin, Github, Instagram } from 'lucide-react';
+import type { FC } from 'react'
+import { Github, Instagram, Linkedin, ShieldCheck } from 'lucide-react'
+import { memo } from 'react'
 
 interface AboutProps {
-  quote: string;
-  bio: string;
-  details: string;
+  quote: string
+  bio: string
+  details: string
   stats: {
-    exp: string;
-    projects: string;
-    eng: string;
-  };
-  userPhoto: string;
-  isRtl: boolean;
+    exp: string
+    projects: string
+    eng: string
+  }
+  userPhoto: string
+  isRtl: boolean
 }
 
-export const About: FC<AboutProps> = memo(({
-  quote,
-  bio,
-  details,
-  stats,
-  userPhoto,
-  isRtl,
-}) => {
-  const quoteParts = quote.split(' ');
-  const firstWord = quoteParts[0];
-  const rest = quoteParts.slice(1).join(' ');
+export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPhoto, isRtl }) => {
+  const quoteParts = quote.split(' ')
+  const firstWord = quoteParts[0]
+  const rest = quoteParts.slice(1).join(' ')
 
   return (
     <section
@@ -56,18 +49,13 @@ export const About: FC<AboutProps> = memo(({
           <div className="space-y-16" dir={isRtl ? 'rtl' : 'ltr'}>
             <div className="space-y-8">
               <h2 className="text-5xl md:text-8xl font-serif leading-[0.9] tracking-tighter">
-                {firstWord}{' '}
-                <span className="italic font-light opacity-60">{rest}</span>
+                {firstWord} <span className="italic font-light opacity-60">{rest}</span>
               </h2>
               <p className="text-[#E5D5C0]/80 text-lg md:text-xl font-light leading-relaxed max-w-xl">
                 {bio}
               </p>
               <div className="flex items-center gap-3 py-4 border-y border-white/5">
-                <ShieldCheck
-                  size={18}
-                  className="text-[#E5D5C0]/70"
-                  aria-hidden="true"
-                />
+                <ShieldCheck size={18} className="text-[#E5D5C0]/70" aria-hidden="true" />
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#E5D5C0]/70">
                   {details}
                 </span>
@@ -103,28 +91,24 @@ export const About: FC<AboutProps> = memo(({
         </div>
       </div>
     </section>
-  );
-});
+  )
+})
 
-About.displayName = 'About';
+About.displayName = 'About'
 
 const StatItem: FC<{ value: string; label: string }> = memo(({ value, label }) => (
   <div className="text-center" style={{ contain: 'layout style' }}>
-    <div className="text-3xl md:text-4xl font-serif font-bold text-[#E5D5C0] mb-2">
-      {value}
-    </div>
-    <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/70">
-      {label}
-    </div>
+    <div className="text-3xl md:text-4xl font-serif font-bold text-[#E5D5C0] mb-2">{value}</div>
+    <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/70">{label}</div>
   </div>
-));
+))
 
-StatItem.displayName = 'StatItem';
+StatItem.displayName = 'StatItem'
 
 interface SocialLinkProps {
-  icon: React.ReactNode;
-  href: string;
-  label: string;
+  icon: React.ReactNode
+  href: string
+  label: string
 }
 
 const SocialLink: FC<SocialLinkProps> = memo(({ icon, href, label }) => (
@@ -137,8 +121,8 @@ const SocialLink: FC<SocialLinkProps> = memo(({ icon, href, label }) => (
   >
     {icon}
   </a>
-));
+))
 
-SocialLink.displayName = 'SocialLink';
+SocialLink.displayName = 'SocialLink'
 
-export default About;
+export default About

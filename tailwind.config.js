@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   future: {
     hoverOnlyWhenSupported: true,
   },
@@ -15,7 +12,14 @@ export default {
         bg: '#0A0A0A',
       },
       fontFamily: {
-        sans: ['Inter', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans Arabic', 'Noto Sans Devanagari', 'sans-serif'],
+        sans: [
+          'Inter',
+          'Noto Sans SC',
+          'Noto Sans JP',
+          'Noto Sans Arabic',
+          'Noto Sans Devanagari',
+          'sans-serif',
+        ],
         serif: ['Cormorant Garamond', 'serif'],
       },
       animation: {
