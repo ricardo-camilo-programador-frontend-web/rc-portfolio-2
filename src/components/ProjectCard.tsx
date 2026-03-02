@@ -99,10 +99,10 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
                 e.stopPropagation()
                 onOpenModal(project.image, project.title, project.category)
               }}
-              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"
+              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none"
               aria-label={`View full size image of ${project.title}`}
             >
-              <div className="bg-[#E5D5C0]/90 rounded-full p-3 hover:scale-110 transition-transform">
+              <div className="bg-[#E5D5C0]/90 rounded-full p-3 hover:scale-110 transition-transform pointer-events-auto">
                 <ZoomIn size={20} className="text-[#0A0A0A]" />
               </div>
             </button>
