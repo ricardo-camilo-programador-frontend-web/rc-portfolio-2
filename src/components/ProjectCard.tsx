@@ -131,7 +131,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
         <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-300">
           <div className="flex items-center gap-2 w-full">
             {project.tags.map((tag, index) => (
-              <span key={index} className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80 mb-2 block">
+              <span key={index} className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80 mb-2 block border border-[#E5D5C0]/20 p-1 rounded">
                 {tag}
               </span>
             ))}
