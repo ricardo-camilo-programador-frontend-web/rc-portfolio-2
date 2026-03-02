@@ -129,9 +129,13 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
         )}
 
         <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-300">
-          <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80 mb-2 block">
-            {project.category}
-          </span>
+          <div className="flex items-center gap-2 w-full">
+            {project.tags.map((tag, index) => (
+              <span key={index} className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80 mb-2 block">
+                {tag}
+              </span>
+            ))}
+          </div>
           <h3 className="text-lg font-bold text-[#E5D5C0] mb-3">{project.title}</h3>
           <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#E5D5C0]">
             <span>View Project</span>

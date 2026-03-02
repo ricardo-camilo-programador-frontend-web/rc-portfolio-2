@@ -1,7 +1,17 @@
 import type { Project } from '../types'
 
 export const PROJECTS: Array<Project> = [
-    {
+  {
+    id: 'pc2026',
+    title: 'Pomodoro Claw',
+    category: 'PWA',
+    description: 'Productivity timer combining Pomodoro technique with claw machine gamification mechanics.',
+    image: '/projects/pomodoro-claw.png',
+    tags: ['PWA', 'TypeScript', 'Netlify', 'Google Ai Studio'],
+    link: 'https://pomodoro-claw.netlify.app',
+    year: '2026',
+  },
+  {
     id: 'ch1',
     title: 'Breath Natural',
     category: 'Next.js',
@@ -9,6 +19,7 @@ export const PROJECTS: Array<Project> = [
     image: '/projects/breath-natural.png',
     tags: ['Next.js 15', 'Framer Motion', 'Tailwind'],
     link: 'https://breath-natural-nextjs-chronicles.netlify.app',
+    year: '2025',
   },
   {
     id: 'f1',
@@ -18,6 +29,7 @@ export const PROJECTS: Array<Project> = [
     image: '/projects/edificio-canada-rvone-freelance.png',
     tags: ['Next.js 13', 'SSR', 'SEO'],
     link: 'https://edificio-canada-freelance-langing.netlify.app/',
+    year: '2025',
   },
   {
     id: 'ch2',
@@ -27,6 +39,7 @@ export const PROJECTS: Array<Project> = [
     image: '/projects/food-hut.png',
     tags: ['Angular', 'PWA', 'Tailwind'],
     link: 'https://food-hut-angular-chronicles-1.netlify.app/',
+    year: '2025',
   },
   {
     id: 'ch3',
@@ -36,6 +49,7 @@ export const PROJECTS: Array<Project> = [
     image: '/projects/savana.webp',
     tags: ['Nuxt 3', 'Pinia', 'i18n'],
     link: 'https://savana-nuxtjs-chronicles-part-1.netlify.app/en',
+    year: '2025',
   },
   {
     id: 'ch4',
@@ -45,6 +59,7 @@ export const PROJECTS: Array<Project> = [
     image: '/projects/persona.png',
     tags: ['Next.js', 'Lighthouse', 'PWA'],
     link: 'https://persona-nextjs-chronicles-2.netlify.app',
+    year: '2025',
   },
   {
     id: 'ch5',
@@ -54,6 +69,17 @@ export const PROJECTS: Array<Project> = [
     image: '/projects/zenith-node-chronicles-part-1.png',
     tags: ['Node.js', 'FS', 'HTTP'],
     link: 'https://replit.com/@ricardo564/zenith-node-chronicles-part-1',
+    year: '2025',
+  },
+  {
+    id: 'o2',
+    title: 'Lembre de Mim',
+    category: 'Python',
+    description: 'Visual Novel game combining storytelling and technical implementation.',
+    image: '/projects/lembre-de-min.png',
+    tags: ['RenPy', 'Python', 'Game'],
+    link: 'https://lembredemin.netlify.app/',
+    year: '2025',
   },
   {
     id: 'o1',
@@ -64,16 +90,7 @@ export const PROJECTS: Array<Project> = [
     comingSoon: true,
     tags: ['Astro', 'TypeScript', 'Netlify'],
     link: 'https://cigana-lila.netlify.app/',
-  },
-  {
-    id: 'o2',
-    title: 'Lembre de Mim',
-    category: 'Python',
-    description: 'Visual Novel game combining storytelling and technical implementation.',
-    image: '',
-    comingSoon: true,
-    tags: ['RenPy', 'Python', 'Game'],
-    link: 'https://lembredemin.netlify.app/',
+    year: '2025',
   },
 ]
 
