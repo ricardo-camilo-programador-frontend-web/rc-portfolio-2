@@ -1,0 +1,61 @@
+# robots.txt for Ricardo Camilo Portfolio
+# https://ricardo-camilo-dev-frontend-web.netlify.app/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://ricardo-camilo-dev-frontend-web.netlify.app/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Allow all crawlers to access main content
+Allow: /*.html$
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.json$
+Allow: /*.svg$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+Allow: /*.avif$
+
+# Disallow admin/private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Common bot specific rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: facebot
+Allow: /
+
+User-agent: ia_archiver
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Host (preferred domain)
+Host: ricardo-camilo-dev-frontend-web.netlify.app

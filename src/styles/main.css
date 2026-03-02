@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --accent: #e5d5c0;
+    --accent-dark: #b8a082;
+    --bg: #0a0a0a;
+  }
+
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    font-family: system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    font-family:
+      "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg);
+    color: var(--accent);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .font-serif {
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-display: swap;
+  }
+
+  .font-sans {
+    font-family:
+      "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-display: swap;
+  }
+
+  .glass {
+    background: rgba(15, 15, 15, 0.75);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(229, 213, 192, 0.05);
+    contain: layout style;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #e5d5c0 0%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .accent-border {
+    border: 1px solid rgba(229, 213, 192, 0.1);
+  }
+
+  .accent-bg {
+    background: #e5d5c0;
+    color: #0a0a0a;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 8px 16px;
+    z-index: 100;
+    transition: top 0.3s;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--bg);
+    outline-offset: 2px;
+  }
+
+  .contain-layout {
+    contain: layout style paint;
+  }
+
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+    will-change: opacity, transform;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .fade-in-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fade-in 0.6s ease-out forwards;
+    will-change: opacity, transform;
+  }
+
+  .fade-in-on-scroll:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .fade-in-on-scroll:nth-child(2) {
+    animation-delay: 100ms;
+  }
+  .fade-in-on-scroll:nth-child(3) {
+    animation-delay: 200ms;
+  }
+  .fade-in-on-scroll:nth-child(4) {
+    animation-delay: 300ms;
+  }
+  .fade-in-on-scroll:nth-child(5) {
+    animation-delay: 400ms;
+  }
+  .fade-in-on-scroll:nth-child(6) {
+    animation-delay: 500ms;
+  }
+  .fade-in-on-scroll:nth-child(7) {
+    animation-delay: 600ms;
+  }
+  .fade-in-on-scroll:nth-child(8) {
+    animation-delay: 700ms;
+  }
+  .fade-in-on-scroll:nth-child(9) {
+    animation-delay: 800ms;
+  }
+}
+
+@layer base {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1a1a1a;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e5d5c0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--bg);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
