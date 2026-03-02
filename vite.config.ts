@@ -48,7 +48,12 @@ export default defineConfig({
         sourcemap: false,
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[ext]',
+        assetFileNames: ({ name }) => {
+          if (name && name.endsWith('.css')) {
+            return 'assets/[name]-[hash][extname]'
+          }
+          return 'assets/[name]-[hash][extname]'
+        },
       },
     },
     target: 'esnext',

@@ -191,6 +191,11 @@ self.addEventListener('fetch', event => {
     return
   }
 
+  if (url.pathname.startsWith('/assets/') && url.pathname.endsWith('.css')) {
+    event.respondWith(staleWhileRevalidate(event.request, CACHE_NAME))
+    return
+  }
+
   if (URL_PATTERNS.api.test(url.pathname) || url.pathname.includes('/api/')) {
     event.respondWith(networkFirst(event.request, API_CACHE_NAME, CACHE_EXPIRATION.api))
     return
