@@ -37,7 +37,7 @@ export const PROJECTS: Array<Project> = [
     category: 'Angular',
     description: 'Restaurant landing page with mobile-first PWA capabilities.',
     image: '/projects/food-hut.png',
-    tags: ['Angular', 'PWA', 'Tailwind', 'Study', 'Completed'],
+    tags: ['Angular', 'PWA', 'Tailwind', 'Study', 'OnGoing'],
     link: 'https://food-hut-angular-chronicles-1.netlify.app/',
     year: '2025',
   },
