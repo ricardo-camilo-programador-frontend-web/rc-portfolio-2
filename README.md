@@ -1,137 +1,91 @@
-# Ricardo Camilo | Frontend Engineer Portfolio
+# 💼 Ricardo Camilo | Portfolio
 
-Performance-optimized portfolio built with React, TypeScript, and Vite.
+<div align="center">
 
-## 🚀 Performance Optimizations
+**Frontend Engineer Portfolio**
 
-This portfolio has been optimized for maximum Lighthouse scores:
+Portfolio otimizado para performance maxima com React, TypeScript e Vite.
 
-### What Was Fixed
+[Demo](#) • [GitHub](https://github.com/ricardo-camilo-programador-frontend-web)
 
-1. **Removed Render-Blocking Resources**
-   - ❌ Removed Tailwind CDN
-   - ✅ Local Tailwind build with PurgeCSS
-   - ✅ Optimized Google Fonts with `font-display: swap`
-   - ✅ Deferred third-party scripts (analytics, ads)
+</div>
 
-2. **Code Splitting**
-   - ✅ Broke 513-line App.tsx into 10+ components
-   - ✅ Lazy loading for below-fold sections
-   - ✅ Vendor chunk splitting (React, Framer Motion, Icons)
+## 📋 Sobre
 
-3. **Image Optimization**
-   - ✅ Removed raw.githubusercontent.com (was 24.5 MiB)
-   - ✅ Local image pipeline with WebP/AVIF
-   - ✅ Responsive images with lazy loading
-   - ✅ Target: 2-4 MiB total (down from 24.5 MiB)
+Portfolio pessoal com foco em performance, acessibilidade e experiencia do usuario.
 
-4. **Fixed Build Errors**
-   - ✅ Removed broken `/index.css` reference
-   - ✅ Fixed Next.js paths in Vite project
-   - ✅ Fixed Service Worker registration
-   - ✅ Zero 404 errors
+## 🚀 Tecnologias
 
-5. **Security & Accessibility**
-   - ✅ Content-Security-Policy
-   - ✅ X-Frame-Options
-   - ✅ Skip links for keyboard navigation
-   - ✅ ARIA labels on interactive elements
+| Tecnologia | Versao | Uso |
+|------------|--------|-----|
+| React | 19.x | UI Library |
+| Vite | 6.x | Build Tool |
+| TypeScript | 5.x | Linguagem |
+| TailwindCSS | 3.x | Estilizacao |
+| Framer Motion | - | Animacoes |
 
-## 📦 Tech Stack
+## ⚡ Performance
 
-- **React 19** - UI library
-- **TypeScript** - Type safety
-- **Vite** - Build tool
-- **Tailwind CSS** - Styling
-- **Framer Motion** - Animations
-- **Lucide Icons** - Icon library
+Otimizado para pontuacao maxima no Lighthouse:
 
-## 🛠️ Setup
+- ✅ **Code Splitting** - Componentes carregados sob demanda
+- ✅ **Image Optimization** - WebP/AVIF com lazy loading
+- ✅ **Tree Shaking** - Bundles otimizados
+- ✅ **Font Optimization** - font-display: swap
+- ✅ **Vendor Chunks** - React, Framer Motion, Icons separados
 
-### Install Dependencies
+## 🏃 Quick Start
 
 ```bash
-npm install
+# Clonar repositorio
+git clone https://github.com/ricardo-camilo-programador-frontend-web/portfolio2.0.git
+
+# Instalar dependencias
+pnpm install
+
+# Rodar desenvolvimento
+pnpm dev
 ```
 
-### Development
-
-```bash
-npm run dev
-```
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
-### Optimize Images
-
-```bash
-# Place images in public/projects/ first
-npm run optimize:images
-```
-
-## 📁 Project Structure
+## 📁 Estrutura
 
 ```
 portfolio2.0/
-├── public/
-│   ├── projects/        # Project images
-│   ├── images/          # Profile images
-│   └── icons/           # PWA icons
 ├── src/
-│   ├── components/      # React components
-│   ├── composables/     # Custom hooks
-│   ├── constants/       # Static data
-│   ├── services/        # API services
-│   ├── styles/          # CSS
-│   ├── types.ts         # TypeScript types
-│   ├── App.tsx          # Main app
-│   └── index.tsx        # Entry point
-├── scripts/
-│   └── optimize-images.js
-├── index.html
-├── tailwind.config.js
-├── vite.config.ts
-├── netlify.toml
-└── sw.js
+│   ├── components/         # Componentes React
+│   ├── sections/           # Secoes da pagina
+│   ├── hooks/              # Custom Hooks
+│   ├── utils/              # Utilitarios
+│   └── assets/             # Assets
+├── public/                 # Arquivos estaticos
+├── docs/                   # Documentacao
+│   └── github-workflow/    # Padroes GitHub
+└── .github/                # Templates e CI/CD
 ```
 
-## 🎯 Performance Budget
+## 📚 Documentacao
 
-| Metric | Target |
-|--------|--------|
-| LCP | < 2.5s |
-| TBT | < 300ms |
-| Initial JS | < 170KB gzip |
-| Critical Image | < 200KB |
-| 404s | 0 |
+- [Workflow GitHub](./docs/github-workflow/README.md)
+- [Padroes de Qualidade](./docs/github-workflow/CODE_QUALITY.md)
+- [Padroes de Commit](./docs/github-workflow/COMMIT-PATTERN.md)
+- [Deploy Guide](./DEPLOY.md)
+- [Fixes Log](./FIXES.md)
 
-## 📊 Expected Lighthouse Scores
+## 📜 Scripts
 
-After image optimization:
+| Comando | Descricao |
+|---------|-----------|
+| `pnpm dev` | Servidor desenvolvimento |
+| `pnpm build` | Build producao |
+| `pnpm preview` | Preview producao |
+| `pnpm lint` | Verificacao de codigo |
 
-- **Performance**: 95-100
-- **Accessibility**: 95-100
-- **Best Practices**: 95-100
-- **SEO**: 100
+## 👤 Contato
 
-## 🚀 Deploy
+**Ricardo Camilo**
+- Portfolio: Este projeto!
+- GitHub: [@ricardo-camilo-programador-frontend-web](https://github.com/ricardo-camilo-programador-frontend-web)
 
-See [DEPLOY.md](./DEPLOY.md) for deployment instructions.
+## 📄 Licenca
 
-## 📈 Performance Guide
-
-See [OPTIMIZATION_GUIDE.md](./OPTIMIZATION_GUIDE.md) for detailed optimization steps.
-
-## 📝 License
-
-MIT © Ricardo Camilo
+MIT License
