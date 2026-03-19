@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { Certificates } from './components/Certificates'
+import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
 import { Navigation } from './components/Navigation'
@@ -13,7 +14,6 @@ import { analytics } from './services/analytics'
 
 const About = lazy(() => import('./components/About').then(m => ({ default: m.About })))
 const Career = lazy(() => import('./components/Career').then(m => ({ default: m.Career })))
-const CTA = lazy(() => import('./components/CTA').then(m => ({ default: m.CTA })))
 
 interface LoadingFallbackProps {
   height?: string
@@ -137,17 +137,14 @@ const App: FC = () => {
           />
         </Suspense>
 
-        <Suspense fallback={<LoadingFallback height="py-40" />}>
-          <CTA
-            title={t.cta.title}
-            subtitle={t.cta.subtitle}
-            description={t.cta.desc}
-            button={t.cta.button}
-            whatsapp={t.cta.whatsapp}
-            whatsappUrl={WHATSAPP_URL}
-            isRtl={isRtl}
-          />
-        </Suspense>
+        <Contact
+          title={t.contact.title}
+          subtitle={t.contact.subtitle}
+          description={t.contact.description}
+          form={t.contact.form}
+          info={t.contact.info}
+          isRtl={isRtl}
+        />
       </main>
 
       <Footer />

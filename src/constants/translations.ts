@@ -19,6 +19,26 @@ export interface Translation {
   career: { title: string; subtitle: string; present: string }
   certs: { title: string; subtitle: string }
   cta: { title: string; subtitle: string; desc: string; button: string; whatsapp: string }
+  contact: {
+    title: string
+    subtitle: string
+    description: string
+    form: {
+      name: string
+      email: string
+      subject: string
+      message: string
+      submit: string
+      sending: string
+      success: string
+      error: string
+    }
+    info: {
+      email: string
+      location: string
+      phone: string
+    }
+  }
 }
 
 export const TRANSLATIONS: Record<LanguageCode, Translation> = {
@@ -76,6 +96,26 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       button: 'Email Me',
       whatsapp: 'WhatsApp Me',
     },
+    contact: {
+      title: 'Get in',
+      subtitle: 'Touch',
+      description: 'Have a project in mind? Fill out the form below and I\'ll get back to you within 24 hours.',
+      form: {
+        name: 'Name',
+        email: 'Email',
+        subject: 'Subject',
+        message: 'Message',
+        submit: 'Send Message',
+        sending: 'Sending...',
+        success: 'Message Sent!',
+        error: 'Something went wrong. Please try again.',
+      },
+      info: {
+        email: 'Email',
+        location: 'Location',
+        phone: 'Phone',
+      },
+    },
   },
   pt: {
     seo: {
@@ -130,6 +170,26 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       desc: 'Pronto para colaborar com marcas que buscam engenharia elegante e design de classe mundial.',
       button: 'Enviar E-mail',
       whatsapp: 'Conversar no WhatsApp',
+    },
+    contact: {
+      title: 'Entre em',
+      subtitle: 'Contato',
+      description: 'Tem um projeto em mente? Preencha o formulário abaixo e retornarei em até 24 horas.',
+      form: {
+        name: 'Nome',
+        email: 'E-mail',
+        subject: 'Assunto',
+        message: 'Mensagem',
+        submit: 'Enviar Mensagem',
+        sending: 'Enviando...',
+        success: 'Mensagem Enviada!',
+        error: 'Algo deu errado. Por favor, tente novamente.',
+      },
+      info: {
+        email: 'E-mail',
+        location: 'Localização',
+        phone: 'Telefone',
+      },
     },
   },
   es: {
