@@ -34,7 +34,7 @@ export const CTA: FC<CTAProps> = memo(
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <a
-              href="mailto:ricardo@example.com"
+              href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}
               className="px-12 py-5 rounded-full border border-[#E5D5C0] text-[#0A0A0A] bg-[#E5D5C0] text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-transparent hover:text-[#E5D5C0] transition-all shadow-2xl flex items-center gap-3"
             >
               <MessageCircle size={18} aria-hidden="true" />

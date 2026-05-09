@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { Github, Instagram, Linkedin, ShieldCheck } from 'lucide-react'
 import { memo } from 'react'
+import { env } from '../constants/env'
 
 interface AboutProps {
   quote: string
@@ -72,17 +73,17 @@ export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPho
               <div className="flex gap-6">
                 <SocialLink
                   icon={<Linkedin size={22} />}
-                  href="https://www.linkedin.com/in/ricardo-camilo-programador-frontend-web-developer/"
+                  href={env.linkedinUrl}
                   label="LinkedIn"
                 />
                 <SocialLink
                   icon={<Github size={22} />}
-                  href="https://github.com/ricardo-camilo-programador-frontend-web"
+                  href={env.githubUrl}
                   label="GitHub"
                 />
                 <SocialLink
                   icon={<Instagram size={22} />}
-                  href="https://instagram.com/ricardo.camilo.dev/"
+                  href={env.instagramUrl}
                   label="Instagram"
                 />
               </div>
