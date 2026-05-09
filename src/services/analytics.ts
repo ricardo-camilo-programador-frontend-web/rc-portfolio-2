@@ -77,7 +77,7 @@ class AnalyticsService {
 
     const counterScript = document.createElement('script')
     counterScript.src = 'https://cdn.counter.dev/script.js'
-    counterScript.setAttribute('data-id', 'f30df6f3-776d-4154-959d-0210ac8a8325')
+    counterScript.setAttribute('data-id', import.meta.env.VITE_COUNTER_DEV_ID)
     counterScript.setAttribute('data-utcoffset', '-3')
     counterScript.defer = true
     counterScript.onload = () => {
@@ -88,7 +88,7 @@ class AnalyticsService {
 
     const gtmScript = document.createElement('script')
     gtmScript.async = true
-    gtmScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-CONVERSION_ID'
+    gtmScript.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_MEASUREMENT_ID}`
     document.head.appendChild(gtmScript)
     gtmScript.onload = () => {
       ;(window as typeof window & { dataLayer: Array<unknown> }).dataLayer =
@@ -99,7 +99,7 @@ class AnalyticsService {
         ).push(args)
       }
       gtag('js', new Date())
-      gtag('config', 'AW-CONVERSION_ID')
+      gtag('config', import.meta.env.VITE_GA_MEASUREMENT_ID)
     }
 
     if (this.loadTimeout) {

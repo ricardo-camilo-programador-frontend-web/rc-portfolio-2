@@ -22,7 +22,7 @@ export const askCamiloAI = async (
   history: Array<{ role: 'user' | 'bot'; text: string }>,
   lang: string = 'pt',
 ) => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY })
+  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY ?? '' })
   const formattedHistory = history.map(msg => ({
     role: msg.role === 'user' ? 'user' : ('model' as const),
     parts: [{ text: msg.text }],

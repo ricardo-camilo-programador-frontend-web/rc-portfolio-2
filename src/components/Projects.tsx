@@ -3,6 +3,7 @@ import type { Project } from '../types'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ProjectCard } from './ProjectCard'
 import { ImageModal } from './ImageModal'
+import { env } from '../constants/env'
 
 interface ProjectsProps {
   title: string
@@ -107,7 +108,7 @@ export const Projects: FC<ProjectsProps> = memo(
               </h2>
             </div>
             <a
-              href="https://github.com/ricardo-camilo-programador-frontend-web"
+              href={env.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
