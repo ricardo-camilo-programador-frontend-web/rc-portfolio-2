@@ -1,3 +1,4 @@
+[![CI](https://github.com/ricardo-camilo-programador-frontend-web/portfolio2.0/actions/workflows/ci.yml/badge.svg)](https://github.com/ricardo-camilo-programador-frontend-web/portfolio2.0/actions)
 # 💼 Ricardo Camilo | Portfolio
 
 <div align="center">
