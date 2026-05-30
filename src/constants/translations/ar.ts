@@ -39,7 +39,7 @@ const translation: TranslationContent = {
       desc: 'تحسين شديد لضمان التحميل الفوري والحد الأقصى من الرؤية العضوية.',
     },
   },
-  work: { title: 'أعمال', subtitle: 'مختارة', viewAll: 'عرض GitHub كامل', viewProject: 'مشاهده پروژه', comingSoon: 'قريباً' },
+  work: { title: 'أعمال', subtitle: 'مختارة', viewAll: 'عرض GitHub كامل', viewProject: 'عرض المشروع', comingSoon: 'قريباً' },
   career: { title: 'المسار', subtitle: 'المهني', present: 'حالياً' },
   certs: { title: 'التقدير', subtitle: 'والشهادات' },
   cta: {

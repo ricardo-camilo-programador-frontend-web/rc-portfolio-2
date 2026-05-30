@@ -13,7 +13,10 @@ if (!existsSync(DIST_DIR)) {
   process.exit(1)
 }
 
-// Collect all hashed assets from dist/assets
+// Collect all hashed assets from dist/assets (excluding translation chunks)
+// Translation chunks are loaded on-demand via dynamic import() — precaching them
+// would negate the lazy-loading benefit (~40KB of unused translations per user).
+// They're still served via staleWhileRevalidate after first navigation to that language.
 const assetsDir = join(DIST_DIR, 'assets')
 const buildAssets = []
 
@@ -21,7 +24,8 @@ if (existsSync(assetsDir)) {
   const files = readdirSync(assetsDir)
   for (const file of files) {
     // Only include hashed JS/CSS files (contain hash in filename)
-    if (/\-[a-zA-Z0-9]{8}\.(js|css)$/.test(file)) {
+    // Exclude 2-letter language code chunks (e.g. en-xxx.js, pt-xxx.js)
+    if (/\-[a-zA-Z0-9]{6,12}\.(js|css)$/.test(file) && !/^[a-z]{2}\-/.test(file)) {
       buildAssets.push(`/assets/${file}`)
     }
   }

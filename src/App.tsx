@@ -54,12 +54,10 @@ const App: FC = () => {
     const stored = localStorage.getItem('lang') as LanguageCode | null
     if (stored && VALID_LANG_CODES.has(stored)) {
       setLangCode(stored)
-      loadTranslation(stored).then(setT)
     } else {
       const browserLang = navigator.language.split('-')[0] as LanguageCode
       if (VALID_LANG_CODES.has(browserLang)) {
         setLangCode(browserLang)
-        loadTranslation(browserLang).then(setT)
       }
     }
   }, [])

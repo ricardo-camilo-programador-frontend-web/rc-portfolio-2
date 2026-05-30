@@ -36,6 +36,9 @@ export default defineConfig({
       },
       // Aggressive tree shaking — ignore side effects in packages
       // Pattern from SGS_WEB PR #2051
+      // WARNING: All current deps (gsap, lucide-react, headlessui, react) self-declare
+      // sideEffects: false or are explicitly imported. If adding a dep that relies on
+      // side effects (CSS-in-JS, polyfills, Sentry), this may silently break it.
       treeshake: {
         moduleSideEffects: false,
         propertyReadSideEffects: false,
