@@ -56,7 +56,6 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
         contentVisibility: 'auto',
         containIntrinsicSize: '400px 300px',
       } as React.CSSProperties,
-      role: 'article' as const,
     }
 
     if (project.comingSoon || !project.image) {
@@ -95,19 +94,10 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
             )}
 
             <div
-              role="button"
-              tabIndex={0}
               onClick={e => {
                 e.preventDefault()
                 e.stopPropagation()
                 onOpenModal(project.image, project.title, project.category)
-              }}
-              onKeyDown={e => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  onOpenModal(project.image, project.title, project.category)
-                }
               }}
               className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none"
               aria-label={`View full size image of ${project.title}`}
