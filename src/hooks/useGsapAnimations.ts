@@ -1,22 +1,15 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type RefObject } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
+gsap.registerPlugin(ScrollTrigger)
 
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 // Call ONCE at App level — never in individual components
 export function useGsapInit() {
-  const initialized = useRef(false)
-
   useEffect(() => {
-    if (initialized.current) return
-    initialized.current = true
-
     gsap.defaults({
       ease: 'power3.out',
       duration: 1,
@@ -40,7 +33,7 @@ export function useGsapInit() {
 }
 
 // Hero text reveal (clip-path + stagger from bottom)
-export function useHeroReveal(containerRef: React.RefObject<HTMLElement | null>) {
+export function useHeroReveal(containerRef: RefObject<HTMLElement | null>) {
   useEffect(() => {
     if (prefersReducedMotion()) return
 
@@ -113,7 +106,7 @@ export function useHeroReveal(containerRef: React.RefObject<HTMLElement | null>)
 }
 
 // Section element reveal on scroll
-export function useSectionReveal(elementRef: React.RefObject<HTMLElement | null>) {
+export function useSectionReveal(elementRef: RefObject<HTMLElement | null>) {
   useEffect(() => {
     if (prefersReducedMotion()) return
 
@@ -143,7 +136,7 @@ export function useSectionReveal(elementRef: React.RefObject<HTMLElement | null>
 
 // Stagger children reveal on scroll
 export function useStaggerReveal(
-  containerRef: React.RefObject<HTMLElement | null>,
+  containerRef: RefObject<HTMLElement | null>,
   childSelector: string,
   stagger = 0.12,
 ) {
@@ -179,7 +172,7 @@ export function useStaggerReveal(
 }
 
 // Parallax element on scroll
-export function useParallax(elementRef: React.RefObject<HTMLElement | null>, speed = 20) {
+export function useParallax(elementRef: RefObject<HTMLElement | null>, speed = 20) {
   useEffect(() => {
     if (prefersReducedMotion()) return
 
@@ -205,7 +198,7 @@ export function useParallax(elementRef: React.RefObject<HTMLElement | null>, spe
 
 // Counter animation on scroll
 export function useCounter(
-  elementRef: React.RefObject<HTMLDivElement | null>,
+  elementRef: RefObject<HTMLDivElement | null>,
   endValue: number,
   suffix = '+',
 ) {
@@ -241,7 +234,7 @@ export function useCounter(
 }
 
 // Scale reveal on scroll
-export function useScaleReveal(elementRef: React.RefObject<HTMLElement | null>) {
+export function useScaleReveal(elementRef: RefObject<HTMLElement | null>) {
   useEffect(() => {
     if (prefersReducedMotion()) return
 
@@ -270,7 +263,7 @@ export function useScaleReveal(elementRef: React.RefObject<HTMLElement | null>) 
 }
 
 // Timeline line draw on scroll
-export function useLineDraw(lineRef: React.RefObject<HTMLElement | null>) {
+export function useLineDraw(lineRef: RefObject<HTMLElement | null>) {
   useEffect(() => {
     if (prefersReducedMotion()) return
 
@@ -299,7 +292,7 @@ export function useLineDraw(lineRef: React.RefObject<HTMLElement | null>) {
 }
 
 // Magnetic cursor effect — manual cleanup (no gsap.context needed for non-ScrollTrigger hooks)
-export function useMagnetic(elementRef: React.RefObject<HTMLElement | null>, strength = 0.3) {
+export function useMagnetic(elementRef: RefObject<HTMLElement | null>, strength = 0.3) {
   useEffect(() => {
     if (prefersReducedMotion()) return
 
@@ -342,7 +335,7 @@ export function useMagnetic(elementRef: React.RefObject<HTMLElement | null>, str
 }
 
 // Footer reveal on scroll
-export function useFooterReveal(elementRef: React.RefObject<HTMLElement | null>) {
+export function useFooterReveal(elementRef: RefObject<HTMLElement | null>) {
   useEffect(() => {
     if (prefersReducedMotion()) return
 

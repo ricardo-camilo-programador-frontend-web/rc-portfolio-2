@@ -61,21 +61,27 @@ export const Navigation: FC<NavigationProps> = memo(
     useMagnetic(logoRef, 0.2)
     useMagnetic(whatsappBtnRef, 0.3)
 
-    // Scroll hide/show nav
+    // Scroll hide/show nav (rAF throttled)
     useEffect(() => {
       const nav = navRef.current
       if (!nav) return
 
       let lastScrollY = 0
+      let ticking = false
 
       const handleScroll = () => {
-        const currentScrollY = window.scrollY
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
-          nav.classList.add('nav-hidden')
-        } else {
-          nav.classList.remove('nav-hidden')
-        }
-        lastScrollY = currentScrollY
+        if (ticking) return
+        ticking = true
+        requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY
+          if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            nav.classList.add('nav-hidden')
+          } else {
+            nav.classList.remove('nav-hidden')
+          }
+          lastScrollY = currentScrollY
+          ticking = false
+        })
       }
 
       window.addEventListener('scroll', handleScroll, { passive: true })

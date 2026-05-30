@@ -74,6 +74,6 @@ export default defineConfig({
   },
   publicDir: 'public',
   optimizeDeps: {
-    include: ['react', 'react-dom', 'lucide-react', 'gsap'],
+    include: ['react', 'react-dom', 'lucide-react', 'gsap', 'gsap/ScrollTrigger'],
   },
 })

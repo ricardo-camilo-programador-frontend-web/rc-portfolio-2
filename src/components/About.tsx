@@ -1,4 +1,4 @@
-import { memo, type FC, type ReactNode, useRef } from 'react'
+import { memo, type FC, type ReactNode, useRef, useMemo } from 'react'
 import {
   useSectionReveal,
   useParallax,
@@ -29,12 +29,21 @@ export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPho
   const stat3Ref = useRef<HTMLDivElement>(null)
   const glassRef = useRef<HTMLDivElement>(null)
 
+  const counterValues = useMemo(
+    () => ({
+      exp: parseInt(stats.exp.replace(/\D/g, ''), 10) || 8,
+      projects: parseInt(stats.projects.replace(/\D/g, ''), 10) || 50,
+      eng: parseInt(stats.eng.replace(/\D/g, ''), 10) || 95,
+    }),
+    [stats],
+  )
+
   useSectionReveal(sectionRef)
   useParallax(photoRef, 40)
   useScaleReveal(glassRef)
-  useCounter(stat1Ref, parseInt(stats.exp.replace(/\D/g, ''), 10) || 8, '+')
-  useCounter(stat2Ref, parseInt(stats.projects.replace(/\D/g, ''), 10) || 50, '+')
-  useCounter(stat3Ref, parseInt(stats.eng.replace(/\D/g, ''), 10) || 95, '%')
+  useCounter(stat1Ref, counterValues.exp, '+')
+  useCounter(stat2Ref, counterValues.projects, '+')
+  useCounter(stat3Ref, counterValues.eng, '%')
 
   const quoteParts = quote.split(' ')
   const firstWord = quoteParts[0]
