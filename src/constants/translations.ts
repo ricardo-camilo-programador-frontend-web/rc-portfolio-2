@@ -15,7 +15,7 @@ export interface Translation {
     s2: { title: string; desc: string }
     s3: { title: string; desc: string }
   }
-  work: { title: string; subtitle: string; viewAll: string; comingSoon: string }
+  work: { title: string; subtitle: string; viewAll: string; viewProject: string; comingSoon: string }
   career: { title: string; subtitle: string; present: string }
   certs: { title: string; subtitle: string }
   cta: { title: string; subtitle: string; desc: string; button: string; whatsapp: string }
@@ -65,6 +65,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'Selected',
       subtitle: 'Works',
       viewAll: 'View Full GitHub',
+      viewProject: 'View Project',
       comingSoon: 'Coming Soon',
     },
     career: { title: 'Professional', subtitle: 'History', present: 'Present' },
@@ -120,6 +121,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'Trabalhos',
       subtitle: 'Selecionados',
       viewAll: 'Ver GitHub Completo',
+      viewProject: 'Ver Projeto',
       comingSoon: 'Em Breve',
     },
     career: { title: 'Histórico', subtitle: 'Profissional', present: 'Atualmente' },
@@ -175,6 +177,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'Trabajos',
       subtitle: 'Seleccionados',
       viewAll: 'Ver GitHub completo',
+      viewProject: 'Ver Proyecto',
       comingSoon: 'Próximamente',
     },
     career: { title: 'Trayectoria', subtitle: 'Profesional', present: 'Actualmente' },
@@ -217,7 +220,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       },
       s3: { title: '性能和 SEO', desc: '极致优化，确保即时加载和最大有机可见度。' },
     },
-    work: { title: '精选', subtitle: '作品', viewAll: '查看完整 GitHub', comingSoon: '即将推出' },
+    work: { title: '精选', subtitle: '作品', viewAll: '查看完整 GitHub', viewProject: '查看项目', comingSoon: '即将推出' },
     career: { title: '职业', subtitle: '经历', present: '至今' },
     certs: { title: '认可', subtitle: '和认证' },
     cta: {
@@ -272,6 +275,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'Travaux',
       subtitle: 'Sélectionnés',
       viewAll: 'Voir GitHub complet',
+      viewProject: 'Voir le Projet',
       comingSoon: 'Bientôt',
     },
     career: { title: 'Parcours', subtitle: 'Professionnel', present: 'Actuellement' },
@@ -328,6 +332,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'Ausgewählte',
       subtitle: 'Arbeiten',
       viewAll: 'Vollständiges GitHub anzeigen',
+      viewProject: 'Projekt ansehen',
       comingSoon: 'Demnächst',
     },
     career: { title: 'Beruflicher', subtitle: 'Werdegang', present: 'Aktuell' },
@@ -383,6 +388,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: '厳選された',
       subtitle: '作品',
       viewAll: '完全な GitHub を表示',
+      viewProject: 'プロジェクトを見る',
       comingSoon: '近日公開',
     },
     career: { title: '職歴', subtitle: '経歴', present: '現在' },
@@ -434,7 +440,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
         desc: 'تحسين شديد لضمان التحميل الفوري والحد الأقصى من الرؤية العضوية.',
       },
     },
-    work: { title: 'أعمال', subtitle: 'مختارة', viewAll: 'عرض GitHub كامل', comingSoon: 'قريباً' },
+    work: { title: 'أعمال', subtitle: 'مختارة', viewAll: 'عرض GitHub كامل', viewProject: 'مشاهده پروژه', comingSoon: 'قريباً' },
     career: { title: 'المسار', subtitle: 'المهني', present: 'حالياً' },
     certs: { title: 'التقدير', subtitle: 'والشهادات' },
     cta: {
@@ -489,6 +495,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'Избранные',
       subtitle: 'работы',
       viewAll: 'Посмотреть полный GitHub',
+      viewProject: 'Посмотреть проект',
       comingSoon: 'Скоро',
     },
     career: { title: 'Профессиональная', subtitle: 'карьера', present: 'Сейчас' },
@@ -544,6 +551,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'Lavori',
       subtitle: 'Selezionati',
       viewAll: 'Vedi GitHub completo',
+      viewProject: 'Vedi Progetto',
       comingSoon: 'Prossimamente',
     },
     career: { title: 'Carriera', subtitle: 'Professionale', present: 'Attualmente' },
@@ -595,7 +603,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
         desc: 'तत्काल लोडिंग और अधिकतम जैविक दृश्यता सुनिश्चित करने के लिए चरम अनुकूलन।',
       },
     },
-    work: { title: 'चयनित', subtitle: 'कार्य', viewAll: 'पूर्ण GitHub देखें', comingSoon: 'जल्द आ रहा है' },
+    work: { title: 'चयनित', subtitle: 'कार्य', viewAll: 'पूर्ण GitHub देखें', viewProject: 'प्रोजेक्ट देखें', comingSoon: 'जल्द आ रहा है' },
     career: { title: 'व्यावसायिक', subtitle: 'इतिहास', present: 'वर्तमान' },
     certs: { title: 'मान्यता', subtitle: 'और प्रमाणपत्र' },
     cta: {
@@ -649,6 +657,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'নির্বাচিত',
       subtitle: 'কাজ',
       viewAll: 'সম্পূর্ণ GitHub দেখুন',
+      viewProject: 'প্রজেক্ট দেখুন',
       comingSoon: 'শীঘ্রই আসছে',
     },
     career: { title: 'পেশাদার', subtitle: 'ইতিহাস', present: 'বর্তমান' },
@@ -700,7 +709,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
         desc: '즉시 로딩 및 최대 유기적 가시성을 보장하는 극한의 최적화.',
       },
     },
-    work: { title: '선택된', subtitle: '작업', viewAll: '전체 GitHub 보기', comingSoon: '곧 출시' },
+    work: { title: '선택된', subtitle: '작업', viewAll: '전체 GitHub 보기', viewProject: '프로젝트 보기', comingSoon: '곧 출시' },
     career: { title: '전문', subtitle: '이력', present: '현재' },
     certs: { title: '인정', subtitle: '및 자격증' },
     cta: {
@@ -755,6 +764,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'Karya',
       subtitle: 'Pilihan',
       viewAll: 'Lihat GitHub Lengkap',
+      viewProject: 'Lihat Proyek',
       comingSoon: 'Segera',
     },
     career: { title: 'Riwayat', subtitle: 'Profesional', present: 'Saat Ini' },
@@ -800,7 +810,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
         desc: 'त्वरित लोडिंग आणि कमाल सेंद्रिय दृश्यमानता सुनिश्चित करण्यासाठी अत्यंत ऑप्टिमायझेशन.',
       },
     },
-    work: { title: 'निवडक', subtitle: 'कामे', viewAll: 'पूर्ण GitHub पहा', comingSoon: 'लवकरच' },
+    work: { title: 'निवडक', subtitle: 'कामे', viewAll: 'पूर्ण GitHub पहा', viewProject: 'प्रोजेक्ट पहा', comingSoon: 'लवकरच' },
     career: { title: 'व्यावसायिक', subtitle: 'इतिहास', present: 'वर्तमान' },
     certs: { title: 'मान्यता', subtitle: 'आणि प्रमाणपत्रे' },
     cta: {
@@ -848,6 +858,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'ఎంపిక చేసిన',
       subtitle: 'పనులు',
       viewAll: 'పూర్తి GitHub చూడండి',
+      viewProject: 'ప్రాజెక్ట్ చూడండి',
       comingSoon: 'త్వరలో',
     },
     career: { title: 'వృత్తిపరమైన', subtitle: 'చరిత్ర', present: 'ప్రస్తుతం' },
@@ -903,6 +914,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'தேர்ந்தெடுக்கப்பட்ட',
       subtitle: 'பணிகள்',
       viewAll: 'முழு GitHub ஐப் பார்க்கவும்',
+      viewProject: 'திட்டத்தைப் பார்',
       comingSoon: 'விரைவில்',
     },
     career: { title: 'தொழில்முறை', subtitle: 'வரலாறு', present: 'தற்போது' },
@@ -959,6 +971,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'Seçilmiş',
       subtitle: 'Çalışmalar',
       viewAll: "Tam GitHub'ı Görüntüle",
+      viewProject: 'Projeyi Gör',
       comingSoon: 'Çok Yakında',
     },
     career: { title: 'Profesyonel', subtitle: 'Geçmiş', present: 'Şu Anda' },
@@ -1015,6 +1028,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
       title: 'Công trình',
       subtitle: 'Chọn lọc',
       viewAll: 'Xem GitHub đầy đủ',
+      viewProject: 'Xem Dự án',
       comingSoon: 'Sắp ra mắt',
     },
     career: { title: 'Lịch sử', subtitle: 'Nghề nghiệp', present: 'Hiện tại' },
@@ -1066,7 +1080,7 @@ export const TRANSLATIONS: Record<LanguageCode, Translation> = {
         desc: 'فوری لوڈنگ اور زیادہ سے زیادہ نامیاتی نمائش کو یقینی بنانے کے لیے انتہائی اصلاح۔',
       },
     },
-    work: { title: 'منتخب', subtitle: 'کام', viewAll: 'مکمل GitHub دیکھیں', comingSoon: 'جلد ہی' },
+    work: { title: 'منتخب', subtitle: 'کام', viewAll: 'مکمل GitHub دیکھیں', viewProject: 'پروجیکٹ دیکھیں', comingSoon: 'جلد ہی' },
     career: { title: 'پیشہ ورانہ', subtitle: 'تاریخ', present: 'موجودہ' },
     certs: { title: 'شناخت', subtitle: 'اور سرٹیفکیٹس' },
     cta: {

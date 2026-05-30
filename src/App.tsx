@@ -126,6 +126,7 @@ const App: FC = () => {
             title={t.work.title}
             subtitle={t.work.subtitle}
             viewAll={t.work.viewAll}
+            viewProject={t.work.viewProject}
             comingSoon={t.work.comingSoon}
             projects={PROJECTS}
             isRtl={isRtl}

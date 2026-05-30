@@ -9,6 +9,7 @@ interface ProjectsProps {
   title: string
   subtitle: string
   viewAll: string
+  viewProject: string
   comingSoon: string
   projects: Array<Project>
   isRtl: boolean
@@ -45,7 +46,7 @@ const useIntersectionObserver = (options?: IntersectionObserverInit) => {
 }
 
 export const Projects: FC<ProjectsProps> = memo(
-  ({ title, subtitle, viewAll, comingSoon, projects, isRtl }) => {
+  ({ title, subtitle, viewAll, viewProject, comingSoon, projects, isRtl }) => {
     const [containerRef, isVisible] = useIntersectionObserver()
     const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
@@ -137,6 +138,7 @@ export const Projects: FC<ProjectsProps> = memo(
                 key={project.id}
                 project={project}
                 comingSoonLabel={comingSoon}
+                viewProjectLabel={viewProject}
                 isRtl={isRtl}
                 isVisible={isVisible}
                 loadDelay={index * 100}

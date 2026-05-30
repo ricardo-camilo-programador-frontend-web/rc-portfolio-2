@@ -10,13 +10,7 @@ export default defineConfig({
     host: '0.0.0.0',
   },
   plugins: [
-    react({
-      babel: {
-        parserOpts: {
-          plugins: ['decorators-legacy', 'classProperties'],
-        },
-      },
-    }),
+    react(),
   ],
   resolve: {
     alias: {
@@ -37,12 +31,7 @@ export default defineConfig({
         sourcemap: false,
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: ({ name }) => {
-          if (name && name.endsWith('.css')) {
-            return 'assets/[name]-[hash][extname]'
-          }
-          return 'assets/[name]-[hash][extname]'
-        },
+        assetFileNames: 'assets/[name]-[hash][extname]',
       },
     },
     target: 'esnext',

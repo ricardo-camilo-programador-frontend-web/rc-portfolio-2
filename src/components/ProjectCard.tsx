@@ -6,6 +6,7 @@ import { memo, useCallback, useEffect, useState } from 'react'
 interface ProjectCardProps {
   project: Project
   comingSoonLabel: string
+  viewProjectLabel: string
   isRtl: boolean
   isVisible: boolean
   loadDelay: number
@@ -29,7 +30,7 @@ const generateSrcSet = (baseUrl: string): string => {
 }
 
 export const ProjectCard: FC<ProjectCardProps> = memo(
-  ({ project, comingSoonLabel, isRtl, isVisible, loadDelay, onImageLoad, onOpenModal }) => {
+  ({ project, comingSoonLabel, viewProjectLabel, isRtl, isVisible, loadDelay, onImageLoad, onOpenModal }) => {
     const [imageError, setImageError] = useState(false)
 
     useEffect(() => {
@@ -93,11 +94,20 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
               </span>
             )}
 
-            <button
+            <div
+              role="button"
+              tabIndex={0}
               onClick={e => {
                 e.preventDefault()
                 e.stopPropagation()
                 onOpenModal(project.image, project.title, project.category)
+              }}
+              onKeyDown={e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  onOpenModal(project.image, project.title, project.category)
+                }
               }}
               className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none"
               aria-label={`View full size image of ${project.title}`}
@@ -105,7 +115,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
               <div className="bg-[#E5D5C0]/90 rounded-full p-3 hover:scale-110 transition-transform pointer-events-auto">
                 <ZoomIn size={20} className="text-[#0A0A0A]" />
               </div>
-            </button>
+            </div>
 
             <img
               src={optimizedImage}
@@ -138,7 +148,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
           </div>
           <h3 className="text-lg font-bold text-[#E5D5C0] mb-3">{project.title}</h3>
           <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#E5D5C0]">
-            <span>View Project</span>
+            <span>{viewProjectLabel}</span>
             <ArrowUpRight size={14} aria-hidden="true" />
           </div>
         </div>

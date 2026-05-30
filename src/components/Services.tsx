@@ -44,7 +44,7 @@ export const Services: FC<ServicesProps> = memo(({ s1, s2, s3, isRtl }) => {
         dir={isRtl ? 'rtl' : 'ltr'}
         aria-label="List of services"
       >
-        {services.map((service, index) => (
+        {services.map((service) => (
           <ServiceCard
             key={service.num}
             num={service.num}
