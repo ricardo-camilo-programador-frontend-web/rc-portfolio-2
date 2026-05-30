@@ -120,7 +120,7 @@ const StatItem = memo(function StatItem({
 }: { value: string; label: string; ref?: React.Ref<HTMLDivElement> }) {
   return (
     <div ref={ref} className="text-center">
-      <div className="counter-value text-3xl md:text-4xl font-serif font-bold text-[#E5D5C0] mb-2">{value}</div>
+      <div className="counter-value text-3xl md:text-4xl font-serif font-bold text-[#E5D5C0] mb-2" role="status" aria-live="polite">{value}</div>
       <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/70">{label}</div>
     </div>
   )
@@ -146,5 +146,3 @@ const SocialLink: FC<SocialLinkProps> = memo(({ icon, href, label }) => (
 ))
 
 SocialLink.displayName = 'SocialLink'
-
-export default About

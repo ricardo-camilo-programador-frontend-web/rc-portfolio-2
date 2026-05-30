@@ -89,7 +89,7 @@ export const Hero: FC<HeroProps> = memo(
               onClick={() => {
                 document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="hero-scroll w-px h-24 bg-gradient-to-b from-[#E5D5C0]/40 to-transparent block cursor-pointer animate-bounce-slow border-0 bg-transparent p-0"
+              className="hero-scroll w-px h-24 bg-transparent block cursor-pointer animate-bounce-slow border-0 p-0"
               aria-label="Scroll to services"
             />
           </div>

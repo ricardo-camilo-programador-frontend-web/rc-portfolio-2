@@ -48,5 +48,3 @@ export const Certificates: FC<CertificatesProps> = memo(({ title, subtitle }) =>
 })
 
 Certificates.displayName = 'Certificates'
-
-export default Certificates

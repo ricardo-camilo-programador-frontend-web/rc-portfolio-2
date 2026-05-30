@@ -1,40 +1,52 @@
-import { useEffect, useRef, type RefObject } from 'react'
+import { useLayoutEffect, useEffect, useRef, type RefObject } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const prefersReducedMotion = () =>
-  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+// Module-level defaults — execute at import time, before any effects
+gsap.defaults({
+  ease: 'power3.out',
+  duration: 1,
+})
+
+ScrollTrigger.defaults({
+  toggleActions: 'play none none reverse',
+})
+
+// Cached media query — avoids re-allocation per hook
+const reducedMotionQuery =
+  typeof window !== 'undefined'
+    ? window.matchMedia('(prefers-reduced-motion: reduce)')
+    : null
+
+const prefersReducedMotion = () => reducedMotionQuery?.matches ?? false
 
 // Call ONCE at App level — never in individual components
 export function useGsapInit() {
-  useEffect(() => {
-    gsap.defaults({
-      ease: 'power3.out',
-      duration: 1,
-    })
-
-    ScrollTrigger.defaults({
-      toggleActions: 'play none none reverse',
-    })
-
+  useLayoutEffect(() => {
     // React to motion preference changes at runtime
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
     const handleMotionChange = (e: MediaQueryListEvent) => {
       if (e.matches) {
-        gsap.globalTimeline.getChildren().forEach((t) => t.kill())
-        ScrollTrigger.getAll().forEach((st) => st.kill())
+        // Pause instead of kill — animations can be resumed
+        gsap.globalTimeline.pause()
+        ScrollTrigger.getAll().forEach((st) => st.disable())
+      } else {
+        gsap.globalTimeline.resume()
+        ScrollTrigger.getAll().forEach((st) => st.enable())
+        ScrollTrigger.refresh()
       }
     }
-    mq.addEventListener('change', handleMotionChange)
-    return () => mq.removeEventListener('change', handleMotionChange)
+    reducedMotionQuery?.addEventListener('change', handleMotionChange)
+    return () => {
+      reducedMotionQuery?.removeEventListener('change', handleMotionChange)
+    }
   }, [])
 }
 
 // Hero text reveal (clip-path + stagger from bottom)
 export function useHeroReveal(containerRef: RefObject<HTMLElement | null>) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (prefersReducedMotion()) return
 
     const el = containerRef.current
@@ -107,7 +119,7 @@ export function useHeroReveal(containerRef: RefObject<HTMLElement | null>) {
 
 // Section element reveal on scroll
 export function useSectionReveal(elementRef: RefObject<HTMLElement | null>) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (prefersReducedMotion()) return
 
     const el = elementRef.current
@@ -140,7 +152,7 @@ export function useStaggerReveal(
   childSelector: string,
   stagger = 0.12,
 ) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (prefersReducedMotion()) return
 
     const el = containerRef.current
@@ -173,7 +185,7 @@ export function useStaggerReveal(
 
 // Parallax element on scroll
 export function useParallax(elementRef: RefObject<HTMLElement | null>, speed = 20) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (prefersReducedMotion()) return
 
     const el = elementRef.current
@@ -202,16 +214,20 @@ export function useCounter(
   endValue: number,
   suffix = '+',
 ) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (prefersReducedMotion()) return
 
     const el = elementRef.current
     if (!el) return
 
-    // Cache DOM query — runs inside ctx but query is done once
+    const target = el.querySelector('.counter-value')
+    if (!target) return
+
+    const originalText = target.textContent ?? ''
+
     const ctx = gsap.context(() => {
-      const target = el.querySelector('.counter-value')
-      if (!target) return
+      target.textContent = `0${suffix}`
+      let lastText = `0${suffix}`
 
       const obj = { value: 0 }
 
@@ -224,18 +240,25 @@ export function useCounter(
           start: 'top 85%',
         },
         onUpdate: () => {
-          target.textContent = `${Math.round(obj.value)}${suffix}`
+          const newText = `${Math.round(obj.value)}${suffix}`
+          if (newText !== lastText) {
+            lastText = newText
+            target.textContent = newText
+          }
         },
       })
     }, el)
 
-    return () => ctx.revert()
+    return () => {
+      target.textContent = originalText
+      ctx.revert()
+    }
   }, [elementRef, endValue, suffix])
 }
 
 // Scale reveal on scroll
 export function useScaleReveal(elementRef: RefObject<HTMLElement | null>) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (prefersReducedMotion()) return
 
     const el = elementRef.current
@@ -264,7 +287,7 @@ export function useScaleReveal(elementRef: RefObject<HTMLElement | null>) {
 
 // Timeline line draw on scroll
 export function useLineDraw(lineRef: RefObject<HTMLElement | null>) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (prefersReducedMotion()) return
 
     const el = lineRef.current
@@ -299,27 +322,21 @@ export function useMagnetic(elementRef: RefObject<HTMLElement | null>, strength 
     const el = elementRef.current
     if (!el) return
 
+    // Reusable quick-setters — single tween instance, no per-move allocation
+    const xSet = gsap.quickTo(el, 'x', { duration: 0.4, ease: 'power2.out' })
+    const ySet = gsap.quickTo(el, 'y', { duration: 0.4, ease: 'power2.out' })
+
     const handleMouseMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect()
       const x = e.clientX - rect.left - rect.width / 2
       const y = e.clientY - rect.top - rect.height / 2
-
-      gsap.to(el, {
-        x: x * strength,
-        y: y * strength,
-        duration: 0.4,
-        ease: 'power2.out',
-      })
+      xSet(x * strength)
+      ySet(y * strength)
     }
 
     const handleMouseLeave = () => {
-      gsap.killTweensOf(el)
-      gsap.to(el, {
-        x: 0,
-        y: 0,
-        duration: 0.4,
-        ease: 'power2.out',
-      })
+      xSet(0)
+      ySet(0)
     }
 
     el.addEventListener('mousemove', handleMouseMove)
@@ -336,7 +353,7 @@ export function useMagnetic(elementRef: RefObject<HTMLElement | null>, strength 
 
 // Footer reveal on scroll
 export function useFooterReveal(elementRef: RefObject<HTMLElement | null>) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (prefersReducedMotion()) return
 
     const el = elementRef.current

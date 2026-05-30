@@ -24,19 +24,21 @@ interface NavigationProps {
 
 function useClickOutside<T extends HTMLElement>(handler: () => void) {
   const ref = useRef<T>(null)
+  const handlerRef = useRef(handler)
+  handlerRef.current = handler
 
   useEffect(() => {
     if (!ref.current) return
 
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
-        handler()
+        handlerRef.current()
       }
     }
 
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [handler])
+  }, [])
 
   return ref
 }
@@ -122,35 +124,30 @@ export const Navigation: FC<NavigationProps> = memo(
               <a
                 href="#work"
                 className="text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
-                role="menuitem"
               >
                 {nav.work}
               </a>
               <a
                 href="#about"
                 className="text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
-                role="menuitem"
               >
                 {nav.about}
               </a>
               <a
                 href="#services"
                 className="text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
-                role="menuitem"
               >
                 {nav.services}
               </a>
               <a
                 href="#career"
                 className="text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
-                role="menuitem"
               >
                 {nav.career}
               </a>
               <a
                 href="#contact"
                 className="text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
-                role="menuitem"
               >
                 {nav.contact}
               </a>
