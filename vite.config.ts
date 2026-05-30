@@ -30,11 +30,8 @@ export default defineConfig({
       },
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react/jsx-runtime'],
           'icons-vendor': ['lucide-react'],
-          'about': ['./src/components/About'],
-          'career': ['./src/components/Career'],
-          'cta': ['./src/components/CTA'],
+          'gsap-vendor': ['gsap', 'gsap/ScrollTrigger'],
           'projects': ['./src/components/Projects'],
           'project-card': ['./src/components/ProjectCard'],
           'services': ['./src/components/Services'],
@@ -77,6 +74,6 @@ export default defineConfig({
   },
   publicDir: 'public',
   optimizeDeps: {
-    include: ['react', 'react-dom', 'lucide-react'],
+    include: ['react', 'react-dom', 'lucide-react', 'gsap'],
   },
 })

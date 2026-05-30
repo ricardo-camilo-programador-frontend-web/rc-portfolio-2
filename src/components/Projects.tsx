@@ -103,7 +103,7 @@ export const Projects: FC<ProjectsProps> = memo(
         <div className="max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-20" dir={isRtl ? 'rtl' : 'ltr'}>
             <div>
-              <h2 className="text-5xl md:text-7xl font-serif" style={{ willChange: 'transform' }}>
+              <h2 className="text-5xl md:text-7xl font-serif">
                 {title} <span className="italic opacity-50">{subtitle}</span>
               </h2>
             </div>

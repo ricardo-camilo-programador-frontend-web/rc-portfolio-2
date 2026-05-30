@@ -1,9 +1,14 @@
 import type { FC } from 'react'
 import { ChevronUp, Github } from 'lucide-react'
-import { memo, useCallback } from 'react'
+import { memo, useCallback, useRef } from 'react'
+import { useFooterReveal } from '../hooks/useGsapAnimations'
 import { env } from '../constants/env'
 
 export const Footer: FC = memo(() => {
+  const footerRef = useRef<HTMLElement>(null)
+
+  useFooterReveal(footerRef)
+
   const currentYear = new Date().getFullYear()
 
   const scrollToTop = useCallback((e: React.MouseEvent) => {
@@ -13,8 +18,8 @@ export const Footer: FC = memo(() => {
 
   return (
     <footer
+      ref={footerRef}
       className="py-12 px-6 border-t border-white/5 bg-[#0A0A0A]"
-      style={{ contain: 'layout style paint' }}
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80">

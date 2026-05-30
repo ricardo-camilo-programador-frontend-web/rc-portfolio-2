@@ -49,7 +49,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
 
     const cardProps = {
       className:
-        'group relative aspect-[4/3] overflow-hidden rounded-sm accent-border fade-in-on-scroll -translate-y-1 transition-transform duration-300 contain-layout focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]',
+        'group relative aspect-[4/3] overflow-hidden rounded-sm accent-border -translate-y-1 transition-transform duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]',
       dir: isRtl ? 'rtl' : ('ltr' as const),
       style: {
         contentVisibility: 'auto',
