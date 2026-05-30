@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs'
-import { dirname, join, resolve } from 'node:path'
+import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -38,9 +38,12 @@ if (buildAssets.length === 0) {
   console.log('⚠️ No hashed assets found, copying SW without manifest')
 } else {
   const manifestJson = JSON.stringify(buildAssets)
-  // Replace the PRECACHE_ASSETS line with injected manifest
+  // Replace the PRECACHE_ASSETS declaration block with injected manifest.
+  // CRITICAL: Must match only the 3-line ternary block, not the rest of the file.
+  // Using multiline with explicit line boundaries prevents the greedy [^;]+ bug
+  // that consumed all event listeners in Round 1.
   swContent = swContent.replace(
-    /const PRECACHE_ASSETS = typeof __BUILD_MANIFEST__[^;]+/,
+    /const PRECACHE_ASSETS = typeof __BUILD_MANIFEST__ !== 'undefined'\n  \? __BUILD_MANIFEST__\n  : \[\]/,
     `const PRECACHE_ASSETS = ${manifestJson}`,
   )
   console.log(`✅ Injected ${buildAssets.length} assets into SW manifest`)

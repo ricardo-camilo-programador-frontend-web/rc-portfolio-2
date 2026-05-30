@@ -63,7 +63,11 @@ const App: FC = () => {
   }, [])
 
   useEffect(() => {
-    loadTranslation(langCode).then(setT)
+    let stale = false
+    loadTranslation(langCode).then(data => {
+      if (!stale) setT(data)
+    })
+    return () => { stale = true }
   }, [langCode])
 
   useEffect(() => {
