@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import type { Language, LanguageCode } from '../constants/languages'
 import { memo, useCallback, useEffect, useRef } from 'react'
+import { useMagnetic } from '../hooks/useGsapAnimations'
 import { ChevronDown, Globe, MessageCircle } from '../icons'
 
 interface NavigationProps {
@@ -23,19 +24,21 @@ interface NavigationProps {
 
 function useClickOutside<T extends HTMLElement>(handler: () => void) {
   const ref = useRef<T>(null)
+  const handlerRef = useRef(handler)
+  handlerRef.current = handler
 
   useEffect(() => {
     if (!ref.current) return
 
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
-        handler()
+        handlerRef.current()
       }
     }
 
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [handler])
+  }, [])
 
   return ref
 }
@@ -53,6 +56,39 @@ export const Navigation: FC<NavigationProps> = memo(
     whatsappUrl,
   }) => {
     const langDropdownRef = useClickOutside<HTMLDivElement>(() => setIsLangOpen(false))
+    const logoRef = useRef<HTMLAnchorElement>(null)
+    const whatsappBtnRef = useRef<HTMLAnchorElement>(null)
+    const navRef = useRef<HTMLElement>(null)
+
+    useMagnetic(logoRef, 0.2)
+    useMagnetic(whatsappBtnRef, 0.3)
+
+    // Scroll hide/show nav (rAF throttled)
+    useEffect(() => {
+      const nav = navRef.current
+      if (!nav) return
+
+      let lastScrollY = 0
+      let ticking = false
+
+      const handleScroll = () => {
+        if (ticking) return
+        ticking = true
+        requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY
+          if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            nav.classList.add('nav-hidden')
+          } else {
+            nav.classList.remove('nav-hidden')
+          }
+          lastScrollY = currentScrollY
+          ticking = false
+        })
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true })
+      return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
 
     const handleLangSelect = useCallback(
       (code: LanguageCode) => {
@@ -69,12 +105,14 @@ export const Navigation: FC<NavigationProps> = memo(
         </a>
 
         <nav
-          className="fixed top-0 left-0 right-0 z-40 bg-[#0A0A0A]/80 backdrop-blur-sm border-b border-white/5"
+          ref={navRef}
+          className="fixed top-0 inset-x-0 z-40 bg-[#0A0A0A]/80 backdrop-blur-sm border-b border-white/5"
           role="navigation"
           aria-label="Main navigation"
         >
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <a
+              ref={logoRef}
               href="#"
               className="text-2xl font-serif font-bold text-[#E5D5C0] hover:text-[#E5D5C0]/80 transition-colors"
               aria-label="Ricardo Camilo home"
@@ -86,35 +124,30 @@ export const Navigation: FC<NavigationProps> = memo(
               <a
                 href="#work"
                 className="text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
-                role="menuitem"
               >
                 {nav.work}
               </a>
               <a
                 href="#about"
                 className="text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
-                role="menuitem"
               >
                 {nav.about}
               </a>
               <a
                 href="#services"
                 className="text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
-                role="menuitem"
               >
                 {nav.services}
               </a>
               <a
                 href="#career"
                 className="text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
-                role="menuitem"
               >
                 {nav.career}
               </a>
               <a
                 href="#contact"
                 className="text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
-                role="menuitem"
               >
                 {nav.contact}
               </a>
@@ -165,6 +198,7 @@ export const Navigation: FC<NavigationProps> = memo(
               </div>
 
               <a
+                ref={whatsappBtnRef}
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"

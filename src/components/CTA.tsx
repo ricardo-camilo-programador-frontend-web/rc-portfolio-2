@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { MessageCircle } from 'lucide-react'
-import { memo } from 'react'
+import { memo, useRef } from 'react'
+import { useSectionReveal } from '../hooks/useGsapAnimations'
 
 interface CTAProps {
   title: string
@@ -14,27 +15,32 @@ interface CTAProps {
 
 export const CTA: FC<CTAProps> = memo(
   ({ title, subtitle, description, button, whatsapp, whatsappUrl, isRtl }) => {
+    const sectionRef = useRef<HTMLElement>(null)
+
+    useSectionReveal(sectionRef)
+
     return (
       <section
         id="contact"
+        ref={sectionRef}
         className="py-40 px-6 bg-[#0A0A0A] scroll-mt-20"
         aria-label="Contact section"
-        style={{ contain: 'layout style paint' }}
       >
         <div className="max-w-4xl mx-auto text-center" dir={isRtl ? 'rtl' : 'ltr'}>
           <h2
             className="text-5xl md:text-8xl font-serif leading-[0.9] tracking-tighter mb-8"
-            style={{ willChange: 'transform' }}
           >
             {title} <br />
             <span className="italic opacity-50">{subtitle}</span>
           </h2>
-          <p className="text-[#E5D5C0]/80 text-lg md:text-xl max-w-2xl mx-auto mb-16 leading-relaxed">
+          <p
+            className="text-[#E5D5C0]/80 text-lg md:text-xl max-w-2xl mx-auto mb-16 leading-relaxed"
+          >
             {description}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <a
-              href="mailto:ricardo@example.com"
+              href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}
               className="px-12 py-5 rounded-full border border-[#E5D5C0] text-[#0A0A0A] bg-[#E5D5C0] text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-transparent hover:text-[#E5D5C0] transition-all shadow-2xl flex items-center gap-3"
             >
               <MessageCircle size={18} aria-hidden="true" />

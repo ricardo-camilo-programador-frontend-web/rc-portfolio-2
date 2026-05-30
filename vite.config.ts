@@ -10,13 +10,7 @@ export default defineConfig({
     host: '0.0.0.0',
   },
   plugins: [
-    react({
-      babel: {
-        parserOpts: {
-          plugins: ['decorators-legacy', 'classProperties'],
-        },
-      },
-    }),
+    react(),
   ],
   resolve: {
     alias: {
@@ -30,30 +24,14 @@ export default defineConfig({
       },
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react/jsx-runtime'],
           'icons-vendor': ['lucide-react'],
-          'about': ['./src/components/About'],
-          'career': ['./src/components/Career'],
-          'cta': ['./src/components/CTA'],
-          'projects': ['./src/components/Projects'],
-          'project-card': ['./src/components/ProjectCard'],
-          'services': ['./src/components/Services'],
-          'service-card': ['./src/components/ServiceCard'],
-          'hero': ['./src/components/Hero'],
-          'navigation': ['./src/components/Navigation'],
-          'footer': ['./src/components/Footer'],
-          'certificates': ['./src/components/Certificates'],
+          'gsap-vendor': ['gsap', 'gsap/ScrollTrigger'],
         },
         format: 'es',
         sourcemap: false,
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: ({ name }) => {
-          if (name && name.endsWith('.css')) {
-            return 'assets/[name]-[hash][extname]'
-          }
-          return 'assets/[name]-[hash][extname]'
-        },
+        assetFileNames: 'assets/[name]-[hash][extname]',
       },
     },
     target: 'esnext',
@@ -77,6 +55,6 @@ export default defineConfig({
   },
   publicDir: 'public',
   optimizeDeps: {
-    include: ['react', 'react-dom', 'lucide-react'],
+    include: ['react', 'react-dom', 'lucide-react', 'gsap', 'gsap/ScrollTrigger'],
   },
 })

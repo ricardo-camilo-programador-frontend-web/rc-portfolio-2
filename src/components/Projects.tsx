@@ -3,11 +3,13 @@ import type { Project } from '../types'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ProjectCard } from './ProjectCard'
 import { ImageModal } from './ImageModal'
+import { env } from '../constants/env'
 
 interface ProjectsProps {
   title: string
   subtitle: string
   viewAll: string
+  viewProject: string
   comingSoon: string
   projects: Array<Project>
   isRtl: boolean
@@ -44,7 +46,7 @@ const useIntersectionObserver = (options?: IntersectionObserverInit) => {
 }
 
 export const Projects: FC<ProjectsProps> = memo(
-  ({ title, subtitle, viewAll, comingSoon, projects, isRtl }) => {
+  ({ title, subtitle, viewAll, viewProject, comingSoon, projects, isRtl }) => {
     const [containerRef, isVisible] = useIntersectionObserver()
     const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
@@ -102,12 +104,12 @@ export const Projects: FC<ProjectsProps> = memo(
         <div className="max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-20" dir={isRtl ? 'rtl' : 'ltr'}>
             <div>
-              <h2 className="text-5xl md:text-7xl font-serif" style={{ willChange: 'transform' }}>
+              <h2 className="text-5xl md:text-7xl font-serif">
                 {title} <span className="italic opacity-50">{subtitle}</span>
               </h2>
             </div>
             <a
-              href="https://github.com/ricardo-camilo-programador-frontend-web"
+              href={env.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
@@ -136,6 +138,7 @@ export const Projects: FC<ProjectsProps> = memo(
                 key={project.id}
                 project={project}
                 comingSoonLabel={comingSoon}
+                viewProjectLabel={viewProject}
                 isRtl={isRtl}
                 isVisible={isVisible}
                 loadDelay={index * 100}

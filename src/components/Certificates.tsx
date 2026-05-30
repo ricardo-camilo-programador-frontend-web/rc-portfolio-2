@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { Award } from 'lucide-react'
-import { memo } from 'react'
+import { memo, useRef } from 'react'
+import { useSectionReveal, useScaleReveal } from '../hooks/useGsapAnimations'
 
 interface CertificatesProps {
   title: string
@@ -8,18 +9,26 @@ interface CertificatesProps {
 }
 
 export const Certificates: FC<CertificatesProps> = memo(({ title, subtitle }) => {
+  const sectionRef = useRef<HTMLElement>(null)
+  const glassRef = useRef<HTMLDivElement>(null)
+
+  useSectionReveal(sectionRef)
+  useScaleReveal(glassRef)
+
   return (
     <section
+      ref={sectionRef}
       className="py-32 px-6 bg-[#0B0B0B]"
       aria-label="Certificates section"
-      style={{ contain: 'layout style paint' }}
     >
       <div
+        ref={glassRef}
         className="max-w-4xl mx-auto p-12 glass accent-border rounded-[3rem] text-center"
-        style={{ contain: 'layout style' }}
       >
-        <Award size={48} className="mx-auto mb-8 text-[#E5D5C0]" aria-hidden="true" />
-        <h2 className="text-4xl md:text-6xl font-serif mb-6" style={{ willChange: 'transform' }}>
+        <div className="mb-8">
+          <Award size={48} className="mx-auto text-[#E5D5C0]" aria-hidden="true" />
+        </div>
+        <h2 className="text-4xl md:text-6xl font-serif mb-6">
           {title} <span className="italic opacity-50">{subtitle}</span>
         </h2>
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 mt-12">
@@ -39,5 +48,3 @@ export const Certificates: FC<CertificatesProps> = memo(({ title, subtitle }) =>
 })
 
 Certificates.displayName = 'Certificates'
-
-export default Certificates
