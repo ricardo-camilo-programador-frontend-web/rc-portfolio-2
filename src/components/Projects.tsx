@@ -1,8 +1,9 @@
 import type { FC } from 'react'
 import type { Project } from '../types'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ProjectCard } from './ProjectCard'
-import { ImageModal } from './ImageModal'
+
+const ImageModal = lazy(() => import('./ImageModal').then(m => ({ default: m.ImageModal })))
 import { env } from '../constants/env'
 
 interface ProjectsProps {
@@ -155,14 +156,16 @@ export const Projects: FC<ProjectsProps> = memo(
           )}
         </div>
 
-        <ImageModal
-          image={modalState.image}
-          alt={modalState.title}
-          isOpen={modalState.isOpen}
-          onClose={handleCloseModal}
-          title={modalState.title}
-          category={modalState.category}
-        />
+        <Suspense fallback={null}>
+          <ImageModal
+            image={modalState.image}
+            alt={modalState.title}
+            isOpen={modalState.isOpen}
+            onClose={handleCloseModal}
+            title={modalState.title}
+            category={modalState.category}
+          />
+        </Suspense>
       </section>
     )
   },

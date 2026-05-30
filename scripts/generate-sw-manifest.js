@@ -1,0 +1,46 @@
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const PROJECT_ROOT = join(__dirname, '..')
+const DIST_DIR = join(PROJECT_ROOT, 'dist')
+const SW_SRC = join(PROJECT_ROOT, 'sw.js')
+const SW_DEST = join(DIST_DIR, 'sw.js')
+
+if (!existsSync(DIST_DIR)) {
+  console.error('❌ dist folder not found. Run build first.')
+  process.exit(1)
+}
+
+// Collect all hashed assets from dist/assets
+const assetsDir = join(DIST_DIR, 'assets')
+const buildAssets = []
+
+if (existsSync(assetsDir)) {
+  const files = readdirSync(assetsDir)
+  for (const file of files) {
+    // Only include hashed JS/CSS files (contain hash in filename)
+    if (/\-[a-zA-Z0-9]{8}\.(js|css)$/.test(file)) {
+      buildAssets.push(`/assets/${file}`)
+    }
+  }
+}
+
+// Read the source sw.js and inject manifest
+let swContent = readFileSync(SW_SRC, 'utf-8')
+
+if (buildAssets.length === 0) {
+  console.log('⚠️ No hashed assets found, copying SW without manifest')
+} else {
+  const manifestJson = JSON.stringify(buildAssets)
+  // Replace the PRECACHE_ASSETS line with injected manifest
+  swContent = swContent.replace(
+    /const PRECACHE_ASSETS = typeof __BUILD_MANIFEST__[^;]+/,
+    `const PRECACHE_ASSETS = ${manifestJson}`,
+  )
+  console.log(`✅ Injected ${buildAssets.length} assets into SW manifest`)
+}
+
+writeFileSync(SW_DEST, swContent)
+console.log('✅ Service Worker copied to dist/sw.js')

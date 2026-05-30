@@ -1,7 +1,14 @@
-const CACHE_NAME = 'camilo-v5'
-const CACHE_VERSION = 'v5.0.0'
+const CACHE_NAME = 'camilo-v6'
+const CACHE_VERSION = 'v6.0.0'
 
+// Core shell — always precached on install
 const STATIC_ASSETS = ['/', '/index.html', '/manifest.json', '/favicon.svg']
+
+// Hashed assets injected at build time by scripts/generate-sw-manifest.js
+// Pattern from SGS_WEB staleWhileRevalidate strategy
+const PRECACHE_ASSETS = typeof __BUILD_MANIFEST__ !== 'undefined'
+  ? __BUILD_MANIFEST__
+  : []
 
 const IMAGE_CACHE_NAME = `camilo-images-${CACHE_VERSION}`
 const FONT_CACHE_NAME = `camilo-fonts-${CACHE_VERSION}`
@@ -24,7 +31,8 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log('SW: Pre-caching core assets')
-      return cache.addAll(STATIC_ASSETS)
+      const allAssets = [...STATIC_ASSETS, ...PRECACHE_ASSETS]
+      return cache.addAll(allAssets)
     }),
   )
   self.skipWaiting()
@@ -191,7 +199,9 @@ self.addEventListener('fetch', event => {
     return
   }
 
-  if (url.pathname.startsWith('/assets/') && url.pathname.endsWith('.css')) {
+  // JS and CSS chunks — stale-while-revalidate for instant loads + background updates
+  // Pattern from SGS_WEB staleWhileRevalidate strategy
+  if (url.pathname.startsWith('/assets/') && (url.pathname.endsWith('.js') || url.pathname.endsWith('.css'))) {
     event.respondWith(staleWhileRevalidate(event.request, CACHE_NAME))
     return
   }
