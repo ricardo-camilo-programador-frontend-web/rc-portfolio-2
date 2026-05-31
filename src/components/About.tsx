@@ -6,6 +6,7 @@ import {
   useScaleReveal,
 } from '../hooks/useGsapAnimations'
 import { Github, Instagram, Linkedin, ShieldCheck } from 'lucide-react'
+
 import { env } from '../constants/env'
 
 interface AboutProps {
@@ -97,9 +98,21 @@ export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPho
 
             <div className="flex flex-col items-start gap-12 sm:flex-row sm:items-center">
               <div className="flex gap-6">
-                <SocialLink icon={<Linkedin size={22} />} href={env.linkedinUrl} label="LinkedIn" />
-                <SocialLink icon={<Github size={22} />} href={env.githubUrl} label="GitHub" />
-                <SocialLink icon={<Instagram size={22} />} href={env.instagramUrl} label="Instagram" />
+                <SocialLink
+                  icon={<Linkedin size={22} />}
+                  href={env.linkedinUrl}
+                  label="LinkedIn"
+                />
+                <SocialLink
+                  icon={<Github size={22} />}
+                  href={env.githubUrl}
+                  label="GitHub"
+                />
+                <SocialLink
+                  icon={<Instagram size={22} />}
+                  href={env.instagramUrl}
+                  label="Instagram"
+                />
               </div>
             </div>
           </div>
