@@ -32,7 +32,14 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME).then(cache => {
       console.log('SW: Pre-caching core assets')
       const allAssets = [...STATIC_ASSETS, ...PRECACHE_ASSETS]
-      return cache.addAll(allAssets)
+      // Use allSettled so one failed asset doesn't block entire SW installation
+      return Promise.allSettled(allAssets.map(url => cache.add(url)))
+        .then(results => {
+          const failed = results.filter(r => r.status === 'rejected')
+          if (failed.length > 0) {
+            console.warn(`SW: ${failed.length}/${allAssets.length} assets failed to precache`)
+          }
+        })
     }),
   )
   self.skipWaiting()

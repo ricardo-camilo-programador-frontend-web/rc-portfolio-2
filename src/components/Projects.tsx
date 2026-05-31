@@ -2,9 +2,9 @@ import type { FC } from 'react'
 import type { Project } from '../types'
 import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ProjectCard } from './ProjectCard'
+import { env } from '../constants/env'
 
 const ImageModal = lazy(() => import('./ImageModal').then(m => ({ default: m.ImageModal })))
-import { env } from '../constants/env'
 
 interface ProjectsProps {
   title: string

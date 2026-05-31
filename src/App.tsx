@@ -21,7 +21,15 @@ const VALID_LANG_CODES = new Set<string>(LANGUAGES.map(l => l.code))
 const loadTranslation = (code: LanguageCode): Promise<TranslationContent> =>
   import(`./constants/translations/${code}.ts`).then(m => m.default)
 
-const FALLBACK_TRANSLATION: TranslationContent = {
+// Lazy-load English as fallback for when translation chunks fail to load
+let _enFallback: Promise<TranslationContent> | null = null
+const getEnglishFallback = (): Promise<TranslationContent> => {
+  if (!_enFallback) _enFallback = import('./constants/translations/en.ts').then(m => m.default)
+  return _enFallback
+}
+
+// Minimal inline fallback for the brief moment before dynamic import resolves
+const INITIAL_TRANSLATION: TranslationContent = {
   seo: { title: 'Ricardo Camilo', desc: '' },
   nav: { work: '', about: '', services: '', career: '', contact: '' },
   hero: { title: '', subtitle: '', desc: '', cta: '', badge: '' },
@@ -38,8 +46,9 @@ interface LoadingFallbackProps {
 }
 
 const LoadingFallback: FC<LoadingFallbackProps> = ({ height = 'h-96' }) => (
-  <div className={`${height} flex items-center justify-center`}>
+  <div className={`${height} flex items-center justify-center`} role="status" aria-label="Loading">
     <div className="w-8 h-8 border-2 border-[#E5D5C0]/30 border-t-[#E5D5C0] rounded-full animate-spin" />
+    <span className="sr-only">Loading...</span>
   </div>
 )
 
@@ -48,7 +57,7 @@ const App: FC = () => {
 
   const [langCode, setLangCode] = useState<LanguageCode>('pt')
   const [isLangOpen, setIsLangOpen] = useState(false)
-  const [t, setT] = useState<TranslationContent>(FALLBACK_TRANSLATION)
+  const [t, setT] = useState<TranslationContent>(INITIAL_TRANSLATION)
 
   useEffect(() => {
     const stored = localStorage.getItem('lang') as LanguageCode | null
@@ -64,26 +73,28 @@ const App: FC = () => {
 
   useEffect(() => {
     let stale = false
-    loadTranslation(langCode).then(data => {
-      if (!stale) setT(data)
+    loadTranslation(langCode)
+      .catch(() => getEnglishFallback())
+      .then(data => {
+        if (!stale) {
+        setT(data)
+        // Apply DOM/SEO updates immediately with correct translation data
+        localStorage.setItem('lang', langCode)
+        document.documentElement.lang = langCode
+        document.title = data.seo.title
+        const descTag = document.querySelector('meta[name="description"]')
+        if (descTag) descTag.setAttribute('content', data.seo.desc)
+      }
     })
     return () => { stale = true }
   }, [langCode])
 
+  // RTL direction change — separate from translation load since it depends only on langCode
   useEffect(() => {
-    localStorage.setItem('lang', langCode)
     const isRtl = ['ar', 'ur'].includes(langCode)
     document.documentElement.dir = isRtl ? 'rtl' : 'ltr'
-    document.documentElement.lang = langCode
-
-    document.title = t.seo.title
-    const descTag = document.querySelector('meta[name="description"]')
-    if (descTag) {
-      descTag.setAttribute('content', t.seo.desc)
-    }
-
     analytics.trackPageView(window.location.hash || '/')
-  }, [langCode, t])
+  }, [langCode])
 
   useEffect(() => {
     const handleHashChange = (): void => {
