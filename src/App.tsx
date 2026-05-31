@@ -86,6 +86,10 @@ const App: FC = () => {
         if (descTag) descTag.setAttribute('content', data.seo.desc)
       }
     })
+    .catch(() => {
+      // Both target and English fallback failed — keep INITIAL_TRANSLATION
+      console.warn(`Failed to load translation for "${langCode}" and English fallback`)
+    })
     return () => { stale = true }
   }, [langCode])
 

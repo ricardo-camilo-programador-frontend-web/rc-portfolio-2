@@ -49,7 +49,6 @@ const useIntersectionObserver = (options?: IntersectionObserverInit) => {
 export const Projects: FC<ProjectsProps> = memo(
   ({ title, subtitle, viewAll, viewProject, comingSoon, projects, isRtl }) => {
     const [containerRef, isVisible] = useIntersectionObserver()
-    const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
     const loadMoreRef = useRef<HTMLDivElement | null>(null)
 
@@ -60,8 +59,8 @@ export const Projects: FC<ProjectsProps> = memo(
       category: string
     }>({ isOpen: false, image: '', title: '', category: '' })
 
-    const handleImageLoad = useCallback((imageUrl: string) => {
-      setLoadedImages(prev => new Set(prev).add(imageUrl))
+    const handleImageLoad = useCallback((_imageUrl: string) => {
+      // Reserved for future use (e.g., image reveal animation trigger)
     }, [])
 
     const handleLoadMore = useCallback(() => {

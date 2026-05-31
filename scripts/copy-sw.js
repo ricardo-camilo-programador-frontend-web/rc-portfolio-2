@@ -1,5 +1,5 @@
-import { join } from 'node:path'
-import { dirname, fileURLToPath } from 'node:url'
+import { join, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = join(__dirname, '..')
