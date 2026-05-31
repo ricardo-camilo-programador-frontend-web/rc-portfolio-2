@@ -117,7 +117,8 @@ async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName)
   const cachedResponse = await cache.match(request)
 
-  const fetchPromise = fetch(request)
+  // Update cache in background (fire and forget)
+  fetch(request)
     .then(networkResponse => {
       if (networkResponse && networkResponse.status === 200) {
         const responseToCache = networkResponse.clone()
@@ -130,22 +131,16 @@ async function staleWhileRevalidate(request, cacheName) {
         })
         cache.put(request, newResponse)
       }
-      return networkResponse
     })
     .catch(() => {
-      console.log('SW: Network failed for stale-while-revalidate')
-      return null
+      // Network failed — cache update skipped, not critical
     })
 
-  return (
-    cachedResponse
-    || fetchPromise
-    || new Response('Offline', {
-      status: 503,
-      statusText: 'Service Unavailable',
-      headers: { 'Content-Type': 'text/plain' },
-    })
-  )
+  return cachedResponse || new Response('Offline', {
+    status: 503,
+    statusText: 'Service Unavailable',
+    headers: { 'Content-Type': 'text/plain' },
+  })
 }
 
 async function networkFirst(request, cacheName, maxAge) {

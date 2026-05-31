@@ -180,7 +180,7 @@ export const Navigation: FC<NavigationProps> = memo(
                       <button
                         key={l.code}
                         onClick={() => handleLangSelect(l.code)}
-                        className="w-full px-4 py-2 text-left hover:bg-white/5 transition-colors flex items-center justify-between group"
+                        className="w-full px-4 py-2 text-start hover:bg-white/5 transition-colors flex items-center justify-between group"
                         role="option"
                         aria-selected={langCode === l.code}
                         type="button"
