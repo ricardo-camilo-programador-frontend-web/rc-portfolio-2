@@ -47,7 +47,7 @@ const translation: TranslationContent = {
     comingSoon: 'শীঘ্রই আসছে',
   },
   career: { title: 'পেশাদার', subtitle: 'ইতিহাস', present: 'বর্তমান' },
-  certs: { title: 'স্বীকৃতি', subtitle: 'এবং সার্টিফিকেশন' },
+  certs: { title: 'স্বীকৃতি', subtitle: 'এবং সার্টিফিকেশন', proficiency: 'ইংরেজি দক্ষতা', certificate: 'EF SET সার্টিফিকেট', level: 'C1 অ্যাডভান্সড' },
   cta: {
     title: 'আপনার',
     subtitle: 'ডিজিটাল পণ্য আপগ্রেড করুন',
@@ -55,7 +55,6 @@ const translation: TranslationContent = {
     button: 'আমাকে ইমেইল করুন',
     whatsapp: 'WhatsApp',
   },
-  }
-
+}
 
 export default translation

@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { MessageCircle } from 'lucide-react'
 import { memo, useRef } from 'react'
-import { useSectionReveal } from '../hooks/useGsapAnimations'
+import { useSectionReveal } from '../hooks/use-gsap-animations'
 
 interface CTAProps {
   title: string
@@ -27,15 +27,11 @@ export const CTA: FC<CTAProps> = memo(
         aria-label="Contact section"
       >
         <div className="max-w-4xl mx-auto text-center" dir={isRtl ? 'rtl' : 'ltr'}>
-          <h2
-            className="text-5xl md:text-8xl font-serif leading-[0.9] tracking-tighter mb-8"
-          >
+          <h2 className="text-5xl md:text-8xl font-serif leading-[0.9] tracking-tighter mb-8">
             {title} <br />
             <span className="italic opacity-50">{subtitle}</span>
           </h2>
-          <p
-            className="text-[#E5D5C0]/80 text-lg md:text-xl max-w-2xl mx-auto mb-16 leading-relaxed"
-          >
+          <p className="text-[#E5D5C0]/80 text-lg md:text-xl max-w-2xl mx-auto mb-16 leading-relaxed">
             {description}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">

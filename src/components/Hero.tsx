@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { memo, useRef } from 'react'
-import { useHeroReveal } from '../hooks/useGsapAnimations'
+import { useHeroReveal } from '../hooks/use-gsap-animations'
 import { MessageCircle } from '../icons'
 
 interface HeroProps {

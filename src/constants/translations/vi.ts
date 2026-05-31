@@ -48,7 +48,7 @@ const translation: TranslationContent = {
     comingSoon: 'Sắp ra mắt',
   },
   career: { title: 'Lịch sử', subtitle: 'Nghề nghiệp', present: 'Hiện tại' },
-  certs: { title: 'Công nhận', subtitle: 'và Chứng chỉ' },
+  certs: { title: 'Công nhận', subtitle: 'và Chứng chỉ', proficiency: 'Trình độ tiếng Anh', certificate: 'Chứng chỉ EF SET', level: 'C1 Nâng cao' },
   cta: {
     title: 'Nâng cấp',
     subtitle: 'Sản phẩm số của bạn',
@@ -56,7 +56,6 @@ const translation: TranslationContent = {
     button: 'Gửi email cho tôi',
     whatsapp: 'WhatsApp',
   },
-  }
-
+}
 
 export default translation

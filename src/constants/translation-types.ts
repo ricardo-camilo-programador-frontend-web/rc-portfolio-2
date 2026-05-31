@@ -13,8 +13,14 @@ export interface TranslationContent {
     s2: { title: string; desc: string }
     s3: { title: string; desc: string }
   }
-  work: { title: string; subtitle: string; viewAll: string; viewProject: string; comingSoon: string }
+  work: {
+    title: string
+    subtitle: string
+    viewAll: string
+    viewProject: string
+    comingSoon: string
+  }
   career: { title: string; subtitle: string; present: string }
-  certs: { title: string; subtitle: string }
+  certs: { title: string; subtitle: string; proficiency: string; certificate: string; level: string }
   cta: { title: string; subtitle: string; desc: string; button: string; whatsapp: string }
 }

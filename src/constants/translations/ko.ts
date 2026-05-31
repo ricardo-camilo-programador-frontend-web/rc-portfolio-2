@@ -39,9 +39,15 @@ const translation: TranslationContent = {
       desc: '즉시 로딩 및 최대 유기적 가시성을 보장하는 극한의 최적화.',
     },
   },
-  work: { title: '선택된', subtitle: '작업', viewAll: '전체 GitHub 보기', viewProject: '프로젝트 보기', comingSoon: '곧 출시' },
+  work: {
+    title: '선택된',
+    subtitle: '작업',
+    viewAll: '전체 GitHub 보기',
+    viewProject: '프로젝트 보기',
+    comingSoon: '곧 출시',
+  },
   career: { title: '전문', subtitle: '이력', present: '현재' },
-  certs: { title: '인정', subtitle: '및 자격증' },
+  certs: { title: '인정', subtitle: '및 자격증', proficiency: '영어 능력', certificate: 'EF SET 인증서', level: 'C1 고급' },
   cta: {
     title: '디지털 제품을',
     subtitle: '업그레이드',
@@ -49,7 +55,6 @@ const translation: TranslationContent = {
     button: '이메일 보내기',
     whatsapp: 'WhatsApp',
   },
-  }
-
+}
 
 export default translation

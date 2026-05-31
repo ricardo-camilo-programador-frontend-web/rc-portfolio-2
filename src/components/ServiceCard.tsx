@@ -19,9 +19,7 @@ export const ServiceCard: FC<ServiceCardProps> = memo(({ num, title, desc, icon,
         <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#E5D5C0]/50">
           {num}
         </span>
-        <div className="text-[#E5D5C0]/80 group-hover:text-[#E5D5C0] transition-colors">
-          {icon}
-        </div>
+        <div className="text-[#E5D5C0]/80 group-hover:text-[#E5D5C0] transition-colors">{icon}</div>
       </div>
       <h3 className="text-xl font-bold text-[#E5D5C0] mb-4">{title}</h3>
       <p className="text-[#E5D5C0]/70 text-sm leading-relaxed">{desc}</p>

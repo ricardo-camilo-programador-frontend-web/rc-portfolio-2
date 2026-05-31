@@ -22,8 +22,7 @@ const translation: TranslationContent = {
   about: {
     quote: 'Teknik mükemmellik, niyet ve kusursuz yürütmenin sonucudur.',
     bio: 'Ben Ricardo Camilo, 6+ yıl deneyimli Frontend Geliştirici. Vue.js ve TypeScript konusunda uzmanım, yüksek kaliteli çözümler sunmak için sağlam teknik uzmanlığı olağanüstü disiplinle birleştiriyorum.',
-    details:
-      'DISC Profili: Araştırmacı — Teknik hassasiyet ve ölçeklenebilir çözümlere odaklanma.',
+    details: 'DISC Profili: Araştırmacı — Teknik hassasiyet ve ölçeklenebilir çözümlere odaklanma.',
     stats: { exp: '6+ Yıl', projects: '20+ Teslim Edildi', eng: 'İngilizce C1' },
   },
   services: {
@@ -48,7 +47,7 @@ const translation: TranslationContent = {
     comingSoon: 'Çok Yakında',
   },
   career: { title: 'Profesyonel', subtitle: 'Geçmiş', present: 'Şu Anda' },
-  certs: { title: 'Tanınma', subtitle: 've Sertifikalar' },
+  certs: { title: 'Tanınma', subtitle: 've Sertifikalar', proficiency: 'İngilizce Yeterlilik', certificate: 'EF SET Sertifikası', level: 'C1 İleri' },
   cta: {
     title: 'Dijital',
     subtitle: 'Ürününüzü Yükseltin',
@@ -56,7 +55,6 @@ const translation: TranslationContent = {
     button: 'Bana E-posta Gönder',
     whatsapp: 'WhatsApp',
   },
-  }
-
+}
 
 export default translation

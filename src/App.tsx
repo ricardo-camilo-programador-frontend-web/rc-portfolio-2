@@ -1,16 +1,18 @@
 import type { FC } from 'react'
+import type { TranslationContent } from './constants/translation-types'
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { Hero } from './components/Hero'
 import { Navigation } from './components/Navigation'
-import { useGsapInit } from './hooks/useGsapAnimations'
 import { PROJECTS, TIMELINE, USER_PHOTO, WHATSAPP_URL } from './constants/data'
 import { LANGUAGES, type LanguageCode } from './constants/languages'
-import type { TranslationContent } from './constants/translation-types'
+import { useGsapInit } from './hooks/use-gsap-animations'
 import { analytics } from './services/analytics'
 
 const About = lazy(() => import('./components/About').then(m => ({ default: m.About })))
 const Career = lazy(() => import('./components/Career').then(m => ({ default: m.Career })))
-const Certificates = lazy(() => import('./components/Certificates').then(m => ({ default: m.Certificates })))
+const Certificates = lazy(() =>
+  import('./components/Certificates').then(m => ({ default: m.Certificates })),
+)
 const CTA = lazy(() => import('./components/CTA').then(m => ({ default: m.CTA })))
 const Footer = lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })))
 const Projects = lazy(() => import('./components/Projects').then(m => ({ default: m.Projects })))
@@ -34,10 +36,14 @@ const INITIAL_TRANSLATION: TranslationContent = {
   nav: { work: '', about: '', services: '', career: '', contact: '' },
   hero: { title: '', subtitle: '', desc: '', cta: '', badge: '' },
   about: { quote: '', bio: '', details: '', stats: { exp: '', projects: '', eng: '' } },
-  services: { s1: { title: '', desc: '' }, s2: { title: '', desc: '' }, s3: { title: '', desc: '' } },
+  services: {
+    s1: { title: '', desc: '' },
+    s2: { title: '', desc: '' },
+    s3: { title: '', desc: '' },
+  },
   work: { title: '', subtitle: '', viewAll: '', viewProject: '', comingSoon: '' },
   career: { title: '', subtitle: '', present: '' },
-  certs: { title: '', subtitle: '' },
+  certs: { title: '', subtitle: '', proficiency: '', certificate: '', level: '' },
   cta: { title: '', subtitle: '', desc: '', button: '', whatsapp: '' },
 }
 
@@ -77,20 +83,22 @@ const App: FC = () => {
       .catch(() => getEnglishFallback())
       .then(data => {
         if (!stale) {
-        setT(data)
-        // Apply DOM/SEO updates immediately with correct translation data
-        localStorage.setItem('lang', langCode)
-        document.documentElement.lang = langCode
-        document.title = data.seo.title
-        const descTag = document.querySelector('meta[name="description"]')
-        if (descTag) descTag.setAttribute('content', data.seo.desc)
-      }
-    })
-    .catch(() => {
-      // Both target and English fallback failed — keep INITIAL_TRANSLATION
-      console.warn(`Failed to load translation for "${langCode}" and English fallback`)
-    })
-    return () => { stale = true }
+          setT(data)
+          // Apply DOM/SEO updates immediately with correct translation data
+          localStorage.setItem('lang', langCode)
+          document.documentElement.lang = langCode
+          document.title = data.seo.title
+          const descTag = document.querySelector('meta[name="description"]')
+          if (descTag) descTag.setAttribute('content', data.seo.desc)
+        }
+      })
+      .catch(() => {
+        // Both target and English fallback failed — keep INITIAL_TRANSLATION
+        console.warn(`Failed to load translation for "${langCode}" and English fallback`)
+      })
+    return () => {
+      stale = true
+    }
   }, [langCode])
 
   // RTL direction change — separate from translation load since it depends only on langCode
@@ -162,7 +170,7 @@ const App: FC = () => {
         </Suspense>
 
         <Suspense fallback={<LoadingFallback height="py-40" />}>
-          <Certificates title={t.certs.title} subtitle={t.certs.subtitle} />
+          <Certificates title={t.certs.title} subtitle={t.certs.subtitle} proficiency={t.certs.proficiency} certificate={t.certs.certificate} level={t.certs.level} />
         </Suspense>
 
         <Suspense fallback={<LoadingFallback height="py-40" />}>

@@ -6,9 +6,7 @@ const STATIC_ASSETS = ['/', '/index.html', '/manifest.json', '/favicon.svg']
 
 // Hashed assets injected at build time by scripts/generate-sw-manifest.js
 // Pattern from SGS_WEB staleWhileRevalidate strategy
-const PRECACHE_ASSETS = typeof __BUILD_MANIFEST__ !== 'undefined'
-  ? __BUILD_MANIFEST__
-  : []
+const PRECACHE_ASSETS = typeof __BUILD_MANIFEST__ !== 'undefined' ? __BUILD_MANIFEST__ : []
 
 const IMAGE_CACHE_NAME = `camilo-images-${CACHE_VERSION}`
 const FONT_CACHE_NAME = `camilo-fonts-${CACHE_VERSION}`
@@ -33,13 +31,12 @@ self.addEventListener('install', event => {
       console.log('SW: Pre-caching core assets')
       const allAssets = [...STATIC_ASSETS, ...PRECACHE_ASSETS]
       // Use allSettled so one failed asset doesn't block entire SW installation
-      return Promise.allSettled(allAssets.map(url => cache.add(url)))
-        .then(results => {
-          const failed = results.filter(r => r.status === 'rejected')
-          if (failed.length > 0) {
-            console.warn(`SW: ${failed.length}/${allAssets.length} assets failed to precache`)
-          }
-        })
+      return Promise.allSettled(allAssets.map(url => cache.add(url))).then(results => {
+        const failed = results.filter(r => r.status === 'rejected')
+        if (failed.length > 0) {
+          console.warn(`SW: ${failed.length}/${allAssets.length} assets failed to precache`)
+        }
+      })
     }),
   )
   self.skipWaiting()
@@ -136,11 +133,14 @@ async function staleWhileRevalidate(request, cacheName) {
       // Network failed — cache update skipped, not critical
     })
 
-  return cachedResponse || new Response('Offline', {
-    status: 503,
-    statusText: 'Service Unavailable',
-    headers: { 'Content-Type': 'text/plain' },
-  })
+  return (
+    cachedResponse
+    || new Response('Offline', {
+      status: 503,
+      statusText: 'Service Unavailable',
+      headers: { 'Content-Type': 'text/plain' },
+    })
+  )
 }
 
 async function networkFirst(request, cacheName, maxAge) {
@@ -203,7 +203,10 @@ self.addEventListener('fetch', event => {
 
   // JS and CSS chunks — stale-while-revalidate for instant loads + background updates
   // Pattern from SGS_WEB staleWhileRevalidate strategy
-  if (url.pathname.startsWith('/assets/') && (url.pathname.endsWith('.js') || url.pathname.endsWith('.css'))) {
+  if (
+    url.pathname.startsWith('/assets/')
+    && (url.pathname.endsWith('.js') || url.pathname.endsWith('.css'))
+  ) {
     event.respondWith(staleWhileRevalidate(event.request, CACHE_NAME))
     return
   }

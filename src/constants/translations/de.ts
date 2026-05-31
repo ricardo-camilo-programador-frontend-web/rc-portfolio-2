@@ -22,8 +22,7 @@ const translation: TranslationContent = {
   about: {
     quote: 'Technische Exzellenz ist das Ergebnis von Absicht und makelloser Ausführung.',
     bio: 'Ich bin Ricardo Camilo, Frontend-Entwickler mit über 6 Jahren Erfahrung. Ich spezialisiere mich auf Vue.js und TypeScript und kombiniere fundierte technische Expertise mit außergewöhnlicher Disziplin für hochwertige Lösungen.',
-    details:
-      'DISC-Profil: Investigator — Fokus auf technische Präzision und skalierbare Lösungen.',
+    details: 'DISC-Profil: Investigator — Fokus auf technische Präzision und skalierbare Lösungen.',
     stats: { exp: '6+ Jahre', projects: '20+ geliefert', eng: 'Englisch C1' },
   },
   services: {
@@ -48,7 +47,7 @@ const translation: TranslationContent = {
     comingSoon: 'Demnächst',
   },
   career: { title: 'Beruflicher', subtitle: 'Werdegang', present: 'Aktuell' },
-  certs: { title: 'Anerkennung', subtitle: 'und Zertifizierungen' },
+  certs: { title: 'Anerkennung', subtitle: 'und Zertifizierungen', proficiency: 'Englischkenntnisse', certificate: 'EF SET Zertifikat', level: 'C1 Fortgeschritten' },
   cta: {
     title: 'Verbessern Sie Ihr',
     subtitle: 'digitales Produkt',
@@ -56,7 +55,6 @@ const translation: TranslationContent = {
     button: 'E-Mail senden',
     whatsapp: 'WhatsApp',
   },
-  }
-
+}
 
 export default translation

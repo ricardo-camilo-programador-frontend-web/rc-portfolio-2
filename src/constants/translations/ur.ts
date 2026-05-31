@@ -39,9 +39,15 @@ const translation: TranslationContent = {
       desc: 'فوری لوڈنگ اور زیادہ سے زیادہ نامیاتی نمائش کو یقینی بنانے کے لیے انتہائی اصلاح۔',
     },
   },
-  work: { title: 'منتخب', subtitle: 'کام', viewAll: 'مکمل GitHub دیکھیں', viewProject: 'پروجیکٹ دیکھیں', comingSoon: 'جلد ہی' },
+  work: {
+    title: 'منتخب',
+    subtitle: 'کام',
+    viewAll: 'مکمل GitHub دیکھیں',
+    viewProject: 'پروجیکٹ دیکھیں',
+    comingSoon: 'جلد ہی',
+  },
   career: { title: 'پیشہ ورانہ', subtitle: 'تاریخ', present: 'موجودہ' },
-  certs: { title: 'شناخت', subtitle: 'اور سرٹیفکیٹس' },
+  certs: { title: 'شناخت', subtitle: 'اور سرٹیفکیٹس', proficiency: 'انگریزی مہارت', certificate: 'EF SET سرٹیفکیٹ', level: 'C1 اعلیٰ' },
   cta: {
     title: 'اپنے',
     subtitle: 'ڈیجیٹل پروڈکٹ کو اپ گریڈ کریں',
@@ -49,7 +55,6 @@ const translation: TranslationContent = {
     button: 'مجھے ای میل کریں',
     whatsapp: 'WhatsApp',
   },
-  }
-
+}
 
 export default translation

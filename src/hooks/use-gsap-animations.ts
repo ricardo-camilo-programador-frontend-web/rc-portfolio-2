@@ -1,6 +1,6 @@
-import { useLayoutEffect, useEffect, useRef, type RefObject } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { type RefObject, useEffect, useLayoutEffect, useRef } from 'react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -16,9 +16,7 @@ ScrollTrigger.defaults({
 
 // Cached media query — avoids re-allocation per hook
 const reducedMotionQuery =
-  typeof window !== 'undefined'
-    ? window.matchMedia('(prefers-reduced-motion: reduce)')
-    : null
+  typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null
 
 const prefersReducedMotion = () => reducedMotionQuery?.matches ?? false
 
@@ -30,10 +28,10 @@ export function useGsapInit() {
       if (e.matches) {
         // Pause instead of kill — animations can be resumed
         gsap.globalTimeline.pause()
-        ScrollTrigger.getAll().forEach((st) => st.disable())
+        ScrollTrigger.getAll().forEach(st => st.disable())
       } else {
         gsap.globalTimeline.resume()
-        ScrollTrigger.getAll().forEach((st) => st.enable())
+        ScrollTrigger.getAll().forEach(st => st.enable())
         ScrollTrigger.refresh()
       }
     }
@@ -64,13 +62,9 @@ export function useHeroReveal(containerRef: RefObject<HTMLElement | null>) {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline()
 
-      tl.fromTo(
-        badge,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, delay: 0.2 },
-      )
+      tl.fromTo(badge, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.2 })
 
-      titleLines.forEach((line) => {
+      titleLines.forEach(line => {
         tl.fromTo(
           line,
           { clipPath: 'inset(100% 0% 0% 0%)', y: 80 },
@@ -79,12 +73,7 @@ export function useHeroReveal(containerRef: RefObject<HTMLElement | null>) {
         )
       })
 
-      tl.fromTo(
-        desc,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8 },
-        '-=0.4',
-      )
+      tl.fromTo(desc, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
 
       tl.fromTo(
         cta,
@@ -93,12 +82,7 @@ export function useHeroReveal(containerRef: RefObject<HTMLElement | null>) {
         '-=0.3',
       )
 
-      tl.fromTo(
-        scroll,
-        { opacity: 0 },
-        { opacity: 1, duration: 1 },
-        '-=0.2',
-      )
+      tl.fromTo(scroll, { opacity: 0 }, { opacity: 1, duration: 1 }, '-=0.2')
 
       // Parallax background — scroll-driven
       gsap.to(bg, {

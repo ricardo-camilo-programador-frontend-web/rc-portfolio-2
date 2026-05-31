@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -25,7 +25,7 @@ if (existsSync(assetsDir)) {
   for (const file of files) {
     // Only include hashed JS/CSS files (contain hash in filename)
     // Exclude 2-letter language code chunks (e.g. en-xxx.js, pt-xxx.js)
-    if (/\-[a-zA-Z0-9]{6,12}\.(js|css)$/.test(file) && !/^[a-z]{2}\-/.test(file)) {
+    if (/-[a-zA-Z0-9]{6,12}\.(js|css)$/.test(file) && !/^[a-z]{2}-/.test(file)) {
       buildAssets.push(`/assets/${file}`)
     }
   }
@@ -38,14 +38,17 @@ if (buildAssets.length === 0) {
   console.log('⚠️ No hashed assets found, copying SW without manifest')
 } else {
   const manifestJson = JSON.stringify(buildAssets)
-  // Replace the PRECACHE_ASSETS declaration block with injected manifest.
-  // CRITICAL: Must match only the 3-line ternary block, not the rest of the file.
-  // Using multiline with explicit line boundaries prevents the greedy [^;]+ bug
-  // that consumed all event listeners in Round 1.
+  // Replace the PRECACHE_ASSETS declaration with injected manifest.
+  // Matches both single-line and multi-line ternary formats.
+  const originalContent = swContent
   swContent = swContent.replace(
-    /const PRECACHE_ASSETS = typeof __BUILD_MANIFEST__ !== 'undefined'\n  \? __BUILD_MANIFEST__\n  : \[\]/,
+    /const PRECACHE_ASSETS = typeof __BUILD_MANIFEST__ !== 'undefined'\s*\?\s*__BUILD_MANIFEST__\s*:\s*\[\]/,
     `const PRECACHE_ASSETS = ${manifestJson}`,
   )
+  if (swContent === originalContent && buildAssets.length > 0) {
+    console.error('❌ SW manifest injection failed: regex did not match')
+    process.exit(1)
+  }
   console.log(`✅ Injected ${buildAssets.length} assets into SW manifest`)
 }
 

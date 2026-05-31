@@ -12,10 +12,7 @@ if ('serviceWorker' in navigator) {
   })
 }
 
-class ErrorBoundary extends React.Component<
-  { children: React.ReactNode },
-  { hasError: boolean }
-> {
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
   state = { hasError: false }
   static getDerivedStateFromError() {
     return { hasError: true }
@@ -27,6 +24,7 @@ class ErrorBoundary extends React.Component<
           <div>
             <p className="text-xl mb-4">Something went wrong.</p>
             <button
+              type="button"
               className="px-4 py-2 border border-[#E5D5C0]/30 rounded hover:bg-[#E5D5C0]/10 transition-colors"
               onClick={() => this.setState({ hasError: false })}
             >

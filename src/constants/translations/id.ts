@@ -48,7 +48,7 @@ const translation: TranslationContent = {
     comingSoon: 'Segera',
   },
   career: { title: 'Riwayat', subtitle: 'Profesional', present: 'Saat Ini' },
-  certs: { title: 'Pengakuan', subtitle: '& Sertifikasi' },
+  certs: { title: 'Pengakuan', subtitle: '& Sertifikasi', proficiency: 'Kemahiran Bahasa Inggris', certificate: 'Sertifikat EF SET', level: 'C1 Mahir' },
   cta: {
     title: 'Tingkatkan',
     subtitle: 'Produk Digital Anda',
@@ -56,7 +56,6 @@ const translation: TranslationContent = {
     button: 'Email Saya',
     whatsapp: 'WhatsApp',
   },
-  }
-
+}
 
 export default translation

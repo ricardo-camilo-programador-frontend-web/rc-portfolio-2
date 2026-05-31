@@ -39,9 +39,15 @@ const translation: TranslationContent = {
       desc: 'تحسين شديد لضمان التحميل الفوري والحد الأقصى من الرؤية العضوية.',
     },
   },
-  work: { title: 'أعمال', subtitle: 'مختارة', viewAll: 'عرض GitHub كامل', viewProject: 'عرض المشروع', comingSoon: 'قريباً' },
+  work: {
+    title: 'أعمال',
+    subtitle: 'مختارة',
+    viewAll: 'عرض GitHub كامل',
+    viewProject: 'عرض المشروع',
+    comingSoon: 'قريباً',
+  },
   career: { title: 'المسار', subtitle: 'المهني', present: 'حالياً' },
-  certs: { title: 'التقدير', subtitle: 'والشهادات' },
+  certs: { title: 'التقدير', subtitle: 'والشهادات', proficiency: 'إتقان الإنجليزية', certificate: 'شهادة EF SET', level: 'C1 متقدم' },
   cta: {
     title: 'طوّر',
     subtitle: 'منتجك الرقمي',
@@ -49,7 +55,6 @@ const translation: TranslationContent = {
     button: 'أرسل لي بريدًا إلكترونيًا',
     whatsapp: 'واتساب',
   },
-  }
-
+}
 
 export default translation

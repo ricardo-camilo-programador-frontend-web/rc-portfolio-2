@@ -1,16 +1,14 @@
 import type { FC } from 'react'
 import type { Project } from '../types'
 import { ArrowUpRight, ZoomIn } from 'lucide-react'
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useState } from 'react'
 
 interface ProjectCardProps {
   project: Project
   comingSoonLabel: string
   viewProjectLabel: string
   isRtl: boolean
-  isVisible: boolean
-  loadDelay: number
-  onImageLoad: (imageUrl: string) => void
+  onImageLoad?: (imageUrl: string) => void
   onOpenModal: (image: string, title: string, category: string) => void
 }
 
@@ -30,23 +28,14 @@ const generateSrcSet = (baseUrl: string): string => {
 }
 
 export const ProjectCard: FC<ProjectCardProps> = memo(
-  ({ project, comingSoonLabel, viewProjectLabel, isRtl, isVisible, loadDelay, onImageLoad, onOpenModal }) => {
+  ({
+    project,
+    comingSoonLabel,
+    viewProjectLabel,
+    isRtl,
+    onOpenModal,
+  }) => {
     const [imageError, setImageError] = useState(false)
-
-    useEffect(() => {
-      if (isVisible && !project.comingSoon && project.image) {
-        const timer = setTimeout(() => {
-          onImageLoad(project.image)
-        }, loadDelay)
-        return () => clearTimeout(timer)
-      }
-    }, [isVisible, loadDelay, project.comingSoon, project.image, onImageLoad])
-
-    const handleImageLoad = useCallback(() => {
-      if (project.image) {
-        onImageLoad(project.image)
-      }
-    }, [project.image, onImageLoad])
 
     const cardProps = {
       className:
@@ -117,7 +106,6 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
               decoding="async"
               width={400}
               height={300}
-              onLoad={handleImageLoad}
               onError={() => setImageError(true)}
               fetchPriority="low"
             />
@@ -130,8 +118,11 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
 
         <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-300">
           <div className="flex items-center gap-2 w-full flex-wrap">
-            {project.tags.map((tag, index) => (
-              <span key={index} className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80 mb-2 block border border-[#E5D5C0]/20 p-1 rounded w-auto">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80 mb-2 block border border-[#E5D5C0]/20 p-1 rounded w-auto"
+              >
                 {tag}
               </span>
             ))}

@@ -47,7 +47,7 @@ const translation: TranslationContent = {
     comingSoon: '近日公開',
   },
   career: { title: '職歴', subtitle: '経歴', present: '現在' },
-  certs: { title: '表彰', subtitle: 'および認定資格' },
+  certs: { title: '表彰', subtitle: 'および認定資格', proficiency: '英語力', certificate: 'EF SET 認定証', level: 'C1 上級' },
   cta: {
     title: 'デジタルプロダクトを',
     subtitle: 'アップグレード',
@@ -55,7 +55,6 @@ const translation: TranslationContent = {
     button: 'メールを送信',
     whatsapp: 'WhatsApp で連絡',
   },
-  }
-
+}
 
 export default translation

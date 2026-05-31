@@ -1,8 +1,8 @@
 import type { FC } from 'react'
 import type { Project } from '../types'
 import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ProjectCard } from './ProjectCard'
 import { env } from '../constants/env'
+import { ProjectCard } from './ProjectCard'
 
 const ImageModal = lazy(() => import('./ImageModal').then(m => ({ default: m.ImageModal })))
 
@@ -18,37 +18,8 @@ interface ProjectsProps {
 
 const INITIAL_VISIBLE_COUNT = 6
 
-const useIntersectionObserver = (options?: IntersectionObserverInit) => {
-  const [isIntersecting, setIsIntersecting] = useState(false)
-  const targetRef = useRef<HTMLDivElement | null>(null)
-  const { threshold = 0.1, rootMargin = '50px' } = options || {}
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsIntersecting(true)
-          if (targetRef.current) {
-            observer.unobserve(targetRef.current)
-          }
-        }
-      },
-      { threshold, rootMargin },
-    )
-
-    if (targetRef.current) {
-      observer.observe(targetRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [threshold, rootMargin])
-
-  return [targetRef, isIntersecting] as const
-}
-
 export const Projects: FC<ProjectsProps> = memo(
   ({ title, subtitle, viewAll, viewProject, comingSoon, projects, isRtl }) => {
-    const [containerRef, isVisible] = useIntersectionObserver()
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
     const loadMoreRef = useRef<HTMLDivElement | null>(null)
 
@@ -58,10 +29,6 @@ export const Projects: FC<ProjectsProps> = memo(
       title: string
       category: string
     }>({ isOpen: false, image: '', title: '', category: '' })
-
-    const handleImageLoad = useCallback((_imageUrl: string) => {
-      // Reserved for future use (e.g., image reveal animation trigger)
-    }, [])
 
     const handleLoadMore = useCallback(() => {
       setVisibleCount(prev => Math.min(prev + INITIAL_VISIBLE_COUNT, projects.length))
@@ -96,7 +63,6 @@ export const Projects: FC<ProjectsProps> = memo(
     return (
       <section
         id="work"
-        ref={containerRef}
         className="py-40 px-6 scroll-mt-20"
         aria-label="Portfolio section"
         style={{ contain: 'layout style paint' }}
@@ -140,9 +106,6 @@ export const Projects: FC<ProjectsProps> = memo(
                 comingSoonLabel={comingSoon}
                 viewProjectLabel={viewProject}
                 isRtl={isRtl}
-                isVisible={isVisible}
-                loadDelay={index * 100}
-                onImageLoad={handleImageLoad}
                 onOpenModal={handleOpenModal}
               />
             ))}

@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import type { Language, LanguageCode } from '../constants/languages'
 import { memo, useCallback, useEffect, useRef } from 'react'
-import { useMagnetic } from '../hooks/useGsapAnimations'
+import { useMagnetic } from '../hooks/use-gsap-animations'
 import { ChevronDown, Globe, MessageCircle } from '../icons'
 
 interface NavigationProps {
@@ -30,14 +30,18 @@ function useClickOutside<T extends HTMLElement>(handler: () => void) {
   useEffect(() => {
     if (!ref.current) return
 
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
         handlerRef.current()
       }
     }
 
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside, { passive: true })
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
   }, [])
 
   return ref
@@ -107,13 +111,12 @@ export const Navigation: FC<NavigationProps> = memo(
         <nav
           ref={navRef}
           className="fixed top-0 inset-x-0 z-40 bg-[#0A0A0A]/80 backdrop-blur-sm border-b border-white/5"
-          role="navigation"
           aria-label="Main navigation"
         >
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <a
               ref={logoRef}
-              href="#"
+              href="/"
               className="text-2xl font-serif font-bold text-[#E5D5C0] hover:text-[#E5D5C0]/80 transition-colors"
               aria-label="Ricardo Camilo home"
             >

@@ -33,9 +33,15 @@ const translation: TranslationContent = {
       desc: 'त्वरित लोडिंग आणि कमाल सेंद्रिय दृश्यमानता सुनिश्चित करण्यासाठी अत्यंत ऑप्टिमायझेशन.',
     },
   },
-  work: { title: 'निवडक', subtitle: 'कामे', viewAll: 'पूर्ण GitHub पहा', viewProject: 'प्रोजेक्ट पहा', comingSoon: 'लवकरच' },
+  work: {
+    title: 'निवडक',
+    subtitle: 'कामे',
+    viewAll: 'पूर्ण GitHub पहा',
+    viewProject: 'प्रोजेक्ट पहा',
+    comingSoon: 'लवकरच',
+  },
   career: { title: 'व्यावसायिक', subtitle: 'इतिहास', present: 'वर्तमान' },
-  certs: { title: 'मान्यता', subtitle: 'आणि प्रमाणपत्रे' },
+  certs: { title: 'मान्यता', subtitle: 'आणि प्रमाणपत्रे', proficiency: 'इंग्रजी प्राविण्य', certificate: 'EF SET प्रमाणपत्र', level: 'C1 प्रगत' },
   cta: {
     title: 'आपले',
     subtitle: 'डिजिटल उत्पादन अपग्रेड करा',
@@ -43,7 +49,6 @@ const translation: TranslationContent = {
     button: 'मला ईमेल करा',
     whatsapp: 'WhatsApp',
   },
-  }
-
+}
 
 export default translation

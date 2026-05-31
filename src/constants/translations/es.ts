@@ -47,7 +47,7 @@ const translation: TranslationContent = {
     comingSoon: 'Próximamente',
   },
   career: { title: 'Trayectoria', subtitle: 'Profesional', present: 'Actualmente' },
-  certs: { title: 'Reconocimiento', subtitle: 'y certificaciones' },
+  certs: { title: 'Reconocimiento', subtitle: 'y certificaciones', proficiency: 'Competencia en inglés', certificate: 'Certificado EF SET', level: 'C1 Avanzado' },
   cta: {
     title: 'Mejora tu',
     subtitle: 'Producto digital',
@@ -55,7 +55,6 @@ const translation: TranslationContent = {
     button: 'Enviar correo',
     whatsapp: 'WhatsApp',
   },
-  }
-
+}
 
 export default translation
