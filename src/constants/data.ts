@@ -5,7 +5,8 @@ export const PROJECTS: Array<Project> = [
     id: 'pc2026',
     title: 'Pomodoro Claw',
     category: 'PWA',
-    description: 'Productivity timer combining Pomodoro technique with claw machine gamification mechanics.',
+    description:
+      'Productivity timer combining Pomodoro technique with claw machine gamification mechanics.',
     image: '/projects/pomodoro-claw.png',
     tags: ['PWA', 'TypeScript', 'Netlify', 'Google Ai Studio', 'OnGoing'],
     link: 'https://pomodoro-claw.netlify.app',

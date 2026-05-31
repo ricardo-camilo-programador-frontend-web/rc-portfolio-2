@@ -1,5 +1,6 @@
 import type { FC } from 'react'
-import { memo } from 'react'
+import { memo, useRef } from 'react'
+import { useLineDraw, useSectionReveal, useStaggerReveal } from '../hooks/use-gsap-animations'
 
 interface TimelineItem {
   id: number
@@ -18,29 +19,33 @@ interface CareerProps {
 }
 
 export const Career: FC<CareerProps> = memo(({ title, subtitle, timeline, isRtl }) => {
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const timelineRef = useRef<HTMLDivElement>(null)
+  const lineRef = useRef<HTMLDivElement>(null)
+
+  useSectionReveal(headingRef)
+  useLineDraw(lineRef)
+  useStaggerReveal(timelineRef, '.timeline-item', 0.2)
+
   return (
     <section
       id="career"
       className="py-40 px-6 bg-[#0A0A0A] scroll-mt-20"
       aria-label="Career section"
-      style={{ contain: 'layout style paint' }}
     >
       <div className="max-w-5xl mx-auto">
-        <h2
-          className="text-5xl md:text-7xl font-serif mb-20 text-center"
-          style={{ willChange: 'transform' }}
-        >
+        <h2 ref={headingRef} className="text-5xl md:text-7xl font-serif mb-20 text-center">
           {title} <span className="italic opacity-50">{subtitle}</span>
         </h2>
 
-        <div className="space-y-12" dir={isRtl ? 'rtl' : 'ltr'}>
-          {timeline.map((item, _index) => (
-            <div
-              key={item.id}
-              className="relative pl-8 md:pl-12 border-l border-[#E5D5C0]/10"
-              style={{ contain: 'layout style' }}
-            >
-              <div className="absolute left-0 top-2 w-2 h-2 -translate-x-1/2 rounded-full bg-[#E5D5C0]/20" />
+        <div ref={timelineRef} className="space-y-12 relative" dir={isRtl ? 'rtl' : 'ltr'}>
+          <div
+            ref={lineRef}
+            className="absolute start-0 md:start-[23px] top-0 bottom-0 w-px bg-[#E5D5C0]/10"
+          />
+          {timeline.map(item => (
+            <div key={item.id} className="timeline-item relative ps-8 md:ps-12">
+              <div className="absolute start-0 top-2 w-2 h-2 -translate-x-1/2 rounded-full bg-[#E5D5C0]/20" />
               <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/70 mb-2">
                 {item.period}
               </div>

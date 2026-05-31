@@ -196,10 +196,7 @@ export function addRelease(state: WorkflowState, release: string): void {
 }
 
 // Code Quality helpers
-export function addCodeQualityIssue(
-  state: WorkflowState,
-  issue: CodeQualityIssue,
-): void {
+export function addCodeQualityIssue(state: WorkflowState, issue: CodeQualityIssue): void {
   state.codeQuality.issues.push(issue)
 }
 
@@ -236,7 +233,7 @@ export function addError(state: WorkflowState, step: string, errorMessage: strin
 }
 
 export function resolveErrors(state: WorkflowState, step?: string): void {
-  state.recentErrors.forEach((error) => {
+  state.recentErrors.forEach(error => {
     if (!step || error.step === step) {
       error.resolved = true
     }
@@ -257,7 +254,7 @@ export function cleanupState(state: WorkflowState): void {
   // Remove resolved tech debt older than 30 days
   const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000
   state.codeQuality.techDebt = state.codeQuality.techDebt
-    .filter((item) => {
+    .filter(item => {
       if (!item.resolved) return true
       return new Date(item.created).getTime() > thirtyDaysAgo
     })

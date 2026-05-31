@@ -42,15 +42,18 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="shortcut" href="/favicon.svg">
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:* ws://localhost:*; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* https://cdn.counter.dev https://www.googletagmanager.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.gstatic.com; style-src 'self' 'unsafe-inline' http://localhost:* https://fonts.googleapis.com; font-src 'self' http://localhost:* https://fonts.gstatic.com data:; img-src 'self' data: https: blob: http://localhost:*; connect-src 'self' http://localhost:* ws://localhost:* https://cdn.counter.dev https://t.counter.dev https://www.google-analytics.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://www.gstatic.com; frame-src 'self' http://localhost:* https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net; worker-src 'self' blob: http://localhost:*;">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <!-- CSP is enforced via HTTP header in netlify.toml (not meta tag, to avoid dual-policy conflicts) -->
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.counter.dev">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://t.counter.dev">
 
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap"></noscript>
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp" fetchpriority="high" imagesrcset="https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 640w, https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 750w, https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 828w, https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 1080w, https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 1200w, https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 1920w" imagesizes="(max-width: 768px) 100vw, 1920px" crossorigin>
 
     <style>

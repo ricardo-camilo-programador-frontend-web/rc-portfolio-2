@@ -1,7 +1,7 @@
 import type { FC } from 'react'
-import { Fragment, memo, useCallback, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { X, ZoomIn, ZoomOut } from 'lucide-react'
+import { Fragment, memo, useCallback, useEffect, useState } from 'react'
 
 interface ImageModalProps {
   image: string
@@ -28,13 +28,10 @@ export const ImageModal: FC<ImageModalProps> = memo(
       return () => document.removeEventListener('touchmove', preventScroll)
     }, [zoom])
 
-    const handleWheel = useCallback(
-      (e: React.WheelEvent) => {
-        e.preventDefault()
-        setZoom(prev => Math.min(Math.max(prev - e.deltaY * 0.001, 1), 3))
-      },
-      [],
-    )
+    const handleWheel = useCallback((e: React.WheelEvent) => {
+      e.preventDefault()
+      setZoom(prev => Math.min(Math.max(prev - e.deltaY * 0.001, 1), 3))
+    }, [])
 
     const handleMouseDown = useCallback(
       (e: React.MouseEvent) => {

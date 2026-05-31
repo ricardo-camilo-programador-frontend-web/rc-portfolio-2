@@ -1,7 +1,12 @@
-const CACHE_NAME = 'camilo-v5'
-const CACHE_VERSION = 'v5.0.0'
+const CACHE_NAME = 'camilo-v6'
+const CACHE_VERSION = 'v6.0.0'
 
+// Core shell — always precached on install
 const STATIC_ASSETS = ['/', '/index.html', '/manifest.json', '/favicon.svg']
+
+// Hashed assets injected at build time by scripts/generate-sw-manifest.js
+// Pattern from SGS_WEB staleWhileRevalidate strategy
+const PRECACHE_ASSETS = typeof __BUILD_MANIFEST__ !== 'undefined' ? __BUILD_MANIFEST__ : []
 
 const IMAGE_CACHE_NAME = `camilo-images-${CACHE_VERSION}`
 const FONT_CACHE_NAME = `camilo-fonts-${CACHE_VERSION}`
@@ -24,7 +29,14 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log('SW: Pre-caching core assets')
-      return cache.addAll(STATIC_ASSETS)
+      const allAssets = [...STATIC_ASSETS, ...PRECACHE_ASSETS]
+      // Use allSettled so one failed asset doesn't block entire SW installation
+      return Promise.allSettled(allAssets.map(url => cache.add(url))).then(results => {
+        const failed = results.filter(r => r.status === 'rejected')
+        if (failed.length > 0) {
+          console.warn(`SW: ${failed.length}/${allAssets.length} assets failed to precache`)
+        }
+      })
     }),
   )
   self.skipWaiting()
@@ -102,7 +114,8 @@ async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName)
   const cachedResponse = await cache.match(request)
 
-  const fetchPromise = fetch(request)
+  // Update cache in background (fire and forget)
+  fetch(request)
     .then(networkResponse => {
       if (networkResponse && networkResponse.status === 200) {
         const responseToCache = networkResponse.clone()
@@ -115,16 +128,13 @@ async function staleWhileRevalidate(request, cacheName) {
         })
         cache.put(request, newResponse)
       }
-      return networkResponse
     })
     .catch(() => {
-      console.log('SW: Network failed for stale-while-revalidate')
-      return null
+      // Network failed — cache update skipped, not critical
     })
 
   return (
     cachedResponse
-    || fetchPromise
     || new Response('Offline', {
       status: 503,
       statusText: 'Service Unavailable',
@@ -191,7 +201,12 @@ self.addEventListener('fetch', event => {
     return
   }
 
-  if (url.pathname.startsWith('/assets/') && url.pathname.endsWith('.css')) {
+  // JS and CSS chunks — stale-while-revalidate for instant loads + background updates
+  // Pattern from SGS_WEB staleWhileRevalidate strategy
+  if (
+    url.pathname.startsWith('/assets/')
+    && (url.pathname.endsWith('.js') || url.pathname.endsWith('.css'))
+  ) {
     event.respondWith(staleWhileRevalidate(event.request, CACHE_NAME))
     return
   }

@@ -1,14 +1,16 @@
 import type { FC } from 'react'
 import type { Project } from '../types'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ProjectCard } from './ProjectCard'
-import { ImageModal } from './ImageModal'
+import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { env } from '../constants/env'
+import { ProjectCard } from './ProjectCard'
+
+const ImageModal = lazy(() => import('./ImageModal').then(m => ({ default: m.ImageModal })))
 
 interface ProjectsProps {
   title: string
   subtitle: string
   viewAll: string
+  viewProject: string
   comingSoon: string
   projects: Array<Project>
   isRtl: boolean
@@ -16,38 +18,8 @@ interface ProjectsProps {
 
 const INITIAL_VISIBLE_COUNT = 6
 
-const useIntersectionObserver = (options?: IntersectionObserverInit) => {
-  const [isIntersecting, setIsIntersecting] = useState(false)
-  const targetRef = useRef<HTMLDivElement | null>(null)
-  const { threshold = 0.1, rootMargin = '50px' } = options || {}
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsIntersecting(true)
-          if (targetRef.current) {
-            observer.unobserve(targetRef.current)
-          }
-        }
-      },
-      { threshold, rootMargin },
-    )
-
-    if (targetRef.current) {
-      observer.observe(targetRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [threshold, rootMargin])
-
-  return [targetRef, isIntersecting] as const
-}
-
 export const Projects: FC<ProjectsProps> = memo(
-  ({ title, subtitle, viewAll, comingSoon, projects, isRtl }) => {
-    const [containerRef, isVisible] = useIntersectionObserver()
-    const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
+  ({ title, subtitle, viewAll, viewProject, comingSoon, projects, isRtl }) => {
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
     const loadMoreRef = useRef<HTMLDivElement | null>(null)
 
@@ -57,10 +29,6 @@ export const Projects: FC<ProjectsProps> = memo(
       title: string
       category: string
     }>({ isOpen: false, image: '', title: '', category: '' })
-
-    const handleImageLoad = useCallback((imageUrl: string) => {
-      setLoadedImages(prev => new Set(prev).add(imageUrl))
-    }, [])
 
     const handleLoadMore = useCallback(() => {
       setVisibleCount(prev => Math.min(prev + INITIAL_VISIBLE_COUNT, projects.length))
@@ -95,7 +63,6 @@ export const Projects: FC<ProjectsProps> = memo(
     return (
       <section
         id="work"
-        ref={containerRef}
         className="py-40 px-6 scroll-mt-20"
         aria-label="Portfolio section"
         style={{ contain: 'layout style paint' }}
@@ -103,7 +70,7 @@ export const Projects: FC<ProjectsProps> = memo(
         <div className="max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-20" dir={isRtl ? 'rtl' : 'ltr'}>
             <div>
-              <h2 className="text-5xl md:text-7xl font-serif" style={{ willChange: 'transform' }}>
+              <h2 className="text-5xl md:text-7xl font-serif">
                 {title} <span className="italic opacity-50">{subtitle}</span>
               </h2>
             </div>
@@ -137,10 +104,8 @@ export const Projects: FC<ProjectsProps> = memo(
                 key={project.id}
                 project={project}
                 comingSoonLabel={comingSoon}
+                viewProjectLabel={viewProject}
                 isRtl={isRtl}
-                isVisible={isVisible}
-                loadDelay={index * 100}
-                onImageLoad={handleImageLoad}
                 onOpenModal={handleOpenModal}
               />
             ))}
@@ -153,14 +118,16 @@ export const Projects: FC<ProjectsProps> = memo(
           )}
         </div>
 
-        <ImageModal
-          image={modalState.image}
-          alt={modalState.title}
-          isOpen={modalState.isOpen}
-          onClose={handleCloseModal}
-          title={modalState.title}
-          category={modalState.category}
-        />
+        <Suspense fallback={null}>
+          <ImageModal
+            image={modalState.image}
+            alt={modalState.title}
+            isOpen={modalState.isOpen}
+            onClose={handleCloseModal}
+            title={modalState.title}
+            category={modalState.category}
+          />
+        </Suspense>
       </section>
     )
   },

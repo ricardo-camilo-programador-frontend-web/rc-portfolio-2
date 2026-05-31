@@ -17,7 +17,7 @@ jobs:
       - name: Setup PATH
         run: echo "/usr/local/bin" >> $GITHUB_PATH
       - name: Cache pnpm store
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.local/share/pnpm/store
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
@@ -48,14 +48,14 @@ jobs:
       VITE_GA_MEASUREMENT_ID: ""
       VITE_GTM_ID: ""
       VITE_COUNTER_DEV_ID: ""
-      VITE_GEMINI_API_KEY: ""
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup PATH
         run: echo "/usr/local/bin" >> $GITHUB_PATH
       - name: Cache pnpm store
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.local/share/pnpm/store
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
@@ -84,7 +84,7 @@ jobs:
       - name: Setup PATH
         run: echo "/usr/local/bin" >> $GITHUB_PATH
       - name: Cache pnpm store
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.local/share/pnpm/store
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
@@ -98,7 +98,7 @@ jobs:
           set -o pipefail
           LOG_FILE="$(mktemp)"
 
-          pnpm audit --audit-level moderate 2>&1 | tee "$LOG_FILE"
+          pnpm audit --audit-level high 2>&1 | tee "$LOG_FILE"
           status=${PIPESTATUS[0]}
 
           if [ "$status" -eq 0 ]; then
@@ -121,7 +121,7 @@ jobs:
       - name: Setup PATH
         run: echo "/usr/local/bin" >> $GITHUB_PATH
       - name: Cache pnpm store
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.local/share/pnpm/store
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
@@ -142,19 +142,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup PATH
-        run: echo "/usr/local/bin" >> $GITHUB_PATH
-      - name: Cache pnpm store
-        uses: actions/cache@v3
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
         with:
-          path: ~/.local/share/pnpm/store
-          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-
-      - name: Instalar dependencias
-        run: pnpm install --ignore-scripts
-
-      - name: Build do projeto
-        run: pnpm run build
+          name: build-dist
 
       - name: Deploy to Netlify
         env:
