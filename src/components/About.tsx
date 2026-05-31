@@ -29,13 +29,11 @@ export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPho
   const stat3Ref = useRef<HTMLDivElement>(null)
   const glassRef = useRef<HTMLDivElement>(null)
 
+  // Portfolio stats are fixed values — hardcode to avoid regex parsing issues
+  // with non-Latin numerals (Bengali ০-৯, Devanagari ०-९) and C1 text parsing
   const counterValues = useMemo(
-    () => ({
-      exp: parseInt(stats.exp.replace(/\D/g, ''), 10) || 8,
-      projects: parseInt(stats.projects.replace(/\D/g, ''), 10) || 50,
-      eng: parseInt(stats.eng.replace(/\D/g, ''), 10) || 95,
-    }),
-    [stats],
+    () => ({ exp: 6, projects: 20, eng: 95 }),
+    [],
   )
 
   useSectionReveal(sectionRef)

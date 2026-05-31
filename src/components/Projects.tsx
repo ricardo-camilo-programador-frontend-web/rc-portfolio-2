@@ -1,9 +1,10 @@
 import type { FC } from 'react'
 import type { Project } from '../types'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ProjectCard } from './ProjectCard'
-import { ImageModal } from './ImageModal'
 import { env } from '../constants/env'
+
+const ImageModal = lazy(() => import('./ImageModal').then(m => ({ default: m.ImageModal })))
 
 interface ProjectsProps {
   title: string
@@ -48,7 +49,6 @@ const useIntersectionObserver = (options?: IntersectionObserverInit) => {
 export const Projects: FC<ProjectsProps> = memo(
   ({ title, subtitle, viewAll, viewProject, comingSoon, projects, isRtl }) => {
     const [containerRef, isVisible] = useIntersectionObserver()
-    const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
     const loadMoreRef = useRef<HTMLDivElement | null>(null)
 
@@ -59,8 +59,8 @@ export const Projects: FC<ProjectsProps> = memo(
       category: string
     }>({ isOpen: false, image: '', title: '', category: '' })
 
-    const handleImageLoad = useCallback((imageUrl: string) => {
-      setLoadedImages(prev => new Set(prev).add(imageUrl))
+    const handleImageLoad = useCallback((_imageUrl: string) => {
+      // Reserved for future use (e.g., image reveal animation trigger)
     }, [])
 
     const handleLoadMore = useCallback(() => {
@@ -155,14 +155,16 @@ export const Projects: FC<ProjectsProps> = memo(
           )}
         </div>
 
-        <ImageModal
-          image={modalState.image}
-          alt={modalState.title}
-          isOpen={modalState.isOpen}
-          onClose={handleCloseModal}
-          title={modalState.title}
-          category={modalState.category}
-        />
+        <Suspense fallback={null}>
+          <ImageModal
+            image={modalState.image}
+            alt={modalState.title}
+            isOpen={modalState.isOpen}
+            onClose={handleCloseModal}
+            title={modalState.title}
+            category={modalState.category}
+          />
+        </Suspense>
       </section>
     )
   },

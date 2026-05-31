@@ -26,6 +26,7 @@ export default defineConfig({
         manualChunks: {
           'icons-vendor': ['lucide-react'],
           'gsap-vendor': ['gsap', 'gsap/ScrollTrigger'],
+          'headlessui-vendor': ['@headlessui/react'],
         },
         format: 'es',
         sourcemap: false,
@@ -33,10 +34,21 @@ export default defineConfig({
         chunkFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash][extname]',
       },
+      // Aggressive tree shaking — ignore side effects in packages
+      // Pattern from SGS_WEB PR #2051
+      // WARNING: All current deps (gsap, lucide-react, headlessui, react) self-declare
+      // sideEffects: false or are explicitly imported. If adding a dep that relies on
+      // side effects (CSS-in-JS, polyfills, Sentry), this may silently break it.
+      treeshake: {
+        moduleSideEffects: false,
+        propertyReadSideEffects: false,
+      },
     },
-    target: 'esnext',
+    // Alinhado com tsconfig target ES2020
+    target: 'es2020',
     minify: 'esbuild',
     sourcemap: false,
+    reportCompressedSize: false,
     assetsDir: 'assets',
     assetsInlineLimit: 4096,
     cssCodeSplit: true,

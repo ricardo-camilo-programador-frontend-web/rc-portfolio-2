@@ -132,11 +132,6 @@
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
-
-  ::selection {
-    background-color: var(--accent);
-    color: var(--bg);
-  }
 }
 
 @keyframes bounce-slow {

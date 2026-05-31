@@ -88,7 +88,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
         {!imageError && project.image && (
           <>
             {project.year && (
-              <span className="absolute top-2 right-2 text-[8px] bg-[#E5D5C0]/90 text-[#0A0A0A] px-2 py-1 rounded font-bold z-10">
+              <span className="absolute top-2 end-2 text-[8px] bg-[#E5D5C0]/90 text-[#0A0A0A] px-2 py-1 rounded font-bold z-10">
                 {project.year}
               </span>
             )}

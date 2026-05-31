@@ -41,7 +41,7 @@ export const LANGUAGES: Array<Language> = [
   { code: 'id', label: 'Indonesian', native: 'Bahasa Indonesia' },
   { code: 'de', label: 'German', native: 'Deutsch' },
   { code: 'ja', label: 'Japanese', native: '日本語' },
-  { code: 'mr', label: 'Marathi', native: 'مراठी' },
+  { code: 'mr', label: 'Marathi', native: 'मराठी' },
   { code: 'te', label: 'Telugu', native: 'తెలుగు' },
   { code: 'tr', label: 'Turkish', native: 'Türkçe' },
   { code: 'ta', label: 'Tamil', native: 'தமிழ்' },
