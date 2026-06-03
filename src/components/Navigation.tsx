@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import type { Language, LanguageCode } from '../constants/languages'
 import { memo, useCallback, useEffect, useRef } from 'react'
-import { useMagnetic } from '../hooks/use-gsap-animations'
+import { useReveal, useMagnetic } from '../hooks/useReveal'
 import { ChevronDown, Globe, MessageCircle } from '../icons'
 
 interface NavigationProps {
