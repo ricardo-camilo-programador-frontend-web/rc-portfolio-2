@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { memo, useRef } from 'react'
-import { useHeroReveal } from '../hooks/use-gsap-animations'
+import { useReveal, useStaggerReveal } from '../hooks/useReveal'
 import { MessageCircle } from '../icons'
 
 interface HeroProps {
@@ -24,8 +24,19 @@ const generateHeroSrcSet = (baseUrl: string): string => {
 export const Hero: FC<HeroProps> = memo(
   ({ title, subtitle, description, cta, badge, userPhoto, isRtl }) => {
     const sectionRef = useRef<HTMLElement>(null)
+    const badgeRef = useRef<HTMLDivElement>(null)
+    const title1Ref = useRef<HTMLSpanElement>(null)
+    const title2Ref = useRef<HTMLSpanElement>(null)
+    const descRef = useRef<HTMLParagraphElement>(null)
+    const ctaRef = useRef<HTMLDivElement>(null)
+    const scrollRef = useRef<HTMLButtonElement>(null)
 
-    useHeroReveal(sectionRef)
+    useReveal(badgeRef)
+    useReveal(title1Ref)
+    useReveal(title2Ref, 'is-visible', 0.1)
+    useReveal(descRef)
+    useReveal(ctaRef)
+    useReveal(scrollRef)
 
     const optimizedImage = userPhoto.startsWith('https://raw.githubusercontent.com')
       ? `${userPhoto}?format=webp`
@@ -56,7 +67,7 @@ export const Hero: FC<HeroProps> = memo(
         </div>
 
         <div className="relative z-10">
-          <div className="hero-badge mb-10 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-[#E5D5C0]/10 bg-white/5 backdrop-blur-sm">
+          <div ref={badgeRef} className="hero-reveal-fade hero-badge mb-10 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-[#E5D5C0]/10 bg-white/5 backdrop-blur-sm">
             <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse shadow-[0_0_10px_rgba(45,212,191,0.5)]" />
             <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80">
               {badge}
@@ -64,20 +75,21 @@ export const Hero: FC<HeroProps> = memo(
           </div>
 
           <h1 className="text-6xl md:text-[11rem] font-serif leading-[0.8] tracking-tighter mb-10">
-            <span className="hero-title-line text-gradient block overflow-hidden">{title}</span>
-            <span className="hero-title-line italic font-light opacity-60 text-[#E5D5C0] block overflow-hidden">
+            <span ref={title1Ref} className="hero-reveal-line text-gradient block overflow-hidden">{title}</span>
+            <span ref={title2Ref} className="hero-reveal-line italic font-light opacity-60 text-[#E5D5C0] block overflow-hidden">
               {subtitle}
             </span>
           </h1>
 
           <p
-            className="hero-desc max-w-xl mx-auto text-[#E5D5C0]/80 text-xs md:text-sm uppercase tracking-[0.2em] font-medium leading-relaxed mb-16 px-4"
+            ref={descRef}
+            className="hero-reveal-fade hero-desc max-w-xl mx-auto text-[#E5D5C0]/80 text-xs md:text-sm uppercase tracking-[0.2em] font-medium leading-relaxed mb-16 px-4"
             dir={isRtl ? 'rtl' : 'ltr'}
           >
             {description}
           </p>
 
-          <div className="hero-cta flex flex-col items-center gap-8">
+          <div ref={ctaRef} className="hero-reveal-fade hero-cta flex flex-col items-center gap-8">
             <a
               href="#contact"
               className="px-12 py-5 rounded-full border border-[#E5D5C0] text-[#0A0A0A] bg-[#E5D5C0] text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-transparent hover:text-[#E5D5C0] transition-all mb-8 shadow-2xl flex items-center gap-3"
@@ -89,7 +101,7 @@ export const Hero: FC<HeroProps> = memo(
               onClick={() => {
                 document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="hero-scroll w-px h-24 bg-transparent block cursor-pointer animate-bounce-slow border-0 p-0"
+              className="hero-reveal-fade hero-scroll w-px h-24 bg-transparent block cursor-pointer animate-bounce-slow border-0 p-0"
               aria-label="Scroll to services"
             />
           </div>

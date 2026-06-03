@@ -5,7 +5,6 @@ import { Hero } from './components/Hero'
 import { Navigation } from './components/Navigation'
 import { PROJECTS, TIMELINE, USER_PHOTO, WHATSAPP_URL } from './constants/data'
 import { LANGUAGES, type LanguageCode } from './constants/languages'
-import { useGsapInit } from './hooks/use-gsap-animations'
 import { analytics } from './services/analytics'
 
 const About = lazy(() => import('./components/About').then(m => ({ default: m.About })))
@@ -59,8 +58,6 @@ const LoadingFallback: FC<LoadingFallbackProps> = ({ height = 'h-96' }) => (
 )
 
 const App: FC = () => {
-  useGsapInit()
-
   const [langCode, setLangCode] = useState<LanguageCode>('pt')
   const [isLangOpen, setIsLangOpen] = useState(false)
   const [t, setT] = useState<TranslationContent>(INITIAL_TRANSLATION)

@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { memo, useRef } from 'react'
-import { useLineDraw, useSectionReveal, useStaggerReveal } from '../hooks/use-gsap-animations'
+import { useReveal, useStaggerReveal } from '../hooks/useReveal'
 
 interface TimelineItem {
   id: number
@@ -23,9 +23,9 @@ export const Career: FC<CareerProps> = memo(({ title, subtitle, timeline, isRtl 
   const timelineRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
 
-  useSectionReveal(headingRef)
-  useLineDraw(lineRef)
-  useStaggerReveal(timelineRef, '.timeline-item', 0.2)
+  useReveal(headingRef)
+  useReveal(lineRef)
+  useStaggerReveal(timelineRef, '.timeline-item', 120)
 
   return (
     <section
@@ -34,14 +34,14 @@ export const Career: FC<CareerProps> = memo(({ title, subtitle, timeline, isRtl 
       aria-label="Career section"
     >
       <div className="max-w-5xl mx-auto">
-        <h2 ref={headingRef} className="text-5xl md:text-7xl font-serif mb-20 text-center">
+        <h2 ref={headingRef} className="reveal text-5xl md:text-7xl font-serif mb-20 text-center">
           {title} <span className="italic opacity-50">{subtitle}</span>
         </h2>
 
         <div ref={timelineRef} className="space-y-12 relative" dir={isRtl ? 'rtl' : 'ltr'}>
           <div
             ref={lineRef}
-            className="absolute start-0 md:start-[23px] top-0 bottom-0 w-px bg-[#E5D5C0]/10"
+            className="line-draw absolute start-0 md:start-[23px] top-0 bottom-0 w-px bg-[#E5D5C0]/10"
           />
           {timeline.map(item => (
             <div key={item.id} className="timeline-item relative ps-8 md:ps-12">

@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { Award } from 'lucide-react'
 import { memo, useRef } from 'react'
-import { useScaleReveal, useSectionReveal } from '../hooks/use-gsap-animations'
+import { useReveal } from '../hooks/useReveal'
 
 interface CertificatesProps {
   title: string
@@ -15,14 +15,14 @@ export const Certificates: FC<CertificatesProps> = memo(({ title, subtitle, prof
   const sectionRef = useRef<HTMLElement>(null)
   const glassRef = useRef<HTMLDivElement>(null)
 
-  useSectionReveal(sectionRef)
-  useScaleReveal(glassRef)
+  useReveal(sectionRef)
+  useReveal(glassRef)
 
   return (
-    <section ref={sectionRef} className="py-32 px-6 bg-[#0B0B0B]" aria-label="Certificates section">
+    <section ref={sectionRef} className="reveal py-32 px-6 bg-[#0B0B0B]" aria-label="Certificates section">
       <div
         ref={glassRef}
-        className="max-w-4xl mx-auto p-12 glass accent-border rounded-[3rem] text-center"
+        className="reveal-scale max-w-4xl mx-auto p-12 glass accent-border rounded-[3rem] text-center"
       >
         <div className="mb-8">
           <Award size={48} className="mx-auto text-[#E5D5C0]" aria-hidden="true" />
