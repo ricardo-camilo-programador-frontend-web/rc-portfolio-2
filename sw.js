@@ -1,5 +1,5 @@
-const CACHE_NAME = 'camilo-v6'
-const CACHE_VERSION = 'v6.0.0'
+const CACHE_NAME = 'camilo-v7'
+const CACHE_VERSION = 'v7.0.0'
 
 // Core shell — always precached on install
 const STATIC_ASSETS = ['/', '/index.html', '/manifest.json', '/favicon.svg']
@@ -13,16 +13,27 @@ const FONT_CACHE_NAME = `camilo-fonts-${CACHE_VERSION}`
 const API_CACHE_NAME = `camilo-api-${CACHE_VERSION}`
 
 const CACHE_EXPIRATION = {
-  images: 365 * 24 * 60 * 60 * 1000,
-  fonts: 365 * 24 * 60 * 60 * 1000,
-  api: 5 * 60 * 1000,
-  static: 30 * 24 * 60 * 60 * 1000,
+ images: 365 * 24 * 60 * 60 * 1000,
+ fonts: 365 * 24 * 60 * 60 * 1000,
+ api: 5 * 60 * 1000,
+ static: 30 * 24 * 60 * 60 * 1000,
 }
 
 const URL_PATTERNS = {
-  images: /\.(png|jpe?g|gif|webp|avif|svg|ico)$/i,
-  fonts: /\.(woff2?|ttf|otf|eot)$/i,
-  api: /\/api\//i,
+ images: /\.(png|jpe?g|gif|webp|avif|svg|ico)$/i,
+ fonts: /\.(woff2?|ttf|otf|eot)$/i,
+ api: /\/api\//i,
+}
+
+async function cacheResponse(cache, request, response) {
+  const clone = response.clone()
+  const headers = new Headers(clone.headers)
+  headers.set('sw-cache-date', Date.now().toString())
+  await cache.put(request, new Response(clone.body, {
+    status: clone.status,
+    statusText: clone.statusText,
+    headers,
+  }))
 }
 
 self.addEventListener('install', event => {
@@ -86,15 +97,9 @@ async function cacheFirst(request, cacheName, maxAge) {
   try {
     const networkResponse = await fetch(request)
     if (networkResponse && networkResponse.status === 200) {
-      const responseToCache = networkResponse.clone()
-      const headers = new Headers(responseToCache.headers)
-      headers.set('sw-cache-date', Date.now().toString())
-      const newResponse = new Response(responseToCache.body, {
-        status: responseToCache.status,
-        statusText: responseToCache.statusText,
-        headers: headers,
-      })
-      await cache.put(request, newResponse)
+      await cacheResponse(cache, request, networkResponse)
+    } else if (networkResponse) {
+      console.warn('SW: Non-200 response for', request.url, networkResponse.status)
     }
     return networkResponse
   } catch (error) {
@@ -119,15 +124,9 @@ async function staleWhileRevalidate(request, cacheName) {
     fetch(request)
       .then(networkResponse => {
         if (networkResponse && networkResponse.status === 200) {
-          const responseToCache = networkResponse.clone()
-          const headers = new Headers(responseToCache.headers)
-          headers.set('sw-cache-date', Date.now().toString())
-          const newResponse = new Response(responseToCache.body, {
-            status: responseToCache.status,
-            statusText: responseToCache.statusText,
-            headers: headers,
+          cacheResponse(cache, request, networkResponse).catch(() => {
+            // Network failed — cache update skipped, not critical
           })
-          cache.put(request, newResponse)
         }
       })
       .catch(() => {
@@ -140,16 +139,10 @@ async function staleWhileRevalidate(request, cacheName) {
   try {
     const networkResponse = await fetch(request)
     if (networkResponse && networkResponse.status === 200) {
-      const responseToCache = networkResponse.clone()
-      const headers = new Headers(responseToCache.headers)
-      headers.set('sw-cache-date', Date.now().toString())
-      const newResponse = new Response(responseToCache.body, {
-        status: responseToCache.status,
-        statusText: networkResponse.statusText,
-        headers: headers,
-      })
-      cache.put(request, newResponse)
+      await cacheResponse(cache, request, networkResponse)
       return networkResponse
+    } else if (networkResponse) {
+      console.warn('SW: Non-200 response for', request.url, networkResponse.status)
     }
     return networkResponse
   } catch {
@@ -167,15 +160,9 @@ async function networkFirst(request, cacheName, maxAge) {
   try {
     const networkResponse = await fetch(request)
     if (networkResponse && networkResponse.status === 200) {
-      const responseToCache = networkResponse.clone()
-      const headers = new Headers(responseToCache.headers)
-      headers.set('sw-cache-date', Date.now().toString())
-      const newResponse = new Response(responseToCache.body, {
-        status: responseToCache.status,
-        statusText: responseToCache.statusText,
-        headers: headers,
-      })
-      await cache.put(request, newResponse)
+      await cacheResponse(cache, request, networkResponse)
+    } else if (networkResponse) {
+      console.warn('SW: Non-200 response for', request.url, networkResponse.status)
     }
     return networkResponse
   } catch (error) {
@@ -260,16 +247,7 @@ self.addEventListener('fetch', event => {
       try {
         const networkResponse = await fetch(event.request)
         if (networkResponse && networkResponse.status === 200) {
-          const responseToCache = networkResponse.clone()
-          const headers = new Headers(responseToCache.headers)
-          headers.set('sw-cache-date', Date.now().toString())
-          const newResponse = new Response(responseToCache.body, {
-            status: responseToCache.status,
-            statusText: responseToCache.statusText,
-            headers: headers,
-          })
-          const cache = await caches.open(CACHE_NAME)
-          await cache.put(event.request, newResponse)
+          await cacheResponse(caches.open(CACHE_NAME), event.request, networkResponse)
         }
         return networkResponse
       } catch (error) {

@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import type { Language, LanguageCode } from '../constants/languages'
 import { memo, useCallback, useEffect, useRef } from 'react'
-import { useReveal, useMagnetic } from '../hooks/useReveal'
+import { useReveal } from '../hooks/useReveal'
 import { ChevronDown, Globe, MessageCircle } from '../icons'
 
 interface NavigationProps {
@@ -64,8 +64,8 @@ export const Navigation: FC<NavigationProps> = memo(
     const whatsappBtnRef = useRef<HTMLAnchorElement>(null)
     const navRef = useRef<HTMLElement>(null)
 
-    useMagnetic(logoRef, 0.2)
-    useMagnetic(whatsappBtnRef, 0.3)
+    useReveal(logoRef, 0.2)
+    useReveal(whatsappBtnRef, 0.3)
 
     // Scroll hide/show nav (rAF throttled)
     useEffect(() => {

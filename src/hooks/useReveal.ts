@@ -65,11 +65,9 @@ export function useStaggerReveal(
 /**
  * Magnetic cursor effect — CSS-only fallback via transform on hover.
  * The GSAP version used mousemove tracking; this uses CSS transitions.
- */
-export function useMagnetic(
-  elementRef: RefObject<HTMLElement | null>,
+ // @deprecated No-op since GSAP removal. CSS :hover transitions handle the effect.
+ export function useMagnetic(
+  _elementRef: RefObject<HTMLElement | null>,
   _strength = 0.3,
-): void {
-  // No-op: CSS :hover with transition handles the visual effect.
-  // GSAP magnetic effect was a micro-interaction that's not critical.
-}
+ ): void {
+ }
