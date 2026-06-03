@@ -12,10 +12,16 @@ if ('serviceWorker' in navigator) {
   })
 }
 
-class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
-  state = { hasError: false }
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean; errorKey: number }> {
+  state = { hasError: false, errorKey: 0 }
   static getDerivedStateFromError() {
     return { hasError: true }
+  }
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error('[ErrorBoundary]', error, info.componentStack)
+  }
+  handleReset = () => {
+    this.setState(prev => ({ hasError: false, errorKey: prev.errorKey + 1 }))
   }
   render() {
     if (this.state.hasError) {
@@ -26,7 +32,7 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
             <button
               type="button"
               className="px-4 py-2 border border-[#E5D5C0]/30 rounded hover:bg-[#E5D5C0]/10 transition-colors"
-              onClick={() => this.setState({ hasError: false })}
+              onClick={this.handleReset}
             >
               Try again
             </button>
@@ -34,7 +40,7 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
         </div>
       )
     }
-    return this.props.children
+    return <React.Fragment key={this.state.errorKey}>{this.props.children}</React.Fragment>
   }
 }
 

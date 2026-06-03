@@ -114,33 +114,51 @@ async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName)
   const cachedResponse = await cache.match(request)
 
-  // Update cache in background (fire and forget)
-  fetch(request)
-    .then(networkResponse => {
-      if (networkResponse && networkResponse.status === 200) {
-        const responseToCache = networkResponse.clone()
-        const headers = new Headers(responseToCache.headers)
-        headers.set('sw-cache-date', Date.now().toString())
-        const newResponse = new Response(responseToCache.body, {
-          status: responseToCache.status,
-          statusText: responseToCache.statusText,
-          headers: headers,
-        })
-        cache.put(request, newResponse)
-      }
-    })
-    .catch(() => {
-      // Network failed — cache update skipped, not critical
-    })
+  if (cachedResponse) {
+    // Serve from cache immediately, update in background
+    fetch(request)
+      .then(networkResponse => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone()
+          const headers = new Headers(responseToCache.headers)
+          headers.set('sw-cache-date', Date.now().toString())
+          const newResponse = new Response(responseToCache.body, {
+            status: responseToCache.status,
+            statusText: responseToCache.statusText,
+            headers: headers,
+          })
+          cache.put(request, newResponse)
+        }
+      })
+      .catch(() => {
+        // Network failed — cache update skipped, not critical
+      })
+    return cachedResponse
+  }
 
-  return (
-    cachedResponse
-    || new Response('Offline', {
+  // No cache entry — must wait for network (first visit or cache cleared)
+  try {
+    const networkResponse = await fetch(request)
+    if (networkResponse && networkResponse.status === 200) {
+      const responseToCache = networkResponse.clone()
+      const headers = new Headers(responseToCache.headers)
+      headers.set('sw-cache-date', Date.now().toString())
+      const newResponse = new Response(responseToCache.body, {
+        status: responseToCache.status,
+        statusText: networkResponse.statusText,
+        headers: headers,
+      })
+      cache.put(request, newResponse)
+      return networkResponse
+    }
+    return networkResponse
+  } catch {
+    return new Response('Offline', {
       status: 503,
       statusText: 'Service Unavailable',
       headers: { 'Content-Type': 'text/plain' },
     })
-  )
+  }
 }
 
 async function networkFirst(request, cacheName, maxAge) {
