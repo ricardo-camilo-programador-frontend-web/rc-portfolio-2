@@ -64,8 +64,8 @@ export const Navigation: FC<NavigationProps> = memo(
     const whatsappBtnRef = useRef<HTMLAnchorElement>(null)
     const navRef = useRef<HTMLElement>(null)
 
-    useReveal(logoRef, 0.2)
-    useReveal(whatsappBtnRef, 0.3)
+    useReveal(logoRef, 'is-visible', 0.2)
+    useReveal(whatsappBtnRef, 'is-visible', 0.3)
 
     // Scroll hide/show nav (rAF throttled)
     useEffect(() => {
