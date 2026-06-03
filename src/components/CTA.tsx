@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { MessageCircle } from 'lucide-react'
 import { memo, useRef } from 'react'
-import { useSectionReveal } from '../hooks/use-gsap-animations'
+import { useReveal } from '../hooks/useReveal'
 
 interface CTAProps {
   title: string
@@ -17,13 +17,13 @@ export const CTA: FC<CTAProps> = memo(
   ({ title, subtitle, description, button, whatsapp, whatsappUrl, isRtl }) => {
     const sectionRef = useRef<HTMLElement>(null)
 
-    useSectionReveal(sectionRef)
+    useReveal(sectionRef)
 
     return (
       <section
         id="contact"
         ref={sectionRef}
-        className="py-40 px-6 bg-[#0A0A0A] scroll-mt-20"
+        className="reveal py-40 px-6 bg-[#0A0A0A] scroll-mt-20"
         aria-label="Contact section"
       >
         <div className="max-w-4xl mx-auto text-center" dir={isRtl ? 'rtl' : 'ltr'}>

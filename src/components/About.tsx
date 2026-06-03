@@ -1,12 +1,7 @@
 import { Github, Instagram, Linkedin, ShieldCheck } from 'lucide-react'
-import { type FC, memo, type ReactNode, useMemo, useRef } from 'react'
+import { type FC, memo, type ReactNode, useRef } from 'react'
 import { env } from '../constants/env'
-import {
-  useCounter,
-  useParallax,
-  useScaleReveal,
-  useSectionReveal,
-} from '../hooks/use-gsap-animations'
+import { useReveal } from '../hooks/useReveal'
 
 interface AboutProps {
   quote: string
@@ -24,21 +19,13 @@ interface AboutProps {
 export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPhoto, isRtl }) => {
   const sectionRef = useRef<HTMLElement>(null)
   const photoRef = useRef<HTMLDivElement>(null)
-  const stat1Ref = useRef<HTMLDivElement>(null)
-  const stat2Ref = useRef<HTMLDivElement>(null)
-  const stat3Ref = useRef<HTMLDivElement>(null)
   const glassRef = useRef<HTMLDivElement>(null)
+  const statsRef = useRef<HTMLDivElement>(null)
 
-  // Portfolio stats are fixed values — hardcode to avoid regex parsing issues
-  // with non-Latin numerals (Bengali ০-৯, Devanagari ०-९) and C1 text parsing
-  const counterValues = useMemo(() => ({ exp: 6, projects: 20, eng: 95 }), [])
-
-  useSectionReveal(sectionRef)
-  useParallax(photoRef, 40)
-  useScaleReveal(glassRef)
-  useCounter(stat1Ref, counterValues.exp, '+')
-  useCounter(stat2Ref, counterValues.projects, '+')
-  useCounter(stat3Ref, counterValues.eng, '%')
+  useReveal(sectionRef)
+  useReveal(photoRef)
+  useReveal(glassRef)
+  useReveal(statsRef)
 
   const quoteParts = quote.split(' ')
   const firstWord = quoteParts[0]
@@ -48,12 +35,12 @@ export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPho
     <section
       id="about"
       ref={sectionRef}
-      className="py-40 px-6 bg-[#0E0E0E] scroll-mt-20 overflow-hidden border-y border-white/5"
+      className="reveal py-40 px-6 bg-[#0E0E0E] scroll-mt-20 overflow-hidden border-y border-white/5"
       aria-label="About section"
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center grid-cols-1 gap-24 lg:grid-cols-2">
-          <div ref={photoRef} className="relative group">
+          <div ref={photoRef} className="reveal-scale relative group">
             <div className="aspect-[4/5] overflow-hidden rounded-sm accent-border relative z-10 shadow-2xl bg-[#1A1A1A]">
               <img
                 src={userPhoto}
@@ -78,7 +65,7 @@ export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPho
               <p className="text-[#E5D5C0]/80 text-lg md:text-xl font-light leading-relaxed max-w-xl">
                 {bio}
               </p>
-              <div ref={glassRef} className="flex items-center gap-3 py-4 border-y border-white/5">
+              <div ref={glassRef} className="reveal-scale flex items-center gap-3 py-4 border-y border-white/5">
                 <ShieldCheck size={18} className="text-[#E5D5C0]/70" aria-hidden="true" />
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#E5D5C0]/70">
                   {details}
@@ -86,10 +73,10 @@ export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPho
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-8 pt-4">
-              <StatItem ref={stat1Ref} value={stats.exp} label="Experience" />
-              <StatItem ref={stat2Ref} value={stats.projects} label="Handcrafted" />
-              <StatItem ref={stat3Ref} value={stats.eng} label="Proficiency" />
+            <div ref={statsRef} className="reveal grid grid-cols-3 gap-8 pt-4">
+              <StatItem value={stats.exp} label="Experience" />
+              <StatItem value={stats.projects} label="Handcrafted" />
+              <StatItem value={stats.eng} label="Proficiency" />
             </div>
 
             <div className="flex flex-col items-start gap-12 sm:flex-row sm:items-center">
@@ -115,21 +102,13 @@ About.displayName = 'About'
 const StatItem = memo(function StatItem({
   value,
   label,
-  ref,
 }: {
   value: string
   label: string
-  ref?: React.Ref<HTMLDivElement>
 }) {
   return (
-    <section
-    ref={ref}
-    className="text-center"
-    aria-live="polite"
-  >
-      <div
-        className="counter-value text-3xl md:text-4xl font-serif font-bold text-[#E5D5C0] mb-2"
-      >
+    <section className="text-center" aria-live="polite">
+      <div className="text-3xl md:text-4xl font-serif font-bold text-[#E5D5C0] mb-2">
         {value}
       </div>
       <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/70">

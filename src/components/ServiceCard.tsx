@@ -12,7 +12,7 @@ interface ServiceCardProps {
 export const ServiceCard: FC<ServiceCardProps> = memo(({ num, title, desc, icon, isRtl }) => {
   return (
     <div
-      className="service-card group p-8 glass rounded-sm accent-border hover:border-[#E5D5C0]/30 transition-all duration-300"
+      className="reveal-child service-card group p-8 glass rounded-sm accent-border hover:border-[#E5D5C0]/30 transition-all duration-300"
       dir={isRtl ? 'rtl' : 'ltr'}
     >
       <div className="flex items-start justify-between mb-6">

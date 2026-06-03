@@ -23,7 +23,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           'icons-vendor': ['lucide-react'],
-          'gsap-vendor': ['gsap', 'gsap/ScrollTrigger'],
           'headlessui-vendor': ['@headlessui/react'],
         },
         format: 'es',
@@ -60,11 +59,11 @@ export default defineConfig({
     minifyIdentifiers: true,
     minifySyntax: true,
     minifyWhitespace: true,
-    drop: ['console', 'debugger'],
-    pure: ['console.log', 'console.debug'],
+    drop: ['debugger'],
+    pure: ['console.debug'],
   },
   publicDir: 'public',
   optimizeDeps: {
-    include: ['react', 'react-dom', 'lucide-react', 'gsap', 'gsap/ScrollTrigger'],
+    include: ['react', 'react-dom', 'lucide-react'],
   },
 })

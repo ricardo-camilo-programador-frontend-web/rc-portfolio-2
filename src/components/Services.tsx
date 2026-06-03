@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { Code, Layers, Zap } from 'lucide-react'
 import { memo, useRef } from 'react'
-import { useSectionReveal, useStaggerReveal } from '../hooks/use-gsap-animations'
+import { useReveal, useStaggerReveal } from '../hooks/useReveal'
 import { ServiceCard } from './ServiceCard'
 
 interface ServicesProps {
@@ -22,8 +22,8 @@ export const Services: FC<ServicesProps> = memo(({ s1, s2, s3, isRtl }) => {
   const sectionRef = useRef<HTMLElement>(null)
   const gridRef = useRef<HTMLUListElement>(null)
 
-  useSectionReveal(sectionRef)
-  useStaggerReveal(gridRef, '.service-card', 0.15)
+  useReveal(sectionRef)
+  useStaggerReveal(gridRef, '.service-card', 120)
 
   const services: Array<ServiceItem> = [
     { num: '01', title: s1.title, desc: s1.desc, icon: <Layers size={22} /> },
@@ -35,7 +35,7 @@ export const Services: FC<ServicesProps> = memo(({ s1, s2, s3, isRtl }) => {
     <section
       ref={sectionRef}
       id="services"
-      className="py-40 px-6 scroll-mt-20"
+      className="reveal py-40 px-6 scroll-mt-20"
       aria-label="Services section"
     >
       <ul
