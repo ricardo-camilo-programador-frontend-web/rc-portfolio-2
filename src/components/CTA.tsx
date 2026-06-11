@@ -42,6 +42,9 @@ export const CTA: FC<CTAProps> = memo(
               <MessageCircle size={18} aria-hidden="true" />
               {button}
             </a>
+            <span className="text-[11px] text-[#E5D5C0]/50 font-mono tracking-wider">
+              {import.meta.env.VITE_CONTACT_EMAIL}
+            </span>
             <a
               href={whatsappUrl}
               target="_blank"

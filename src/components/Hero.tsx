@@ -1,5 +1,7 @@
 import type { FC } from 'react'
+import { Github, Linkedin, Mail } from 'lucide-react'
 import { memo, useRef } from 'react'
+import { env } from '../constants/env'
 import { useReveal, useStaggerReveal } from '../hooks/useReveal'
 import { MessageCircle } from '../icons'
 
@@ -55,7 +57,7 @@ export const Hero: FC<HeroProps> = memo(
             src={optimizedImage}
             srcSet={srcSet}
             sizes="(max-width: 768px) 100vw, 1920px"
-            alt=""
+            alt="Ricardo Camilo, Frontend Engineer & Vue.js Specialist — background"
             className="w-full h-full object-cover grayscale opacity-[0.05] scale-110 blur-[2px]"
             loading="eager"
             fetchPriority="high"
@@ -67,7 +69,10 @@ export const Hero: FC<HeroProps> = memo(
         </div>
 
         <div className="relative z-10">
-          <div ref={badgeRef} className="hero-reveal-fade hero-badge mb-10 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-[#E5D5C0]/10 bg-white/5 backdrop-blur-sm">
+          <div
+            ref={badgeRef}
+            className="hero-reveal-fade hero-badge mb-10 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-[#E5D5C0]/10 bg-white/5 backdrop-blur-sm"
+          >
             <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse shadow-[0_0_10px_rgba(45,212,191,0.5)]" />
             <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80">
               {badge}
@@ -75,8 +80,13 @@ export const Hero: FC<HeroProps> = memo(
           </div>
 
           <h1 className="text-6xl md:text-[11rem] font-serif leading-[0.8] tracking-tighter mb-10">
-            <span ref={title1Ref} className="hero-reveal-line text-gradient block overflow-hidden">{title}</span>
-            <span ref={title2Ref} className="hero-reveal-line italic font-light opacity-60 text-[#E5D5C0] block overflow-hidden">
+            <span ref={title1Ref} className="hero-reveal-line text-gradient block overflow-hidden">
+              {title}
+            </span>
+            <span
+              ref={title2Ref}
+              className="hero-reveal-line italic font-light opacity-60 text-[#E5D5C0] block overflow-hidden"
+            >
               {subtitle}
             </span>
           </h1>
@@ -92,10 +102,37 @@ export const Hero: FC<HeroProps> = memo(
           <div ref={ctaRef} className="hero-reveal-fade hero-cta flex flex-col items-center gap-8">
             <a
               href="#contact"
-              className="px-12 py-5 rounded-full border border-[#E5D5C0] text-[#0A0A0A] bg-[#E5D5C0] text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-transparent hover:text-[#E5D5C0] transition-all mb-8 shadow-2xl flex items-center gap-3"
+              className="px-12 py-5 rounded-full border border-[#E5D5C0] text-[#0A0A0A] bg-[#E5D5C0] text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-transparent hover:text-[#E5D5C0] transition-all mb-4 shadow-2xl flex items-center gap-3"
             >
               <MessageCircle size={18} aria-hidden={true} /> {cta}
             </a>
+            <div className="flex items-center gap-6">
+              <a
+                href={env.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#E5D5C0]/60 hover:text-[#E5D5C0] transition-colors"
+                aria-label="LinkedIn profile"
+              >
+                <Linkedin size={20} aria-hidden="true" />
+              </a>
+              <a
+                href={`${env.githubUrl}?tab=repositories`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#E5D5C0]/60 hover:text-[#E5D5C0] transition-colors"
+                aria-label="GitHub repositories"
+              >
+                <Github size={20} aria-hidden="true" />
+              </a>
+              <a
+                href={`mailto:${env.contactEmail}`}
+                className="text-[#E5D5C0]/60 hover:text-[#E5D5C0] transition-colors"
+                aria-label="Send email"
+              >
+                <Mail size={20} aria-hidden="true" />
+              </a>
+            </div>
             <button
               type="button"
               onClick={() => {
