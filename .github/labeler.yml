@@ -1,20 +1,24 @@
 # Auto-labeling rules for actions/labeler@v5
 # Docs: https://github.com/actions/labeler
+#
+# labeler@v5 changed the config format from v4:
+# - "anyGlobToInclude" → "any-glob-to-any-file"
+# - Changed in https://github.com/actions/labeler/releases/tag/v5.0.0
 
 frontend:
   - changed-files:
-      - anyGlobToInclude:
+      - any-glob-to-any-file:
           - 'src/**'
 
 dependencies:
   - changed-files:
-      - anyGlobToInclude:
+      - any-glob-to-any-file:
           - 'package.json'
           - 'pnpm-lock.yaml'
 
 config:
   - changed-files:
-      - anyGlobToInclude:
+      - any-glob-to-any-file:
           - '.github/**'
           - '*.config.*'
           - 'tsconfig.*'
@@ -22,11 +26,16 @@ config:
 
 documentation:
   - changed-files:
-      - anyGlobToInclude:
+      - any-glob-to-any-file:
           - '**/*.md'
           - 'docs/**'
 
 i18n:
   - changed-files:
-      - anyGlobToInclude:
+      - any-glob-to-any-file:
           - 'src/constants/translations/**'
+
+accessibility:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/components/**'
