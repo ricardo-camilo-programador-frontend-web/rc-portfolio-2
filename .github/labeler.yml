@@ -1,0 +1,32 @@
+# Auto-labeling rules for actions/labeler@v5
+# Docs: https://github.com/actions/labeler
+
+frontend:
+  - changed-files:
+      - anyGlobToInclude:
+          - 'src/**'
+
+dependencies:
+  - changed-files:
+      - anyGlobToInclude:
+          - 'package.json'
+          - 'pnpm-lock.yaml'
+
+config:
+  - changed-files:
+      - anyGlobToInclude:
+          - '.github/**'
+          - '*.config.*'
+          - 'tsconfig.*'
+          - 'biome.json'
+
+documentation:
+  - changed-files:
+      - anyGlobToInclude:
+          - '**/*.md'
+          - 'docs/**'
+
+i18n:
+  - changed-files:
+      - anyGlobToInclude:
+          - 'src/constants/translations/**'
