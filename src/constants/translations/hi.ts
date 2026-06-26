@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'तत्काल लोडिंग और अधिकतम जैविक दृश्यता सुनिश्चित करने के लिए चरम अनुकूलन।',
     },
   },
+  skills: { title: 'तकनीक', subtitle: 'और उपकरण' },
   work: {
     title: 'चयनित',
     subtitle: 'कार्य',

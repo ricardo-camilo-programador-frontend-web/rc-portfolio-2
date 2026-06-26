@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'تحسين شديد لضمان التحميل الفوري والحد الأقصى من الرؤية العضوية.',
     },
   },
+  skills: { title: 'التقنيات', subtitle: 'والأدوات' },
   work: {
     title: 'أعمال',
     subtitle: 'مختارة',
