@@ -75,7 +75,7 @@ export const Projects: FC<ProjectsProps> = memo(
               </h2>
             </div>
             <a
-              href={`${env.githubUrl}?tab=repositories`}
+              href={env.githubReposUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"

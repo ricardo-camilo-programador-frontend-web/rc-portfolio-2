@@ -5,6 +5,7 @@ import { useReveal } from '../hooks/useReveal'
 interface SkillsProps {
   title: string
   subtitle: string
+  isRtl: boolean
 }
 
 interface SkillBadge {
@@ -31,14 +32,14 @@ const SKILLS: Array<SkillBadge> = [
   { name: 'i18n', category: 'architecture' },
 ]
 
-const CATEGORY_STYLES: Record<string, string> = {
+const CATEGORY_STYLES: Record<SkillBadge['category'], string> = {
   framework: 'border-[#E5D5C0]/30 text-[#E5D5C0]',
   frontend: 'border-[#E5D5C0]/20 text-[#E5D5C0]/90',
   tooling: 'border-white/15 text-[#E5D5C0]/80',
   architecture: 'border-[#E5D5C0]/25 text-[#E5D5C0]/85',
 }
 
-export const Skills: FC<SkillsProps> = memo(({ title, subtitle }) => {
+export const Skills: FC<SkillsProps> = memo(({ title, subtitle, isRtl }) => {
   const sectionRef = useRef<HTMLElement>(null)
   const gridRef = useRef<HTMLUListElement>(null)
 
@@ -52,7 +53,7 @@ export const Skills: FC<SkillsProps> = memo(({ title, subtitle }) => {
       className="reveal py-40 px-6 bg-[#0A0A0A] scroll-mt-20"
       aria-label="Technical skills section"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto" dir={isRtl ? 'rtl' : 'ltr'}>
         <h2 className="text-5xl md:text-7xl font-serif mb-20 text-center">
           {title} <span className="italic opacity-50">{subtitle}</span>
         </h2>
