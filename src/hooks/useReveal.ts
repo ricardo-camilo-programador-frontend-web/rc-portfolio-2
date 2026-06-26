@@ -1,4 +1,4 @@
-import { useEffect, type RefObject } from 'react'
+import { type RefObject, useEffect } from 'react'
 
 /**
  * Lightweight IntersectionObserver hook — zero dependencies.
@@ -66,8 +66,4 @@ export function useStaggerReveal(
  * @deprecated No-op since GSAP removal. CSS :hover transitions handle the magnetic effect.
  * The GSAP version used mousemove tracking; this is now handled via CSS-only.
  */
-export function useMagnetic(
-  _elementRef: RefObject<HTMLElement | null>,
-  _strength = 0.3,
- ): void {
- }
+export function useMagnetic(_elementRef: RefObject<HTMLElement | null>, _strength = 0.3): void {}

@@ -53,6 +53,7 @@ interface LoadingFallbackProps {
 }
 
 const LoadingFallback: FC<LoadingFallbackProps> = ({ height = 'h-96' }) => (
+  // biome-ignore lint/a11y/useSemanticElements: loading placeholder uses ARIA status role
   <div className={`${height} flex items-center justify-center`} role="status" aria-label="Loading">
     <div className="w-8 h-8 border-2 border-[#E5D5C0]/30 border-t-[#E5D5C0] rounded-full animate-spin" />
     <span className="sr-only">Loading...</span>

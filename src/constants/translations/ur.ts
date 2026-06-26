@@ -48,7 +48,13 @@ const translation: TranslationContent = {
     comingSoon: 'جلد ہی',
   },
   career: { title: 'پیشہ ورانہ', subtitle: 'تاریخ', present: 'موجودہ' },
-  certs: { title: 'شناخت', subtitle: 'اور سرٹیفکیٹس', proficiency: 'انگریزی مہارت', certificate: 'EF SET سرٹیفکیٹ', level: 'C1 اعلیٰ' },
+  certs: {
+    title: 'شناخت',
+    subtitle: 'اور سرٹیفکیٹس',
+    proficiency: 'انگریزی مہارت',
+    certificate: 'EF SET سرٹیفکیٹ',
+    level: 'C1 اعلیٰ',
+  },
   cta: {
     title: 'اپنے',
     subtitle: 'ڈیجیٹل پروڈکٹ کو اپ گریڈ کریں',

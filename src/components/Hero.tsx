@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { memo, useRef } from 'react'
 import { env } from '../constants/env'
-import { useReveal, useStaggerReveal } from '../hooks/useReveal'
+import { useReveal } from '../hooks/useReveal'
 import { MessageCircle } from '../icons'
 
 interface HeroProps {

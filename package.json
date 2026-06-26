@@ -12,7 +12,13 @@
     "lint": "biome check --write --unsafe . --max-diagnostics=4293000000",
     "lint:check": "biome check .",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,md}\""
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,md}\"",
+    "type-check": "tsc --noEmit",
+    "validate": "tsc --noEmit && biome check src/ && vite build",
+    "fix": "biome check --write --unsafe . && tsc --noEmit",
+    "dead-deps": "knip",
+    "dead-deps:fix": "knip --fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
@@ -27,6 +33,9 @@
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.21",
+    "husky": "^9.1.7",
+    "knip": "^6.21.0",
+    "lint-staged": "^17.0.8",
     "postcss": "^8.5.3",
     "prettier": "^3.8.1",
     "sharp": "^0.33.5",
@@ -35,6 +44,17 @@
     "vite": "^6.2.0"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "biome check --write --no-errors-on-unmatched"
+    ],
+    "*.{json,css,md}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
   }
 }
