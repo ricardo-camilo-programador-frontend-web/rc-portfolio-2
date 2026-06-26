@@ -135,6 +135,8 @@ export const ImageModal: FC<ImageModalProps> = memo(
                   </div>
                 )}
 
+                {/* biome-ignore lint/a11y/noStaticElementInteractions: modal backdrop click-to-close surface */}
+                {/* biome-ignore lint/a11y/useKeyWithClickEvents: keyboard handled by close button and Esc handler */}
                 <div
                   className="flex-1 flex items-center justify-center w-full overflow-hidden"
                   onClick={e => e.stopPropagation()}
