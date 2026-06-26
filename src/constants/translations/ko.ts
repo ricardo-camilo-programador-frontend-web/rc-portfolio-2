@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: '즉시 로딩 및 최대 유기적 가시성을 보장하는 극한의 최적화.',
     },
   },
+  skills: { title: '기술', subtitle: '스택' },
   work: {
     title: '선택된',
     subtitle: '작업',

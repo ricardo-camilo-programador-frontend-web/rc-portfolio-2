@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'Optimización extrema para garantizar carga instantánea y máxima visibilidad orgánica.',
     },
   },
+  skills: { title: 'Tecnologías', subtitle: '& Herramientas' },
   work: {
     title: 'Trabajos',
     subtitle: 'Seleccionados',

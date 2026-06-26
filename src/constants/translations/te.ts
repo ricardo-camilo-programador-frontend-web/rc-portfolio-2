@@ -33,6 +33,7 @@ const translation: TranslationContent = {
       desc: 'తక్షణ లోడింగ్ మరియు గరిష్ట సేంద్రీయ దృశ్యమానతను నిర్ధారించడానికి అత్యంత ఆప్టిమైజేషన్.',
     },
   },
+  skills: { title: 'టెక్', subtitle: 'స్టాక్' },
   work: {
     title: 'ఎంపిక చేసిన',
     subtitle: 'పనులు',

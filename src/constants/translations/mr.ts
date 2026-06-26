@@ -33,6 +33,7 @@ const translation: TranslationContent = {
       desc: 'त्वरित लोडिंग आणि कमाल सेंद्रिय दृश्यमानता सुनिश्चित करण्यासाठी अत्यंत ऑप्टिमायझेशन.',
     },
   },
+  skills: { title: 'तंत्रज्ञान', subtitle: 'आणि साधने' },
   work: {
     title: 'निवडक',
     subtitle: 'कामे',

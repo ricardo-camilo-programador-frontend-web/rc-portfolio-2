@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'Anında yükleme ve maksimum organik görünürlük sağlamak için uç optimizasyon.',
     },
   },
+  skills: { title: 'Teknolojiler', subtitle: '& Araçlar' },
   work: {
     title: 'Seçilmiş',
     subtitle: 'Çalışmalar',

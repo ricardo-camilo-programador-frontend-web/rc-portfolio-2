@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'Extreme optimization ensuring instant loading and maximum organic visibility.',
     },
   },
+  skills: { title: 'Tech', subtitle: 'Stack' },
   work: {
     title: 'Selected',
     subtitle: 'Works',

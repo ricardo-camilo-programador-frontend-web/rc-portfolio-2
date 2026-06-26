@@ -40,6 +40,7 @@ const translation: TranslationContent = {
       desc: 'Tối ưu hóa cực cao đảm bảo tải ngay lập tức và hiển thị hữu cơ tối đa.',
     },
   },
+  skills: { title: 'Công nghệ', subtitle: '& Công cụ' },
   work: {
     title: 'Công trình',
     subtitle: 'Chọn lọc',

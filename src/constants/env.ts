@@ -9,6 +9,8 @@ export const env = {
 
   /** Social / profile URLs */
   githubUrl: import.meta.env.VITE_GITHUB_URL ?? '',
+  /** GitHub profile with repositories tab pre-selected */
+  githubReposUrl: `${import.meta.env.VITE_GITHUB_URL ?? ''}?tab=repositories`,
   linkedinUrl: import.meta.env.VITE_LINKEDIN_URL ?? '',
   xUrl: import.meta.env.VITE_X_URL ?? '',
   instagramUrl: import.meta.env.VITE_INSTAGRAM_URL ?? '',

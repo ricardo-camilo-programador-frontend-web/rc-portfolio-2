@@ -13,6 +13,7 @@ export interface TranslationContent {
     s2: { title: string; desc: string }
     s3: { title: string; desc: string }
   }
+  skills: { title: string; subtitle: string }
   work: {
     title: string
     subtitle: string
@@ -21,6 +22,12 @@ export interface TranslationContent {
     comingSoon: string
   }
   career: { title: string; subtitle: string; present: string }
-  certs: { title: string; subtitle: string; proficiency: string; certificate: string; level: string }
+  certs: {
+    title: string
+    subtitle: string
+    proficiency: string
+    certificate: string
+    level: string
+  }
   cta: { title: string; subtitle: string; desc: string; button: string; whatsapp: string }
 }

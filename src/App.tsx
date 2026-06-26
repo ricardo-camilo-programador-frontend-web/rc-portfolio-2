@@ -16,6 +16,7 @@ const CTA = lazy(() => import('./components/CTA').then(m => ({ default: m.CTA })
 const Footer = lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })))
 const Projects = lazy(() => import('./components/Projects').then(m => ({ default: m.Projects })))
 const Services = lazy(() => import('./components/Services').then(m => ({ default: m.Services })))
+const Skills = lazy(() => import('./components/Skills').then(m => ({ default: m.Skills })))
 
 const VALID_LANG_CODES = new Set<string>(LANGUAGES.map(l => l.code))
 
@@ -40,6 +41,7 @@ const INITIAL_TRANSLATION: TranslationContent = {
     s2: { title: '', desc: '' },
     s3: { title: '', desc: '' },
   },
+  skills: { title: '', subtitle: '' },
   work: { title: '', subtitle: '', viewAll: '', viewProject: '', comingSoon: '' },
   career: { title: '', subtitle: '', present: '' },
   certs: { title: '', subtitle: '', proficiency: '', certificate: '', level: '' },
@@ -167,7 +169,17 @@ const App: FC = () => {
         </Suspense>
 
         <Suspense fallback={<LoadingFallback height="py-40" />}>
-          <Certificates title={t.certs.title} subtitle={t.certs.subtitle} proficiency={t.certs.proficiency} certificate={t.certs.certificate} level={t.certs.level} />
+          <Certificates
+            title={t.certs.title}
+            subtitle={t.certs.subtitle}
+            proficiency={t.certs.proficiency}
+            certificate={t.certs.certificate}
+            level={t.certs.level}
+          />
+        </Suspense>
+
+        <Suspense fallback={<LoadingFallback height="py-40" />}>
+          <Skills title={t.skills.title} subtitle={t.skills.subtitle} isRtl={isRtl} />
         </Suspense>
 
         <Suspense fallback={<LoadingFallback height="py-40" />}>

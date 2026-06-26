@@ -40,6 +40,7 @@ const translation: TranslationContent = {
       desc: 'Optimasi ekstrem untuk memastikan pemuatan instan dan visibilitas organik maksimal.',
     },
   },
+  skills: { title: 'Teknologi', subtitle: '& Alat' },
   work: {
     title: 'Karya',
     subtitle: 'Pilihan',

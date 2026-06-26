@@ -30,6 +30,7 @@ const translation: TranslationContent = {
     },
     s3: { title: '性能和 SEO', desc: '极致优化，确保即时加载和最大有机可见度。' },
   },
+  skills: { title: '技术', subtitle: '栈' },
   work: {
     title: '精选',
     subtitle: '作品',

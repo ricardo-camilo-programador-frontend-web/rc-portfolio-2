@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: '即時読み込みと最大のオーガニック可視性を確保する極限の最適化。',
     },
   },
+  skills: { title: 'テクノロジー', subtitle: '& ツール' },
   work: {
     title: '厳選された',
     subtitle: '作品',
