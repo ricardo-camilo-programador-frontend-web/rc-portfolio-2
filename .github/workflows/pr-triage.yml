@@ -1,0 +1,151 @@
+name: PR Triage
+
+on:
+  pull_request:
+    types: [opened, ready_for_review, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: pr-triage-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  triage:
+    name: Label · Risk · Size
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ── 1. Ensure all expected labels exist (created/updated if missing) ──
+      - name: Ensure labels exist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          ensure() {
+            gh label create "$1" --color "$2" --description "$3" --repo "$REPO" --force || true
+          }
+          # Labeler labels
+          ensure "frontend"     "0E8A16" "Source code in src/"
+          ensure "dependencies" "0366D6" "Dependency changes (package.json / lockfile)"
+          ensure "config"       "5319E7" "Build, tooling & CI config"
+          ensure "documentation" "0075CA" "Documentation"
+          ensure "i18n"         "1D76DB" "Internationalization & translations"
+          # Triage labels — size (mutually exclusive)
+          ensure "size/XS" "3CBF1B" "Smallest — 0–49 changed lines"
+          ensure "size/S"  "5D9801" "Small — 50–149 changed lines"
+          ensure "size/M"  "D93F0B" "Medium — 150–299 changed lines"
+          ensure "size/L"  "B60205" "Large — 300–499 changed lines"
+          ensure "size/XL" "7C0404" "Extra large — 500+ changed lines"
+          # Triage labels — risk
+          ensure "risk:low"    "28A745" "Low risk — < 200 changed lines"
+          ensure "risk:medium" "FBCA04" "Medium risk — 200–500 changed lines"
+          ensure "risk:high"   "D93F0B" "High risk — > 500 changed lines"
+
+      # ── 2. Auto-label based on changed file paths ──
+      - name: Auto-label by changed files
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labeler.yml
+          sync-labels: true
+
+      # ── 3. Count changed lines (additions + deletions) ──
+      - name: Count changed lines
+        id: diff
+        run: |
+          git fetch origin "$GITHUB_BASE_REF" --depth=1
+          BASE="origin/$GITHUB_BASE_REF"
+          ADDED=$(git diff --numstat "$BASE...$GITHUB_SHA" | awk '{s+=$1} END {print s+0}')
+          DELETED=$(git diff --numstat "$BASE...$GITHUB_SHA" | awk '{s+=$2} END {print s+0}')
+          TOTAL=$((ADDED + DELETED))
+          {
+            echo "added=$ADDED"
+            echo "deleted=$DELETED"
+            echo "total=$TOTAL"
+          } >> "$GITHUB_OUTPUT"
+
+      # ── 4. Determine risk and (mutually exclusive) size labels ──
+      - name: Assess risk & size
+        id: assess
+        run: |
+          TOTAL=${{ steps.diff.outputs.total }}
+
+          # Risk level — low (<200), medium (200–500), high (>500)
+          if [ "$TOTAL" -gt 500 ]; then
+            RISK="high"; RISK_ICON="🔴"
+          elif [ "$TOTAL" -gt 200 ]; then
+            RISK="medium"; RISK_ICON="🟡"
+          else
+            RISK="low"; RISK_ICON="🟢"
+          fi
+
+          # Size label — mutually exclusive
+          if [ "$TOTAL" -lt 50 ]; then
+            SIZE="size/XS"
+          elif [ "$TOTAL" -lt 150 ]; then
+            SIZE="size/S"
+          elif [ "$TOTAL" -lt 300 ]; then
+            SIZE="size/M"
+          elif [ "$TOTAL" -lt 500 ]; then
+            SIZE="size/L"
+          else
+            SIZE="size/XL"
+          fi
+
+          {
+            echo "risk=$RISK"
+            echo "risk_icon=$RISK_ICON"
+            echo "size=$SIZE"
+          } >> "$GITHUB_OUTPUT"
+
+      # ── 5. Apply risk + mutually-exclusive size labels ──
+      - name: Sync risk & size labels
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR="${{ github.event.pull_request.number }}"
+          # Remove every size label first so they stay mutually exclusive
+          for lbl in "size/XS" "size/S" "size/M" "size/L" "size/XL"; do
+            gh pr edit "$PR" --remove-label "$lbl" 2>/dev/null || true
+          done
+          # Remove every risk label first, then apply the current one
+          for lbl in "risk:low" "risk:medium" "risk:high"; do
+            gh pr edit "$PR" --remove-label "$lbl" 2>/dev/null || true
+          done
+          gh pr edit "$PR" --add-label "${{ steps.assess.outputs.size }}"
+          gh pr edit "$PR" --add-label "risk:${{ steps.assess.outputs.risk }}"
+
+      # ── 6. Post triage summary comment ──
+      - name: Post triage summary
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          ADDED: ${{ steps.diff.outputs.added }}
+          DELETED: ${{ steps.diff.outputs.deleted }}
+          TOTAL: ${{ steps.diff.outputs.total }}
+          SIZE: ${{ steps.assess.outputs.size }}
+          RISK: ${{ steps.assess.outputs.risk }}
+          RISK_ICON: ${{ steps.assess.outputs.risk_icon }}
+        run: |
+          {
+            printf '## 🤖 PR Triage Summary\n\n'
+            printf '| Metric | Value |\n'
+            printf '| --- | --- |\n'
+            printf '| ➕ Lines added | %s |\n' "$ADDED"
+            printf '| ➖ Lines deleted | %s |\n' "$DELETED"
+            printf '| 📊 Total changed | %s |\n' "$TOTAL"
+            printf '| 📐 Size | `%s` |\n' "$SIZE"
+            printf '| %s Risk | `risk:%s` |\n' "$RISK_ICON" "$RISK"
+            printf '\n---\n_Automatically generated by the `pr-triage` workflow on each update._\n'
+          } > comment.md
+          gh pr comment "$PR" --body-file comment.md
