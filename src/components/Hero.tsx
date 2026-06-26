@@ -57,7 +57,7 @@ export const Hero: FC<HeroProps> = memo(
             src={optimizedImage}
             srcSet={srcSet}
             sizes="(max-width: 768px) 100vw, 1920px"
-            alt="Ricardo Camilo, Frontend Engineer & Vue.js Specialist — background"
+            alt=""
             className="w-full h-full object-cover grayscale opacity-[0.05] scale-110 blur-[2px]"
             loading="eager"
             fetchPriority="high"
@@ -111,23 +111,23 @@ export const Hero: FC<HeroProps> = memo(
                 href={env.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#E5D5C0]/60 hover:text-[#E5D5C0] transition-colors"
+                className="text-[#E5D5C0]/60 hover:text-[#E5D5C0] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] rounded p-1"
                 aria-label="LinkedIn profile"
               >
                 <Linkedin size={20} aria-hidden="true" />
               </a>
               <a
-                href={`${env.githubUrl}?tab=repositories`}
+                href={env.githubReposUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#E5D5C0]/60 hover:text-[#E5D5C0] transition-colors"
+                className="text-[#E5D5C0]/60 hover:text-[#E5D5C0] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] rounded p-1"
                 aria-label="GitHub repositories"
               >
                 <Github size={20} aria-hidden="true" />
               </a>
               <a
                 href={`mailto:${env.contactEmail}`}
-                className="text-[#E5D5C0]/60 hover:text-[#E5D5C0] transition-colors"
+                className="text-[#E5D5C0]/60 hover:text-[#E5D5C0] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] rounded p-1"
                 aria-label="Send email"
               >
                 <Mail size={20} aria-hidden="true" />

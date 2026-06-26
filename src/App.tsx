@@ -179,7 +179,7 @@ const App: FC = () => {
         </Suspense>
 
         <Suspense fallback={<LoadingFallback height="py-40" />}>
-          <Skills title={t.skills.title} subtitle={t.skills.subtitle} />
+          <Skills title={t.skills.title} subtitle={t.skills.subtitle} isRtl={isRtl} />
         </Suspense>
 
         <Suspense fallback={<LoadingFallback height="py-40" />}>
