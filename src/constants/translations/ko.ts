@@ -48,7 +48,13 @@ const translation: TranslationContent = {
     comingSoon: '곧 출시',
   },
   career: { title: '전문', subtitle: '이력', present: '현재' },
-  certs: { title: '인정', subtitle: '및 자격증', proficiency: '영어 능력', certificate: 'EF SET 인증서', level: 'C1 고급' },
+  certs: {
+    title: '인정',
+    subtitle: '및 자격증',
+    proficiency: '영어 능력',
+    certificate: 'EF SET 인증서',
+    level: 'C1 고급',
+  },
   cta: {
     title: '디지털 제품을',
     subtitle: '업그레이드',

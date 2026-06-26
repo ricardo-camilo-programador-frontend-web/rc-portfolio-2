@@ -48,7 +48,13 @@ const translation: TranslationContent = {
     comingSoon: 'விரைவில்',
   },
   career: { title: 'தொழில்முறை', subtitle: 'வரலாறு', present: 'தற்போது' },
-  certs: { title: 'அங்கீகாரம்', subtitle: 'மற்றும் சான்றிதழ்கள்', proficiency: 'ஆங்கில தேர்ச்சி', certificate: 'EF SET சான்றிதழ்', level: 'C1 மேம்பட்ட' },
+  certs: {
+    title: 'அங்கீகாரம்',
+    subtitle: 'மற்றும் சான்றிதழ்கள்',
+    proficiency: 'ஆங்கில தேர்ச்சி',
+    certificate: 'EF SET சான்றிதழ்',
+    level: 'C1 மேம்பட்ட',
+  },
   cta: {
     title: 'உங்கள்',
     subtitle: 'டிஜிட்டல் தயாரிப்பை மேம்படுத்தவும்',

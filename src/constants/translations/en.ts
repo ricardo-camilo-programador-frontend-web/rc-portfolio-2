@@ -48,7 +48,13 @@ const translation: TranslationContent = {
     comingSoon: 'Coming Soon',
   },
   career: { title: 'Professional', subtitle: 'History', present: 'Present' },
-  certs: { title: 'Recognition', subtitle: '& Certifications', proficiency: 'English Proficiency', certificate: 'EF SET Certificate', level: 'C1 Advanced' },
+  certs: {
+    title: 'Recognition',
+    subtitle: '& Certifications',
+    proficiency: 'English Proficiency',
+    certificate: 'EF SET Certificate',
+    level: 'C1 Advanced',
+  },
   cta: {
     title: 'Upgrade your',
     subtitle: 'Digital Product',
