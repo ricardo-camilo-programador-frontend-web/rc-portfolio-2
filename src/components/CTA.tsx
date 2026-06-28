@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { MessageCircle } from 'lucide-react'
 import { memo, useRef } from 'react'
-import { useReveal } from '../hooks/useReveal'
+import { useReveal } from '../hooks/use-reveal'
 
 interface CTAProps {
   title: string

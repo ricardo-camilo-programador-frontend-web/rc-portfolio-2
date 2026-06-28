@@ -1,6 +1,6 @@
 [build]
   publish = "dist"
-  command = "pnpm run build"
+  command = "pnpm install --frozen-lockfile --ignore-scripts && pnpm run build"
 
 # SPA redirect for client-side routing
 [[redirects]]

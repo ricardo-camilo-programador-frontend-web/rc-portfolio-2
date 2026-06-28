@@ -47,7 +47,13 @@ const translation: TranslationContent = {
     comingSoon: 'जल्द आ रहा है',
   },
   career: { title: 'व्यावसायिक', subtitle: 'इतिहास', present: 'वर्तमान' },
-  certs: { title: 'मान्यता', subtitle: 'और प्रमाणपत्र', proficiency: 'अंग्रेजी दक्षता', certificate: 'EF SET प्रमाणपत्र', level: 'C1 उन्नत' },
+  certs: {
+    title: 'मान्यता',
+    subtitle: 'और प्रमाणपत्र',
+    proficiency: 'अंग्रेजी दक्षता',
+    certificate: 'EF SET प्रमाणपत्र',
+    level: 'C1 उन्नत',
+  },
   cta: {
     title: 'अपने',
     subtitle: 'डिजिटल उत्पाद को अपग्रेड करें',

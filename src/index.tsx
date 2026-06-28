@@ -12,7 +12,10 @@ if ('serviceWorker' in navigator) {
   })
 }
 
-class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean; errorKey: number }> {
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean; errorKey: number }
+> {
   state = { hasError: false, errorKey: 0 }
   static getDerivedStateFromError() {
     // NOTE: errorKey is intentionally NOT reset here — it only increments on user-initiated reset

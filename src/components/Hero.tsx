@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { memo, useRef } from 'react'
-import { useReveal, useStaggerReveal } from '../hooks/useReveal'
+import { useReveal, useStaggerReveal } from '../hooks/use-reveal'
 import { MessageCircle } from '../icons'
 
 interface HeroProps {
@@ -67,7 +67,10 @@ export const Hero: FC<HeroProps> = memo(
         </div>
 
         <div className="relative z-10">
-          <div ref={badgeRef} className="hero-reveal-fade hero-badge mb-10 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-[#E5D5C0]/10 bg-white/5 backdrop-blur-sm">
+          <div
+            ref={badgeRef}
+            className="hero-reveal-fade hero-badge mb-10 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-[#E5D5C0]/10 bg-white/5 backdrop-blur-sm"
+          >
             <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse shadow-[0_0_10px_rgba(45,212,191,0.5)]" />
             <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80">
               {badge}
@@ -75,8 +78,13 @@ export const Hero: FC<HeroProps> = memo(
           </div>
 
           <h1 className="text-6xl md:text-[11rem] font-serif leading-[0.8] tracking-tighter mb-10">
-            <span ref={title1Ref} className="hero-reveal-line text-gradient block overflow-hidden">{title}</span>
-            <span ref={title2Ref} className="hero-reveal-line italic font-light opacity-60 text-[#E5D5C0] block overflow-hidden">
+            <span ref={title1Ref} className="hero-reveal-line text-gradient block overflow-hidden">
+              {title}
+            </span>
+            <span
+              ref={title2Ref}
+              className="hero-reveal-line italic font-light opacity-60 text-[#E5D5C0] block overflow-hidden"
+            >
               {subtitle}
             </span>
           </h1>

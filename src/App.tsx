@@ -51,10 +51,10 @@ interface LoadingFallbackProps {
 }
 
 const LoadingFallback: FC<LoadingFallbackProps> = ({ height = 'h-96' }) => (
-  <div className={`${height} flex items-center justify-center`} role="status" aria-label="Loading">
+  <output className={`${height} flex items-center justify-center`} aria-label="Loading">
     <div className="w-8 h-8 border-2 border-[#E5D5C0]/30 border-t-[#E5D5C0] rounded-full animate-spin" />
     <span className="sr-only">Loading...</span>
-  </div>
+  </output>
 )
 
 const App: FC = () => {
@@ -167,7 +167,13 @@ const App: FC = () => {
         </Suspense>
 
         <Suspense fallback={<LoadingFallback height="py-40" />}>
-          <Certificates title={t.certs.title} subtitle={t.certs.subtitle} proficiency={t.certs.proficiency} certificate={t.certs.certificate} level={t.certs.level} />
+          <Certificates
+            title={t.certs.title}
+            subtitle={t.certs.subtitle}
+            proficiency={t.certs.proficiency}
+            certificate={t.certs.certificate}
+            level={t.certs.level}
+          />
         </Suspense>
 
         <Suspense fallback={<LoadingFallback height="py-40" />}>

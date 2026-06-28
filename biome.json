@@ -96,7 +96,8 @@
         "noImplicitAnyLet": "off"
       },
       "a11y": {
-        "useValidAutocomplete": "off"
+        "useValidAutocomplete": "off",
+        "useSemanticElements": "warn"
       },
       "complexity": {
         "noExcessiveCognitiveComplexity": "off"

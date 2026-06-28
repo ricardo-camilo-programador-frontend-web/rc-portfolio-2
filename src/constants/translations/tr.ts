@@ -47,7 +47,13 @@ const translation: TranslationContent = {
     comingSoon: 'Çok Yakında',
   },
   career: { title: 'Profesyonel', subtitle: 'Geçmiş', present: 'Şu Anda' },
-  certs: { title: 'Tanınma', subtitle: 've Sertifikalar', proficiency: 'İngilizce Yeterlilik', certificate: 'EF SET Sertifikası', level: 'C1 İleri' },
+  certs: {
+    title: 'Tanınma',
+    subtitle: 've Sertifikalar',
+    proficiency: 'İngilizce Yeterlilik',
+    certificate: 'EF SET Sertifikası',
+    level: 'C1 İleri',
+  },
   cta: {
     title: 'Dijital',
     subtitle: 'Ürününüzü Yükseltin',

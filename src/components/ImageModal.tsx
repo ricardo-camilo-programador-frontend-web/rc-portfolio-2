@@ -139,6 +139,12 @@ export const ImageModal: FC<ImageModalProps> = memo(
                   className="flex-1 flex items-center justify-center w-full overflow-hidden"
                   onClick={e => e.stopPropagation()}
                   onWheel={handleWheel}
+                  onKeyDown={e => {
+                    if (e.key === 'Escape') e.stopPropagation()
+                  }}
+                  role="group"
+                  tabIndex={-1}
+                  aria-label="Image zoom area"
                 >
                   <img
                     src={image}

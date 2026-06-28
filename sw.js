@@ -13,27 +13,30 @@ const FONT_CACHE_NAME = `camilo-fonts-${CACHE_VERSION}`
 const API_CACHE_NAME = `camilo-api-${CACHE_VERSION}`
 
 const CACHE_EXPIRATION = {
- images: 365 * 24 * 60 * 60 * 1000,
- fonts: 365 * 24 * 60 * 60 * 1000,
- api: 5 * 60 * 1000,
- static: 30 * 24 * 60 * 60 * 1000,
+  images: 365 * 24 * 60 * 60 * 1000,
+  fonts: 365 * 24 * 60 * 60 * 1000,
+  api: 5 * 60 * 1000,
+  static: 30 * 24 * 60 * 60 * 1000,
 }
 
 const URL_PATTERNS = {
- images: /\.(png|jpe?g|gif|webp|avif|svg|ico)$/i,
- fonts: /\.(woff2?|ttf|otf|eot)$/i,
- api: /\/api\//i,
+  images: /\.(png|jpe?g|gif|webp|avif|svg|ico)$/i,
+  fonts: /\.(woff2?|ttf|otf|eot)$/i,
+  api: /\/api\//i,
 }
 
 async function cacheResponse(cache, request, response) {
   const clone = response.clone()
   const headers = new Headers(clone.headers)
   headers.set('sw-cache-date', Date.now().toString())
-  await cache.put(request, new Response(clone.body, {
-    status: clone.status,
-    statusText: clone.statusText,
-    headers,
-  }))
+  await cache.put(
+    request,
+    new Response(clone.body, {
+      status: clone.status,
+      statusText: clone.statusText,
+      headers,
+    }),
+  )
 }
 
 self.addEventListener('install', event => {
