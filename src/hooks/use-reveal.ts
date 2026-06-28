@@ -42,14 +42,17 @@ export function useStaggerReveal(
     const el = containerRef.current
     if (!el) return
 
+    const timers: Array<ReturnType<typeof setTimeout>> = []
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           const children = el.querySelectorAll(childSelector)
           children.forEach((child, i) => {
-            setTimeout(() => {
+            const timer = setTimeout(() => {
               child.classList.add('is-visible')
             }, i * baseDelay)
+            timers.push(timer)
           })
           observer.unobserve(el)
         }
@@ -58,12 +61,9 @@ export function useStaggerReveal(
     )
 
     observer.observe(el)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      for (const timer of timers) clearTimeout(timer)
+    }
   }, [containerRef, childSelector, baseDelay, threshold])
 }
-
-/**
- * @deprecated No-op since GSAP removal. CSS :hover transitions handle the magnetic effect.
- * The GSAP version used mousemove tracking; this is now handled via CSS-only.
- */
-export function useMagnetic(_elementRef: RefObject<HTMLElement | null>, _strength = 0.3): void {}

@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run TruffleHog
-        uses: trufflesecurity/trufflehog@main
+        uses: trufflesecurity/trufflehog@v3.88.0
         with:
           path: ./
           base: ${{ github.event.repository.default_branch }}
@@ -243,7 +243,7 @@ jobs:
           path: dist/
 
       - name: Deploy to Netlify
-        run: npx netlify-cli deploy --prod --dir=dist --message "Deploy from CI ${{ github.sha }}"
+        run: npx netlify-cli@17 deploy --prod --dir=dist --auth "$NETLIFY_AUTH_TOKEN" --site "$NETLIFY_SITE_ID" --message "Deploy from CI ${{ github.sha }}"
 
   # ──────────────────────────────────────────────
   # 7. Security audit (preserved from old CI)

@@ -53,7 +53,11 @@ interface LoadingFallbackProps {
 }
 
 const LoadingFallback: FC<LoadingFallbackProps> = ({ height = 'h-96' }) => (
-  <output className={`${height} flex items-center justify-center`} aria-label="Loading">
+  <output
+    className={`${height} flex items-center justify-center`}
+    aria-label="Loading"
+    aria-live="polite"
+  >
     <div className="w-8 h-8 border-2 border-[#E5D5C0]/30 border-t-[#E5D5C0] rounded-full animate-spin" />
     <span className="sr-only">Loading...</span>
   </output>
@@ -117,6 +121,8 @@ const App: FC = () => {
   }, [])
 
   const handleLangChange = useCallback((code: LanguageCode) => {
+    localStorage.setItem('lang', code)
+    document.documentElement.lang = code
     setLangCode(code)
   }, [])
 
