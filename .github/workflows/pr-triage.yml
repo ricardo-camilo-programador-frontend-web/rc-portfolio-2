@@ -53,7 +53,7 @@ jobs:
 
       # ── 2. Auto-label based on changed file paths ──
       - name: Auto-label by changed files
-        uses: actions/labeler@v5
+        uses: actions/labeler@v6
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           configuration-path: .github/labeler.yml
