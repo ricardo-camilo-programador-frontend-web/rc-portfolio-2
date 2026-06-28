@@ -1,0 +1,47 @@
+version: 2
+updates:
+  # npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+    versioning-strategy: increase
+    commit-message:
+      prefix: ":arrow_up:"
+      include: scope
+    labels:
+      - "dependencies"
+      - "priority/low"
+    groups:
+      react:
+        patterns: ["react", "react-dom", "@types/react", "@types/react-dom"]
+      build-tools:
+        patterns: ["vite", "@vitejs/*", "rollup*"]
+      linting:
+        patterns: ["@biomejs/*", "prettier", "prettier-plugin-*"]
+      testing:
+        patterns: ["vitest", "@testing-library/*", "jsdom", "@playwright/*"]
+    ignore:
+      # React 19 is the current major — don't auto-bump to next major
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: ":arrow_up:"
+      include: scope
+    labels:
+      - "dependencies"
+      - "type/ci"

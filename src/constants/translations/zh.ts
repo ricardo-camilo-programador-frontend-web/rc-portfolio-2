@@ -30,6 +30,7 @@ const translation: TranslationContent = {
     },
     s3: { title: '性能和 SEO', desc: '极致优化，确保即时加载和最大有机可见度。' },
   },
+  skills: { title: '技术', subtitle: '栈' },
   work: {
     title: '精选',
     subtitle: '作品',
@@ -38,7 +39,13 @@ const translation: TranslationContent = {
     comingSoon: '即将推出',
   },
   career: { title: '职业', subtitle: '经历', present: '至今' },
-  certs: { title: '认可', subtitle: '和认证', proficiency: '英语水平', certificate: 'EF SET 证书', level: 'C1 高级' },
+  certs: {
+    title: '认可',
+    subtitle: '和认证',
+    proficiency: '英语水平',
+    certificate: 'EF SET 证书',
+    level: 'C1 高级',
+  },
   cta: {
     title: '升级您的',
     subtitle: '数字产品',

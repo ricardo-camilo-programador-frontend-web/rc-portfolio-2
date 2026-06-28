@@ -33,6 +33,7 @@ const translation: TranslationContent = {
       desc: 'తక్షణ లోడింగ్ మరియు గరిష్ట సేంద్రీయ దృశ్యమానతను నిర్ధారించడానికి అత్యంత ఆప్టిమైజేషన్.',
     },
   },
+  skills: { title: 'టెక్', subtitle: 'స్టాక్' },
   work: {
     title: 'ఎంపిక చేసిన',
     subtitle: 'పనులు',
@@ -41,7 +42,13 @@ const translation: TranslationContent = {
     comingSoon: 'త్వరలో',
   },
   career: { title: 'వృత్తిపరమైన', subtitle: 'చరిత్ర', present: 'ప్రస్తుతం' },
-  certs: { title: 'గుర్తింపు', subtitle: 'మరియు ధృవీకరణలు', proficiency: 'ఆంగ్ల నైపుణ్యం', certificate: 'EF SET సర్టిఫికేట్', level: 'C1 అడ్వాన్స్డ్' },
+  certs: {
+    title: 'గుర్తింపు',
+    subtitle: 'మరియు ధృవీకరణలు',
+    proficiency: 'ఆంగ్ల నైపుణ్యం',
+    certificate: 'EF SET సర్టిఫికేట్',
+    level: 'C1 అడ్వాన్స్డ్',
+  },
   cta: {
     title: 'మీ',
     subtitle: 'డిజిటల్ ఉత్పత్తిని అప్‌గ్రేడ్ చేయండి',

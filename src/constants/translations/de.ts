@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'Extreme Optimierung für sofortiges Laden und maximale organische Sichtbarkeit.',
     },
   },
+  skills: { title: 'Technologien', subtitle: '& Werkzeuge' },
   work: {
     title: 'Ausgewählte',
     subtitle: 'Arbeiten',
@@ -47,7 +48,13 @@ const translation: TranslationContent = {
     comingSoon: 'Demnächst',
   },
   career: { title: 'Beruflicher', subtitle: 'Werdegang', present: 'Aktuell' },
-  certs: { title: 'Anerkennung', subtitle: 'und Zertifizierungen', proficiency: 'Englischkenntnisse', certificate: 'EF SET Zertifikat', level: 'C1 Fortgeschritten' },
+  certs: {
+    title: 'Anerkennung',
+    subtitle: 'und Zertifizierungen',
+    proficiency: 'Englischkenntnisse',
+    certificate: 'EF SET Zertifikat',
+    level: 'C1 Fortgeschritten',
+  },
   cta: {
     title: 'Verbessern Sie Ihr',
     subtitle: 'digitales Produkt',

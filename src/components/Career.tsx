@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { memo, useRef } from 'react'
-import { useReveal, useStaggerReveal } from '../hooks/useReveal'
+import { useReveal, useStaggerReveal } from '../hooks/use-reveal'
 
 interface TimelineItem {
   id: number

@@ -40,6 +40,7 @@ const translation: TranslationContent = {
       desc: 'Экстремальная оптимизация для мгновенной загрузки и максимальной органической видимости.',
     },
   },
+  skills: { title: 'Технологии', subtitle: 'и инструменты' },
   work: {
     title: 'Избранные',
     subtitle: 'работы',
@@ -48,7 +49,13 @@ const translation: TranslationContent = {
     comingSoon: 'Скоро',
   },
   career: { title: 'Профессиональная', subtitle: 'карьера', present: 'Сейчас' },
-  certs: { title: 'Признание', subtitle: 'и сертификаты', proficiency: 'Владение английским', certificate: 'Сертификат EF SET', level: 'C1 Продвинутый' },
+  certs: {
+    title: 'Признание',
+    subtitle: 'и сертификаты',
+    proficiency: 'Владение английским',
+    certificate: 'Сертификат EF SET',
+    level: 'C1 Продвинутый',
+  },
   cta: {
     title: 'Улучшите ваш',
     subtitle: 'цифровой продукт',

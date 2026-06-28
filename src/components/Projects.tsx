@@ -75,7 +75,7 @@ export const Projects: FC<ProjectsProps> = memo(
               </h2>
             </div>
             <a
-              href={env.githubUrl}
+              href={env.githubReposUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors"
@@ -99,7 +99,7 @@ export const Projects: FC<ProjectsProps> = memo(
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             dir={isRtl ? 'rtl' : 'ltr'}
           >
-            {visibleProjects.map((project: Project, index: number) => (
+            {visibleProjects.map((project: Project, _index: number) => (
               <ProjectCard
                 key={project.id}
                 project={project}

@@ -28,13 +28,7 @@ const generateSrcSet = (baseUrl: string): string => {
 }
 
 export const ProjectCard: FC<ProjectCardProps> = memo(
-  ({
-    project,
-    comingSoonLabel,
-    viewProjectLabel,
-    isRtl,
-    onOpenModal,
-  }) => {
+  ({ project, comingSoonLabel, viewProjectLabel, isRtl, onOpenModal }) => {
     const [imageError, setImageError] = useState(false)
 
     const cardProps = {
@@ -82,19 +76,20 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
               </span>
             )}
 
-            <div
+            <button
+              type="button"
               onClick={e => {
                 e.preventDefault()
                 e.stopPropagation()
                 onOpenModal(project.image, project.title, project.category)
               }}
-              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none"
+              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none cursor-pointer"
               aria-label={`View full size image of ${project.title}`}
             >
               <div className="bg-[#E5D5C0]/90 rounded-full p-3 hover:scale-110 transition-transform pointer-events-auto">
                 <ZoomIn size={20} className="text-[#0A0A0A]" />
               </div>
-            </div>
+            </button>
 
             <img
               src={optimizedImage}
@@ -118,7 +113,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
 
         <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-300">
           <div className="flex items-center gap-2 w-full flex-wrap">
-            {project.tags.map((tag) => (
+            {project.tags.map(tag => (
               <span
                 key={tag}
                 className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/80 mb-2 block border border-[#E5D5C0]/20 p-1 rounded w-auto"

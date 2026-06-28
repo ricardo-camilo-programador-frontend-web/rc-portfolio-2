@@ -16,6 +16,7 @@ const CTA = lazy(() => import('./components/CTA').then(m => ({ default: m.CTA })
 const Footer = lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })))
 const Projects = lazy(() => import('./components/Projects').then(m => ({ default: m.Projects })))
 const Services = lazy(() => import('./components/Services').then(m => ({ default: m.Services })))
+const Skills = lazy(() => import('./components/Skills').then(m => ({ default: m.Skills })))
 
 const VALID_LANG_CODES = new Set<string>(LANGUAGES.map(l => l.code))
 
@@ -40,6 +41,7 @@ const INITIAL_TRANSLATION: TranslationContent = {
     s2: { title: '', desc: '' },
     s3: { title: '', desc: '' },
   },
+  skills: { title: '', subtitle: '' },
   work: { title: '', subtitle: '', viewAll: '', viewProject: '', comingSoon: '' },
   career: { title: '', subtitle: '', present: '' },
   certs: { title: '', subtitle: '', proficiency: '', certificate: '', level: '' },
@@ -51,10 +53,14 @@ interface LoadingFallbackProps {
 }
 
 const LoadingFallback: FC<LoadingFallbackProps> = ({ height = 'h-96' }) => (
-  <div className={`${height} flex items-center justify-center`} role="status" aria-label="Loading">
+  <output
+    className={`${height} flex items-center justify-center`}
+    aria-label="Loading"
+    aria-live="polite"
+  >
     <div className="w-8 h-8 border-2 border-[#E5D5C0]/30 border-t-[#E5D5C0] rounded-full animate-spin" />
     <span className="sr-only">Loading...</span>
-  </div>
+  </output>
 )
 
 const App: FC = () => {
@@ -115,6 +121,8 @@ const App: FC = () => {
   }, [])
 
   const handleLangChange = useCallback((code: LanguageCode) => {
+    localStorage.setItem('lang', code)
+    document.documentElement.lang = code
     setLangCode(code)
   }, [])
 
@@ -167,7 +175,17 @@ const App: FC = () => {
         </Suspense>
 
         <Suspense fallback={<LoadingFallback height="py-40" />}>
-          <Certificates title={t.certs.title} subtitle={t.certs.subtitle} proficiency={t.certs.proficiency} certificate={t.certs.certificate} level={t.certs.level} />
+          <Certificates
+            title={t.certs.title}
+            subtitle={t.certs.subtitle}
+            proficiency={t.certs.proficiency}
+            certificate={t.certs.certificate}
+            level={t.certs.level}
+          />
+        </Suspense>
+
+        <Suspense fallback={<LoadingFallback height="py-40" />}>
+          <Skills title={t.skills.title} subtitle={t.skills.subtitle} isRtl={isRtl} />
         </Suspense>
 
         <Suspense fallback={<LoadingFallback height="py-40" />}>

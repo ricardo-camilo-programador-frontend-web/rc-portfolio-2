@@ -40,6 +40,7 @@ const translation: TranslationContent = {
       desc: 'Tối ưu hóa cực cao đảm bảo tải ngay lập tức và hiển thị hữu cơ tối đa.',
     },
   },
+  skills: { title: 'Công nghệ', subtitle: '& Công cụ' },
   work: {
     title: 'Công trình',
     subtitle: 'Chọn lọc',
@@ -48,7 +49,13 @@ const translation: TranslationContent = {
     comingSoon: 'Sắp ra mắt',
   },
   career: { title: 'Lịch sử', subtitle: 'Nghề nghiệp', present: 'Hiện tại' },
-  certs: { title: 'Công nhận', subtitle: 'và Chứng chỉ', proficiency: 'Trình độ tiếng Anh', certificate: 'Chứng chỉ EF SET', level: 'C1 Nâng cao' },
+  certs: {
+    title: 'Công nhận',
+    subtitle: 'và Chứng chỉ',
+    proficiency: 'Trình độ tiếng Anh',
+    certificate: 'Chứng chỉ EF SET',
+    level: 'C1 Nâng cao',
+  },
   cta: {
     title: 'Nâng cấp',
     subtitle: 'Sản phẩm số của bạn',

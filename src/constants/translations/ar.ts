@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'تحسين شديد لضمان التحميل الفوري والحد الأقصى من الرؤية العضوية.',
     },
   },
+  skills: { title: 'التقنيات', subtitle: 'والأدوات' },
   work: {
     title: 'أعمال',
     subtitle: 'مختارة',
@@ -47,7 +48,13 @@ const translation: TranslationContent = {
     comingSoon: 'قريباً',
   },
   career: { title: 'المسار', subtitle: 'المهني', present: 'حالياً' },
-  certs: { title: 'التقدير', subtitle: 'والشهادات', proficiency: 'إتقان الإنجليزية', certificate: 'شهادة EF SET', level: 'C1 متقدم' },
+  certs: {
+    title: 'التقدير',
+    subtitle: 'والشهادات',
+    proficiency: 'إتقان الإنجليزية',
+    certificate: 'شهادة EF SET',
+    level: 'C1 متقدم',
+  },
   cta: {
     title: 'طوّر',
     subtitle: 'منتجك الرقمي',

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://raw.githubusercontent.com/webpro/knip/main/knip.schema.json",
+  "ignoreExportsUsedInFile": {
+    "interface": true,
+    "type": true
+  },
+  "ignoreFiles": ["docs/**", "scripts/**", "**/*.test.ts", "**/*.spec.ts"]
+}

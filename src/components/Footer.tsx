@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import { ChevronUp, Github } from 'lucide-react'
 import { memo, useCallback, useRef } from 'react'
 import { env } from '../constants/env'
-import { useReveal } from '../hooks/useReveal'
+import { useReveal } from '../hooks/use-reveal'
 
 export const Footer: FC = memo(() => {
   const footerRef = useRef<HTMLElement>(null)
@@ -26,7 +26,7 @@ export const Footer: FC = memo(() => {
         <ul className="flex items-center gap-6" aria-label="Footer links">
           <li>
             <a
-              href={env.githubUrl}
+              href={env.githubReposUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] rounded px-2 py-1"

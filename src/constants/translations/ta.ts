@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'உடனடி ஏற்றம் மற்றும் அதிகபட்ச கரிம தெரிவுநிலையை உறுதி செய்ய தீவிர உகப்பாக்கம்.',
     },
   },
+  skills: { title: 'தொழில்நுட்பம்', subtitle: '& கருவிகள்' },
   work: {
     title: 'தேர்ந்தெடுக்கப்பட்ட',
     subtitle: 'பணிகள்',
@@ -47,7 +48,13 @@ const translation: TranslationContent = {
     comingSoon: 'விரைவில்',
   },
   career: { title: 'தொழில்முறை', subtitle: 'வரலாறு', present: 'தற்போது' },
-  certs: { title: 'அங்கீகாரம்', subtitle: 'மற்றும் சான்றிதழ்கள்', proficiency: 'ஆங்கில தேர்ச்சி', certificate: 'EF SET சான்றிதழ்', level: 'C1 மேம்பட்ட' },
+  certs: {
+    title: 'அங்கீகாரம்',
+    subtitle: 'மற்றும் சான்றிதழ்கள்',
+    proficiency: 'ஆங்கில தேர்ச்சி',
+    certificate: 'EF SET சான்றிதழ்',
+    level: 'C1 மேம்பட்ட',
+  },
   cta: {
     title: 'உங்கள்',
     subtitle: 'டிஜிட்டல் தயாரிப்பை மேம்படுத்தவும்',

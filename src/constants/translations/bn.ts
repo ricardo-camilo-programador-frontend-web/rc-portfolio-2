@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'তাৎক্ষণিক লোডিং এবং সর্বোচ্চ অর্গানিক দৃশ্যমানতা নিশ্চিত করার জন্য চরম অপ্টিমাইজেশন।',
     },
   },
+  skills: { title: 'প্রযুক্তি', subtitle: 'ও টুল' },
   work: {
     title: 'নির্বাচিত',
     subtitle: 'কাজ',
@@ -47,7 +48,13 @@ const translation: TranslationContent = {
     comingSoon: 'শীঘ্রই আসছে',
   },
   career: { title: 'পেশাদার', subtitle: 'ইতিহাস', present: 'বর্তমান' },
-  certs: { title: 'স্বীকৃতি', subtitle: 'এবং সার্টিফিকেশন', proficiency: 'ইংরেজি দক্ষতা', certificate: 'EF SET সার্টিফিকেট', level: 'C1 অ্যাডভান্সড' },
+  certs: {
+    title: 'স্বীকৃতি',
+    subtitle: 'এবং সার্টিফিকেশন',
+    proficiency: 'ইংরেজি দক্ষতা',
+    certificate: 'EF SET সার্টিফিকেট',
+    level: 'C1 অ্যাডভান্সড',
+  },
   cta: {
     title: 'আপনার',
     subtitle: 'ডিজিটাল পণ্য আপগ্রেড করুন',
