@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'فوری لوڈنگ اور زیادہ سے زیادہ نامیاتی نمائش کو یقینی بنانے کے لیے انتہائی اصلاح۔',
     },
   },
+  skills: { title: 'ٹیکنالوجی', subtitle: 'اور ٹولز' },
   work: {
     title: 'منتخب',
     subtitle: 'کام',

@@ -60,8 +60,11 @@
         "useExhaustiveDependencies": "off",
         "useHookAtTopLevel": "off",
         "useParseIntRadix": "error",
-        "noUnusedImports": "off",
-        "noUnusedVariables": "off"
+        "noUnusedImports": "error",
+        "noUnusedVariables": {
+          "level": "error",
+          "options": { "ignoreRestSiblings": true }
+        }
       },
       "style": {
         "useBlockStatements": "off",
@@ -90,10 +93,10 @@
         }
       },
       "suspicious": {
-        "noExplicitAny": "warn",
+        "noExplicitAny": "error",
         "noArrayIndexKey": "warn",
         "noConsole": { "level": "off", "options": { "allow": ["log"] } },
-        "noImplicitAnyLet": "off"
+        "noImplicitAnyLet": "error"
       },
       "a11y": {
         "useValidAutocomplete": "off",
@@ -222,6 +225,16 @@
     },
     {
       "includes": ["**/composables/useStorage.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/hooks/useReveal.ts"],
       "linter": {
         "rules": {
           "style": {

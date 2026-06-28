@@ -85,7 +85,7 @@ export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPho
             <div className="flex flex-col items-start gap-12 sm:flex-row sm:items-center">
               <div className="flex gap-6">
                 <SocialLink icon={<Linkedin size={22} />} href={env.linkedinUrl} label="LinkedIn" />
-                <SocialLink icon={<Github size={22} />} href={env.githubUrl} label="GitHub" />
+                <SocialLink icon={<Github size={22} />} href={env.githubReposUrl} label="GitHub" />
                 <SocialLink
                   icon={<Instagram size={22} />}
                   href={env.instagramUrl}

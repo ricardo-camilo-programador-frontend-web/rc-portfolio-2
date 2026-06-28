@@ -40,6 +40,7 @@ const translation: TranslationContent = {
       desc: 'Экстремальная оптимизация для мгновенной загрузки и максимальной органической видимости.',
     },
   },
+  skills: { title: 'Технологии', subtitle: 'и инструменты' },
   work: {
     title: 'Избранные',
     subtitle: 'работы',

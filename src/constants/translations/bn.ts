@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'তাৎক্ষণিক লোডিং এবং সর্বোচ্চ অর্গানিক দৃশ্যমানতা নিশ্চিত করার জন্য চরম অপ্টিমাইজেশন।',
     },
   },
+  skills: { title: 'প্রযুক্তি', subtitle: 'ও টুল' },
   work: {
     title: 'নির্বাচিত',
     subtitle: 'কাজ',

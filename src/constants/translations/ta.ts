@@ -39,6 +39,7 @@ const translation: TranslationContent = {
       desc: 'உடனடி ஏற்றம் மற்றும் அதிகபட்ச கரிம தெரிவுநிலையை உறுதி செய்ய தீவிர உகப்பாக்கம்.',
     },
   },
+  skills: { title: 'தொழில்நுட்பம்', subtitle: '& கருவிகள்' },
   work: {
     title: 'தேர்ந்தெடுக்கப்பட்ட',
     subtitle: 'பணிகள்',

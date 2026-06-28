@@ -13,6 +13,7 @@ export interface TranslationContent {
     s2: { title: string; desc: string }
     s3: { title: string; desc: string }
   }
+  skills: { title: string; subtitle: string }
   work: {
     title: string
     subtitle: string

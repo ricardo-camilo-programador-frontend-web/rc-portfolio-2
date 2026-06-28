@@ -105,7 +105,7 @@ async function cacheFirst(request, cacheName, maxAge) {
       console.warn('SW: Non-200 response for', request.url, networkResponse.status)
     }
     return networkResponse
-  } catch (error) {
+  } catch (_error) {
     console.log('SW: Network failed, using cached response')
     return (
       cachedResponse
@@ -168,7 +168,7 @@ async function networkFirst(request, cacheName, maxAge) {
       console.warn('SW: Non-200 response for', request.url, networkResponse.status)
     }
     return networkResponse
-  } catch (error) {
+  } catch (_error) {
     console.log('SW: Network failed, checking cache')
     const cachedResponse = await cache.match(request)
     if (cachedResponse) {
@@ -253,7 +253,7 @@ self.addEventListener('fetch', event => {
           await cacheResponse(caches.open(CACHE_NAME), event.request, networkResponse)
         }
         return networkResponse
-      } catch (error) {
+      } catch (_error) {
         console.log('SW: Fetch failed, checking cache')
         return (
           cachedResponse
