@@ -318,7 +318,7 @@ jobs:
 
       - name: Run SonarScanner
         if: steps.sonar_check.outputs.sonar_enabled == 'true'
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
