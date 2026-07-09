@@ -84,7 +84,7 @@ const translation: TranslationContent = {
         period: 'Oct 2021 — Dec 2024',
         company: 'Labi9 Tecnologia',
         role: 'Frontend Developer',
-        desc: '3+ years in fintech ecosystem. Complex interfaces with React, Qwik and Nuxt.',
+        desc: '3+ years in fintech ecosystem. Complex interface development with React, Qwik and Nuxt.',
         tags: ['React', 'Nuxt', 'Fintech'],
       },
       {
