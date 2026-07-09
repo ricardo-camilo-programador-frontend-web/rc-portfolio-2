@@ -3,7 +3,8 @@ import type { TranslationContent } from './constants/translation-types'
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { Hero } from './components/Hero'
 import { Navigation } from './components/Navigation'
-import { PROJECTS, TIMELINE, USER_PHOTO, WHATSAPP_URL } from './constants/data'
+import { PROJECTS, USER_PHOTO } from './constants/data'
+import { env } from './constants/env'
 import { LANGUAGES, type LanguageCode } from './constants/languages'
 import { analytics } from './services/analytics'
 
@@ -33,7 +34,7 @@ const getEnglishFallback = (): Promise<TranslationContent> => {
 // Minimal inline fallback for the brief moment before dynamic import resolves
 const INITIAL_TRANSLATION: TranslationContent = {
   seo: { title: 'Ricardo Camilo', desc: '' },
-  nav: { work: '', about: '', services: '', career: '', contact: '' },
+  nav: { work: '', about: '', services: '', career: '', contact: '', menu: '' },
   hero: { title: '', subtitle: '', desc: '', cta: '', badge: '' },
   about: { quote: '', bio: '', details: '', stats: { exp: '', projects: '', eng: '' } },
   services: {
@@ -51,7 +52,7 @@ const INITIAL_TRANSLATION: TranslationContent = {
     projectCategory: '',
     comingSoon: '',
   },
-  career: { title: '', subtitle: '', present: '' },
+  career: { title: '', subtitle: '', present: '', timeline: [] },
   certs: { title: '', subtitle: '', proficiency: '', certificate: '', level: '' },
   cta: { title: '', subtitle: '', desc: '', button: '', whatsapp: '' },
 }
@@ -101,6 +102,27 @@ const App: FC = () => {
           document.title = data.seo.title
           const descTag = document.querySelector('meta[name="description"]')
           if (descTag) descTag.setAttribute('content', data.seo.desc)
+
+          // Add hreflang tags for multilingual SEO
+          const BaseUrl = 'https://ricardo-camilo-dev-frontend-web.netlify.app'
+          const existingHreflangs = document.querySelectorAll('link[hreflang]')
+          existingHreflangs.forEach(el => {
+            el.remove()
+          })
+          const head = document.head
+          LANGUAGES.forEach(lang => {
+            const link = document.createElement('link')
+            link.rel = 'alternate'
+            link.hreflang = lang.code
+            link.href = `${BaseUrl}/?lang=${lang.code}`
+            head.appendChild(link)
+          })
+          // x-default hreflang pointing to default language (Portuguese)
+          const xDefault = document.createElement('link')
+          xDefault.rel = 'alternate'
+          xDefault.hreflang = 'x-default'
+          xDefault.href = `${BaseUrl}/`
+          head.appendChild(xDefault)
         }
       })
       .catch(() => {
@@ -153,7 +175,8 @@ const App: FC = () => {
         isLangOpen={isLangOpen}
         setIsLangOpen={setIsLangOpen}
         whatsappLabel={t.cta.whatsapp}
-        whatsappUrl={WHATSAPP_URL}
+        whatsappUrl={env.whatsappUrl}
+        menuLabel={t.nav.menu}
       />
 
       <main id="main-content">
@@ -214,7 +237,7 @@ const App: FC = () => {
           <Career
             title={t.career.title}
             subtitle={t.career.subtitle}
-            timeline={TIMELINE}
+            timeline={t.career.timeline}
             isRtl={isRtl}
           />
         </Suspense>
@@ -226,7 +249,7 @@ const App: FC = () => {
             description={t.cta.desc}
             button={t.cta.button}
             whatsapp={t.cta.whatsapp}
-            whatsappUrl={WHATSAPP_URL}
+            whatsappUrl={env.whatsappUrl}
             isRtl={isRtl}
           />
         </Suspense>
