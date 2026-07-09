@@ -40,6 +40,8 @@ const translation: TranslationContent = {
     viewAll: 'పూర్తి GitHub చూడండి',
     viewProject: 'ప్రాజెక్ట్ చూడండి',
     comingSoon: 'త్వరలో',
+    viewFullSize: 'పూర్తి పరిమాణంలో చూడండి',
+    projectCategory: 'ప్రాజెక్ట్ వర్గం',
   },
   career: { title: 'వృత్తిపరమైన', subtitle: 'చరిత్ర', present: 'ప్రస్తుతం' },
   certs: {
