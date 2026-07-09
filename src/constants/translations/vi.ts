@@ -51,7 +51,13 @@ const translation: TranslationContent = {
     projectCategory: 'Danh mục dự án',
   },
   career: { title: 'Lịch sử', subtitle: 'Nghề nghiệp', present: 'Hiện tại' },
-  certs: { title: 'Công nhận', subtitle: 'và Chứng chỉ', proficiency: 'Trình độ tiếng Anh', certificate: 'Chứng chỉ EF SET', level: 'C1 Nâng cao' },
+  certs: {
+    title: 'Công nhận',
+    subtitle: 'và Chứng chỉ',
+    proficiency: 'Trình độ tiếng Anh',
+    certificate: 'Chứng chỉ EF SET',
+    level: 'C1 Nâng cao',
+  },
   cta: {
     title: 'Nâng cấp',
     subtitle: 'Sản phẩm số của bạn',

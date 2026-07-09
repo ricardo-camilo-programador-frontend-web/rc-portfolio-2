@@ -1,7 +1,7 @@
 import { Github, Instagram, Linkedin, ShieldCheck } from 'lucide-react'
 import { type FC, memo, type ReactNode, useRef } from 'react'
 import { env } from '../constants/env'
-import { useReveal } from '../hooks/useReveal'
+import { useReveal } from '../hooks/use-reveal'
 
 interface AboutProps {
   quote: string
@@ -65,7 +65,10 @@ export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPho
               <p className="text-[#E5D5C0]/80 text-lg md:text-xl font-light leading-relaxed max-w-xl">
                 {bio}
               </p>
-              <div ref={glassRef} className="reveal-scale flex items-center gap-3 py-4 border-y border-white/5">
+              <div
+                ref={glassRef}
+                className="reveal-scale flex items-center gap-3 py-4 border-y border-white/5"
+              >
                 <ShieldCheck size={18} className="text-[#E5D5C0]/70" aria-hidden="true" />
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#E5D5C0]/70">
                   {details}
@@ -99,18 +102,10 @@ export const About: FC<AboutProps> = memo(({ quote, bio, details, stats, userPho
 
 About.displayName = 'About'
 
-const StatItem = memo(function StatItem({
-  value,
-  label,
-}: {
-  value: string
-  label: string
-}) {
+const StatItem = memo(function StatItem({ value, label }: { value: string; label: string }) {
   return (
     <section className="text-center" aria-live="polite">
-      <div className="text-3xl md:text-4xl font-serif font-bold text-[#E5D5C0] mb-2">
-        {value}
-      </div>
+      <div className="text-3xl md:text-4xl font-serif font-bold text-[#E5D5C0] mb-2">{value}</div>
       <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/70">
         {label}
       </div>

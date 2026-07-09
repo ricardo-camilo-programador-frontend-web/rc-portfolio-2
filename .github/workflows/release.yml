@@ -2,33 +2,127 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release, e.g. v1.2.3. Leave empty to read from package.json'
+        required: false
+        default: ''
+        type: string
+      tag_only:
+        description: 'Create only the tag — skip the GitHub Release'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+# Never interrupt an in-flight release for the same ref.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   release:
-    runs-on: self-hosted
+    name: Tag & Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          fetch-depth: 0
 
-      - name: Install dependencies
-        run: npm ci
+      # ── 1. Resolve version: manual input wins, else read from package.json ──
+      - name: Resolve version
+        id: version
+        run: |
+          MANUAL="${{ github.event.inputs.version }}"
+          if [ -n "$MANUAL" ]; then
+            RAW="$MANUAL"
+          else
+            RAW="v$(node -p "require('./package.json').version")"
+          fi
+          # Normalize: strip optional leading 'v', then re-add it
+          NUM="${RAW#v}"
+          VERSION="v${NUM}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Build
-        run: npm run build
+      # ── 2. Validate semver (vX.Y.Z) ──
+      - name: Validate semver
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          NUM="${VERSION#v}"
+          if ! printf '%s' "$NUM" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::Invalid semver '$VERSION'. Expected format vX.Y.Z (e.g. v1.2.3)"
+            exit 1
+          fi
+          echo "✅ Valid semver: $VERSION"
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: dist/**
-          generate_release_notes: true
+      # ── 3. Idempotency check: skip if tag already exists ──
+      - name: Check if tag exists
+        id: tagcheck
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          if git rev-parse -q --verify "refs/tags/$VERSION" >/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "ℹ️ Tag $VERSION already exists — will skip creation."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # ── 4. Create lightweight tag (only if missing) ──
+      - name: Create tag
+        if: steps.tagcheck.outputs.exists != 'true'
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag "$VERSION"
+          git push origin "$VERSION"
+
+      # ── 5. Create GitHub Release with auto-generated notes ──
+      - name: Create GitHub Release
+        id: release
+        if: steps.tagcheck.outputs.exists != 'true' && github.event.inputs.tag_only != 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          gh release create "$VERSION" \
+            --title "$VERSION" \
+            --generate-notes \
+            --target "$GITHUB_SHA"
+          echo "url=$(gh release view "$VERSION" --json url -q .url)" >> "$GITHUB_OUTPUT"
+
+      # ── 6. Publish summary to the Actions run summary ──
+      - name: Summary
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          EXISTS="${{ steps.tagcheck.outputs.exists }}"
+          TAG_ONLY="${{ github.event.inputs.tag_only }}"
+          RELEASE_URL="${{ steps.release.outputs.url }}"
+          {
+            echo "## 🚀 Release Summary"
+            echo ""
+            echo "| Item | Value |"
+            echo "| --- | --- |"
+            echo "| Version | \`$VERSION\` |"
+            echo "| Trigger | \`${{ github.event_name }}\` |"
+            echo "| Tag existed | \`$EXISTS\` |"
+            if [ -n "$RELEASE_URL" ]; then
+              echo "| Release | $RELEASE_URL |"
+            elif [ "$EXISTS" = "true" ]; then
+              echo "| Release | ⏭️ Skipped — tag already existed (idempotent) |"
+            elif [ "$TAG_ONLY" = "true" ]; then
+              echo "| Release | ⏭️ Skipped — \`tag_only\` mode |"
+            else
+              echo "| Release | ⚠️ Not created (check logs) |"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

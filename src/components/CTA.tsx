@@ -1,8 +1,8 @@
 import type { FC } from 'react'
-import { MessageCircle } from '../icons'
 import { memo, useRef } from 'react'
 import { env } from '../constants/env'
-import { useReveal } from '../hooks/useReveal'
+import { useReveal } from '../hooks/use-reveal'
+import { MessageCircle } from '../icons'
 
 interface CTAProps {
   title: string

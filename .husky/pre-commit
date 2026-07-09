@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+set -eu
+
+echo "\033[1;36m[husky] pre-commit: validating staged files...\033[0m"
+
+# 1. Merge conflict markers
+staged=$(git diff --cached --name-only --diff-filter=ACM -- '*.ts' '*.tsx' '*.js' '*.jsx' '*.json' '*.css')
+if [ -n "$staged" ]; then
+  echo "$staged" | while IFS= read -r f; do
+    if grep -qP '^(<<<<<<<|=======|>>>>>>>)' "$f" 2>/dev/null; then
+      echo "\033[1;31mERROR: Unresolved merge conflict in $f\033[0m"
+      exit 1
+    fi
+  done
+fi
+
+# 2. lint-staged (Biome on staged files only)
+npx lint-staged
+
+echo "\033[1;32m[husky] pre-commit passed\033[0m"

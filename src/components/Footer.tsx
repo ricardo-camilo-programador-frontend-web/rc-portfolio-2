@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import { ChevronUp, Github } from 'lucide-react'
 import { memo, useCallback, useRef } from 'react'
 import { env } from '../constants/env'
-import { useReveal } from '../hooks/useReveal'
+import { useReveal } from '../hooks/use-reveal'
 
 export const Footer: FC = memo(() => {
   const footerRef = useRef<HTMLElement>(null)
