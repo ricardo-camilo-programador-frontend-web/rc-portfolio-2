@@ -42,7 +42,7 @@ const INITIAL_TRANSLATION: TranslationContent = {
     s3: { title: '', desc: '' },
   },
   skills: { title: '', subtitle: '' },
-  work: { title: '', subtitle: '', viewAll: '', viewProject: '', comingSoon: '' },
+  work: { title: '', subtitle: '', viewAll: '', viewProject: '', viewFullSize: '', projectCategory: '', comingSoon: '' },
   career: { title: '', subtitle: '', present: '' },
   certs: { title: '', subtitle: '', proficiency: '', certificate: '', level: '' },
   cta: { title: '', subtitle: '', desc: '', button: '', whatsapp: '' },
@@ -188,6 +188,8 @@ const App: FC = () => {
             subtitle={t.work.subtitle}
             viewAll={t.work.viewAll}
             viewProject={t.work.viewProject}
+            viewFullSize={t.work.viewFullSize}
+            projectCategory={t.work.projectCategory}
             comingSoon={t.work.comingSoon}
             projects={PROJECTS}
             isRtl={isRtl}

@@ -46,6 +46,8 @@ const translation: TranslationContent = {
     viewAll: 'مکمل GitHub دیکھیں',
     viewProject: 'پروجیکٹ دیکھیں',
     comingSoon: 'جلد ہی',
+    viewFullSize: 'مکمل سائز دیکھیں',
+    projectCategory: 'پروجیکٹ زمرہ',
   },
   career: { title: 'پیشہ ورانہ', subtitle: 'تاریخ', present: 'موجودہ' },
   certs: { title: 'شناخت', subtitle: 'اور سرٹیفکیٹس', proficiency: 'انگریزی مہارت', certificate: 'EF SET سرٹیفکیٹ', level: 'C1 اعلیٰ' },

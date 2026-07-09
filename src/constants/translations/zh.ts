@@ -37,6 +37,8 @@ const translation: TranslationContent = {
     viewAll: '查看完整 GitHub',
     viewProject: '查看项目',
     comingSoon: '即将推出',
+    viewFullSize: '查看全尺寸',
+    projectCategory: '项目分类',
   },
   career: { title: '职业', subtitle: '经历', present: '至今' },
   certs: { title: '认可', subtitle: '和认证', proficiency: '英语水平', certificate: 'EF SET 证书', level: 'C1 高级' },

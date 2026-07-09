@@ -62,12 +62,3 @@ export function useStaggerReveal(
   }, [containerRef, childSelector, baseDelay, threshold])
 }
 
-/**
- * @deprecated No-op since GSAP removal. CSS :hover transitions handle the magnetic effect.
- * The GSAP version used mousemove tracking; this is now handled via CSS-only.
- */
-export function useMagnetic(
-  _elementRef: RefObject<HTMLElement | null>,
-  _strength = 0.3,
- ): void {
- }

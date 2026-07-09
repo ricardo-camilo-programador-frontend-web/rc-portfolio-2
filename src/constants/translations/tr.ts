@@ -46,6 +46,8 @@ const translation: TranslationContent = {
     viewAll: "Tam GitHub'ı Görüntüle",
     viewProject: 'Projeyi Gör',
     comingSoon: 'Çok Yakında',
+    viewFullSize: 'Tam boyutu görüntüle',
+    projectCategory: 'Proje kategorisi',
   },
   career: { title: 'Profesyonel', subtitle: 'Geçmiş', present: 'Şu Anda' },
   certs: { title: 'Tanınma', subtitle: 've Sertifikalar', proficiency: 'İngilizce Yeterlilik', certificate: 'EF SET Sertifikası', level: 'C1 İleri' },

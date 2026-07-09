@@ -46,6 +46,8 @@ const translation: TranslationContent = {
     viewAll: 'Ver GitHub completo',
     viewProject: 'Ver Proyecto',
     comingSoon: 'Próximamente',
+    viewFullSize: 'Ver tamaño completo',
+    projectCategory: 'Categoría del proyecto',
   },
   career: { title: 'Trayectoria', subtitle: 'Profesional', present: 'Actualmente' },
   certs: { title: 'Reconocimiento', subtitle: 'y certificaciones', proficiency: 'Competencia en inglés', certificate: 'Certificado EF SET', level: 'C1 Avanzado' },
