@@ -1,6 +1,13 @@
 export interface TranslationContent {
   seo: { title: string; desc: string }
-  nav: { work: string; about: string; services: string; career: string; contact: string }
+  nav: {
+    work: string
+    about: string
+    services: string
+    career: string
+    contact: string
+    menu: string
+  }
   hero: { title: string; subtitle: string; desc: string; cta: string; badge: string }
   about: {
     quote: string
@@ -23,7 +30,19 @@ export interface TranslationContent {
     projectCategory: string
     comingSoon: string
   }
-  career: { title: string; subtitle: string; present: string }
+  career: {
+    title: string
+    subtitle: string
+    present: string
+    timeline: Array<{
+      id: number
+      period: string
+      company: string
+      role: string
+      desc: string
+      tags: Array<string>
+    }>
+  }
   certs: {
     title: string
     subtitle: string
