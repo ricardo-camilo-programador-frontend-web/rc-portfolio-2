@@ -27,3 +27,6 @@ dist-ssr
 .env
 .env.local
 .scannerwork/
+
+# knip dead-code detection artifacts
+.knip/

@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { Code, Layers, Zap } from 'lucide-react'
 import { memo, useRef } from 'react'
-import { useReveal, useStaggerReveal } from '../hooks/useReveal'
+import { useReveal, useStaggerReveal } from '../hooks/use-reveal'
 import { ServiceCard } from './ServiceCard'
 
 interface ServicesProps {

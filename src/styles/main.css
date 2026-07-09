@@ -116,7 +116,8 @@
 .reveal {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal:not(.is-visible) {
@@ -127,7 +128,8 @@
 .reveal-scale {
   opacity: 1;
   transform: scale(1);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-scale:not(.is-visible) {
@@ -138,7 +140,8 @@
 .reveal-child {
   opacity: 1;
   transform: translateY(16px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-child:not(.is-visible) {
@@ -149,7 +152,8 @@
 .hero-reveal-line {
   clip-path: inset(0% 0% 0% 0%);
   transform: translateY(0);
-  transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    clip-path 1s cubic-bezier(0.16, 1, 0.3, 1),
     transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .hero-reveal-line:not(.is-visible) {
@@ -160,7 +164,8 @@
 .hero-reveal-fade {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .hero-reveal-fade:not(.is-visible) {
@@ -178,8 +183,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-scale, .reveal-child,
-  .hero-reveal-line, .hero-reveal-fade, .line-draw {
+  .reveal,
+  .reveal-scale,
+  .reveal-child,
+  .hero-reveal-line,
+  .hero-reveal-fade,
+  .line-draw {
     transition: none;
     opacity: 1;
     transform: none;

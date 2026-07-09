@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import type { Language, LanguageCode } from '../constants/languages'
 import { memo, useCallback, useEffect, useRef } from 'react'
-import { useReveal } from '../hooks/useReveal'
+import { useReveal } from '../hooks/use-reveal'
 import { ChevronDown, Globe, MessageCircle } from '../icons'
 
 interface NavigationProps {

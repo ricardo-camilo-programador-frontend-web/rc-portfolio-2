@@ -42,7 +42,15 @@ const INITIAL_TRANSLATION: TranslationContent = {
     s3: { title: '', desc: '' },
   },
   skills: { title: '', subtitle: '' },
-  work: { title: '', subtitle: '', viewAll: '', viewProject: '', viewFullSize: '', projectCategory: '', comingSoon: '' },
+  work: {
+    title: '',
+    subtitle: '',
+    viewAll: '',
+    viewProject: '',
+    viewFullSize: '',
+    projectCategory: '',
+    comingSoon: '',
+  },
   career: { title: '', subtitle: '', present: '' },
   certs: { title: '', subtitle: '', proficiency: '', certificate: '', level: '' },
   cta: { title: '', subtitle: '', desc: '', button: '', whatsapp: '' },
@@ -53,10 +61,14 @@ interface LoadingFallbackProps {
 }
 
 const LoadingFallback: FC<LoadingFallbackProps> = ({ height = 'h-96' }) => (
-  <div className={`${height} flex items-center justify-center`} role="status" aria-label="Loading">
+  <output
+    className={`${height} flex items-center justify-center`}
+    aria-label="Loading"
+    aria-live="polite"
+  >
     <div className="w-8 h-8 border-2 border-[#E5D5C0]/30 border-t-[#E5D5C0] rounded-full animate-spin" />
     <span className="sr-only">Loading...</span>
-  </div>
+  </output>
 )
 
 const App: FC = () => {
@@ -117,6 +129,8 @@ const App: FC = () => {
   }, [])
 
   const handleLangChange = useCallback((code: LanguageCode) => {
+    localStorage.setItem('lang', code)
+    document.documentElement.lang = code
     setLangCode(code)
   }, [])
 

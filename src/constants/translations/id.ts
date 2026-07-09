@@ -51,7 +51,13 @@ const translation: TranslationContent = {
     projectCategory: 'Kategori proyek',
   },
   career: { title: 'Riwayat', subtitle: 'Profesional', present: 'Saat Ini' },
-  certs: { title: 'Pengakuan', subtitle: '& Sertifikasi', proficiency: 'Kemahiran Bahasa Inggris', certificate: 'Sertifikat EF SET', level: 'C1 Mahir' },
+  certs: {
+    title: 'Pengakuan',
+    subtitle: '& Sertifikasi',
+    proficiency: 'Kemahiran Bahasa Inggris',
+    certificate: 'Sertifikat EF SET',
+    level: 'C1 Mahir',
+  },
   cta: {
     title: 'Tingkatkan',
     subtitle: 'Produk Digital Anda',

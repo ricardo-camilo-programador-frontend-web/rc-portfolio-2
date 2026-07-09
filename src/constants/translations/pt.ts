@@ -50,7 +50,13 @@ const translation: TranslationContent = {
     projectCategory: 'Categoria do projeto',
   },
   career: { title: 'Histórico', subtitle: 'Profissional', present: 'Atualmente' },
-  certs: { title: 'Reconhecimento', subtitle: '& Certificações', proficiency: 'Proficiência em Inglês', certificate: 'Certificado EF SET', level: 'C1 Avançado' },
+  certs: {
+    title: 'Reconhecimento',
+    subtitle: '& Certificações',
+    proficiency: 'Proficiência em Inglês',
+    certificate: 'Certificado EF SET',
+    level: 'C1 Avançado',
+  },
   cta: {
     title: 'Eleve o nível do seu',
     subtitle: 'Produto Digital',

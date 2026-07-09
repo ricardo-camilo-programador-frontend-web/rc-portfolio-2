@@ -41,7 +41,13 @@ const translation: TranslationContent = {
     projectCategory: '项目分类',
   },
   career: { title: '职业', subtitle: '经历', present: '至今' },
-  certs: { title: '认可', subtitle: '和认证', proficiency: '英语水平', certificate: 'EF SET 证书', level: 'C1 高级' },
+  certs: {
+    title: '认可',
+    subtitle: '和认证',
+    proficiency: '英语水平',
+    certificate: 'EF SET 证书',
+    level: 'C1 高级',
+  },
   cta: {
     title: '升级您的',
     subtitle: '数字产品',

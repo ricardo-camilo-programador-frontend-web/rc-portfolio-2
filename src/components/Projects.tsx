@@ -21,7 +21,17 @@ interface ProjectsProps {
 const INITIAL_VISIBLE_COUNT = 6
 
 export const Projects: FC<ProjectsProps> = memo(
-  ({ title, subtitle, viewAll, viewProject, viewFullSize, projectCategory, comingSoon, projects, isRtl }) => {
+  ({
+    title,
+    subtitle,
+    viewAll,
+    viewProject,
+    viewFullSize,
+    projectCategory,
+    comingSoon,
+    projects,
+    isRtl,
+  }) => {
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
     const loadMoreRef = useRef<HTMLDivElement | null>(null)
 
@@ -101,7 +111,7 @@ export const Projects: FC<ProjectsProps> = memo(
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             dir={isRtl ? 'rtl' : 'ltr'}
           >
-            {visibleProjects.map((project: Project, index: number) => (
+            {visibleProjects.map((project: Project, _index: number) => (
               <ProjectCard
                 key={project.id}
                 project={project}
