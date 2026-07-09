@@ -19,6 +19,8 @@ export interface TranslationContent {
     subtitle: string
     viewAll: string
     viewProject: string
+    viewFullSize: string
+    projectCategory: string
     comingSoon: string
   }
   career: { title: string; subtitle: string; present: string }

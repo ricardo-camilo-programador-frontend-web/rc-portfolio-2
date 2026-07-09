@@ -46,6 +46,8 @@ const translation: TranslationContent = {
     viewAll: 'முழு GitHub ஐப் பார்க்கவும்',
     viewProject: 'திட்டத்தைப் பார்',
     comingSoon: 'விரைவில்',
+    viewFullSize: 'முழு அளவில் பார்க்கவும்',
+    projectCategory: 'திட்ட வகை',
   },
   career: { title: 'தொழில்முறை', subtitle: 'வரலாறு', present: 'தற்போது' },
   certs: { title: 'அங்கீகாரம்', subtitle: 'மற்றும் சான்றிதழ்கள்', proficiency: 'ஆங்கில தேர்ச்சி', certificate: 'EF SET சான்றிதழ்', level: 'C1 மேம்பட்ட' },

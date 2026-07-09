@@ -11,6 +11,8 @@ interface ProjectsProps {
   subtitle: string
   viewAll: string
   viewProject: string
+  viewFullSize: string
+  projectCategory: string
   comingSoon: string
   projects: Array<Project>
   isRtl: boolean
@@ -19,7 +21,7 @@ interface ProjectsProps {
 const INITIAL_VISIBLE_COUNT = 6
 
 export const Projects: FC<ProjectsProps> = memo(
-  ({ title, subtitle, viewAll, viewProject, comingSoon, projects, isRtl }) => {
+  ({ title, subtitle, viewAll, viewProject, viewFullSize, projectCategory, comingSoon, projects, isRtl }) => {
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
     const loadMoreRef = useRef<HTMLDivElement | null>(null)
 
@@ -105,6 +107,8 @@ export const Projects: FC<ProjectsProps> = memo(
                 project={project}
                 comingSoonLabel={comingSoon}
                 viewProjectLabel={viewProject}
+                viewFullSizeLabel={viewFullSize}
+                projectCategoryLabel={projectCategory}
                 isRtl={isRtl}
                 onOpenModal={handleOpenModal}
               />

@@ -7,8 +7,9 @@ interface ProjectCardProps {
   project: Project
   comingSoonLabel: string
   viewProjectLabel: string
+  viewFullSizeLabel: string
+  projectCategoryLabel: string
   isRtl: boolean
-  onImageLoad?: (imageUrl: string) => void
   onOpenModal: (image: string, title: string, category: string) => void
 }
 
@@ -32,6 +33,8 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
     project,
     comingSoonLabel,
     viewProjectLabel,
+    viewFullSizeLabel,
+    projectCategoryLabel,
     isRtl,
     onOpenModal,
   }) => {
@@ -72,7 +75,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
         href={project.link}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`View ${project.title} project in ${project.category} category`}
+        aria-label={`${viewProjectLabel} ${project.title} — ${projectCategoryLabel}: ${project.category}`}
       >
         {!imageError && project.image && (
           <>
@@ -88,8 +91,8 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
                 e.stopPropagation()
                 onOpenModal(project.image, project.title, project.category)
               }}
-              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none"
-              aria-label={`View full size image of ${project.title}`}
+              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"
+              aria-label={`${viewFullSizeLabel} ${project.title}`}
             >
               <div className="bg-[#E5D5C0]/90 rounded-full p-3 hover:scale-110 transition-transform pointer-events-auto">
                 <ZoomIn size={20} className="text-[#0A0A0A]" />
@@ -100,7 +103,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
               src={optimizedImage}
               srcSet={srcSet}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              alt=""
+              alt={`${project.title} — ${project.category}`}
               className="object-cover w-full h-full transition-opacity duration-300"
               loading="lazy"
               decoding="async"

@@ -47,6 +47,8 @@ const translation: TranslationContent = {
     viewAll: 'Xem GitHub đầy đủ',
     viewProject: 'Xem Dự án',
     comingSoon: 'Sắp ra mắt',
+    viewFullSize: 'Xem kích thước đầy đủ',
+    projectCategory: 'Danh mục dự án',
   },
   career: { title: 'Lịch sử', subtitle: 'Nghề nghiệp', present: 'Hiện tại' },
   certs: { title: 'Công nhận', subtitle: 'và Chứng chỉ', proficiency: 'Trình độ tiếng Anh', certificate: 'Chứng chỉ EF SET', level: 'C1 Nâng cao' },
