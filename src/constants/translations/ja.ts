@@ -46,6 +46,8 @@ const translation: TranslationContent = {
     viewAll: '完全な GitHub を表示',
     viewProject: 'プロジェクトを見る',
     comingSoon: '近日公開',
+    viewFullSize: 'フルサイズ表示',
+    projectCategory: 'プロジェクトカテゴリ',
   },
   career: { title: '職歴', subtitle: '経歴', present: '現在' },
   certs: {

@@ -47,6 +47,8 @@ const translation: TranslationContent = {
     viewAll: 'Lihat GitHub Lengkap',
     viewProject: 'Lihat Proyek',
     comingSoon: 'Segera',
+    viewFullSize: 'Lihat ukuran penuh',
+    projectCategory: 'Kategori proyek',
   },
   career: { title: 'Riwayat', subtitle: 'Profesional', present: 'Saat Ini' },
   certs: {

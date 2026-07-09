@@ -46,6 +46,8 @@ const translation: TranslationContent = {
     viewAll: 'Vollständiges GitHub anzeigen',
     viewProject: 'Projekt ansehen',
     comingSoon: 'Demnächst',
+    viewFullSize: 'Vollansicht',
+    projectCategory: 'Projektkategorie',
   },
   career: { title: 'Beruflicher', subtitle: 'Werdegang', present: 'Aktuell' },
   certs: {

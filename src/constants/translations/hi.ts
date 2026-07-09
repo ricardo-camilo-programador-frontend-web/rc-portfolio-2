@@ -46,6 +46,8 @@ const translation: TranslationContent = {
     viewAll: 'पूर्ण GitHub देखें',
     viewProject: 'प्रोजेक्ट देखें',
     comingSoon: 'जल्द आ रहा है',
+    viewFullSize: 'पूर्ण आकार में देखें',
+    projectCategory: 'प्रोजेक्ट श्रेणी',
   },
   career: { title: 'व्यावसायिक', subtitle: 'इतिहास', present: 'वर्तमान' },
   certs: {

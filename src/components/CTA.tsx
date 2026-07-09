@@ -1,8 +1,8 @@
 import type { FC } from 'react'
-import { MessageCircle } from 'lucide-react'
 import { memo, useRef } from 'react'
 import { env } from '../constants/env'
 import { useReveal } from '../hooks/use-reveal'
+import { MessageCircle } from '../icons'
 
 interface CTAProps {
   title: string
@@ -40,7 +40,7 @@ export const CTA: FC<CTAProps> = memo(
               href={`mailto:${env.contactEmail}`}
               className="px-12 py-5 rounded-full border border-[#E5D5C0] text-[#0A0A0A] bg-[#E5D5C0] text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-transparent hover:text-[#E5D5C0] transition-all shadow-2xl flex items-center gap-3"
             >
-              <MessageCircle size={18} aria-hidden="true" />
+              <MessageCircle size={18} aria-hidden={true} />
               {button}
             </a>
             <span className="text-[11px] text-[#E5D5C0]/60 font-mono tracking-wider">

@@ -46,6 +46,8 @@ const translation: TranslationContent = {
     viewAll: 'عرض GitHub كامل',
     viewProject: 'عرض المشروع',
     comingSoon: 'قريباً',
+    viewFullSize: 'عرض بالحجم الكامل',
+    projectCategory: 'فئة المشروع',
   },
   career: { title: 'المسار', subtitle: 'المهني', present: 'حالياً' },
   certs: {
