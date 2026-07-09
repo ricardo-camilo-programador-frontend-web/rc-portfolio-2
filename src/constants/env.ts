@@ -25,7 +25,7 @@ export const env = {
   contactEmail: import.meta.env.VITE_CONTACT_EMAIL ?? '',
 
   /** WhatsApp contact URL */
-  whatsappUrl: import.meta.env.VITE_WHATSAPP_URL ?? 'https://wa.me/5514996765389',
+  whatsappUrl: import.meta.env.VITE_WHATSAPP_URL ?? '',
 
   /** Analytics */
   gaMeasurementId: import.meta.env.VITE_GA_MEASUREMENT_ID ?? '',
