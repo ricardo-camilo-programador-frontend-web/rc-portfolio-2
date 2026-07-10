@@ -1,5 +1,6 @@
 import type { FC, KeyboardEvent } from 'react'
 import type { Language, LanguageCode } from '../constants/languages'
+import type { TranslationContent } from '../constants/translation-types'
 import { memo, useCallback, useRef } from 'react'
 import { ChevronDown, Globe } from '../icons'
 
@@ -11,6 +12,7 @@ interface NavLanguageSwitcherProps {
   setIsLangOpen: (open: boolean) => void
   setLangCode: (code: LanguageCode) => void
   menuPosition: 'left' | 'right'
+  a11y: TranslationContent['a11y']
   className?: string
 }
 
@@ -23,6 +25,7 @@ export const NavLanguageSwitcher: FC<NavLanguageSwitcherProps> = memo(
     setIsLangOpen,
     setLangCode,
     menuPosition,
+    a11y,
     className = '',
   }) => {
     const langOptionsRef = useRef<Array<HTMLButtonElement | null>>([])
@@ -74,7 +77,7 @@ export const NavLanguageSwitcher: FC<NavLanguageSwitcherProps> = memo(
           onClick={() => setIsLangOpen(!isLangOpen)}
           onKeyDown={handleLangKeyDown}
           className="text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] rounded px-2 py-1"
-          aria-label="Select language"
+          aria-label={a11y.selectLanguage}
           type="button"
           aria-haspopup="listbox"
           aria-expanded={isLangOpen}
@@ -92,7 +95,7 @@ export const NavLanguageSwitcher: FC<NavLanguageSwitcherProps> = memo(
           <div
             className={`absolute top-full ${menuAlignmentClass} mt-2 py-2 bg-[#0A0A0A] border border-white/10 rounded-sm shadow-xl z-50 min-w-[140px]`}
             role="listbox"
-            aria-label="Language selection"
+            aria-label={a11y.languageSelection}
             onKeyDown={handleLangKeyDown}
           >
             {languages.map((language, index) => (

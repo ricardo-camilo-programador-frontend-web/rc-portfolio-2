@@ -9,6 +9,11 @@ export interface TranslationContent {
     contact: string
     menu: string
   }
+  a11y: {
+    skipToContent: string
+    selectLanguage: string
+    languageSelection: string
+  }
   hero: { title: string; subtitle: string; desc: string; cta: string; badge: string }
   about: {
     quote: string

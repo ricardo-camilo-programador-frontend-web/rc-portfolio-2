@@ -14,6 +14,11 @@ const translation: TranslationContent = {
     contact: 'Contato',
     menu: 'Menu',
   },
+  a11y: {
+    skipToContent: 'Pular para o conteúdo principal',
+    selectLanguage: 'Selecionar idioma',
+    languageSelection: 'Seleção de idioma',
+  },
   hero: {
     title: 'Desenvolvedor Frontend Pleno',
     subtitle: '& Especialista Vue.js',

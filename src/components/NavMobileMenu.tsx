@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import type { Language, LanguageCode } from '../constants/languages'
-import type { NavCopy } from '../constants/translation-types'
+import type { NavCopy, TranslationContent } from '../constants/translation-types'
 import { memo } from 'react'
 import { MessageCircle } from '../icons'
 import { NavLanguageSwitcher } from './NavLanguageSwitcher'
@@ -18,6 +18,7 @@ interface NavMobileMenuProps {
   onNavigate: () => void
   whatsappLabel: string
   whatsappUrl: string
+  a11y: TranslationContent['a11y']
 }
 
 const MOBILE_LINK_CLASS =
@@ -36,6 +37,7 @@ export const NavMobileMenu: FC<NavMobileMenuProps> = memo(
     onNavigate,
     whatsappLabel,
     whatsappUrl,
+    a11y,
   }) => (
     <div
       id="mobile-menu"
@@ -53,6 +55,7 @@ export const NavMobileMenu: FC<NavMobileMenuProps> = memo(
           isLangOpen={isLangOpen}
           setIsLangOpen={setIsLangOpen}
           menuPosition="left"
+          a11y={a11y}
           className="relative pt-4 border-t border-white/5"
         />
 

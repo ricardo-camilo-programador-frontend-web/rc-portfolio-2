@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import type { Language, LanguageCode } from '../constants/languages'
+import type { TranslationContent } from '../constants/translation-types'
 import { memo, useEffect, useRef, useState } from 'react'
 import { useBodyScrollLock } from '../hooks/use-body-scroll-lock'
 import { useClickOutside } from '../hooks/use-click-outside'
@@ -18,6 +19,7 @@ interface NavigationProps {
     career: string
     contact: string
   }
+  a11y: TranslationContent['a11y']
   currentLang: Language
   languages: Array<Language>
   langCode: string
@@ -35,6 +37,7 @@ const DESKTOP_LINK_CLASS =
 export const Navigation: FC<NavigationProps> = memo(
   ({
     nav,
+    a11y,
     currentLang,
     languages,
     langCode,
@@ -70,8 +73,8 @@ export const Navigation: FC<NavigationProps> = memo(
 
     return (
       <>
-        <a href="#main-content" className="skip-link z-[9999]" aria-label="Skip to main content">
-          Skip to main content
+        <a href="#main-content" className="skip-link z-[9999]" aria-label={a11y.skipToContent}>
+          {a11y.skipToContent}
         </a>
 
         <nav
@@ -101,6 +104,7 @@ export const Navigation: FC<NavigationProps> = memo(
                   isLangOpen={isLangOpen}
                   setIsLangOpen={setIsLangOpen}
                   menuPosition="right"
+                  a11y={a11y}
                 />
               </div>
 
@@ -163,6 +167,7 @@ export const Navigation: FC<NavigationProps> = memo(
             onNavigate={handleMobileNavClick}
             whatsappLabel={whatsappLabel}
             whatsappUrl={whatsappUrl}
+            a11y={a11y}
           />
         </nav>
       </>

@@ -14,6 +14,11 @@ const translation: TranslationContent = {
     contact: 'Liên hệ',
     menu: 'Menu',
   },
+  a11y: {
+    skipToContent: 'Chuyển đến nội dung chính',
+    selectLanguage: 'Chọn ngôn ngữ',
+    languageSelection: 'Chọn ngôn ngữ',
+  },
   hero: {
     title: 'Kỹ sư Frontend',
     subtitle: 'và Chuyên gia Vue.js',
