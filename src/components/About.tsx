@@ -104,7 +104,7 @@ About.displayName = 'About'
 
 const StatItem = memo(function StatItem({ value, label }: { value: string; label: string }) {
   return (
-    <section className="text-center" aria-live="polite">
+    <section className="text-center">
       <div className="text-3xl md:text-4xl font-serif font-bold text-[#E5D5C0] mb-2">{value}</div>
       <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#E5D5C0]/70">
         {label}
