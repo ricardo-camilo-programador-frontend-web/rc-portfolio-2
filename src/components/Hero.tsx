@@ -1,9 +1,9 @@
 import type { FC } from 'react'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { memo, useRef } from 'react'
 import { env } from '../constants/env'
 import { useReveal } from '../hooks/use-reveal'
-import { MessageCircle } from '../icons'
+import { Github, Linkedin, MessageCircle } from '../icons'
 
 interface HeroProps {
   title: string
