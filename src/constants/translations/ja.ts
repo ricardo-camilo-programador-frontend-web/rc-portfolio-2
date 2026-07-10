@@ -5,12 +5,19 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | フロントエンドエンジニア',
     desc: '6 年以上の経験を持つフロントエンドエンジニアおよび Vue.js/TypeScript スペシャリスト。Vue 3、React、Next.js のエキスパート。',
   },
+  errorBoundary: { title: '問題が発生しました。', retry: 'もう一度試す' },
   nav: {
     work: 'ポートフォリオ',
     about: '概要',
     services: 'サービス',
     career: '経歴',
     contact: '連絡先',
+    menu: 'メニュー',
+  },
+  a11y: {
+    skipToContent: 'メインコンテンツへ移動',
+    selectLanguage: '言語を選択',
+    languageSelection: '言語選択',
   },
   hero: {
     title: 'フロントエンドエンジニア',
@@ -24,6 +31,8 @@ const translation: TranslationContent = {
     bio: 'Ricardo Camilo と申します。6 年以上の経験を持つフロントエンドデベロッパーです。Vue.js と TypeScript を専門とし、確かな技術的専門知識と並外れた規律を組み合わせて、高品質なソリューションを提供します。',
     details: 'DISC プロファイル：調査官タイプ—技術的な精度とスケーラブルなソリューションに注力。',
     stats: { exp: '6 年以上', projects: '20+ 納品済み', eng: '英語 C1' },
+    statsLabels: { exp: '経験', projects: '手作り', eng: '習熟度' },
+    portraitAlt: 'リカルド・カミロのポートレート',
   },
   services: {
     s1: {
@@ -45,9 +54,57 @@ const translation: TranslationContent = {
     subtitle: '作品',
     viewAll: '完全な GitHub を表示',
     viewProject: 'プロジェクトを見る',
+    viewFullSize: 'フルサイズ表示',
+    projectCategory: 'プロジェクトカテゴリ',
     comingSoon: '近日公開',
   },
-  career: { title: '職歴', subtitle: '経歴', present: '現在' },
+  career: {
+    title: '職歴',
+    subtitle: '経歴',
+    present: '現在',
+    timeline: [
+      {
+        id: 1,
+        period: '2025年11月 — 現在',
+        company: 'Consir Informática',
+        role: 'フロントエンドエンジニア',
+        desc: 'レガシーな労働組合管理システムのVue.js 3 + TypeScriptへのモダン化における技術リーダーシップ。PiniaとPWAを使用したストアベースアーキテクチャの実装。',
+        tags: ['Vue 3', 'TypeScript', 'Pinia', 'PWA'],
+      },
+      {
+        id: 2,
+        period: '2025年7月 — 2025年11月',
+        company: 'Consir Informática',
+        role: 'ミドルフロントエンドエンジニア',
+        desc: 'Vue.js、TypeScript、高レベルな保守に焦点を当てたスケーラブルなエンタープライズシステムエンジニアリング。',
+        tags: ['Vue.js', 'TypeScript', 'Enterprise'],
+      },
+      {
+        id: 3,
+        period: '2025年1月 — 2025年7月',
+        company: 'Freelance Specialist',
+        role: 'フロントエンドコンサルタント',
+        desc: 'コンバージョンとパフォーマンスに焦点を当てた高インパクトプロジェクト（Itu Pneus、RvOne、Cajuscript）での技術リーダーシップ。',
+        tags: ['Next.js 15', 'SEO', 'コンサルティング'],
+      },
+      {
+        id: 4,
+        period: '2021年10月 — 2024年12月',
+        company: 'Labi9 Tecnologia',
+        role: 'フロントエンドデベロッパー',
+        desc: 'フィンテックエコシステムで3年以上。React、Qwik、Nuxtを使用した複雑なインターフェースの開発。',
+        tags: ['React', 'Nuxt', 'Fintech'],
+      },
+      {
+        id: 5,
+        period: '2019',
+        company: 'SIALOG Software',
+        role: 'テクニカルインターン',
+        desc: 'ロジスティクス向けのRuby on RailsとJasperReportsの基礎。',
+        tags: ['Ruby on Rails', 'Git'],
+      },
+    ],
+  },
   certs: {
     title: '表彰',
     subtitle: 'および認定資格',
@@ -61,6 +118,12 @@ const translation: TranslationContent = {
     desc: 'エレガントなエンジニアリングとワールドクラスのデザインを求めるブランドとの協力準備ができています。',
     button: 'メールを送信',
     whatsapp: 'WhatsApp で連絡',
+  },
+  footer: {
+    rights: '全著作権所有。',
+    links: 'フッターリンク',
+    github: 'GitHubプロフィールを開く',
+    scrollTop: 'ページ上部へ戻る',
   },
 }
 

@@ -5,12 +5,19 @@ const translation: TranslationContent = {
     title: 'রিকার্ডো কামিলো | ফ্রন্টএন্ড ইঞ্জিনিয়ার',
     desc: '৬+ বছরের অভিজ্ঞতার সাথে ফ্রন্টএন্ড ইঞ্জিনিয়ার এবং Vue.js/TypeScript বিশেষজ্ঞ। Vue 3, React এবং Next.js-এ বিশেষজ্ঞ।',
   },
+  errorBoundary: { title: 'কিছু ভুল হয়েছে।', retry: 'আবার চেষ্টা করুন' },
   nav: {
     work: 'পোর্টফোলিও',
     about: 'সম্পর্কে',
     services: 'সেবাসমূহ',
     career: 'ক্যারিয়ার',
     contact: 'যোগাযোগ',
+    menu: 'মেনু',
+  },
+  a11y: {
+    skipToContent: 'প্রধান বিষয়বস্তুতে যান',
+    selectLanguage: 'ভাষা নির্বাচন',
+    languageSelection: 'ভাষা নির্বাচন',
   },
   hero: {
     title: 'ফ্রন্টএন্ড ইঞ্জিনিয়ার',
@@ -24,6 +31,8 @@ const translation: TranslationContent = {
     bio: 'আমি রিকার্ডো কামিলো, ৬+ বছরের অভিজ্ঞতার সাথে ফ্রন্টএন্ড ডেভেলপার। আমি Vue.js এবং TypeScript-এ বিশেষজ্ঞ, উচ্চ-গুণমানের সমাধান প্রদানের জন্য কঠোর প্রযুক্তিগত দক্ষতা এবং অসাধারণ শৃঙ্খলা একত্রিত করি।',
     details: 'DISC প্রোফাইল: অনুসন্ধানকারী — প্রযুক্তিগত নির্ভুলতা এবং স্কেলেবল সমাধানে ফোকাস।',
     stats: { exp: '৬+ বছর', projects: '২০+ ডেলিভারি', eng: 'ইংরেজি C1' },
+    statsLabels: { exp: 'অভিজ্ঞতা', projects: 'হাতে তৈরি', eng: 'দক্ষতা' },
+    portraitAlt: 'রিকার্ডো কামিলোর প্রতিকৃতি',
   },
   services: {
     s1: {
@@ -45,9 +54,57 @@ const translation: TranslationContent = {
     subtitle: 'কাজ',
     viewAll: 'সম্পূর্ণ GitHub দেখুন',
     viewProject: 'প্রজেক্ট দেখুন',
+    viewFullSize: 'পূর্ণ আকার দেখুন',
+    projectCategory: 'প্রকল্প বিভাগ',
     comingSoon: 'শীঘ্রই আসছে',
   },
-  career: { title: 'পেশাদার', subtitle: 'ইতিহাস', present: 'বর্তমান' },
+  career: {
+    title: 'পেশাদার',
+    subtitle: 'ইতিহাস',
+    present: 'বর্তমান',
+    timeline: [
+      {
+        id: 1,
+        period: 'নভেম্বর 2025 — বর্তমান',
+        company: 'Consir Informática',
+        role: 'ফ্রন্টএন্ড ইঞ্জিনিয়ার',
+        desc: 'Vue.js 3 + TypeScript এ লেগেসি ইউনিয়ন ম্যানেজমেন্ট সিস্টেম আধুনিকীকরণে প্রযুক্তিগত নেতৃত্ব। Pinia এবং PWA সহ store-based আর্কিটেকচার বাস্তবায়ন।',
+        tags: ['Vue 3', 'TypeScript', 'Pinia', 'PWA'],
+      },
+      {
+        id: 2,
+        period: 'জুলাই 2025 — নভেম্বর 2025',
+        company: 'Consir Informática',
+        role: 'মিড ফ্রন্টএন্ড ইঞ্জিনিয়ার',
+        desc: 'Vue.js, TypeScript এবং উচ্চ-স্তরের রক্ষণাবেক্ষণে মনোযোগী মাপসই যোগ্য এন্টারপ্রাইজ সিস্টেম ইঞ্জিনিয়ারিং।',
+        tags: ['Vue.js', 'TypeScript', 'Enterprise'],
+      },
+      {
+        id: 3,
+        period: 'জানুয়ারি 2025 — জুলাই 2025',
+        company: 'Freelance Specialist',
+        role: 'ফ্রন্টএন্ড কনসালট্যান্ট',
+        desc: 'কনভার্সন এবং পারফরম্যান্সে ফোকাস সহ উচ্চ-প্রভাব প্রকল্পে (Itu Pneus, RvOne, Cajuscript) প্রযুক্তিগত নেতৃত্ব।',
+        tags: ['Next.js 15', 'SEO', 'Consultancy'],
+      },
+      {
+        id: 4,
+        period: 'অক্টোবর 2021 — ডিসেম্বর 2024',
+        company: 'Labi9 Tecnologia',
+        role: 'ফ্রন্টএন্ড ডেভেলপার',
+        desc: 'ফিনটেক ইকোসিস্টেমে ৩+ বছর। React, Qwik এবং Nuxt দিয়ে জটিল ইন্টারফেস ডেভেলপমেন্ট।',
+        tags: ['React', 'Nuxt', 'Fintech'],
+      },
+      {
+        id: 5,
+        period: '2019',
+        company: 'SIALOG Software',
+        role: 'টেক ইন্টার্ন',
+        desc: 'লজিস্টিক্সের জন্য Ruby on Rails এবং JasperReports এর ভিত্তি।',
+        tags: ['Ruby on Rails', 'Git'],
+      },
+    ],
+  },
   certs: {
     title: 'স্বীকৃতি',
     subtitle: 'এবং সার্টিফিকেশন',
@@ -61,6 +118,12 @@ const translation: TranslationContent = {
     desc: 'এমন ব্র্যান্ডগুলোর সাথে সহযোগিতা করতে প্রস্তুত যারা মার্জিত ইঞ্জিনিয়ারিং এবং বিশ্ব-মানের ডিজাইন খুঁজছে।',
     button: 'আমাকে ইমেইল করুন',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'সর্বস্বত্ব সংরক্ষিত।',
+    links: 'ফুটার লিঙ্ক',
+    github: 'GitHub প্রোফাইল দেখুন',
+    scrollTop: 'পাতার শীর্ষে যান',
   },
 }
 

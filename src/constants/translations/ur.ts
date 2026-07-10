@@ -5,12 +5,19 @@ const translation: TranslationContent = {
     title: 'رکارڈو کامیلو | فرنٹ اینڈ انجینئر',
     desc: '6+ سال کے تجربے کے ساتھ فرنٹ اینڈ انجینئر اور Vue.js/TypeScript ماہر۔ Vue 3, React اور Next.js میں ماہر۔',
   },
+  errorBoundary: { title: 'کچھ غلط ہو گیا۔', retry: 'دوبارہ کوشش کریں' },
   nav: {
     work: 'پورٹ فولیو',
     about: 'کے بارے میں',
     services: 'خدمات',
     career: 'کیریئر',
     contact: 'رابطہ',
+    menu: 'مینو',
+  },
+  a11y: {
+    skipToContent: 'اہم مواد پر جائیں',
+    selectLanguage: 'زبان منتخب کریں',
+    languageSelection: 'زبان کا انتخاب',
   },
   hero: {
     title: 'فرنٹ اینڈ انجینئر',
@@ -24,6 +31,8 @@ const translation: TranslationContent = {
     bio: 'میں رکارڈو کامیلو ہوں، 6+ سال کے تجربے کے ساتھ فرنٹ اینڈ ڈیولپر۔ میں Vue.js اور TypeScript میں مہارت رکھتا ہوں، اعلیٰ معیار کے حل فراہم کرنے کے لیے ٹھوس تکنیکی مہارت اور غیر معمولی نظم و ضبط کو یکجا کرتا ہوں۔',
     details: 'DISC پروفائل: محقق — تکنیکی درستگی اور اسکیل ایبل حل پر توجہ۔',
     stats: { exp: '6+ سال', projects: '20+ ڈیلیورڈ', eng: 'انگریزی C1' },
+    statsLabels: { exp: 'تجربہ', projects: 'ہاتھ سے تیار', eng: 'مہارت' },
+    portraitAlt: 'ریکارڈو کامیلو کی تصویر',
   },
   services: {
     s1: {
@@ -45,9 +54,57 @@ const translation: TranslationContent = {
     subtitle: 'کام',
     viewAll: 'مکمل GitHub دیکھیں',
     viewProject: 'پروجیکٹ دیکھیں',
+    viewFullSize: 'مکمل سائز دیکھیں',
+    projectCategory: 'پروجیکٹ زمرہ',
     comingSoon: 'جلد ہی',
   },
-  career: { title: 'پیشہ ورانہ', subtitle: 'تاریخ', present: 'موجودہ' },
+  career: {
+    title: 'پیشہ ورانہ',
+    subtitle: 'تاریخ',
+    present: 'موجودہ',
+    timeline: [
+      {
+        id: 1,
+        period: 'نومبر 2025 — موجودہ',
+        company: 'Consir Informática',
+        role: 'فرنٹ اینڈ انجینئر',
+        desc: 'Vue.js 3 + TypeScript پر لیگیسی یونین مینجمنٹ سسٹم کی جدیدیت میں تکنیکی قیادت۔ Pinia اور PWA کے ساتھ اسٹور بیسڈ آرکیٹیکچر کا نفاذ۔',
+        tags: ['Vue 3', 'TypeScript', 'Pinia', 'PWA'],
+      },
+      {
+        id: 2,
+        period: 'جولائی 2025 — نومبر 2025',
+        company: 'Consir Informática',
+        role: 'مڈ فرنٹ اینڈ انجینئر',
+        desc: 'Vue.js، TypeScript اور اعلیٰ سطح کی دیکھ بھال پر مرکوز قابل توسیع انٹرپرائز سسٹم انجینئرنگ۔',
+        tags: ['Vue.js', 'TypeScript', 'Enterprise'],
+      },
+      {
+        id: 3,
+        period: 'جنوری 2025 — جولائی 2025',
+        company: 'Freelance Specialist',
+        role: 'فرنٹ اینڈ کنسلٹنٹ',
+        desc: 'تبدیلی اور کارکردگی پر مرکوز اعلیٰ اثر والے منصوبوں (Itu Pneus, RvOne, Cajuscript) پر تکنیکی قیادت۔',
+        tags: ['Next.js 15', 'SEO', 'مشاورہ'],
+      },
+      {
+        id: 4,
+        period: 'اکتوبر 2021 — دسمبر 2024',
+        company: 'Labi9 Tecnologia',
+        role: 'فرنٹ اینڈ ڈویلپر',
+        desc: 'فن ٹیک ایکو سسٹم میں 3+ سال۔ React، Qwik اور Nuxt کے ساتھ پیچیدہ انٹرفیس کی ترقی۔',
+        tags: ['React', 'Nuxt', 'Fintech'],
+      },
+      {
+        id: 5,
+        period: '2019',
+        company: 'SIALOG Software',
+        role: 'ٹیکنیکل انٹرن',
+        desc: 'لجسٹکس کے لیے Ruby on Rails اور JasperReports کی بنیادیات۔',
+        tags: ['Ruby on Rails', 'Git'],
+      },
+    ],
+  },
   certs: {
     title: 'شناخت',
     subtitle: 'اور سرٹیفکیٹس',
@@ -61,6 +118,12 @@ const translation: TranslationContent = {
     desc: 'ایسی برانڈز کے ساتھ تعاون کرنے کے لیے تیار جو خوبصورت انجینئرنگ اور عالمی معیار کا ڈیزائن تلاش کر رہی ہیں۔',
     button: 'مجھے ای میل کریں',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'جملہ حقوق محفوظ ہیں۔',
+    links: 'فوٹر لنکس',
+    github: 'GitHub پروفائل دیکھیں',
+    scrollTop: 'صفحے کے اوپر جائیں',
   },
 }
 

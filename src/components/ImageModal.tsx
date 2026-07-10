@@ -62,6 +62,16 @@ export const ImageModal: FC<ImageModalProps> = memo(
       setPosition({ x: 0, y: 0 })
     }, [])
 
+    const handleKeyDown = useCallback((event: React.KeyboardEvent) => {
+      if (event.key === '+' || event.key === '=') {
+        event.preventDefault()
+        setZoom(prev => Math.min(prev + 0.5, 3))
+      } else if (event.key === '-' || event.key === '_') {
+        event.preventDefault()
+        setZoom(prev => Math.max(prev - 0.5, 1))
+      }
+    }, [])
+
     const handleClose = useCallback(() => {
       handleResetZoom()
       onClose()
@@ -76,10 +86,10 @@ export const ImageModal: FC<ImageModalProps> = memo(
         }
       }
 
-      window.addEventListener('keydown', handleEscape)
+      globalThis.addEventListener('keydown', handleEscape)
 
       return () => {
-        window.removeEventListener('keydown', handleEscape)
+        globalThis.removeEventListener('keydown', handleEscape)
       }
     }, [isOpen, handleClose])
 
@@ -135,14 +145,10 @@ export const ImageModal: FC<ImageModalProps> = memo(
                   </div>
                 )}
 
-                {/* biome-ignore lint/a11y/useKeyWithClickEvents: stopPropagation only prevents modal dismissal on click-through, not a user action */}
-                {/* biome-ignore lint/a11y/useSemanticElements: zoom container needs div for overflow control */}
+                {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: div needs aria-label for screen readers */}
                 <div
-                  className="flex-1 flex items-center justify-center w-full overflow-hidden"
-                  onClick={e => e.stopPropagation()}
+                  className="flex-1 flex items-center justify-center w-full overflow-hidden border-0 m-0 p-0 min-w-0"
                   onWheel={handleWheel}
-                  role="group"
-                  tabIndex={-1}
                   aria-label="Image zoom area"
                 >
                   <img
@@ -157,6 +163,9 @@ export const ImageModal: FC<ImageModalProps> = memo(
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseUp}
+                    onKeyDown={handleKeyDown}
+                    // biome-ignore lint/a11y/noNoninteractiveTabindex: img needs keyboard focus for zoom shortcuts
+                    tabIndex={0}
                   />
                 </div>
 

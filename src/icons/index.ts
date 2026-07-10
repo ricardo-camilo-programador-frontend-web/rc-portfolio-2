@@ -1,3 +1,6 @@
 export { ChevronDown } from './ChevronDown'
+export { GithubIcon as Github } from './GithubIcon'
 export { Globe } from './Globe'
+export { InstagramIcon as Instagram } from './InstagramIcon'
+export { LinkedinIcon as Linkedin } from './LinkedinIcon'
 export { MessageCircle } from './MessageCircle'

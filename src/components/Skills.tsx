@@ -35,7 +35,7 @@ const SKILLS: Array<SkillBadge> = [
 const CATEGORY_STYLES: Record<SkillBadge['category'], string> = {
   framework: 'border-[#E5D5C0]/30 text-[#E5D5C0]',
   frontend: 'border-[#E5D5C0]/20 text-[#E5D5C0]/90',
-  tooling: 'border-white/15 text-[#E5D5C0]/80',
+  tooling: 'border-white/[0.15] text-[#E5D5C0]/80',
   architecture: 'border-[#E5D5C0]/25 text-[#E5D5C0]/85',
 }
 

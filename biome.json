@@ -242,6 +242,16 @@
           }
         }
       }
+    },
+    {
+      "includes": ["**/components/Navigation.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useValidAnchor": "off"
+          }
+        }
+      }
     }
   ]
 }

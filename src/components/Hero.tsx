@@ -1,9 +1,9 @@
 import type { FC } from 'react'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { memo, useRef } from 'react'
 import { env } from '../constants/env'
 import { useReveal } from '../hooks/use-reveal'
-import { MessageCircle } from '../icons'
+import { Github, Linkedin, MessageCircle } from '../icons'
 
 interface HeroProps {
   title: string
@@ -54,11 +54,13 @@ export const Hero: FC<HeroProps> = memo(
         style={{ contain: 'layout style' }}
       >
         <div className="hero-bg absolute inset-0 z-0">
+          {/* Intentional duplicate of About photo: this copy is decorative ambient background. */}
           <img
             src={optimizedImage}
             srcSet={srcSet}
             sizes="(max-width: 768px) 100vw, 1920px"
             alt=""
+            aria-hidden={true}
             className="w-full h-full object-cover grayscale opacity-[0.05] scale-110 blur-[2px]"
             loading="eager"
             fetchPriority="high"

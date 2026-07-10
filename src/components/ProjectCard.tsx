@@ -7,6 +7,8 @@ interface ProjectCardProps {
   project: Project
   comingSoonLabel: string
   viewProjectLabel: string
+  viewFullSizeLabel: string
+  projectCategoryLabel: string
   isRtl: boolean
   onImageLoad?: (imageUrl: string) => void
   onOpenModal: (image: string, title: string, category: string) => void
@@ -28,7 +30,15 @@ const generateSrcSet = (baseUrl: string): string => {
 }
 
 export const ProjectCard: FC<ProjectCardProps> = memo(
-  ({ project, comingSoonLabel, viewProjectLabel, isRtl, onOpenModal }) => {
+  ({
+    project,
+    comingSoonLabel,
+    viewProjectLabel,
+    viewFullSizeLabel,
+    projectCategoryLabel,
+    isRtl,
+    onOpenModal,
+  }) => {
     const [imageError, setImageError] = useState(false)
 
     const cardProps = {
@@ -78,7 +88,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
                 onOpenModal(project.image, project.title, project.category)
               }}
               className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none cursor-pointer"
-              aria-label={`View full size image of ${project.title}`}
+              aria-label={`${viewFullSizeLabel} ${project.title}`}
             >
               <div className="bg-[#E5D5C0]/90 rounded-full p-3 hover:scale-110 transition-transform pointer-events-auto">
                 <ZoomIn size={20} className="text-[#0A0A0A]" />
@@ -89,7 +99,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
               src={optimizedImage}
               srcSet={srcSet}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              alt=""
+              alt={`${project.title} — ${projectCategoryLabel}: ${project.category}`}
               className="object-cover w-full h-full transition-opacity duration-300"
               loading="lazy"
               decoding="async"

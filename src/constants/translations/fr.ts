@@ -5,12 +5,19 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | Ingénieur Frontend',
     desc: "Ingénieur Frontend et spécialiste Vue.js/TypeScript avec plus de 6 ans d'expérience. Expert en Vue 3, React et Next.js.",
   },
+  errorBoundary: { title: 'Une erreur est survenue.', retry: 'Réessayer' },
   nav: {
     work: 'Portfolio',
     about: 'À propos',
     services: 'Services',
     career: 'Parcours',
     contact: 'Contact',
+    menu: 'Menu',
+  },
+  a11y: {
+    skipToContent: 'Aller au contenu principal',
+    selectLanguage: 'Sélectionner la langue',
+    languageSelection: 'Sélection de langue',
   },
   hero: {
     title: 'Ingénieur Frontend',
@@ -25,6 +32,8 @@ const translation: TranslationContent = {
     details:
       'Profil DISC : Investigateur — Accent sur la précision technique et les solutions évolutives.',
     stats: { exp: '6+ ans', projects: '20+ livrés', eng: 'Anglais C1' },
+    statsLabels: { exp: 'Expérience', projects: 'Fait main', eng: 'Maîtrise' },
+    portraitAlt: 'Portrait de Ricardo Camilo',
   },
   services: {
     s1: {
@@ -46,9 +55,57 @@ const translation: TranslationContent = {
     subtitle: 'Sélectionnés',
     viewAll: 'Voir GitHub complet',
     viewProject: 'Voir le Projet',
+    viewFullSize: 'Voir en taille réelle',
+    projectCategory: 'Catégorie du projet',
     comingSoon: 'Bientôt',
   },
-  career: { title: 'Parcours', subtitle: 'Professionnel', present: 'Actuellement' },
+  career: {
+    title: 'Parcours',
+    subtitle: 'Professionnel',
+    present: 'Actuellement',
+    timeline: [
+      {
+        id: 1,
+        period: 'Nov 2025 — Présent',
+        company: 'Consir Informática',
+        role: 'Ingénieur Frontend',
+        desc: "Direction technique dans la modernisation d'un système legacy de gestion syndicale vers Vue.js 3 + TypeScript. Mise en œuvre d'une architecture basée sur les stores avec Pinia et PWA.",
+        tags: ['Vue 3', 'TypeScript', 'Pinia', 'PWA'],
+      },
+      {
+        id: 2,
+        period: 'Jul 2025 — Nov 2025',
+        company: 'Consir Informática',
+        role: 'Ingénieur Frontend Intermédiaire',
+        desc: "Ingénierie de systèmes d'entreprise évolutifs axée sur Vue.js, TypeScript et la maintenance de haut niveau.",
+        tags: ['Vue.js', 'TypeScript', 'Enterprise'],
+      },
+      {
+        id: 3,
+        period: 'Jan 2025 — Jul 2025',
+        company: 'Freelance Specialist',
+        role: 'Consultant Frontend',
+        desc: 'Direction technique sur des projets à fort impact (Itu Pneus, RvOne, Cajuscript) axée sur la conversion et la performance.',
+        tags: ['Next.js 15', 'SEO', 'Consulting'],
+      },
+      {
+        id: 4,
+        period: 'Oct 2021 — Déc 2024',
+        company: 'Labi9 Tecnologia',
+        role: 'Développeur Frontend',
+        desc: "3+ ans dans l'écosystème fintech. Développement d'interfaces complexes avec React, Qwik et Nuxt.",
+        tags: ['React', 'Nuxt', 'Fintech'],
+      },
+      {
+        id: 5,
+        period: '2019',
+        company: 'SIALOG Software',
+        role: 'Stagiaire Technique',
+        desc: 'Fondamentaux en Ruby on Rails et JasperReports pour la logistique.',
+        tags: ['Ruby on Rails', 'Git'],
+      },
+    ],
+  },
   certs: {
     title: 'Reconnaissance',
     subtitle: 'et certifications',
@@ -62,6 +119,12 @@ const translation: TranslationContent = {
     desc: 'Prêt à collaborer avec des marques recherchant une ingénierie élégante et un design de classe mondiale.',
     button: "M'envoyer un email",
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'Tous droits réservés.',
+    links: 'Liens de pied de page',
+    github: 'Visiter le profil GitHub',
+    scrollTop: 'Remonter en haut de page',
   },
 }
 

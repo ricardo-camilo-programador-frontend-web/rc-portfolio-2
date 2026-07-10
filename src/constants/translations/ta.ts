@@ -5,12 +5,19 @@ const translation: TranslationContent = {
     title: 'ரிகார்டோ கமிலோ | ஃப்ரண்ட்எண்ட் பொறியாளர்',
     desc: '6+ ஆண்டுகள் அனுபவத்துடன் ஃப்ரண்ட்எண்ட் பொறியாளர் மற்றும் Vue.js/TypeScript நிபுணர். Vue 3, React மற்றும் Next.js இல் நிபுணர்.',
   },
+  errorBoundary: { title: 'ஏதோ தவறு ஏற்பட்டது.', retry: 'மீண்டும் முயற்சிக்கவும்' },
   nav: {
     work: 'போர்ட்ஃபோலியோ',
     about: 'பற்றி',
     services: 'சேவைகள்',
     career: 'பணி',
     contact: 'தொடர்பு',
+    menu: 'மெனு',
+  },
+  a11y: {
+    skipToContent: 'முதன்மை உள்ளடக்கத்திற்கு செல்',
+    selectLanguage: 'மொழி தேர்ந்தெடு',
+    languageSelection: 'மொழி தேர்வு',
   },
   hero: {
     title: 'ஃப்ரண்ட்எண்ட் பொறியாளர்',
@@ -24,6 +31,8 @@ const translation: TranslationContent = {
     bio: 'நான் ரிகார்டோ கமிலோ, 6+ ஆண்டுகள் அனுபவத்துடன் ஃப்ரண்ட்எண்ட் டெவலப்பர். நான் Vue.js மற்றும் TypeScript இல் நிபுணத்துவம் பெற்றவன், உயர்-தரமான தீர்வுகளை வழங்க திடமான தொழில்நுட்ப நிபுணத்துவம் மற்றும் விதிவிலக்கான ஒழுக்கத்தை இணைக்கிறேன்.',
     details: 'DISC சுயவிவரம்: விசாரணையாளர் — தொழில்நுட்ப துல்லியம் மற்றும் அளவிடக்கூடிய தீர்வுகளில் கவனம்.',
     stats: { exp: '6+ ஆண்டுகள்', projects: '20+ விநியோகிக்கப்பட்டது', eng: 'ஆங்கிலம் C1' },
+    statsLabels: { exp: 'அனுபவம்', projects: 'கைவினை', eng: 'தேர்ச்சி' },
+    portraitAlt: 'ரிகார்டோ கமிலோ உருவப்படம்',
   },
   services: {
     s1: {
@@ -45,9 +54,57 @@ const translation: TranslationContent = {
     subtitle: 'பணிகள்',
     viewAll: 'முழு GitHub ஐப் பார்க்கவும்',
     viewProject: 'திட்டத்தைப் பார்',
+    viewFullSize: 'முழு அளவைப் பார்',
+    projectCategory: 'திட்ட வகை',
     comingSoon: 'விரைவில்',
   },
-  career: { title: 'தொழில்முறை', subtitle: 'வரலாறு', present: 'தற்போது' },
+  career: {
+    title: 'தொழில்முறை',
+    subtitle: 'வரலாறு',
+    present: 'தற்போது',
+    timeline: [
+      {
+        id: 1,
+        period: 'நவம்பர் 2025 — தற்போது',
+        company: 'Consir Informática',
+        role: 'ஃப்ரன்ட்எண்ட் பொறியாளர்',
+        desc: 'Vue.js 3 + TypeScript க்கு மரபு தொழிற்சங்க மேலாண்மை அமைப்பை நவீனப்படுத்துவதில் தொழில்நுட்ப தலைமை. Pinia மற்றும் PWA உடன் store-அடிப்படையிலான கட்டமைப்பு செயலாக்கம்.',
+        tags: ['Vue 3', 'TypeScript', 'Pinia', 'PWA'],
+      },
+      {
+        id: 2,
+        period: 'ஜூலை 2025 — நவம்பர் 2025',
+        company: 'Consir Informática',
+        role: 'மிட் ஃப்ரன்ட்எண்ட் பொறியாளர்',
+        desc: 'Vue.js, TypeScript மற்றும் உயர்ந்த நிலை பராமரிப்பில் கவனம் செலுத்தும் அளவிடக்கூடிய நிறுவன அமைப்பு பொறியியல்.',
+        tags: ['Vue.js', 'TypeScript', 'Enterprise'],
+      },
+      {
+        id: 3,
+        period: 'சனவரி 2025 — ஜூலை 2025',
+        company: 'Freelance Specialist',
+        role: 'ஃப்ரன்ட்எண்ட் ஆலோசகர்',
+        desc: 'மாற்றம் மற்றும் செயல்திறனில் கவனம் செலுத்தும் அதிக தாக்கமுள்ள திட்டங்களில் (Itu Pneus, RvOne, Cajuscript) தொழில்நுட்ப தலைமை.',
+        tags: ['Next.js 15', 'SEO', 'Consultancy'],
+      },
+      {
+        id: 4,
+        period: 'அக்டோபர் 2021 — டிசம்பர் 2024',
+        company: 'Labi9 Tecnologia',
+        role: 'ஃப்ரன்ட்எண்ட் டெவலப்பர்',
+        desc: 'ஃபின்டெக் சூழலில் 3+ ஆண்டுகள். React, Qwik மற்றும் Nuxt உடன் சிக்கலான இடைமுகங்கள் உருவாக்கம்.',
+        tags: ['React', 'Nuxt', 'Fintech'],
+      },
+      {
+        id: 5,
+        period: '2019',
+        company: 'SIALOG Software',
+        role: 'தொழில்நுட்ப பயிற்சியாளர்',
+        desc: 'லாஜிஸ்டிக்ஸுக்கு Ruby on Rails மற்றும் JasperReports அடிப்படைகள்.',
+        tags: ['Ruby on Rails', 'Git'],
+      },
+    ],
+  },
   certs: {
     title: 'அங்கீகாரம்',
     subtitle: 'மற்றும் சான்றிதழ்கள்',
@@ -61,6 +118,12 @@ const translation: TranslationContent = {
     desc: 'நவீன பொறியியல் மற்றும் உலக-தரம் வாய்ந்த வடிவமைப்பைத் தேடும் பிராண்டுகளுடன் ஒத்துழைக்க தயாராக உள்ளது.',
     button: 'எனக்கு மின்னஞ்சல் அனுப்பவும்',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.',
+    links: 'அடிக்குறிப்பு இணைப்புகள்',
+    github: 'GitHub சுயவிவரத்தை பார்க்கவும்',
+    scrollTop: 'பக்கத்தின் மேலே செல்லவும்',
   },
 }
 

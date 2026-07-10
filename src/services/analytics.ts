@@ -5,10 +5,9 @@ interface AnalyticsEvent {
   value?: number
 }
 
-declare global {
-  interface Window {
-    dataLayer: Array<unknown>
-  }
+type AnalyticsWindow = Window & {
+  dataLayer?: Array<unknown>
+  gtag?: (...arguments_: Array<unknown>) => void
 }
 
 class AnalyticsService {
@@ -102,15 +101,13 @@ class AnalyticsService {
     gtmScript.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`
     document.head.appendChild(gtmScript)
     gtmScript.onload = () => {
-      ;(window as typeof window & { dataLayer: Array<unknown> }).dataLayer =
-        (window as typeof window & { dataLayer: Array<unknown> }).dataLayer || []
-      const gtag = function gtag(...args: Array<unknown>) {
-        ;(
-          (window as typeof window & { dataLayer: Array<unknown> }).dataLayer as Array<unknown>
-        ).push(args)
+      const analyticsWindow = window as AnalyticsWindow
+      analyticsWindow.dataLayer = analyticsWindow.dataLayer || []
+      analyticsWindow.gtag = (...arguments_: Array<unknown>) => {
+        analyticsWindow.dataLayer?.push(arguments_)
       }
-      gtag('js', new Date())
-      gtag('config', measurementId)
+      analyticsWindow.gtag?.('js', new Date())
+      analyticsWindow.gtag?.('config', measurementId)
       this.isLoaded = true
       this.flush()
     }
@@ -142,16 +139,14 @@ class AnalyticsService {
     const events = [...this.queue]
     this.queue = []
 
-    if (this.isLoaded && 'sendBeacon' in navigator) {
+    const analyticsWindow = window as AnalyticsWindow
+    if (this.isLoaded && analyticsWindow.gtag) {
       events.forEach(event => {
-        const payload = new URLSearchParams({
-          category: event.category,
-          action: event.action,
-          ...(event.label && { label: event.label }),
-          ...(event.value && { value: String(event.value) }),
+        analyticsWindow.gtag?.('event', event.action, {
+          ['event_category']: event.category,
+          ...(event.label ? { ['event_label']: event.label } : {}),
+          ...(event.value !== undefined ? { value: event.value } : {}),
         })
-
-        navigator.sendBeacon(`https://www.google-analytics.com/collect`, payload.toString())
       })
     }
   }
