@@ -99,23 +99,16 @@ jobs:
       - name: Validate gitmoji format
         shell: bash
         run: |
-          BASE_SHA="${{ github.event.pull_request.base.sha }}"
-          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
-          PATTERN="^:[a-z_]+:\s[a-z]+([a-z-]*)?(\([a-zA-Z0-9/_.-]+\)): .+"
+          PATTERN="^:[a-z_]+:\s[a-z]+([a-z-]*)?(\([a-zA-Z0-9/_.-]+\))?: .+"
 
-          echo "Validating commits from $BASE_SHA..$HEAD_SHA"
+          echo "Validating commits introduced by this PR"
           FAILED=0
 
-          for COMMIT in $(git rev-list "$BASE_SHA..$HEAD_SHA"); do
+          for COMMIT in $(git rev-list --no-merges "$(git merge-base origin/$GITHUB_BASE_REF $GITHUB_SHA)..$GITHUB_SHA"); do
             MSG=$(git log -1 --format="%s" "$COMMIT")
-            PARENTS=$(git rev-list --parents -1 "$COMMIT" | wc -w)
-            if [ "$PARENTS" -gt 2 ]; then
-              echo "  Skipping merge commit: $MSG"
-              continue
-            fi
             if ! echo "$MSG" | grep -qE "$PATTERN"; then
               echo "  ❌ Invalid commit: $MSG"
-              echo "      Expected: :emoji: type(scope): description"
+              echo "      Expected: :emoji: type(scope): description or :emoji: type: description"
               FAILED=1
             else
               echo "  ✅ $MSG"
@@ -125,7 +118,7 @@ jobs:
           if [ "$FAILED" -eq 1 ]; then
             echo ""
             echo "Some commits do not follow gitmoji convention."
-            echo "  Pattern: :emoji: type(scope): description"
+            echo "  Pattern: :emoji: type(scope): description or :emoji: type: description"
             echo "  Example: :sparkles: feat(hero): add social links"
             exit 1
           fi
