@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eu
+
+message_file="${1-}"
+if [ -z "$message_file" ] || [ ! -f "$message_file" ]; then
+  echo "Usage: $0 <commit-message-file>" >&2
+  exit 1
+fi
+
+exec "$(dirname "$0")/../scripts/validate-commit-message.sh" "$message_file"
