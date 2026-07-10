@@ -11,7 +11,7 @@ interface ServiceCardProps {
 
 export const ServiceCard: FC<ServiceCardProps> = memo(({ num, title, desc, icon, isRtl }) => {
   return (
-    <div
+    <li
       className="reveal-child service-card group p-8 glass rounded-sm accent-border hover:border-[#E5D5C0]/30 transition-all duration-300"
       dir={isRtl ? 'rtl' : 'ltr'}
     >
@@ -21,9 +21,9 @@ export const ServiceCard: FC<ServiceCardProps> = memo(({ num, title, desc, icon,
         </span>
         <div className="text-[#E5D5C0]/80 group-hover:text-[#E5D5C0] transition-colors">{icon}</div>
       </div>
-      <h3 className="text-xl font-bold text-[#E5D5C0] mb-4">{title}</h3>
+      <h2 className="text-xl font-bold text-[#E5D5C0] mb-4">{title}</h2>
       <p className="text-[#E5D5C0]/70 text-sm leading-relaxed">{desc}</p>
-    </div>
+    </li>
   )
 })
 
