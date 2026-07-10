@@ -116,9 +116,9 @@ const translation: TranslationContent = {
   },
   footer: {
     rights: 'Todos los derechos reservados.',
-    links: 'Enlaces del pie de pagina',
+    links: 'Enlaces del pie de página',
     github: 'Visitar perfil de GitHub',
-    scrollTop: 'Volver al inicio de la pagina',
+    scrollTop: 'Volver al inicio de la página',
   },
 }
 

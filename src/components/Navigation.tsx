@@ -1,8 +1,10 @@
 import type { FC } from 'react'
 import type { Language, LanguageCode } from '../constants/languages'
 import { memo, useEffect, useRef, useState } from 'react'
+import { useBodyScrollLock } from '../hooks/use-body-scroll-lock'
 import { useClickOutside } from '../hooks/use-click-outside'
 import { useReveal } from '../hooks/use-reveal'
+import { useScrollHideNav } from '../hooks/use-scroll-hide-nav'
 import { MessageCircle } from '../icons'
 import { NavLanguageSwitcher } from './NavLanguageSwitcher'
 import { NavLinks } from './NavLinks'
@@ -51,6 +53,8 @@ export const Navigation: FC<NavigationProps> = memo(
 
     useReveal(logoRef, 'is-visible', 0.2)
     useReveal(whatsappBtnRef, 'is-visible', 0.3)
+    useBodyScrollLock(isMobileOpen)
+    useScrollHideNav(navRef)
 
     useEffect(() => {
       const handleResize = (): void => {
@@ -58,39 +62,6 @@ export const Navigation: FC<NavigationProps> = memo(
       }
       window.addEventListener('resize', handleResize)
       return () => window.removeEventListener('resize', handleResize)
-    }, [])
-
-    useEffect(() => {
-      document.body.style.overflow = isMobileOpen ? 'hidden' : ''
-      return () => {
-        document.body.style.overflow = ''
-      }
-    }, [isMobileOpen])
-
-    useEffect(() => {
-      const navElement = navRef.current
-      if (!navElement) return
-
-      let lastScrollY = 0
-      let ticking = false
-
-      const handleScroll = (): void => {
-        if (ticking) return
-        ticking = true
-        requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY
-          if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            navElement.classList.add('nav-hidden')
-          } else {
-            navElement.classList.remove('nav-hidden')
-          }
-          lastScrollY = currentScrollY
-          ticking = false
-        })
-      }
-
-      window.addEventListener('scroll', handleScroll, { passive: true })
-      return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
     const handleMobileNavClick = (): void => {

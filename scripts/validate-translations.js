@@ -36,7 +36,7 @@ function extractTopLevelKeys(code) {
 }
 
 function extractNestedKeys(code, objectKey) {
-  const objectMatch = code.match(new RegExp(`^\\s{2}${objectKey}\\s*:\\s*\\{`, 'm'))
+  const objectMatch = code.match(new RegExp(`^\\s+${objectKey}\\s*:\\s*\\{`, 'm'))
   if (!objectMatch) return null
 
   const startIdx = code.indexOf(objectMatch[0]) + objectMatch[0].length
@@ -53,7 +53,51 @@ function extractNestedKeys(code, objectKey) {
   }
 
   const objectContent = code.substring(startIdx, objectEnd)
-  return [...objectContent.matchAll(/^\s{4}(\w+)\s*:/gm)].map(match => match[1])
+  const keys = []
+  let depth = 0
+  let quote = null
+  let isEscaped = false
+
+  for (let i = 0; i < objectContent.length; i++) {
+    const char = objectContent[i]
+    if (quote) {
+      if (isEscaped) {
+        isEscaped = false
+        continue
+      }
+      if (char === '\\') {
+        isEscaped = true
+        continue
+      }
+      if (char === quote) {
+        quote = null
+      }
+      continue
+    }
+
+    if (char === "'" || char === '"' || char === '`') {
+      quote = char
+      continue
+    }
+
+    if (char === '{') {
+      depth++
+      continue
+    }
+    if (char === '}') {
+      depth--
+      continue
+    }
+    if (depth !== 0 || !/\w/.test(char)) continue
+
+    const keyMatch = objectContent.slice(i).match(/^(\w+)\s*:/)
+    if (!keyMatch) continue
+
+    keys.push(keyMatch[1])
+    i += keyMatch[0].length - 1
+  }
+
+  return keys
 }
 
 function compareKeys(errors, file, label, keys, referenceKeys) {
@@ -70,6 +114,8 @@ async function main() {
   const files = (await readdir(translationsDir)).filter(f => f.endsWith('.ts') && f !== 'index.ts')
   let referenceKeys = null
   let referenceCareerKeys = null
+  let referenceAboutKeys = null
+  let referenceStatsLabelsKeys = null
   let referenceFile = null
   const errors = []
 
@@ -77,6 +123,8 @@ async function main() {
     const code = await readFile(resolve(translationsDir, file), 'utf-8')
     const keys = extractTopLevelKeys(code)
     const careerKeys = extractNestedKeys(code, 'career')
+    const aboutKeys = extractNestedKeys(code, 'about')
+    const statsLabelsKeys = extractNestedKeys(code, 'statsLabels')
 
     if (!keys) {
       errors.push(`${file}: could not parse TranslationContent object`)
@@ -88,22 +136,38 @@ async function main() {
       continue
     }
 
+    if (!aboutKeys) {
+      errors.push(`${file}: could not parse about object`)
+      continue
+    }
+
+    if (!statsLabelsKeys) {
+      errors.push(`${file}: could not parse about.statsLabels object`)
+      continue
+    }
+
     if (!referenceKeys) {
       referenceKeys = keys
       referenceCareerKeys = careerKeys
+      referenceAboutKeys = aboutKeys
+      referenceStatsLabelsKeys = statsLabelsKeys
       referenceFile = file
     } else {
       compareKeys(errors, file, 'top-level', keys, referenceKeys)
       compareKeys(errors, file, 'career', careerKeys, referenceCareerKeys)
+      compareKeys(errors, file, 'about', aboutKeys, referenceAboutKeys)
+      compareKeys(errors, file, 'about.statsLabels', statsLabelsKeys, referenceStatsLabelsKeys)
     }
   }
 
   if (errors.length === 0) {
     console.log(
-      `✅ All ${files.length} translation files have matching top-level and career keys (reference: ${referenceFile})`,
+      `✅ All ${files.length} translation files have matching top-level, career, and about keys (reference: ${referenceFile})`,
     )
     console.log(`   Keys: ${referenceKeys.join(', ')}`)
     console.log(`   Career keys: ${referenceCareerKeys.join(', ')}`)
+    console.log(`   About keys: ${referenceAboutKeys.join(', ')}`)
+    console.log(`   About statsLabels keys: ${referenceStatsLabelsKeys.join(', ')}`)
     process.exit(0)
   } else {
     console.error('❌ Translation key mismatches found:')

@@ -2,7 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './styles/main.css'
-import { loadErrorBoundaryTranslation } from './constants/error-boundary'
+import {
+  FALLBACK_RETRY,
+  FALLBACK_TITLE,
+  loadErrorBoundaryTranslation,
+} from './constants/error-boundary'
 import { analytics } from './services/analytics'
 
 analytics.init()
@@ -17,7 +21,7 @@ class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean; errorKey: number; title: string; retry: string }
 > {
-  state = { hasError: false, errorKey: 0, title: '', retry: '' }
+  state = { hasError: false, errorKey: 0, title: FALLBACK_TITLE, retry: FALLBACK_RETRY }
   componentDidMount() {
     loadErrorBoundaryTranslation()
       .then(errorBoundaryTranslation => {
