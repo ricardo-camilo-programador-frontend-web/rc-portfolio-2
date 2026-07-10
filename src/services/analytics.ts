@@ -21,6 +21,7 @@ class AnalyticsService {
   private hasInteracted = false
   private loadTimeout: ReturnType<typeof setTimeout> | null = null
   private abortController: AbortController | null = null
+  private idleCallbackHandle: number | null = null
 
   init(): void {
     this.abortController = new AbortController()
@@ -63,8 +64,6 @@ class AnalyticsService {
     }
   }
 
-  private idleCallbackHandle: number | null = null
-
   private scheduleLoad(): void {
     if ('requestIdleCallback' in window) {
       const ric = (
@@ -91,17 +90,6 @@ class AnalyticsService {
     if (this.isLoaded || this.isLoading) return
     this.isLoading = true
 
-    const counterScript = document.createElement('script')
-    counterScript.src = 'https://cdn.counter.dev/script.js'
-    counterScript.setAttribute('data-id', import.meta.env.VITE_COUNTER_DEV_ID)
-    counterScript.setAttribute('data-utcoffset', '-3')
-    counterScript.defer = true
-    counterScript.onload = () => {
-      this.isLoaded = true
-      this.flush()
-    }
-    document.head.appendChild(counterScript)
-
     const gtmScript = document.createElement('script')
     gtmScript.async = true
     gtmScript.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_MEASUREMENT_ID}`
@@ -116,6 +104,8 @@ class AnalyticsService {
       }
       gtag('js', new Date())
       gtag('config', import.meta.env.VITE_GA_MEASUREMENT_ID)
+      this.isLoaded = true
+      this.flush()
     }
 
     if (this.loadTimeout) {
@@ -145,7 +135,7 @@ class AnalyticsService {
     const events = [...this.queue]
     this.queue = []
 
-    if ('sendBeacon' in navigator) {
+    if (this.isLoaded && 'sendBeacon' in navigator) {
       events.forEach(event => {
         const payload = new URLSearchParams({
           category: event.category,
@@ -154,7 +144,7 @@ class AnalyticsService {
           ...(event.value && { value: String(event.value) }),
         })
 
-        navigator.sendBeacon('https://t.counter.dev/track', payload.toString())
+        navigator.sendBeacon(`https://www.google-analytics.com/collect`, payload.toString())
       })
     }
   }

@@ -66,7 +66,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
         href={project.link}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`View ${project.title} project in ${project.category} category`}
+        aria-label={`View project: ${project.title} (${project.category})`}
       >
         {!imageError && project.image && (
           <>
