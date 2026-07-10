@@ -44,16 +44,20 @@ export function useStaggerReveal(
 
     const timers: Array<ReturnType<typeof setTimeout>> = []
 
+    const revealChildren = (): void => {
+      const children = el.querySelectorAll(childSelector)
+      children.forEach((child, index) => {
+        const timer = setTimeout(() => {
+          child.classList.add('is-visible')
+        }, index * baseDelay)
+        timers.push(timer)
+      })
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          const children = el.querySelectorAll(childSelector)
-          children.forEach((child, i) => {
-            const timer = setTimeout(() => {
-              child.classList.add('is-visible')
-            }, i * baseDelay)
-            timers.push(timer)
-          })
+          revealChildren()
           observer.unobserve(el)
         }
       },
