@@ -46,8 +46,6 @@ const translation: TranslationContent = {
     viewFullSize: '查看全尺寸',
     projectCategory: '项目类别',
     comingSoon: '即将推出',
-    viewFullSize: '查看全尺寸',
-    projectCategory: '项目分类',
   },
   career: {
     title: '职业',

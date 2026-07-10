@@ -49,8 +49,6 @@ const translation: TranslationContent = {
     viewFullSize: 'முழு அளவைப் பார்',
     projectCategory: 'திட்ட வகை',
     comingSoon: 'விரைவில்',
-    viewFullSize: 'முழு அளவில் பார்க்கவும்',
-    projectCategory: 'திட்ட வகை',
   },
   career: {
     title: 'தொழில்முறை',

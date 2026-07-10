@@ -50,8 +50,6 @@ const translation: TranslationContent = {
     viewFullSize: 'Voir en taille réelle',
     projectCategory: 'Catégorie du projet',
     comingSoon: 'Bientôt',
-    viewFullSize: 'Voir en taille réelle',
-    projectCategory: 'Catégorie du projet',
   },
   career: {
     title: 'Parcours',

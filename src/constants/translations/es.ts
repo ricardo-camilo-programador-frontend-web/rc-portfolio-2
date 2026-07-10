@@ -49,8 +49,6 @@ const translation: TranslationContent = {
     viewFullSize: 'Ver tamaño completo',
     projectCategory: 'Categoría del proyecto',
     comingSoon: 'Próximamente',
-    viewFullSize: 'Ver tamaño completo',
-    projectCategory: 'Categoría del proyecto',
   },
   career: {
     title: 'Trayectoria',

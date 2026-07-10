@@ -49,8 +49,6 @@ const translation: TranslationContent = {
     viewFullSize: 'مکمل سائز دیکھیں',
     projectCategory: 'پروجیکٹ زمرہ',
     comingSoon: 'جلد ہی',
-    viewFullSize: 'مکمل سائز دیکھیں',
-    projectCategory: 'پروجیکٹ زمرہ',
   },
   career: {
     title: 'پیشہ ورانہ',

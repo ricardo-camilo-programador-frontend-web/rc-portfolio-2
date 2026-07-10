@@ -49,8 +49,6 @@ const translation: TranslationContent = {
     viewFullSize: 'పూర్తి పరిమాణం చూడండి',
     projectCategory: 'ప్రాజెక్ట్ వర్గం',
     comingSoon: 'త్వరలో',
-    viewFullSize: 'పూర్తి పరిమాణంలో చూడండి',
-    projectCategory: 'ప్రాజెక్ట్ వర్గం',
   },
   career: {
     title: 'వృత్తిపరమైన',
