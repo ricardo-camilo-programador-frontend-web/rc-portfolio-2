@@ -50,8 +50,6 @@ const translation: TranslationContent = {
     viewFullSize: 'Xem kích thước đầy đủ',
     projectCategory: 'Danh mục dự án',
     comingSoon: 'Sắp ra mắt',
-    viewFullSize: 'Xem kích thước đầy đủ',
-    projectCategory: 'Danh mục dự án',
   },
   career: {
     title: 'Lịch sử',

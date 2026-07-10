@@ -50,8 +50,6 @@ const translation: TranslationContent = {
     viewFullSize: 'Полный размер',
     projectCategory: 'Категория проекта',
     comingSoon: 'Скоро',
-    viewFullSize: 'Полный размер',
-    projectCategory: 'Категория проекта',
   },
   career: {
     title: 'Профессиональная',

@@ -49,8 +49,6 @@ const translation: TranslationContent = {
     viewFullSize: 'पूर्ण आकार पहा',
     projectCategory: 'प्रकल्प श्रेणी',
     comingSoon: 'लवकरच',
-    viewFullSize: 'पूर्ण आकारात पहा',
-    projectCategory: 'प्रकल्प श्रेणी',
   },
   career: {
     title: 'व्यावसायिक',

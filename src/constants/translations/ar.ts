@@ -49,8 +49,6 @@ const translation: TranslationContent = {
     viewFullSize: 'عرض بالحجم الكامل',
     projectCategory: 'فئة المشروع',
     comingSoon: 'قريباً',
-    viewFullSize: 'عرض بالحجم الكامل',
-    projectCategory: 'فئة المشروع',
   },
   career: {
     title: 'المسار',

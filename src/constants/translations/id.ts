@@ -50,8 +50,6 @@ const translation: TranslationContent = {
     viewFullSize: 'Lihat ukuran penuh',
     projectCategory: 'Kategori proyek',
     comingSoon: 'Segera',
-    viewFullSize: 'Lihat ukuran penuh',
-    projectCategory: 'Kategori proyek',
   },
   career: {
     title: 'Riwayat',

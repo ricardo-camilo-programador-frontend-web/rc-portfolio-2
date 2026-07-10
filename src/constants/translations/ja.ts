@@ -49,8 +49,6 @@ const translation: TranslationContent = {
     viewFullSize: 'フルサイズ表示',
     projectCategory: 'プロジェクトカテゴリ',
     comingSoon: '近日公開',
-    viewFullSize: 'フルサイズ表示',
-    projectCategory: 'プロジェクトカテゴリ',
   },
   career: {
     title: '職歴',

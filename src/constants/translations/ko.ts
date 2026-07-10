@@ -49,8 +49,6 @@ const translation: TranslationContent = {
     viewFullSize: '전체 크기 보기',
     projectCategory: '프로젝트 카테고리',
     comingSoon: '곧 출시',
-    viewFullSize: '전체 크기 보기',
-    projectCategory: '프로젝트 카테고리',
   },
   career: {
     title: '전문',

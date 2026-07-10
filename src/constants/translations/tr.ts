@@ -49,8 +49,6 @@ const translation: TranslationContent = {
     viewFullSize: 'Tam boyutu görüntüle',
     projectCategory: 'Proje kategorisi',
     comingSoon: 'Çok Yakında',
-    viewFullSize: 'Tam boyutu görüntüle',
-    projectCategory: 'Proje kategorisi',
   },
   career: {
     title: 'Profesyonel',
