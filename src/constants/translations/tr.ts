@@ -5,6 +5,7 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | Frontend Mühendisi',
     desc: '6+ yıl deneyimli Frontend Mühendisi ve Vue.js/TypeScript Uzmanı. Vue 3, React ve Next.js konusunda uzman.',
   },
+  errorBoundary: { title: 'Bir seyler ters gitti.', retry: 'Tekrar dene' },
   nav: {
     work: 'Portfolyo',
     about: 'Hakkımda',
@@ -25,6 +26,8 @@ const translation: TranslationContent = {
     bio: 'Ben Ricardo Camilo, 6+ yıl deneyimli Frontend Geliştirici. Vue.js ve TypeScript konusunda uzmanım, yüksek kaliteli çözümler sunmak için sağlam teknik uzmanlığı olağanüstü disiplinle birleştiriyorum.',
     details: 'DISC Profili: Araştırmacı — Teknik hassasiyet ve ölçeklenebilir çözümlere odaklanma.',
     stats: { exp: '6+ Yıl', projects: '20+ Teslim Edildi', eng: 'İngilizce C1' },
+    statsLabels: { exp: 'Deneyim', projects: 'El yapimi', eng: 'Yetkinlik' },
+    portraitAlt: 'Ricardo Camilo portresi',
   },
   services: {
     s1: {
@@ -110,6 +113,12 @@ const translation: TranslationContent = {
     desc: 'Zarif mühendislik ve dünya standartlarında tasarım arayan markalarla işbirliği yapmaya hazır.',
     button: 'Bana E-posta Gönder',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'Tum haklari saklidir.',
+    links: 'Alt bilgi baglantilari',
+    github: 'GitHub profilini ziyaret et',
+    scrollTop: 'Sayfanin basina don',
   },
 }
 

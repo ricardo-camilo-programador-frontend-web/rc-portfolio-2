@@ -5,6 +5,7 @@ const translation: TranslationContent = {
     title: 'ريكاردو كاميلو | مهندس واجهة أمامية',
     desc: 'مهندس واجهة أمامية ومتخصص في Vue.js/TypeScript مع أكثر من 6 سنوات من الخبرة. خبير في Vue 3 و React و Next.js.',
   },
+  errorBoundary: { title: 'حدث خطأ ما.', retry: 'حاول مرة أخرى' },
   nav: {
     work: 'معرض الأعمال',
     about: 'حول',
@@ -21,10 +22,12 @@ const translation: TranslationContent = {
     badge: 'متاح للعمل الحر',
   },
   about: {
-    quote: 'التميز التقني هو نتيجة النية والتنفيذ impeccable.',
+    quote: 'التميز التقني هو نتيجة النية والتنفيذ مثالية.',
     bio: 'أنا ريكاردو كاميلو، مطور واجهة أمامية مع أكثر من 6 سنوات من الخبرة. متخصص في Vue.js و TypeScript، أجمع بين الخبرة التقنية الصلبة والانضباط الاستثنائي لتقديم حلول عالية الجودة.',
     details: 'ملف DISC: الباحث — التركيز على الدقة التقنية والحلول القابلة للتوسع.',
     stats: { exp: '6+ سنوات', projects: '20+ مشروع مُسلم', eng: 'إنجليزي C1' },
+    statsLabels: { exp: 'الخبرة', projects: 'مصنوع يدوياً', eng: 'الإتقان' },
+    portraitAlt: 'صورة ريكاردو كاميلو',
   },
   services: {
     s1: {
@@ -110,6 +113,12 @@ const translation: TranslationContent = {
     desc: 'مستعد للتعاون مع العلامات التجارية التي تبحث عن هندسة أنيقة وتصميم عالمي المستوى.',
     button: 'أرسل لي بريدًا إلكترونيًا',
     whatsapp: 'واتساب',
+  },
+  footer: {
+    rights: 'جميع الحقوق محفوظة.',
+    links: 'روابط التذييل',
+    github: 'زيارة ملف GitHub',
+    scrollTop: 'التمرير إلى أعلى الصفحة',
   },
 }
 

@@ -5,6 +5,7 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | フロントエンドエンジニア',
     desc: '6 年以上の経験を持つフロントエンドエンジニアおよび Vue.js/TypeScript スペシャリスト。Vue 3、React、Next.js のエキスパート。',
   },
+  errorBoundary: { title: '問題が発生しました。', retry: 'もう一度試す' },
   nav: {
     work: 'ポートフォリオ',
     about: '概要',
@@ -25,6 +26,8 @@ const translation: TranslationContent = {
     bio: 'Ricardo Camilo と申します。6 年以上の経験を持つフロントエンドデベロッパーです。Vue.js と TypeScript を専門とし、確かな技術的専門知識と並外れた規律を組み合わせて、高品質なソリューションを提供します。',
     details: 'DISC プロファイル：調査官タイプ—技術的な精度とスケーラブルなソリューションに注力。',
     stats: { exp: '6 年以上', projects: '20+ 納品済み', eng: '英語 C1' },
+    statsLabels: { exp: '経験', projects: '手作り', eng: '習熟度' },
+    portraitAlt: 'リカルド・カミロのポートレート',
   },
   services: {
     s1: {
@@ -110,6 +113,12 @@ const translation: TranslationContent = {
     desc: 'エレガントなエンジニアリングとワールドクラスのデザインを求めるブランドとの協力準備ができています。',
     button: 'メールを送信',
     whatsapp: 'WhatsApp で連絡',
+  },
+  footer: {
+    rights: 'All rights reserved.',
+    links: 'フッターリンク',
+    github: 'GitHubプロフィールを開く',
+    scrollTop: 'ページ上部へ戻る',
   },
 }
 

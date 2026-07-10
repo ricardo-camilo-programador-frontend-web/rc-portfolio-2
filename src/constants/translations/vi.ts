@@ -5,6 +5,7 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | Kỹ sư Frontend',
     desc: 'Kỹ sư Frontend & Chuyên gia Vue.js/TypeScript với hơn 6 năm kinh nghiệm. Chuyên gia về Vue 3, React và Next.js.',
   },
+  errorBoundary: { title: 'Đã xảy ra lỗi.', retry: 'Thử lại' },
   nav: {
     work: 'Portfolio',
     about: 'Giới thiệu',
@@ -26,6 +27,8 @@ const translation: TranslationContent = {
     details:
       'Hồ sơ DISC: Nhà điều tra — Tập trung vào độ chính xác kỹ thuật và giải pháp có thể mở rộng.',
     stats: { exp: '6+ năm', projects: '20+ đã bàn giao', eng: 'Tiếng Anh C1' },
+    statsLabels: { exp: 'Kinh nghiệm', projects: 'Thủ công', eng: 'Thành thạo' },
+    portraitAlt: 'Chân dung Ricardo Camilo',
   },
   services: {
     s1: {
@@ -111,6 +114,12 @@ const translation: TranslationContent = {
     desc: 'Sẵn sàng hợp tác với các thương hiệu tìm kiếm kỹ thuật thanh lịch và thiết kế đẳng cấp thế giới.',
     button: 'Gửi email cho tôi',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'Đã đăng ký bản quyền.',
+    links: 'Liên kết chân trang',
+    github: 'Truy cập hồ sơ GitHub',
+    scrollTop: 'Cuộn lên đầu trang',
   },
 }
 

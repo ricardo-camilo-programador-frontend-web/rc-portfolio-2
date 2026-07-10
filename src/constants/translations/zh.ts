@@ -5,6 +5,7 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | 前端工程师',
     desc: '拥有 6 年以上经验的前端工程师和 Vue.js/TypeScript 专家。精通 Vue 3、React 和 Next.js。',
   },
+  errorBoundary: { title: '出现问题。', retry: '重试' },
   nav: {
     work: '作品集',
     about: '关于',
@@ -25,6 +26,8 @@ const translation: TranslationContent = {
     bio: '我是 Ricardo Camilo，拥有 6 年以上经验的前端开发人员。我专注于 Vue.js 和 TypeScript，将扎实的技术专长与非凡的纪律性相结合，提供高质量的解决方案。',
     details: 'DISC _profile：研究者——专注于技术精确性和可扩展解决方案。',
     stats: { exp: '6+ 年', projects: '20+ 已交付', eng: '英语 C1' },
+    statsLabels: { exp: '经验', projects: '手工打造', eng: '熟练度' },
+    portraitAlt: 'Ricardo Camilo 肖像',
   },
   services: {
     s1: {
@@ -107,6 +110,12 @@ const translation: TranslationContent = {
     desc: '准备与寻求优雅工程和世界一流设计的品牌合作。',
     button: '给我发电子邮件',
     whatsapp: 'WhatsApp 联系我们',
+  },
+  footer: {
+    rights: '版权所有。',
+    links: '页脚链接',
+    github: '访问 GitHub 个人资料',
+    scrollTop: '滚动到页面顶部',
   },
 }
 
