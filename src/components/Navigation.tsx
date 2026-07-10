@@ -87,7 +87,7 @@ export const Navigation: FC<NavigationProps> = memo(
               ref={logoRef}
               href="/"
               className="text-2xl font-serif font-bold text-[#E5D5C0] hover:text-[#E5D5C0]/80 transition-colors"
-              aria-label="Ricardo Camilo home"
+              aria-label="RICARDO.CAMILO — Home"
             >
               RICARDO.CAMILO
             </a>

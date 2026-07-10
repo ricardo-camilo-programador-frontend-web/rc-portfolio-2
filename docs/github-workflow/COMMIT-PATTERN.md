@@ -2,7 +2,29 @@
 
 Este documento define o padrao de mensagens de commit utilizado no projeto SGS Web, baseado no [Gitmoji](https://gitmoji.dev/).
 
-## Formato de Commit
+## Lembrete antes de criar um commit
+
+O CI rejeita qualquer commit que não comece com um gitmoji textual. Antes de executar `git commit`, confira:
+
+```bash
+# Verificar uma mensagem sem criar commit
+./scripts/validate-commit-message.sh <(printf '%s\n' ':bug: fix(77): corrigir validacao')
+
+# Exemplos validos
+:bug: fix(77): corrigir validacao
+:sparkles: feat(hero): adicionar links sociais
+:recycle: refactor(analytics): simplificar rastreamento
+
+# Exemplos invalidos
+fix(77): corrigir validacao
+fix: corrigir validacao
+🐛 fix(77): corrigir validacao
+```
+
+O hook local `.husky/commit-msg` executa a mesma validacao automaticamente. Se o hook nao for executado, verifique `git config core.hooksPath` e confirme que ele aponta para `.husky`.
+
+> Importante: os commits `fix(77): ...` e `fix(78): ...` nao passam neste projeto, pois a regra exige `:emoji: ` no inicio. Use, por exemplo, `:bug: fix(77): ...`.
+
 
 O formato padrao para mensagens de commit e:
 

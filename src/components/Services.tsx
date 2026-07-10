@@ -40,7 +40,7 @@ export const Services: FC<ServicesProps> = memo(({ s1, s2, s3, isRtl }) => {
     >
       <ul
         ref={gridRef}
-        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 list-none"
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12"
         dir={isRtl ? 'rtl' : 'ltr'}
         aria-label="List of services"
       >

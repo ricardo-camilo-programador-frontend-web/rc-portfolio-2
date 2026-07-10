@@ -1,10 +1,13 @@
-import { env } from '../constants/env'
-
 interface AnalyticsEvent {
   category: string
   action: string
   label?: string
   value?: number
+}
+
+type AnalyticsWindow = Window & {
+  dataLayer?: Array<unknown>
+  gtag?: (...arguments_: Array<unknown>) => void
 }
 
 class AnalyticsService {
@@ -17,6 +20,7 @@ class AnalyticsService {
   private hasInteracted = false
   private loadTimeout: ReturnType<typeof setTimeout> | null = null
   private abortController: AbortController | null = null
+  private idleCallbackHandle: number | null = null
 
   init(): void {
     this.abortController = new AbortController()
@@ -50,17 +54,15 @@ class AnalyticsService {
       this.abortController.abort()
       this.abortController = null
     }
-    if (this.idleCallbackHandle !== null && window.cancelIdleCallback) {
-      window.cancelIdleCallback(this.idleCallbackHandle)
+    if (this.idleCallbackHandle !== null && globalThis.cancelIdleCallback) {
+      globalThis.cancelIdleCallback(this.idleCallbackHandle)
       this.idleCallbackHandle = null
     }
   }
 
-  private idleCallbackHandle: number | null = null
-
   private scheduleLoad(): void {
-    if (window.requestIdleCallback) {
-      this.idleCallbackHandle = window.requestIdleCallback(
+    if (globalThis.requestIdleCallback) {
+      this.idleCallbackHandle = globalThis.requestIdleCallback(
         () => {
           this.idleCallbackHandle = null
           if (!this.hasInteracted) {
@@ -76,32 +78,29 @@ class AnalyticsService {
 
   private loadAnalytics(): void {
     if (this.isLoaded || this.isLoading) return
+
+    const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID
+    if (!measurementId || measurementId === 'undefined') {
+      this.isLoading = false
+      return
+    }
+
     this.isLoading = true
 
-    const counterScript = document.createElement('script')
-    counterScript.src = 'https://cdn.counter.dev/script.js'
-    counterScript.setAttribute('data-id', import.meta.env.VITE_COUNTER_DEV_ID)
-    counterScript.setAttribute('data-utcoffset', '-3')
-    counterScript.defer = true
-    counterScript.onload = () => {
+    const gtmScript = document.createElement('script')
+    gtmScript.async = true
+    gtmScript.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`
+    document.head.appendChild(gtmScript)
+    gtmScript.onload = () => {
+      const analyticsWindow = window as AnalyticsWindow
+      analyticsWindow.dataLayer = analyticsWindow.dataLayer || []
+      analyticsWindow.gtag = (...arguments_: Array<unknown>) => {
+        analyticsWindow.dataLayer?.push(arguments_)
+      }
+      analyticsWindow.gtag?.('js', new Date())
+      analyticsWindow.gtag?.('config', measurementId)
       this.isLoaded = true
       this.flush()
-    }
-    document.head.appendChild(counterScript)
-
-    if (env.gaMeasurementId) {
-      const gtmScript = document.createElement('script')
-      gtmScript.async = true
-      gtmScript.src = `https://www.googletagmanager.com/gtag/js?id=${env.gaMeasurementId}`
-      document.head.appendChild(gtmScript)
-      gtmScript.onload = () => {
-        window.dataLayer = window.dataLayer ?? []
-        const gtag = function gtag(...args: Array<unknown>) {
-          window.dataLayer?.push(args)
-        }
-        gtag('js', new Date())
-        gtag('config', env.gaMeasurementId)
-      }
     }
 
     if (this.loadTimeout) {
@@ -131,16 +130,14 @@ class AnalyticsService {
     const events = [...this.queue]
     this.queue = []
 
-    if ('sendBeacon' in navigator) {
+    const analyticsWindow = window as AnalyticsWindow
+    if (this.isLoaded && analyticsWindow.gtag) {
       events.forEach(event => {
-        const payload = new URLSearchParams({
-          category: event.category,
-          action: event.action,
-          ...(event.label && { label: event.label }),
-          ...(event.value && { value: String(event.value) }),
+        analyticsWindow.gtag?.('event', event.action, {
+          ['event_category']: event.category,
+          ...(event.label ? { ['event_label']: event.label } : {}),
+          ...(event.value !== undefined ? { value: event.value } : {}),
         })
-
-        navigator.sendBeacon('https://t.counter.dev/track', payload.toString())
       })
     }
   }

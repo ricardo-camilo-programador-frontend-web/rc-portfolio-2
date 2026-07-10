@@ -1,8 +1,9 @@
 import type { FC } from 'react'
-import { ChevronUp, Github } from 'lucide-react'
+import { ChevronUp } from 'lucide-react'
 import { memo, useCallback, useRef } from 'react'
 import { env } from '../constants/env'
 import { useReveal } from '../hooks/use-reveal'
+import { Github } from '../icons'
 
 export interface FooterProps {
   footer: {

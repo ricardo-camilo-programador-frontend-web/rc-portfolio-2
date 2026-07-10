@@ -104,7 +104,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
               src={optimizedImage}
               srcSet={srcSet}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              alt={`${project.title} — ${project.category}`}
+              alt={`${project.title} — ${projectCategoryLabel}: ${project.category}`}
               className="object-cover w-full h-full transition-opacity duration-300"
               loading="lazy"
               decoding="async"
@@ -121,6 +121,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
         )}
 
         <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-300">
+          <span className="sr-only">{project.category} — </span>
           <div className="flex items-center gap-2 w-full flex-wrap">
             {project.tags.map(tag => (
               <span

@@ -36,7 +36,8 @@
 
 @layer components {
   .font-serif {
-    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-family:
+      "Cormorant Garamond", "Cormorant Garamond Fallback", Georgia, "Times New Roman", serif;
   }
 
   .font-sans {
@@ -77,7 +78,7 @@
   .skip-link {
     position: absolute;
     top: -40px;
-    start: 0;
+    inset-inline-start: 0;
     background: var(--accent);
     color: var(--bg);
     padding: 8px 16px;
