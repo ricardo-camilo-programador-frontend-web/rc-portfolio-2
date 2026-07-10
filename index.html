@@ -45,20 +45,25 @@
     <!-- CSP is enforced via HTTP header in netlify.toml (not meta tag, to avoid dual-policy conflicts) -->
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" as="style" onload="this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap"></noscript>
-    <link rel="preload" as="image" href="https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp" fetchpriority="high" imagesrcset="https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 640w, https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 750w, https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 828w, https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 1080w, https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 1200w, https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg?format=webp 1920w" imagesizes="(max-width: 768px) 100vw, 1920px" crossorigin>
+    <link rel="preload" href="/fonts/cormorant-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" as="image" href="/images/ricardo-camilo-portfolio-hero.webp" fetchpriority="high" imagesizes="(max-width: 768px) 100vw, 1920px">
 
     <style>
+        @font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:400;font-display:optional;src:url(/fonts/cormorant-400.woff2) format('woff2')}
+        @font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:600;font-display:optional;src:url(/fonts/cormorant-600.woff2) format('woff2')}
+        /* Fallback font with adjusted metrics to match Cormorant Garamond — prevents CLS */
+        @font-face{font-family:'Cormorant Garamond Fallback';font-style:normal;font-weight:400;src:local('Georgia');size-adjust:108%;ascent-override:88%;descent-override:22%}
+        @font-face{font-family:'Cormorant Garamond Fallback';font-style:normal;font-weight:600;src:local('Georgia');size-adjust:108%;ascent-override:88%;descent-override:22%}
+        @font-face{font-family:'Inter';font-style:normal;font-weight:300 700;font-display:optional;src:url(/fonts/inter-latin.woff2) format('woff2')}
         *,*::before,*::after{box-sizing:border-box}
         :root{--accent:#E5D5C0;--accent-dark:#b8a082;--bg:#0A0A0A}
         html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:system-ui,-apple-system,sans-serif}
         body{margin:0;background-color:var(--bg);color:var(--accent);min-height:100vh}
+        .font-serif{font-family:"Cormorant Garamond","Cormorant Garamond Fallback",Georgia,"Times New Roman",serif}
         .scroll-smooth{scroll-behavior:smooth}
         .overflow-x-hidden{overflow-x:hidden}
         .selection\:bg-\[\#E5D5C0\]::selection{background-color:#E5D5C0}
@@ -96,7 +101,7 @@
           "@id": "https://ricardo-camilo-dev-frontend-web.netlify.app/#person",
           "name": "Ricardo Camilo",
           "url": "https://ricardo-camilo-dev-frontend-web.netlify.app/",
-          "image": "https://raw.githubusercontent.com/ricardo-camilo-programador-frontend-web/portfolio-assets/main/hero-photo.jpg",
+          "image": "https://ricardo-camilo-dev-frontend-web.netlify.app/images/ricardo-camilo-portfolio-hero.webp",
           "jobTitle": "Desenvolvedor Frontend Pleno",
           "description": "Desenvolvedor Frontend Pleno especializado em Vue.js, TypeScript e React com 6+ anos de experiência.",
           "sameAs": [

@@ -51,6 +51,7 @@ export const Hero: FC<HeroProps> = memo(
         ref={sectionRef}
         className="min-h-screen flex flex-col items-center justify-center pt-24 px-6 text-center relative overflow-hidden"
         aria-label="Hero section"
+        style={{ contain: 'layout style' }}
       >
         <div className="hero-bg absolute inset-0 z-0">
           <img

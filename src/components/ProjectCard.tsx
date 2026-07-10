@@ -61,13 +61,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
     const srcSet = generateSrcSet(project.image)
 
     return (
-      <a
-        {...cardProps}
-        href={project.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`View project: ${project.title} (${project.category})`}
-      >
+      <a {...cardProps} href={project.link} target="_blank" rel="noopener noreferrer">
         {!imageError && project.image && (
           <>
             {project.year && (
@@ -112,6 +106,7 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
         )}
 
         <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-300">
+          <span className="sr-only">{project.category} — </span>
           <div className="flex items-center gap-2 w-full flex-wrap">
             {project.tags.map(tag => (
               <span

@@ -36,9 +36,8 @@
 
 @layer components {
   .font-serif {
-    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-    /* Reduce CLS from font loading — match metrics to fallback font */
-    size-adjust: 110%;
+    font-family:
+      "Cormorant Garamond", "Cormorant Garamond Fallback", Georgia, "Times New Roman", serif;
   }
 
   .font-sans {

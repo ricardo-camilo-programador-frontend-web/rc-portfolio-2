@@ -138,6 +138,5 @@ export const TIMELINE = [
   },
 ]
 
-export const USER_PHOTO =
-  '/images/ricardo-camilo-programador-frontend-web-developer-frontend-engineer-software-engineer-web-developer-vuejs-vue-reactjs-react-javascript-typescript.png'
+export const USER_PHOTO = '/images/ricardo-camilo-portfolio-hero.webp'
 export const WHATSAPP_URL = 'https://wa.me/5514996765389'

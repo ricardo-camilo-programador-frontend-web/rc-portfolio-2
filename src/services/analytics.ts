@@ -88,11 +88,18 @@ class AnalyticsService {
 
   private loadAnalytics(): void {
     if (this.isLoaded || this.isLoading) return
+
+    const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID
+    if (!measurementId || measurementId === 'undefined') {
+      this.isLoading = false
+      return
+    }
+
     this.isLoading = true
 
     const gtmScript = document.createElement('script')
     gtmScript.async = true
-    gtmScript.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_MEASUREMENT_ID}`
+    gtmScript.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`
     document.head.appendChild(gtmScript)
     gtmScript.onload = () => {
       ;(window as typeof window & { dataLayer: Array<unknown> }).dataLayer =
@@ -103,7 +110,7 @@ class AnalyticsService {
         ).push(args)
       }
       gtag('js', new Date())
-      gtag('config', import.meta.env.VITE_GA_MEASUREMENT_ID)
+      gtag('config', measurementId)
       this.isLoaded = true
       this.flush()
     }
