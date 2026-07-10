@@ -10,7 +10,6 @@ interface ProjectCardProps {
   viewFullSizeLabel: string
   projectCategoryLabel: string
   isRtl: boolean
-  onImageLoad?: (imageUrl: string) => void
   onOpenModal: (image: string, title: string, category: string) => void
 }
 
@@ -21,12 +20,12 @@ const optimizeImageUrl = (url: string): string => {
   return url
 }
 
-const generateSrcSet = (baseUrl: string): string => {
+const generateSrcSet = (baseUrl: string): string | undefined => {
   if (baseUrl.startsWith('https://raw.githubusercontent.com')) {
     const base = `${baseUrl}?format=webp`
     return `${base} 400w, ${base} 800w, ${base} 1200w`
   }
-  return `${baseUrl} 400w, ${baseUrl} 800w`
+  return undefined
 }
 
 export const ProjectCard: FC<ProjectCardProps> = memo(
@@ -71,7 +70,13 @@ export const ProjectCard: FC<ProjectCardProps> = memo(
     const srcSet = generateSrcSet(project.image)
 
     return (
-      <a {...cardProps} href={project.link} target="_blank" rel="noopener noreferrer">
+      <a
+        {...cardProps}
+        href={project.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${viewProjectLabel} ${project.title} — ${projectCategoryLabel}: ${project.category}`}
+      >
         {!imageError && project.image && (
           <>
             {project.year && (

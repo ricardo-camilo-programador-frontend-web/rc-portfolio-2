@@ -62,6 +62,7 @@ export const PROJECTS: Array<Project> = [
     link: 'https://persona-nextjs-chronicles-2.netlify.app',
     year: '2025',
   },
+  // Hidden on initial render: PROJECTS uses incremental reveal, so this appears after "load more".
   {
     id: 'ch5',
     title: 'Zenith Node',

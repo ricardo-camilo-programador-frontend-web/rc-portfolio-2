@@ -54,24 +54,15 @@ class AnalyticsService {
       this.abortController.abort()
       this.abortController = null
     }
-    if (this.idleCallbackHandle !== null && 'cancelIdleCallback' in window) {
-      const cic = (
-        window as Window & typeof globalThis & { cancelIdleCallback: (handle: number) => void }
-      ).cancelIdleCallback
-      cic(this.idleCallbackHandle)
+    if (this.idleCallbackHandle !== null && globalThis.cancelIdleCallback) {
+      globalThis.cancelIdleCallback(this.idleCallbackHandle)
       this.idleCallbackHandle = null
     }
   }
 
   private scheduleLoad(): void {
-    if ('requestIdleCallback' in window) {
-      const ric = (
-        window as Window &
-          typeof globalThis & {
-            requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number
-          }
-      ).requestIdleCallback
-      this.idleCallbackHandle = ric(
+    if (globalThis.requestIdleCallback) {
+      this.idleCallbackHandle = globalThis.requestIdleCallback(
         () => {
           this.idleCallbackHandle = null
           if (!this.hasInteracted) {
