@@ -50,8 +50,8 @@ class AnalyticsService {
       this.abortController.abort()
       this.abortController = null
     }
-    if (this.idleCallbackHandle !== null && window.cancelIdleCallback) {
-      window.cancelIdleCallback(this.idleCallbackHandle)
+    if (this.idleCallbackHandle !== null && globalThis.cancelIdleCallback) {
+      globalThis.cancelIdleCallback(this.idleCallbackHandle)
       this.idleCallbackHandle = null
     }
   }
@@ -59,8 +59,8 @@ class AnalyticsService {
   private idleCallbackHandle: number | null = null
 
   private scheduleLoad(): void {
-    if (window.requestIdleCallback) {
-      this.idleCallbackHandle = window.requestIdleCallback(
+    if (globalThis.requestIdleCallback) {
+      this.idleCallbackHandle = globalThis.requestIdleCallback(
         () => {
           this.idleCallbackHandle = null
           if (!this.hasInteracted) {
@@ -80,8 +80,8 @@ class AnalyticsService {
 
     const counterScript = document.createElement('script')
     counterScript.src = 'https://cdn.counter.dev/script.js'
-    counterScript.setAttribute('data-id', import.meta.env.VITE_COUNTER_DEV_ID)
-    counterScript.setAttribute('data-utcoffset', '-3')
+    counterScript.dataset.id = import.meta.env.VITE_COUNTER_DEV_ID
+    counterScript.dataset.utcoffset = '-3'
     counterScript.defer = true
     counterScript.onload = () => {
       this.isLoaded = true

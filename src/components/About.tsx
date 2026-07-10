@@ -1,7 +1,8 @@
-import { Github, Instagram, Linkedin, ShieldCheck } from 'lucide-react'
+import { ShieldCheck } from 'lucide-react'
 import { type FC, memo, type ReactNode, useRef } from 'react'
 import { env } from '../constants/env'
 import { useReveal } from '../hooks/use-reveal'
+import { Github, Instagram, Linkedin } from '../icons'
 
 interface AboutProps {
   quote: string

@@ -55,7 +55,7 @@ const loadTranslation = (code: LanguageCode): Promise<TranslationContent> =>
 // Lazy-load English as fallback for when translation chunks fail to load
 let _enFallback: Promise<TranslationContent> | null = null
 const getEnglishFallback = (): Promise<TranslationContent> => {
-  if (!_enFallback) _enFallback = import('./constants/translations/en.ts').then(m => m.default)
+  _enFallback ??= import('./constants/translations/en.ts').then(m => m.default)
   return _enFallback
 }
 
@@ -202,16 +202,16 @@ const App: FC = () => {
   useEffect(() => {
     const isRtl = ['ar', 'ur'].includes(langCode)
     document.documentElement.dir = isRtl ? 'rtl' : 'ltr'
-    analytics.trackPageView(window.location.hash || '/')
+    analytics.trackPageView(globalThis.location.hash || '/')
   }, [langCode])
 
   useEffect(() => {
     const handleHashChange = (): void => {
-      analytics.trackNavigation(window.location.hash.replace('#', '') || 'home')
+      analytics.trackNavigation(globalThis.location.hash.replace('#', '') || 'home')
     }
 
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
+    globalThis.addEventListener('hashchange', handleHashChange)
+    return () => globalThis.removeEventListener('hashchange', handleHashChange)
   }, [])
 
   const handleLangChange = useCallback((code: LanguageCode) => {
