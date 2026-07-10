@@ -26,7 +26,7 @@ const translation: TranslationContent = {
     bio: 'Ben Ricardo Camilo, 6+ yıl deneyimli Frontend Geliştirici. Vue.js ve TypeScript konusunda uzmanım, yüksek kaliteli çözümler sunmak için sağlam teknik uzmanlığı olağanüstü disiplinle birleştiriyorum.',
     details: 'DISC Profili: Araştırmacı — Teknik hassasiyet ve ölçeklenebilir çözümlere odaklanma.',
     stats: { exp: '6+ Yıl', projects: '20+ Teslim Edildi', eng: 'İngilizce C1' },
-    statsLabels: { exp: 'Deneyim', projects: 'El yapimi', eng: 'Yetkinlik' },
+    statsLabels: { exp: 'Deneyim', projects: 'El yapımı', eng: 'Yetkinlik' },
     portraitAlt: 'Ricardo Camilo portresi',
   },
   services: {
