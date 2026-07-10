@@ -98,6 +98,7 @@ export const NavLanguageSwitcher: FC<NavLanguageSwitcherProps> = memo(
           <div
             className={`absolute top-full ${menuAlignmentClass} mt-2 py-2 bg-[#0A0A0A] border border-white/10 rounded-sm shadow-xl z-50 min-w-[140px]`}
             role="listbox"
+            tabIndex={-1}
             aria-label={a11y.languageSelection}
             onKeyDown={handleLangKeyDown}
           >
