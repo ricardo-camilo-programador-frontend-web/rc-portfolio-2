@@ -5,6 +5,7 @@ const translation: TranslationContent = {
     title: 'Рикардо Камило | Фронтенд-инженер',
     desc: 'Фронтенд-инженер и специалист по Vue.js/TypeScript с более чем 6-летним опытом. Эксперт в Vue 3, React и Next.js.',
   },
+  errorBoundary: { title: 'Что-то пошло не так.', retry: 'Попробовать снова' },
   nav: {
     work: 'Портфолио',
     about: 'Обо мне',
@@ -26,6 +27,8 @@ const translation: TranslationContent = {
     details:
       'Профиль DISC: Исследователь — фокус на технической точности и масштабируемых решениях.',
     stats: { exp: '6+ лет', projects: '20+ выполнено', eng: 'Английский C1' },
+    statsLabels: { exp: 'Опыт', projects: 'Ручная работа', eng: 'Владение' },
+    portraitAlt: 'Портрет Рикардо Камило',
   },
   services: {
     s1: {
@@ -111,6 +114,12 @@ const translation: TranslationContent = {
     desc: 'Готов к сотрудничеству с брендами, ищущими элегантную инженерию и дизайн мирового класса.',
     button: 'Написать мне',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'Все права защищены.',
+    links: 'Ссылки в футере',
+    github: 'Посетить профиль GitHub',
+    scrollTop: 'Прокрутить к началу страницы',
   },
 }
 

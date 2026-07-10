@@ -4,5 +4,11 @@
     "interface": true,
     "type": true
   },
-  "ignoreFiles": ["docs/**", "scripts/**", "**/*.test.ts", "**/*.spec.ts"]
+  "ignoreFiles": [
+    "docs/**",
+    "scripts/**",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "src/constants/translations/**"
+  ]
 }

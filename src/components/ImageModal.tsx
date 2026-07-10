@@ -135,14 +135,9 @@ export const ImageModal: FC<ImageModalProps> = memo(
                   </div>
                 )}
 
-                {/* biome-ignore lint/a11y/useKeyWithClickEvents: stopPropagation only prevents modal dismissal on click-through, not a user action */}
-                {/* biome-ignore lint/a11y/useSemanticElements: zoom container needs div for overflow control */}
-                <div
-                  className="flex-1 flex items-center justify-center w-full overflow-hidden"
-                  onClick={e => e.stopPropagation()}
+                <fieldset
+                  className="flex-1 flex items-center justify-center w-full overflow-hidden border-0 m-0 p-0 min-w-0"
                   onWheel={handleWheel}
-                  role="group"
-                  tabIndex={-1}
                   aria-label="Image zoom area"
                 >
                   <img
@@ -158,7 +153,7 @@ export const ImageModal: FC<ImageModalProps> = memo(
                     onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseUp}
                   />
-                </div>
+                </fieldset>
 
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-[#E5D5C0]/20 backdrop-blur-sm px-4 py-3 rounded-full mb-4">
                   <button
