@@ -5,6 +5,7 @@ const translation: TranslationContent = {
     title: 'रिकार्डो कामिलो | फ्रंटएंड इंजिनिअर',
     desc: '६+ वर्षांच्या अनुभवासह फ्रंटएंड इंजिनिअर आणि Vue.js/TypeScript विशेषज्ञ. Vue 3, React आणि Next.js मध्ये विशेषज्ञ.',
   },
+  errorBoundary: { title: 'काहीतरी चूक झाली.', retry: 'पुन्हा प्रयत्न करा' },
   nav: {
     work: 'पोर्टफोलिओ',
     about: 'बद्दल',
@@ -25,6 +26,8 @@ const translation: TranslationContent = {
     bio: 'मी रिकार्डो कामिलो, ६+ वर्षांच्या अनुभवासह फ्रंटएंड डेव्हलपर. मी Vue.js आणि TypeScript मध्ये विशेषज्ञ आहे, उच्च-गुणवत्तेचे उपाय प्रदान करण्यासाठी कसोटीने तांत्रिक विशेषज्ञता आणि असाधारण शिस्ताचे संयोजन करतो.',
     details: 'DISC प्रोफाइल: संशोधक — तांत्रिक अचूकता आणि स्केलेबल सोल्यूशन्सवर लक्ष केंद्रित.',
     stats: { exp: '६+ वर्षे', projects: '२०+ वितरित', eng: 'इंग्रजी C1' },
+    statsLabels: { exp: 'अनुभव', projects: 'हस्तनिर्मित', eng: 'प्रावीण्य' },
+    portraitAlt: 'रिकार्डो कामिलोचे पोर्ट्रेट',
   },
   services: {
     s1: {
@@ -110,6 +113,12 @@ const translation: TranslationContent = {
     desc: 'अशा ब्रँड्ससह सहयोग करण्यासाठी तयार जे सुंदर इंजिनिअरिंग आणि जागतिक-स्तरीय डिझाइन शोधत आहेत.',
     button: 'मला ईमेल करा',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'सर्व हक्क राखीव.',
+    links: 'फूटर दुवे',
+    github: 'GitHub प्रोफाइल पहा',
+    scrollTop: 'पानाच्या शीर्षस्थानी जा',
   },
 }
 

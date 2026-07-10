@@ -1,5 +1,5 @@
 /**
- * Validates that all translation files have the same set of top-level keys.
+ * Validates that all translation files have the same top-level keys and career keys.
  * Run: node scripts/validate-translations.js
  * Exit code: 0 = all good, 1 = mismatch found
  */
@@ -35,37 +35,139 @@ function extractTopLevelKeys(code) {
   return keys
 }
 
+function extractNestedKeys(code, objectKey) {
+  const objectMatch = code.match(new RegExp(`^\\s+${objectKey}\\s*:\\s*\\{`, 'm'))
+  if (!objectMatch) return null
+
+  const startIdx = code.indexOf(objectMatch[0]) + objectMatch[0].length
+  let braceCount = 1
+  let objectEnd = startIdx
+
+  for (let i = startIdx; i < code.length && braceCount > 0; i++) {
+    if (code[i] === '{') braceCount++
+    else if (code[i] === '}') braceCount--
+    if (braceCount === 0) {
+      objectEnd = i
+      break
+    }
+  }
+
+  const objectContent = code.substring(startIdx, objectEnd)
+  const keys = []
+  let depth = 0
+  let quote = null
+  let isEscaped = false
+
+  for (let i = 0; i < objectContent.length; i++) {
+    const char = objectContent[i]
+    if (quote) {
+      if (isEscaped) {
+        isEscaped = false
+        continue
+      }
+      if (char === '\\') {
+        isEscaped = true
+        continue
+      }
+      if (char === quote) {
+        quote = null
+      }
+      continue
+    }
+
+    if (char === "'" || char === '"' || char === '`') {
+      quote = char
+      continue
+    }
+
+    if (char === '{') {
+      depth++
+      continue
+    }
+    if (char === '}') {
+      depth--
+      continue
+    }
+    if (depth !== 0 || !/\w/.test(char)) continue
+
+    const keyMatch = objectContent.slice(i).match(/^(\w+)\s*:/)
+    if (!keyMatch) continue
+
+    keys.push(keyMatch[1])
+    i += keyMatch[0].length - 1
+  }
+
+  return keys
+}
+
+function compareKeys(errors, file, label, keys, referenceKeys) {
+  if (JSON.stringify(keys) === JSON.stringify(referenceKeys)) return
+
+  const missing = referenceKeys.filter(key => !keys.includes(key))
+  const extra = keys.filter(key => !referenceKeys.includes(key))
+
+  if (missing.length > 0) errors.push(`${file}: missing ${label} keys [${missing.join(', ')}]`)
+  if (extra.length > 0) errors.push(`${file}: extra ${label} keys [${extra.join(', ')}]`)
+}
+
 async function main() {
   const files = (await readdir(translationsDir)).filter(f => f.endsWith('.ts') && f !== 'index.ts')
   let referenceKeys = null
+  let referenceCareerKeys = null
+  let referenceAboutKeys = null
+  let referenceStatsLabelsKeys = null
   let referenceFile = null
   const errors = []
 
   for (const file of files.sort()) {
     const code = await readFile(resolve(translationsDir, file), 'utf-8')
     const keys = extractTopLevelKeys(code)
+    const careerKeys = extractNestedKeys(code, 'career')
+    const aboutKeys = extractNestedKeys(code, 'about')
+    const statsLabelsKeys = extractNestedKeys(code, 'statsLabels')
 
     if (!keys) {
       errors.push(`${file}: could not parse TranslationContent object`)
       continue
     }
 
+    if (!careerKeys) {
+      errors.push(`${file}: could not parse career object`)
+      continue
+    }
+
+    if (!aboutKeys) {
+      errors.push(`${file}: could not parse about object`)
+      continue
+    }
+
+    if (!statsLabelsKeys) {
+      errors.push(`${file}: could not parse about.statsLabels object`)
+      continue
+    }
+
     if (!referenceKeys) {
       referenceKeys = keys
+      referenceCareerKeys = careerKeys
+      referenceAboutKeys = aboutKeys
+      referenceStatsLabelsKeys = statsLabelsKeys
       referenceFile = file
-    } else if (JSON.stringify(keys) !== JSON.stringify(referenceKeys)) {
-      const missing = referenceKeys.filter(k => !keys.includes(k))
-      const extra = keys.filter(k => !referenceKeys.includes(k))
-      if (missing.length > 0) errors.push(`${file}: missing keys [${missing.join(', ')}]`)
-      if (extra.length > 0) errors.push(`${file}: extra keys [${extra.join(', ')}]`)
+    } else {
+      compareKeys(errors, file, 'top-level', keys, referenceKeys)
+      compareKeys(errors, file, 'career', careerKeys, referenceCareerKeys)
+      compareKeys(errors, file, 'about', aboutKeys, referenceAboutKeys)
+      compareKeys(errors, file, 'about.statsLabels', statsLabelsKeys, referenceStatsLabelsKeys)
     }
   }
 
   if (errors.length === 0) {
     console.log(
-      `✅ All ${files.length} translation files have matching top-level keys (reference: ${referenceFile})`,
+      `✅ All ${files.length} translation files have matching top-level, career, and about keys (reference: ${referenceFile})`,
     )
     console.log(`   Keys: ${referenceKeys.join(', ')}`)
+    console.log(`   Career keys: ${referenceCareerKeys.join(', ')}`)
+    console.log(`   About keys: ${referenceAboutKeys.join(', ')}`)
+    console.log(`   About statsLabels keys: ${referenceStatsLabelsKeys.join(', ')}`)
     process.exit(0)
   } else {
     console.error('❌ Translation key mismatches found:')

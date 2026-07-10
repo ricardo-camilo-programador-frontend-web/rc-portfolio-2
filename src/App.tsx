@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import type { FooterProps } from './components/Footer'
 import type { TranslationContent } from './constants/translation-types'
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { Hero } from './components/Hero'
@@ -14,12 +15,39 @@ const Certificates = lazy(() =>
   import('./components/Certificates').then(m => ({ default: m.Certificates })),
 )
 const CTA = lazy(() => import('./components/CTA').then(m => ({ default: m.CTA })))
-const Footer = lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })))
+const Footer = lazy<FC<FooterProps>>(() =>
+  import('./components/Footer').then(m => ({ default: m.Footer })),
+)
 const Projects = lazy(() => import('./components/Projects').then(m => ({ default: m.Projects })))
 const Services = lazy(() => import('./components/Services').then(m => ({ default: m.Services })))
 const Skills = lazy(() => import('./components/Skills').then(m => ({ default: m.Skills })))
 
 const VALID_LANG_CODES = new Set<string>(LANGUAGES.map(l => l.code))
+const BASE_URL = env.portfolioUrl
+const OG_IMAGE_URL = `${BASE_URL}/og-image.png`
+
+const OG_LOCALES: Record<LanguageCode, string> = {
+  en: 'en_US',
+  zh: 'zh_CN',
+  hi: 'hi_IN',
+  es: 'es_ES',
+  fr: 'fr_FR',
+  ar: 'ar_AR',
+  bn: 'bn_BD',
+  pt: 'pt_BR',
+  ru: 'ru_RU',
+  ur: 'ur_PK',
+  id: 'id_ID',
+  de: 'de_DE',
+  ja: 'ja_JP',
+  mr: 'mr_IN',
+  te: 'te_IN',
+  tr: 'tr_TR',
+  ta: 'ta_IN',
+  vi: 'vi_VN',
+  ko: 'ko_KR',
+  it: 'it_IT',
+}
 
 const loadTranslation = (code: LanguageCode): Promise<TranslationContent> =>
   import(`./constants/translations/${code}.ts`).then(m => m.default)
@@ -31,12 +59,43 @@ const getEnglishFallback = (): Promise<TranslationContent> => {
   return _enFallback
 }
 
+const setMetaProperty = (property: string, content: string): void => {
+  const selector = `meta[property="${property}"]`
+  const existingMeta = document.querySelector(selector)
+  const meta = existingMeta ?? document.createElement('meta')
+
+  meta.setAttribute('property', property)
+  meta.setAttribute('content', content)
+
+  if (!existingMeta) {
+    document.head.appendChild(meta)
+  }
+}
+
+const updateOpenGraphMeta = (translation: TranslationContent, langCode: LanguageCode): void => {
+  setMetaProperty('og:title', translation.seo.title)
+  setMetaProperty('og:description', translation.seo.desc)
+  setMetaProperty('og:image', OG_IMAGE_URL)
+  setMetaProperty('og:image:width', '1200')
+  setMetaProperty('og:image:height', '630')
+  setMetaProperty('og:image:alt', translation.seo.title)
+  setMetaProperty('og:locale', OG_LOCALES[langCode])
+}
+
 // Minimal inline fallback for the brief moment before dynamic import resolves
 const INITIAL_TRANSLATION: TranslationContent = {
   seo: { title: 'Ricardo Camilo', desc: '' },
+  errorBoundary: { title: '', retry: '' },
   nav: { work: '', about: '', services: '', career: '', contact: '', menu: '' },
   hero: { title: '', subtitle: '', desc: '', cta: '', badge: '' },
-  about: { quote: '', bio: '', details: '', stats: { exp: '', projects: '', eng: '' } },
+  about: {
+    quote: '',
+    bio: '',
+    details: '',
+    stats: { exp: '', projects: '', eng: '' },
+    statsLabels: { exp: '', projects: '', eng: '' },
+    portraitAlt: '',
+  },
   services: {
     s1: { title: '', desc: '' },
     s2: { title: '', desc: '' },
@@ -55,6 +114,7 @@ const INITIAL_TRANSLATION: TranslationContent = {
   career: { title: '', subtitle: '', present: '', timeline: [] },
   certs: { title: '', subtitle: '', proficiency: '', certificate: '', level: '' },
   cta: { title: '', subtitle: '', desc: '', button: '', whatsapp: '' },
+  footer: { rights: '', links: '', github: '', scrollTop: '' },
 }
 
 interface LoadingFallbackProps {
@@ -103,8 +163,9 @@ const App: FC = () => {
           const descTag = document.querySelector('meta[name="description"]')
           if (descTag) descTag.setAttribute('content', data.seo.desc)
 
+          updateOpenGraphMeta(data, langCode)
+
           // Add hreflang tags for multilingual SEO
-          const BaseUrl = 'https://ricardo-camilo-dev-frontend-web.netlify.app'
           const existingHreflangs = document.querySelectorAll('link[hreflang]')
           existingHreflangs.forEach(el => {
             el.remove()
@@ -114,20 +175,22 @@ const App: FC = () => {
             const link = document.createElement('link')
             link.rel = 'alternate'
             link.hreflang = lang.code
-            link.href = `${BaseUrl}/?lang=${lang.code}`
+            link.href = `${BASE_URL}/?lang=${lang.code}`
             head.appendChild(link)
           })
           // x-default hreflang pointing to default language (Portuguese)
           const xDefault = document.createElement('link')
           xDefault.rel = 'alternate'
           xDefault.hreflang = 'x-default'
-          xDefault.href = `${BaseUrl}/`
+          xDefault.href = `${BASE_URL}/`
           head.appendChild(xDefault)
         }
       })
       .catch(() => {
         // Both target and English fallback failed — keep INITIAL_TRANSLATION
-        console.warn(`Failed to load translation for "${langCode}" and English fallback`)
+        if (import.meta.env.DEV) {
+          console.warn(`Failed to load translation for "${langCode}" and English fallback`)
+        }
       })
     return () => {
       stale = true
@@ -200,6 +263,8 @@ const App: FC = () => {
             bio={t.about.bio}
             details={t.about.details}
             stats={t.about.stats}
+            statsLabels={t.about.statsLabels}
+            portraitAlt={t.about.portraitAlt}
             userPhoto={USER_PHOTO}
             isRtl={isRtl}
           />
@@ -256,7 +321,7 @@ const App: FC = () => {
       </main>
 
       <Suspense fallback={null}>
-        <Footer />
+        <Footer footer={t.footer} />
       </Suspense>
     </div>
   )

@@ -5,6 +5,7 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | 프론트엔드 엔지니어',
     desc: '6 년 이상의 경력을 가진 프론트엔드 엔지니어 및 Vue.js/TypeScript 전문가. Vue 3, React 및 Next.js 전문가.',
   },
+  errorBoundary: { title: '문제가 발생했습니다.', retry: '다시 시도' },
   nav: {
     work: '포트폴리오',
     about: '소개',
@@ -25,6 +26,8 @@ const translation: TranslationContent = {
     bio: '6 년 이상의 경력을 가진 프론트엔드 개발자 Ricardo Camilo 입니다. Vue.js 와 TypeScript 를 전문으로 하며, 견고한 기술 전문성과 뛰어난 규율을 결합하여 고품질 솔루션을 제공합니다.',
     details: 'DISC 프로필: 조사관형 — 기술적 정밀성과 확장 가능한 솔루션에 중점.',
     stats: { exp: '6+ 년', projects: '20+ 완료', eng: '영어 C1' },
+    statsLabels: { exp: '경험', projects: '수작업', eng: '숙련도' },
+    portraitAlt: '리카르도 카밀로 초상',
   },
   services: {
     s1: {
@@ -110,6 +113,12 @@ const translation: TranslationContent = {
     desc: '우아한 엔지니어링과 세계적 수준의 디자인을 찾는 브랜드와 협력할 준비가 되었습니다.',
     button: '이메일 보내기',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: '모든 권리 보유.',
+    links: '푸터 링크',
+    github: 'GitHub 프로필 방문',
+    scrollTop: '페이지 맨 위로 이동',
   },
 }
 
