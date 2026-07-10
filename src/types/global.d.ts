@@ -5,5 +5,5 @@ interface IdleRequestOptions {
 interface Window {
   requestIdleCallback?: (callback: () => void, options?: IdleRequestOptions) => number
   cancelIdleCallback?: (handle: number) => void
-  dataLayer: Array<unknown>
+  dataLayer?: Array<unknown>
 }

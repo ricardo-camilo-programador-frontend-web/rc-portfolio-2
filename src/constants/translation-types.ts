@@ -56,3 +56,11 @@ export interface TranslationContent {
   cta: { title: string; subtitle: string; desc: string; button: string; whatsapp: string }
   footer: { rights: string; links: string; github: string; scrollTop: string }
 }
+
+export interface NavCopy {
+  work: string
+  about: string
+  services: string
+  career: string
+  contact: string
+}

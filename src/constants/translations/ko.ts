@@ -115,7 +115,7 @@ const translation: TranslationContent = {
     whatsapp: 'WhatsApp',
   },
   footer: {
-    rights: 'All rights reserved.',
+    rights: '모든 권리 보유.',
     links: '푸터 링크',
     github: 'GitHub 프로필 방문',
     scrollTop: '페이지 맨 위로 이동',

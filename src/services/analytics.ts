@@ -95,9 +95,9 @@ class AnalyticsService {
       gtmScript.src = `https://www.googletagmanager.com/gtag/js?id=${env.gaMeasurementId}`
       document.head.appendChild(gtmScript)
       gtmScript.onload = () => {
-        window.dataLayer = window.dataLayer || []
+        window.dataLayer = window.dataLayer ?? []
         const gtag = function gtag(...args: Array<unknown>) {
-          window.dataLayer.push(args)
+          window.dataLayer!.push(args)
         }
         gtag('js', new Date())
         gtag('config', env.gaMeasurementId)

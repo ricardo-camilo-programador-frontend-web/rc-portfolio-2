@@ -26,7 +26,7 @@ const translation: TranslationContent = {
     bio: 'Sou Ricardo Camilo, Desenvolvedor Front-end Pleno com 6+ anos de experiência. Especialista em Vue.js e TypeScript, combino expertise técnica sólida com disciplina excepcional para entregas de qualidade.',
     details: 'Perfil DISC: Investigador — Foco em precisão técnica e soluções escaláveis.',
     stats: { exp: '6+ Anos', projects: '20+ Entregues', eng: 'Inglês C1' },
-    statsLabels: { exp: 'Experiencia', projects: 'Artesanal', eng: 'Proficiencia' },
+    statsLabels: { exp: 'Experiência', projects: 'Artesanal', eng: 'Proficiência' },
     portraitAlt: 'Retrato de Ricardo Camilo',
   },
   services: {
@@ -116,9 +116,9 @@ const translation: TranslationContent = {
   },
   footer: {
     rights: 'Todos os direitos reservados.',
-    links: 'Links do rodape',
+    links: 'Links do rodapé',
     github: 'Visitar perfil no GitHub',
-    scrollTop: 'Rolar para o topo da pagina',
+    scrollTop: 'Rolar para o topo da página',
   },
 }
 

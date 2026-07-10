@@ -1,17 +1,10 @@
 import type { FC } from 'react'
 import type { Language, LanguageCode } from '../constants/languages'
+import type { NavCopy } from '../constants/translation-types'
 import { memo } from 'react'
 import { MessageCircle } from '../icons'
 import { NavLanguageSwitcher } from './NavLanguageSwitcher'
 import { NavLinks } from './NavLinks'
-
-interface NavCopy {
-  work: string
-  about: string
-  services: string
-  career: string
-  contact: string
-}
 
 interface NavMobileMenuProps {
   nav: NavCopy
