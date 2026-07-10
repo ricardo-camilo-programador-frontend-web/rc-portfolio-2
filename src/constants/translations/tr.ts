@@ -115,10 +115,10 @@ const translation: TranslationContent = {
     whatsapp: 'WhatsApp',
   },
   footer: {
-    rights: 'Tum haklari saklidir.',
-    links: 'Alt bilgi baglantilari',
+    rights: 'Tüm hakları saklıdır.',
+    links: 'Alt bilgi bağlantıları',
     github: 'GitHub profilini ziyaret et',
-    scrollTop: 'Sayfanin basina don',
+    scrollTop: 'Sayfanın başına dön',
   },
 }
 

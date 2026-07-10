@@ -115,7 +115,7 @@ const translation: TranslationContent = {
     whatsapp: 'WhatsApp で連絡',
   },
   footer: {
-    rights: 'All rights reserved.',
+    rights: '全著作権所有。',
     links: 'フッターリンク',
     github: 'GitHubプロフィールを開く',
     scrollTop: 'ページ上部へ戻る',

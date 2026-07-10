@@ -1,13 +1,6 @@
 import type { FC } from 'react'
+import type { NavCopy } from '../constants/translation-types'
 import { memo } from 'react'
-
-interface NavCopy {
-  work: string
-  about: string
-  services: string
-  career: string
-  contact: string
-}
 
 interface NavLinksProps {
   nav: NavCopy
