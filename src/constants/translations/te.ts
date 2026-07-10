@@ -5,7 +5,20 @@ const translation: TranslationContent = {
     title: 'రికార్డో కామిలో | ఫ్రంట్‌ఎండ్ ఇంజనీర్',
     desc: '6+ సంవత్సరాల అనుభవంతో ఫ్రంట్‌ఎండ్ ఇంజనీర్ మరియు Vue.js/TypeScript నిపుణుడు. Vue 3, React మరియు Next.js లో నిపుణుడు.',
   },
-  nav: { work: 'పోర్ట్‌ఫోలియో', about: 'గురించి', services: 'సేవలు', career: 'కెరీర్', contact: 'సంప్రదించండి' },
+  errorBoundary: { title: 'ఏదో తప్పు జరిగింది.', retry: 'మళ్లీ ప్రయత్నించండి' },
+  nav: {
+    work: 'పోర్ట్‌ఫోలియో',
+    about: 'గురించి',
+    services: 'సేవలు',
+    career: 'కెరీర్',
+    contact: 'సంప్రదించండి',
+    menu: 'మెనూ',
+  },
+  a11y: {
+    skipToContent: 'ప్రధాన కంటెంటుకు వెళ్ళండి',
+    selectLanguage: 'భాష ఎంచుకోండి',
+    languageSelection: 'భాష ఎంపిక',
+  },
   hero: {
     title: 'ఫ్రంట్‌ఎండ్ ఇంజనీర్',
     subtitle: 'మరియు Vue.js నిపుణుడు',
@@ -18,6 +31,8 @@ const translation: TranslationContent = {
     bio: 'నేను రికార్డో కామిలో, 6+ సంవత్సరాల అనుభవంతో ఫ్రంట్‌ఎండ్ డెవలపర్. నేను Vue.js మరియు TypeScript లో నిపుణుడిని, అధిక-నాణ్యత పరిష్కారాలను అందించడానికి ఘనమైన సాంకేతిక నిపుణుడిని మరియు అసాధారణమైన శిక్షణతో కలిపి ఉన్నాను.',
     details: 'DISC ప్రొఫైల్: ఇన్వెస్టిగేటర్ — సాంకేతిక ఖచ్చితత్వం మరియు స్కేలబుల్ పరిష్కారాలపై దృష్టి.',
     stats: { exp: '6+ సంవత్సరాలు', projects: '20+ డెలివరీలు', eng: 'ఇంగ్లీష్ C1' },
+    statsLabels: { exp: 'అనుభవం', projects: 'చేతితో చేసినవి', eng: 'నైపుణ్యం' },
+    portraitAlt: 'రికార్డో కామిలో చిత్రపటం',
   },
   services: {
     s1: {
@@ -39,9 +54,57 @@ const translation: TranslationContent = {
     subtitle: 'పనులు',
     viewAll: 'పూర్తి GitHub చూడండి',
     viewProject: 'ప్రాజెక్ట్ చూడండి',
+    viewFullSize: 'పూర్తి పరిమాణం చూడండి',
+    projectCategory: 'ప్రాజెక్ట్ వర్గం',
     comingSoon: 'త్వరలో',
   },
-  career: { title: 'వృత్తిపరమైన', subtitle: 'చరిత్ర', present: 'ప్రస్తుతం' },
+  career: {
+    title: 'వృత్తిపరమైన',
+    subtitle: 'చరిత్ర',
+    present: 'ప్రస్తుతం',
+    timeline: [
+      {
+        id: 1,
+        period: 'నవంబర్ 2025 — ప్రస్తుతం',
+        company: 'Consir Informática',
+        role: 'ఫ్రంటెండ్ ఇంజనీర్',
+        desc: 'Vue.js 3 + TypeScript కి లెగసీ యూనియన్ నిర్వహణ వ్యవస్థను ఆధునికీకరించడంలో సాంకేతిక నాయకత్వం. Pinia మరియు PWA తో store-ఆధారిత ఆర్కిటెక్చర్ అమలు.',
+        tags: ['Vue 3', 'TypeScript', 'Pinia', 'PWA'],
+      },
+      {
+        id: 2,
+        period: 'జూలై 2025 — నవంబర్ 2025',
+        company: 'Consir Informática',
+        role: 'మిడ్ ఫ్రంటెండ్ ఇంజనీర్',
+        desc: 'Vue.js, TypeScript మరియు అధిక-స్థాయి నిర్వహణపై దృష్టి సారించే స్కేలబుల్ ఎంటర్ప్రైజ్ సిస్టమ్ ఇంజనీరింగ్.',
+        tags: ['Vue.js', 'TypeScript', 'Enterprise'],
+      },
+      {
+        id: 3,
+        period: 'జనవరి 2025 — జూలై 2025',
+        company: 'Freelance Specialist',
+        role: 'ఫ్రంటెండ్ కన్సల్టెంట్',
+        desc: 'మార్పు మరియు పనితీరుపై దృష్టి సారించే అధిక-ప్రభావ ప్రాజెక్ట్లలో (Itu Pneus, RvOne, Cajuscript) సాంకేతిక నాయకత్వం.',
+        tags: ['Next.js 15', 'SEO', 'Consultancy'],
+      },
+      {
+        id: 4,
+        period: 'అక్టోబర్ 2021 — డిసెంబర్ 2024',
+        company: 'Labi9 Tecnologia',
+        role: 'ఫ్రంటెండ్ డెవలపర్',
+        desc: 'ఫింటెక్ ఎకోసిస్టమ్‌లో 3+ సంవత్సరాలు. React, Qwik మరియు Nuxt తో సంక్లిష్ట ఇంటర్‌ఫేస్ డెవలప్‌మెంట్.',
+        tags: ['React', 'Nuxt', 'Fintech'],
+      },
+      {
+        id: 5,
+        period: '2019',
+        company: 'SIALOG Software',
+        role: 'టెక్ ఇంటర్న్',
+        desc: 'లాజిస్టిక్స్ కోసం Ruby on Rails మరియు JasperReports ప్రాథమికాలు.',
+        tags: ['Ruby on Rails', 'Git'],
+      },
+    ],
+  },
   certs: {
     title: 'గుర్తింపు',
     subtitle: 'మరియు ధృవీకరణలు',
@@ -55,6 +118,12 @@ const translation: TranslationContent = {
     desc: 'అందమైన ఇంజనీరింగ్ మరియు ప్రపంచ-తరగతి డిజైన్ కోసం బ్రాండ్‌లతో సహకరించడానికి సిద్ధంగా ఉంది.',
     button: 'నాకు ఇమెయిల్ చేయండి',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.',
+    links: 'ఫుటర్ లింకులు',
+    github: 'GitHub ప్రొఫైల్ చూడండి',
+    scrollTop: 'పేజీ పైభాగానికి వెళ్ళండి',
   },
 }
 

@@ -5,12 +5,19 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | Kỹ sư Frontend',
     desc: 'Kỹ sư Frontend & Chuyên gia Vue.js/TypeScript với hơn 6 năm kinh nghiệm. Chuyên gia về Vue 3, React và Next.js.',
   },
+  errorBoundary: { title: 'Đã xảy ra lỗi.', retry: 'Thử lại' },
   nav: {
     work: 'Portfolio',
     about: 'Giới thiệu',
     services: 'Dịch vụ',
     career: 'Sự nghiệp',
     contact: 'Liên hệ',
+    menu: 'Menu',
+  },
+  a11y: {
+    skipToContent: 'Chuyển đến nội dung chính',
+    selectLanguage: 'Chọn ngôn ngữ',
+    languageSelection: 'Chọn ngôn ngữ',
   },
   hero: {
     title: 'Kỹ sư Frontend',
@@ -25,6 +32,8 @@ const translation: TranslationContent = {
     details:
       'Hồ sơ DISC: Nhà điều tra — Tập trung vào độ chính xác kỹ thuật và giải pháp có thể mở rộng.',
     stats: { exp: '6+ năm', projects: '20+ đã bàn giao', eng: 'Tiếng Anh C1' },
+    statsLabels: { exp: 'Kinh nghiệm', projects: 'Thủ công', eng: 'Thành thạo' },
+    portraitAlt: 'Chân dung Ricardo Camilo',
   },
   services: {
     s1: {
@@ -46,9 +55,57 @@ const translation: TranslationContent = {
     subtitle: 'Chọn lọc',
     viewAll: 'Xem GitHub đầy đủ',
     viewProject: 'Xem Dự án',
+    viewFullSize: 'Xem kích thước đầy đủ',
+    projectCategory: 'Danh mục dự án',
     comingSoon: 'Sắp ra mắt',
   },
-  career: { title: 'Lịch sử', subtitle: 'Nghề nghiệp', present: 'Hiện tại' },
+  career: {
+    title: 'Lịch sử',
+    subtitle: 'Nghề nghiệp',
+    present: 'Hiện tại',
+    timeline: [
+      {
+        id: 1,
+        period: 'Tháng 11/2025 — Hiện tại',
+        company: 'Consir Informática',
+        role: 'Kỹ sư Frontend',
+        desc: 'Lãnh đạo kỹ thuật trong việc hiện đại hóa hệ thống quản lý công đoàn legacy sang Vue.js 3 + TypeScript. Triển khai kiến trúc dựa trên store với Pinia và PWA.',
+        tags: ['Vue 3', 'TypeScript', 'Pinia', 'PWA'],
+      },
+      {
+        id: 2,
+        period: 'Tháng 7/2025 — Tháng 11/2025',
+        company: 'Consir Informática',
+        role: 'Kỹ sư Frontend Mid',
+        desc: 'Kỹ thuật hệ thống doanh nghiệp có khả năng mở rộng tập trung vào Vue.js, TypeScript và bảo trì cấp cao.',
+        tags: ['Vue.js', 'TypeScript', 'Enterprise'],
+      },
+      {
+        id: 3,
+        period: 'Tháng 1/2025 — Tháng 7/2025',
+        company: 'Freelance Specialist',
+        role: 'Tư vấn Frontend',
+        desc: 'Lãnh đạo kỹ thuật trong các dự án tác động cao (Itu Pneus, RvOne, Cajuscript) tập trung vào chuyển đổi và hiệu suất.',
+        tags: ['Next.js 15', 'SEO', 'Tư vấn'],
+      },
+      {
+        id: 4,
+        period: 'Tháng 10/2021 — Tháng 12/2024',
+        company: 'Labi9 Tecnologia',
+        role: 'Lập trình viên Frontend',
+        desc: '3+ năm trong hệ sinh thái fintech. Phát triển giao diện phức tạp với React, Qwik và Nuxt.',
+        tags: ['React', 'Nuxt', 'Fintech'],
+      },
+      {
+        id: 5,
+        period: '2019',
+        company: 'SIALOG Software',
+        role: 'Thực tập viên Kỹ thuật',
+        desc: 'Nền tảng về Ruby on Rails và JasperReports cho logistics.',
+        tags: ['Ruby on Rails', 'Git'],
+      },
+    ],
+  },
   certs: {
     title: 'Công nhận',
     subtitle: 'và Chứng chỉ',
@@ -62,6 +119,12 @@ const translation: TranslationContent = {
     desc: 'Sẵn sàng hợp tác với các thương hiệu tìm kiếm kỹ thuật thanh lịch và thiết kế đẳng cấp thế giới.',
     button: 'Gửi email cho tôi',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'Đã đăng ký bản quyền.',
+    links: 'Liên kết chân trang',
+    github: 'Truy cập hồ sơ GitHub',
+    scrollTop: 'Cuộn lên đầu trang',
   },
 }
 

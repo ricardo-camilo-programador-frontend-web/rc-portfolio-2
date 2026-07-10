@@ -1,14 +1,10 @@
+import { env } from '../constants/env'
+
 interface AnalyticsEvent {
   category: string
   action: string
   label?: string
   value?: number
-}
-
-declare global {
-  interface Window {
-    dataLayer: Array<unknown>
-  }
 }
 
 class AnalyticsService {
@@ -54,11 +50,8 @@ class AnalyticsService {
       this.abortController.abort()
       this.abortController = null
     }
-    if (this.idleCallbackHandle !== null && 'cancelIdleCallback' in window) {
-      const cic = (
-        window as Window & typeof globalThis & { cancelIdleCallback: (handle: number) => void }
-      ).cancelIdleCallback
-      cic(this.idleCallbackHandle)
+    if (this.idleCallbackHandle !== null && window.cancelIdleCallback) {
+      window.cancelIdleCallback(this.idleCallbackHandle)
       this.idleCallbackHandle = null
     }
   }
@@ -66,14 +59,8 @@ class AnalyticsService {
   private idleCallbackHandle: number | null = null
 
   private scheduleLoad(): void {
-    if ('requestIdleCallback' in window) {
-      const ric = (
-        window as Window &
-          typeof globalThis & {
-            requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number
-          }
-      ).requestIdleCallback
-      this.idleCallbackHandle = ric(
+    if (window.requestIdleCallback) {
+      this.idleCallbackHandle = window.requestIdleCallback(
         () => {
           this.idleCallbackHandle = null
           if (!this.hasInteracted) {
@@ -102,20 +89,19 @@ class AnalyticsService {
     }
     document.head.appendChild(counterScript)
 
-    const gtmScript = document.createElement('script')
-    gtmScript.async = true
-    gtmScript.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_MEASUREMENT_ID}`
-    document.head.appendChild(gtmScript)
-    gtmScript.onload = () => {
-      ;(window as typeof window & { dataLayer: Array<unknown> }).dataLayer =
-        (window as typeof window & { dataLayer: Array<unknown> }).dataLayer || []
-      const gtag = function gtag(...args: Array<unknown>) {
-        ;(
-          (window as typeof window & { dataLayer: Array<unknown> }).dataLayer as Array<unknown>
-        ).push(args)
+    if (env.gaMeasurementId) {
+      const gtmScript = document.createElement('script')
+      gtmScript.async = true
+      gtmScript.src = `https://www.googletagmanager.com/gtag/js?id=${env.gaMeasurementId}`
+      document.head.appendChild(gtmScript)
+      gtmScript.onload = () => {
+        window.dataLayer = window.dataLayer ?? []
+        const gtag = function gtag(...args: Array<unknown>) {
+          window.dataLayer?.push(args)
+        }
+        gtag('js', new Date())
+        gtag('config', env.gaMeasurementId)
       }
-      gtag('js', new Date())
-      gtag('config', import.meta.env.VITE_GA_MEASUREMENT_ID)
     }
 
     if (this.loadTimeout) {

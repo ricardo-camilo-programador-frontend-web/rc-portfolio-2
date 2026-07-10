@@ -5,12 +5,19 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | Insinyur Frontend',
     desc: 'Insinyur Frontend & Spesialis Vue.js/TypeScript dengan pengalaman 6+ tahun. Ahli dalam Vue 3, React, dan Next.js.',
   },
+  errorBoundary: { title: 'Terjadi kesalahan.', retry: 'Coba lagi' },
   nav: {
     work: 'Portofolio',
     about: 'Tentang',
     services: 'Layanan',
     career: 'Karier',
     contact: 'Kontak',
+    menu: 'Menu',
+  },
+  a11y: {
+    skipToContent: 'Lewati ke konten utama',
+    selectLanguage: 'Pilih bahasa',
+    languageSelection: 'Pemilihan bahasa',
   },
   hero: {
     title: 'Insinyur Frontend',
@@ -25,6 +32,8 @@ const translation: TranslationContent = {
     details:
       'Profil DISC: Investigator — Fokus pada presisi teknis dan solusi yang dapat diskalakan.',
     stats: { exp: '6+ Tahun', projects: '20+ Dikirimkan', eng: 'Bahasa Inggris C1' },
+    statsLabels: { exp: 'Pengalaman', projects: 'Buatan tangan', eng: 'Kemahiran' },
+    portraitAlt: 'Potret Ricardo Camilo',
   },
   services: {
     s1: {
@@ -46,9 +55,57 @@ const translation: TranslationContent = {
     subtitle: 'Pilihan',
     viewAll: 'Lihat GitHub Lengkap',
     viewProject: 'Lihat Proyek',
+    viewFullSize: 'Lihat ukuran penuh',
+    projectCategory: 'Kategori proyek',
     comingSoon: 'Segera',
   },
-  career: { title: 'Riwayat', subtitle: 'Profesional', present: 'Saat Ini' },
+  career: {
+    title: 'Riwayat',
+    subtitle: 'Profesional',
+    present: 'Saat Ini',
+    timeline: [
+      {
+        id: 1,
+        period: 'Nov 2025 — Sekarang',
+        company: 'Consir Informática',
+        role: 'Frontend Engineer',
+        desc: 'Kepemimpinan teknis dalam memodernisasi sistem manajemen serikat pekerja legacy ke Vue.js 3 + TypeScript. Implementasi arsitektur berbasis store dengan Pinia dan PWA.',
+        tags: ['Vue 3', 'TypeScript', 'Pinia', 'PWA'],
+      },
+      {
+        id: 2,
+        period: 'Jul 2025 — Nov 2025',
+        company: 'Consir Informática',
+        role: 'Frontend Engineer Mid',
+        desc: 'Rekayasa sistem enterprise yang scalable dengan fokus pada Vue.js, TypeScript, dan pemeliharaan tingkat tinggi.',
+        tags: ['Vue.js', 'TypeScript', 'Enterprise'],
+      },
+      {
+        id: 3,
+        period: 'Jan 2025 — Jul 2025',
+        company: 'Freelance Specialist',
+        role: 'Konsultan Frontend',
+        desc: 'Kepemimpinan teknis pada proyek berdampak tinggi (Itu Pneus, RvOne, Cajuscript) dengan fokus pada konversi dan performa.',
+        tags: ['Next.js 15', 'SEO', 'Konsultansi'],
+      },
+      {
+        id: 4,
+        period: 'Okt 2021 — Des 2024',
+        company: 'Labi9 Tecnologia',
+        role: 'Frontend Developer',
+        desc: '3+ tahun di ekosistem fintech. Pengembangan antarmuka kompleks dengan React, Qwik, dan Nuxt.',
+        tags: ['React', 'Nuxt', 'Fintech'],
+      },
+      {
+        id: 5,
+        period: '2019',
+        company: 'SIALOG Software',
+        role: 'Magang Teknis',
+        desc: 'Dasar-dasar Ruby on Rails dan JasperReports untuk logistik.',
+        tags: ['Ruby on Rails', 'Git'],
+      },
+    ],
+  },
   certs: {
     title: 'Pengakuan',
     subtitle: '& Sertifikasi',
@@ -62,6 +119,12 @@ const translation: TranslationContent = {
     desc: 'Siap berkolaborasi dengan merek yang mencari rekayasa elegan dan desain kelas dunia.',
     button: 'Email Saya',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'Hak cipta dilindungi.',
+    links: 'Tautan footer',
+    github: 'Kunjungi profil GitHub',
+    scrollTop: 'Gulir ke atas halaman',
   },
 }
 

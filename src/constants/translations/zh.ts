@@ -5,7 +5,20 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | 前端工程师',
     desc: '拥有 6 年以上经验的前端工程师和 Vue.js/TypeScript 专家。精通 Vue 3、React 和 Next.js。',
   },
-  nav: { work: '作品集', about: '关于', services: '服务', career: '经历', contact: '联系' },
+  errorBoundary: { title: '出现问题。', retry: '重试' },
+  nav: {
+    work: '作品集',
+    about: '关于',
+    services: '服务',
+    career: '经历',
+    contact: '联系',
+    menu: '菜单',
+  },
+  a11y: {
+    skipToContent: '跳到主要内容',
+    selectLanguage: '选择语言',
+    languageSelection: '语言选择',
+  },
   hero: {
     title: '前端工程师',
     subtitle: '和 Vue.js 专家',
@@ -18,6 +31,8 @@ const translation: TranslationContent = {
     bio: '我是 Ricardo Camilo，拥有 6 年以上经验的前端开发人员。我专注于 Vue.js 和 TypeScript，将扎实的技术专长与非凡的纪律性相结合，提供高质量的解决方案。',
     details: 'DISC _profile：研究者——专注于技术精确性和可扩展解决方案。',
     stats: { exp: '6+ 年', projects: '20+ 已交付', eng: '英语 C1' },
+    statsLabels: { exp: '经验', projects: '手工打造', eng: '熟练度' },
+    portraitAlt: 'Ricardo Camilo 肖像',
   },
   services: {
     s1: {
@@ -36,9 +51,57 @@ const translation: TranslationContent = {
     subtitle: '作品',
     viewAll: '查看完整 GitHub',
     viewProject: '查看项目',
+    viewFullSize: '查看全尺寸',
+    projectCategory: '项目类别',
     comingSoon: '即将推出',
   },
-  career: { title: '职业', subtitle: '经历', present: '至今' },
+  career: {
+    title: '职业',
+    subtitle: '经历',
+    present: '至今',
+    timeline: [
+      {
+        id: 1,
+        period: '2025年11月 — 至今',
+        company: 'Consir Informática',
+        role: '前端工程师',
+        desc: '将遗留工会管理系统现代化为Vue.js 3 + TypeScript的技术领导力。使用Pinia和PWA实现基于store的架构。',
+        tags: ['Vue 3', 'TypeScript', 'Pinia', 'PWA'],
+      },
+      {
+        id: 2,
+        period: '2025年7月 — 2025年11月',
+        company: 'Consir Informática',
+        role: '中级前端工程师',
+        desc: '专注于Vue.js、TypeScript和高级维护的可扩展企业系统工程。',
+        tags: ['Vue.js', 'TypeScript', 'Enterprise'],
+      },
+      {
+        id: 3,
+        period: '2025年1月 — 2025年7月',
+        company: 'Freelance Specialist',
+        role: '前端顾问',
+        desc: '专注于转化和性能的高影响力项目（Itu Pneus、RvOne、Cajuscript）的技术领导力。',
+        tags: ['Next.js 15', 'SEO', '咨询'],
+      },
+      {
+        id: 4,
+        period: '2021年10月 — 2024年12月',
+        company: 'Labi9 Tecnologia',
+        role: '前端开发者',
+        desc: '金融科技生态系统3年以上。使用React、Qwik和Nuxt开发复杂界面。',
+        tags: ['React', 'Nuxt', 'Fintech'],
+      },
+      {
+        id: 5,
+        period: '2019',
+        company: 'SIALOG Software',
+        role: '技术实习生',
+        desc: '物流领域的Ruby on Rails和JasperReports基础。',
+        tags: ['Ruby on Rails', 'Git'],
+      },
+    ],
+  },
   certs: {
     title: '认可',
     subtitle: '和认证',
@@ -52,6 +115,12 @@ const translation: TranslationContent = {
     desc: '准备与寻求优雅工程和世界一流设计的品牌合作。',
     button: '给我发电子邮件',
     whatsapp: 'WhatsApp 联系我们',
+  },
+  footer: {
+    rights: '版权所有。',
+    links: '页脚链接',
+    github: '访问 GitHub 个人资料',
+    scrollTop: '滚动到页面顶部',
   },
 }
 

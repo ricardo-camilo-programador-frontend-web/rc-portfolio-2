@@ -62,6 +62,7 @@ export const PROJECTS: Array<Project> = [
     link: 'https://persona-nextjs-chronicles-2.netlify.app',
     year: '2025',
   },
+  // Hidden on initial render: PROJECTS uses incremental reveal, so this appears after "load more".
   {
     id: 'ch5',
     title: 'Zenith Node',
@@ -95,49 +96,5 @@ export const PROJECTS: Array<Project> = [
   // },
 ]
 
-export const TIMELINE = [
-  {
-    id: 1,
-    period: 'Nov 2025 — Present',
-    company: 'Consir Informática',
-    role: 'Frontend Engineer',
-    desc: 'Liderança técnica na modernização de sistema legado de gestão sindical para Vue.js 3 + TypeScript. Implementação de arquitetura base store com Pinia e PWA.',
-    tags: ['Vue 3', 'TypeScript', 'Pinia', 'PWA'],
-  },
-  {
-    id: 2,
-    period: 'Jul 2025 — Nov 2025',
-    company: 'Consir Informática',
-    role: 'Pleno Frontend Engineer',
-    desc: 'Engenharia de sistemas corporativos escaláveis focada em Vue.js, TypeScript e manutenção de alto nível.',
-    tags: ['Vue.js', 'TypeScript', 'Enterprise'],
-  },
-  {
-    id: 3,
-    period: 'Jan 2025 — Jul 2025',
-    company: 'Freelance Specialist',
-    role: 'Frontend Consultant',
-    desc: 'Liderança técnica em projetos de alto impacto (Itu Pneus, RvOne, Cajuscript) com foco em conversão e performance.',
-    tags: ['Next.js 15', 'SEO', 'Consultancy'],
-  },
-  {
-    id: 4,
-    period: 'Oct 2021 — Dec 2024',
-    company: 'Labi9 Tecnologia',
-    role: 'Frontend Developer',
-    desc: '3+ anos em ecossistema de fintechs. Desenvolvimento de interfaces complexas com React, Qwik e Nuxt.',
-    tags: ['React', 'Nuxt', 'Fintech'],
-  },
-  {
-    id: 5,
-    period: '2019',
-    company: 'SIALOG Software',
-    role: 'Tech Intern',
-    desc: 'Fundamentos em Ruby on Rails e JasperReports para logística.',
-    tags: ['Ruby on Rails', 'Git'],
-  },
-]
-
 export const USER_PHOTO =
   '/images/ricardo-camilo-programador-frontend-web-developer-frontend-engineer-software-engineer-web-developer-vuejs-vue-reactjs-react-javascript-typescript.png'
-export const WHATSAPP_URL = 'https://wa.me/5514996765389'
