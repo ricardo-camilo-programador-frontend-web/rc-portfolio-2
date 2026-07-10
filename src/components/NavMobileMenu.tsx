@@ -43,6 +43,7 @@ export const NavMobileMenu: FC<NavMobileMenuProps> = memo(
       id="mobile-menu"
       className={`md:hidden fixed inset-x-0 top-[57px] z-30 bg-[#0A0A0A]/95 backdrop-blur-sm border-b border-white/5 transition-all duration-300 ${isMobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
       aria-hidden={!isMobileOpen}
+      inert={!isMobileOpen}
     >
       <div className="px-6 py-8 flex flex-col gap-6">
         <NavLinks nav={nav} className={MOBILE_LINK_CLASS} onNavigate={onNavigate} />

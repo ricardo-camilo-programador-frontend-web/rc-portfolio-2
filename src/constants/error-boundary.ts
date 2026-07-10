@@ -26,8 +26,9 @@ const loadTranslation = (code: LanguageCode): Promise<TranslationContent> =>
   import(`./translations/${code}.ts`).then(module => module.default)
 
 export const loadErrorBoundaryTranslation = async (): Promise<{ title: string; retry: string }> => {
-  const language = getPreferredLanguage()
+  let language: LanguageCode
   try {
+    language = getPreferredLanguage()
     const translation = await loadTranslation(language)
     return translation.errorBoundary
   } catch {

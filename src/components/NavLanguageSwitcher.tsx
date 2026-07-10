@@ -29,6 +29,7 @@ export const NavLanguageSwitcher: FC<NavLanguageSwitcherProps> = memo(
     className = '',
   }) => {
     const langOptionsRef = useRef<Array<HTMLButtonElement | null>>([])
+    const triggerRef = useRef<HTMLButtonElement>(null)
 
     const handleLangSelect = useCallback(
       (code: LanguageCode) => {
@@ -62,6 +63,7 @@ export const NavLanguageSwitcher: FC<NavLanguageSwitcherProps> = memo(
           case 'Escape': {
             event.preventDefault()
             setIsLangOpen(false)
+            triggerRef.current?.focus()
             break
           }
         }
@@ -74,6 +76,7 @@ export const NavLanguageSwitcher: FC<NavLanguageSwitcherProps> = memo(
     return (
       <div className={className}>
         <button
+          ref={triggerRef}
           onClick={() => setIsLangOpen(!isLangOpen)}
           onKeyDown={handleLangKeyDown}
           className="text-[#E5D5C0]/80 hover:text-[#E5D5C0] transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D5C0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] rounded px-2 py-1"
