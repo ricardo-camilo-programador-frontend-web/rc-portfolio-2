@@ -14,6 +14,11 @@ const translation: TranslationContent = {
     contact: 'İletişim',
     menu: 'Menü',
   },
+  a11y: {
+    skipToContent: 'Ana içeriğe atla',
+    selectLanguage: 'Dil seç',
+    languageSelection: 'Dil seçimi',
+  },
   hero: {
     title: 'Frontend Mühendisi',
     subtitle: 've Vue.js Uzmanı',

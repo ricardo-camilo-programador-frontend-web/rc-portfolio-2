@@ -14,6 +14,11 @@ const translation: TranslationContent = {
     contact: 'যোগাযোগ',
     menu: 'মেনু',
   },
+  a11y: {
+    skipToContent: 'প্রধান বিষয়বস্তুতে যান',
+    selectLanguage: 'ভাষা নির্বাচন',
+    languageSelection: 'ভাষা নির্বাচন',
+  },
   hero: {
     title: 'ফ্রন্টএন্ড ইঞ্জিনিয়ার',
     subtitle: 'এবং Vue.js বিশেষজ্ঞ',

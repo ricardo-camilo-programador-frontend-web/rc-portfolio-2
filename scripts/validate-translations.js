@@ -1,5 +1,5 @@
 /**
- * Validates that all translation files have the same top-level keys and career keys.
+ * Validates that all translation files have the same top-level keys and nested keys.
  * Run: node scripts/validate-translations.js
  * Exit code: 0 = all good, 1 = mismatch found
  */
@@ -116,6 +116,7 @@ async function main() {
   let referenceCareerKeys = null
   let referenceAboutKeys = null
   let referenceStatsLabelsKeys = null
+  let referenceA11yKeys = null
   let referenceFile = null
   const errors = []
 
@@ -125,6 +126,7 @@ async function main() {
     const careerKeys = extractNestedKeys(code, 'career')
     const aboutKeys = extractNestedKeys(code, 'about')
     const statsLabelsKeys = extractNestedKeys(code, 'statsLabels')
+    const a11yKeys = extractNestedKeys(code, 'a11y')
 
     if (!keys) {
       errors.push(`${file}: could not parse TranslationContent object`)
@@ -146,28 +148,36 @@ async function main() {
       continue
     }
 
+    if (!a11yKeys) {
+      errors.push(`${file}: could not parse a11y object`)
+      continue
+    }
+
     if (!referenceKeys) {
       referenceKeys = keys
       referenceCareerKeys = careerKeys
       referenceAboutKeys = aboutKeys
       referenceStatsLabelsKeys = statsLabelsKeys
+      referenceA11yKeys = a11yKeys
       referenceFile = file
     } else {
       compareKeys(errors, file, 'top-level', keys, referenceKeys)
       compareKeys(errors, file, 'career', careerKeys, referenceCareerKeys)
       compareKeys(errors, file, 'about', aboutKeys, referenceAboutKeys)
       compareKeys(errors, file, 'about.statsLabels', statsLabelsKeys, referenceStatsLabelsKeys)
+      compareKeys(errors, file, 'a11y', a11yKeys, referenceA11yKeys)
     }
   }
 
   if (errors.length === 0) {
     console.log(
-      `✅ All ${files.length} translation files have matching top-level, career, and about keys (reference: ${referenceFile})`,
+      `✅ All ${files.length} translation files have matching top-level, career, about, and a11y keys (reference: ${referenceFile})`,
     )
     console.log(`   Keys: ${referenceKeys.join(', ')}`)
     console.log(`   Career keys: ${referenceCareerKeys.join(', ')}`)
     console.log(`   About keys: ${referenceAboutKeys.join(', ')}`)
     console.log(`   About statsLabels keys: ${referenceStatsLabelsKeys.join(', ')}`)
+    console.log(`   A11y keys: ${referenceA11yKeys.join(', ')}`)
     process.exit(0)
   } else {
     console.error('❌ Translation key mismatches found:')

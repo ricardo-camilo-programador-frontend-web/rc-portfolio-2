@@ -87,6 +87,7 @@ const INITIAL_TRANSLATION: TranslationContent = {
   seo: { title: 'Ricardo Camilo', desc: '' },
   errorBoundary: { title: '', retry: '' },
   nav: { work: '', about: '', services: '', career: '', contact: '', menu: '' },
+  a11y: { skipToContent: '', selectLanguage: '', languageSelection: '' },
   hero: { title: '', subtitle: '', desc: '', cta: '', badge: '' },
   about: {
     quote: '',
@@ -231,6 +232,7 @@ const App: FC = () => {
     >
       <Navigation
         nav={t.nav}
+        a11y={t.a11y}
         currentLang={currentLang}
         languages={LANGUAGES}
         langCode={langCode}
