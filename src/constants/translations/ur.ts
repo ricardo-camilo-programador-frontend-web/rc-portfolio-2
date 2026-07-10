@@ -5,6 +5,7 @@ const translation: TranslationContent = {
     title: 'رکارڈو کامیلو | فرنٹ اینڈ انجینئر',
     desc: '6+ سال کے تجربے کے ساتھ فرنٹ اینڈ انجینئر اور Vue.js/TypeScript ماہر۔ Vue 3, React اور Next.js میں ماہر۔',
   },
+  errorBoundary: { title: 'کچھ غلط ہو گیا۔', retry: 'دوبارہ کوشش کریں' },
   nav: {
     work: 'پورٹ فولیو',
     about: 'کے بارے میں',
@@ -25,6 +26,8 @@ const translation: TranslationContent = {
     bio: 'میں رکارڈو کامیلو ہوں، 6+ سال کے تجربے کے ساتھ فرنٹ اینڈ ڈیولپر۔ میں Vue.js اور TypeScript میں مہارت رکھتا ہوں، اعلیٰ معیار کے حل فراہم کرنے کے لیے ٹھوس تکنیکی مہارت اور غیر معمولی نظم و ضبط کو یکجا کرتا ہوں۔',
     details: 'DISC پروفائل: محقق — تکنیکی درستگی اور اسکیل ایبل حل پر توجہ۔',
     stats: { exp: '6+ سال', projects: '20+ ڈیلیورڈ', eng: 'انگریزی C1' },
+    statsLabels: { exp: 'تجربہ', projects: 'ہاتھ سے تیار', eng: 'مہارت' },
+    portraitAlt: 'ریکارڈو کامیلو کی تصویر',
   },
   services: {
     s1: {
@@ -110,6 +113,12 @@ const translation: TranslationContent = {
     desc: 'ایسی برانڈز کے ساتھ تعاون کرنے کے لیے تیار جو خوبصورت انجینئرنگ اور عالمی معیار کا ڈیزائن تلاش کر رہی ہیں۔',
     button: 'مجھے ای میل کریں',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'جملہ حقوق محفوظ ہیں۔',
+    links: 'فوٹر لنکس',
+    github: 'GitHub پروفائل دیکھیں',
+    scrollTop: 'صفحے کے اوپر جائیں',
   },
 }
 

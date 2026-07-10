@@ -5,6 +5,7 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | Frontend-Ingenieur',
     desc: 'Frontend-Ingenieur und Vue.js/TypeScript-Spezialist mit über 6 Jahren Erfahrung. Experte für Vue 3, React und Next.js.',
   },
+  errorBoundary: { title: 'Etwas ist schiefgelaufen.', retry: 'Erneut versuchen' },
   nav: {
     work: 'Portfolio',
     about: 'Über',
@@ -25,6 +26,8 @@ const translation: TranslationContent = {
     bio: 'Ich bin Ricardo Camilo, Frontend-Entwickler mit über 6 Jahren Erfahrung. Ich spezialisiere mich auf Vue.js und TypeScript und kombiniere fundierte technische Expertise mit außergewöhnlicher Disziplin für hochwertige Lösungen.',
     details: 'DISC-Profil: Investigator — Fokus auf technische Präzision und skalierbare Lösungen.',
     stats: { exp: '6+ Jahre', projects: '20+ geliefert', eng: 'Englisch C1' },
+    statsLabels: { exp: 'Erfahrung', projects: 'Handgefertigt', eng: 'Kompetenz' },
+    portraitAlt: 'Portrat von Ricardo Camilo',
   },
   services: {
     s1: {
@@ -110,6 +113,12 @@ const translation: TranslationContent = {
     desc: 'Bereit zur Zusammenarbeit mit Marken, die elegante Technik und Weltklasse-Design suchen.',
     button: 'E-Mail senden',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'Alle Rechte vorbehalten.',
+    links: 'Footer-Links',
+    github: 'GitHub-Profil besuchen',
+    scrollTop: 'Zum Seitenanfang scrollen',
   },
 }
 

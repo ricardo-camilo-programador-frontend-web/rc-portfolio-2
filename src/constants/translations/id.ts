@@ -5,6 +5,7 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | Insinyur Frontend',
     desc: 'Insinyur Frontend & Spesialis Vue.js/TypeScript dengan pengalaman 6+ tahun. Ahli dalam Vue 3, React, dan Next.js.',
   },
+  errorBoundary: { title: 'Terjadi kesalahan.', retry: 'Coba lagi' },
   nav: {
     work: 'Portofolio',
     about: 'Tentang',
@@ -26,6 +27,8 @@ const translation: TranslationContent = {
     details:
       'Profil DISC: Investigator — Fokus pada presisi teknis dan solusi yang dapat diskalakan.',
     stats: { exp: '6+ Tahun', projects: '20+ Dikirimkan', eng: 'Bahasa Inggris C1' },
+    statsLabels: { exp: 'Pengalaman', projects: 'Buatan tangan', eng: 'Kemahiran' },
+    portraitAlt: 'Potret Ricardo Camilo',
   },
   services: {
     s1: {
@@ -111,6 +114,12 @@ const translation: TranslationContent = {
     desc: 'Siap berkolaborasi dengan merek yang mencari rekayasa elegan dan desain kelas dunia.',
     button: 'Email Saya',
     whatsapp: 'WhatsApp',
+  },
+  footer: {
+    rights: 'Hak cipta dilindungi.',
+    links: 'Tautan footer',
+    github: 'Kunjungi profil GitHub',
+    scrollTop: 'Gulir ke atas halaman',
   },
 }
 

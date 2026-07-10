@@ -1,5 +1,6 @@
 export interface TranslationContent {
   seo: { title: string; desc: string }
+  errorBoundary: { title: string; retry: string }
   nav: {
     work: string
     about: string
@@ -14,6 +15,8 @@ export interface TranslationContent {
     bio: string
     details: string
     stats: { exp: string; projects: string; eng: string }
+    statsLabels: { exp: string; projects: string; eng: string }
+    portraitAlt: string
   }
   services: {
     s1: { title: string; desc: string }
@@ -51,4 +54,5 @@ export interface TranslationContent {
     level: string
   }
   cta: { title: string; subtitle: string; desc: string; button: string; whatsapp: string }
+  footer: { rights: string; links: string; github: string; scrollTop: string }
 }
