@@ -5,7 +5,7 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | Frontend Mühendisi',
     desc: '6+ yıl deneyimli Frontend Mühendisi ve Vue.js/TypeScript Uzmanı. Vue 3, React ve Next.js konusunda uzman.',
   },
-  errorBoundary: { title: 'Bir seyler ters gitti.', retry: 'Tekrar dene' },
+  errorBoundary: { title: 'Bir şeyler ters gitti.', retry: 'Tekrar dene' },
   nav: {
     work: 'Portfolyo',
     about: 'Hakkımda',

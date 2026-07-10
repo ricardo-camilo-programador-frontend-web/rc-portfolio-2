@@ -21,6 +21,15 @@ function extractTopLevelKeys(code) {
   let objEnd = startIdx
 
   for (let i = startIdx; i < code.length && braceCount > 0; i++) {
+    if (code[i] === "'" || code[i] === '"' || code[i] === '`') {
+      const quote = code[i]
+      i++
+      while (i < code.length && code[i] !== quote) {
+        if (code[i] === '\\') i++
+        i++
+      }
+      continue
+    }
     if (code[i] === '{') braceCount++
     else if (code[i] === '}') braceCount--
     if (braceCount === 0) {
@@ -44,6 +53,15 @@ function extractNestedKeys(code, objectKey) {
   let objectEnd = startIdx
 
   for (let i = startIdx; i < code.length && braceCount > 0; i++) {
+    if (code[i] === "'" || code[i] === '"' || code[i] === '`') {
+      const quote = code[i]
+      i++
+      while (i < code.length && code[i] !== quote) {
+        if (code[i] === '\\') i++
+        i++
+      }
+      continue
+    }
     if (code[i] === '{') braceCount++
     else if (code[i] === '}') braceCount--
     if (braceCount === 0) {

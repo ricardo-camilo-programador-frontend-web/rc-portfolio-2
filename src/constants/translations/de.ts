@@ -32,7 +32,7 @@ const translation: TranslationContent = {
     details: 'DISC-Profil: Investigator — Fokus auf technische Präzision und skalierbare Lösungen.',
     stats: { exp: '6+ Jahre', projects: '20+ geliefert', eng: 'Englisch C1' },
     statsLabels: { exp: 'Erfahrung', projects: 'Handgefertigt', eng: 'Kompetenz' },
-    portraitAlt: 'Portrat von Ricardo Camilo',
+    portraitAlt: 'Porträt von Ricardo Camilo',
   },
   services: {
     s1: {

@@ -5,7 +5,7 @@ const translation: TranslationContent = {
     title: 'Ricardo Camilo | Ingeniero Frontend',
     desc: 'Ingeniero Frontend y especialista en Vue.js/TypeScript con más de 6 años de experiencia. Experto en Vue 3, React y Next.js.',
   },
-  errorBoundary: { title: 'Algo salio mal.', retry: 'Intentar de nuevo' },
+  errorBoundary: { title: 'Algo salió mal.', retry: 'Intentar de nuevo' },
   nav: {
     work: 'Portafolio',
     about: 'Sobre mí',
