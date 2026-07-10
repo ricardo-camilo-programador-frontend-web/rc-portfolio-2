@@ -1,6 +1,9 @@
 import type { TranslationContent } from './translation-types'
 import { LANGUAGES, type LanguageCode } from './languages'
 
+export const FALLBACK_TITLE = 'Something went wrong.'
+export const FALLBACK_RETRY = 'Try again'
+
 const VALID_LANGUAGE_CODES = new Set<string>(LANGUAGES.map(language => language.code))
 
 const isLanguageCode = (value: string): value is LanguageCode => VALID_LANGUAGE_CODES.has(value)
@@ -28,7 +31,11 @@ export const loadErrorBoundaryTranslation = async (): Promise<{ title: string; r
     const translation = await loadTranslation(language)
     return translation.errorBoundary
   } catch {
-    const fallbackTranslation = await loadTranslation('pt')
-    return fallbackTranslation.errorBoundary
+    try {
+      const fallbackTranslation = await loadTranslation('pt')
+      return fallbackTranslation.errorBoundary
+    } catch {
+      return { title: FALLBACK_TITLE, retry: FALLBACK_RETRY }
+    }
   }
 }
