@@ -7,6 +7,7 @@ import { Navigation } from './components/Navigation'
 import { PROJECTS, USER_PHOTO } from './constants/data'
 import { env } from './constants/env'
 import { LANGUAGES, type LanguageCode } from './constants/languages'
+import portugueseTranslation from './constants/translations/pt'
 import { analytics } from './services/analytics'
 
 const About = lazy(() => import('./components/About').then(m => ({ default: m.About })))
@@ -82,41 +83,7 @@ const updateOpenGraphMeta = (translation: TranslationContent, langCode: Language
   setMetaProperty('og:locale', OG_LOCALES[langCode])
 }
 
-// Minimal inline fallback for the brief moment before dynamic import resolves
-const INITIAL_TRANSLATION: TranslationContent = {
-  seo: { title: 'Ricardo Camilo', desc: '' },
-  errorBoundary: { title: '', retry: '' },
-  nav: { work: '', about: '', services: '', career: '', contact: '', menu: '' },
-  a11y: { skipToContent: '', selectLanguage: '', languageSelection: '' },
-  hero: { title: '', subtitle: '', desc: '', cta: '', badge: '' },
-  about: {
-    quote: '',
-    bio: '',
-    details: '',
-    stats: { exp: '', projects: '', eng: '' },
-    statsLabels: { exp: '', projects: '', eng: '' },
-    portraitAlt: '',
-  },
-  services: {
-    s1: { title: '', desc: '' },
-    s2: { title: '', desc: '' },
-    s3: { title: '', desc: '' },
-  },
-  skills: { title: '', subtitle: '' },
-  work: {
-    title: '',
-    subtitle: '',
-    viewAll: '',
-    viewProject: '',
-    viewFullSize: '',
-    projectCategory: '',
-    comingSoon: '',
-  },
-  career: { title: '', subtitle: '', present: '', timeline: [] },
-  certs: { title: '', subtitle: '', proficiency: '', certificate: '', level: '' },
-  cta: { title: '', subtitle: '', desc: '', button: '', whatsapp: '' },
-  footer: { rights: '', links: '', github: '', scrollTop: '' },
-}
+const INITIAL_TRANSLATION: TranslationContent = portugueseTranslation
 
 interface LoadingFallbackProps {
   height?: string
