@@ -24,7 +24,7 @@ export interface AnalyticsConfig {
 
 export const ANALYTICS_DEFAULTS = {
   clarityId: 'yyrpg1l7im',
-  ga4Id: 'G-DLRDXGG3V1',
+  ga4Id: 'G-BPG92MZWJ3',
   gtmId: '',
   gtmEnabled: false,
   gtmGa4Id: '',
