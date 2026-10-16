@@ -1,3 +1,5 @@
+import { resolveAnalyticsConfig } from '../lib/analytics/config'
+
 /**
  * Centralized access to all runtime environment variables.
  * Every VITE_* variable is read once here so components don't
@@ -27,8 +29,17 @@ export const env = {
   /** WhatsApp contact URL */
   whatsappUrl: import.meta.env.VITE_WHATSAPP_URL ?? '',
 
-  /** Analytics */
-  gaMeasurementId: import.meta.env.VITE_GA_MEASUREMENT_ID ?? '',
-  gtmId: import.meta.env.VITE_GTM_ID ?? '',
-  counterDevId: import.meta.env.VITE_COUNTER_DEV_ID ?? '',
+  /** Analytics (defaults e fallbacks legados em src/lib/analytics/config.ts) */
+  analytics: resolveAnalyticsConfig({
+    clarityId: import.meta.env.VITE_CLARITY_ID,
+    ga4Id: import.meta.env.VITE_GA4_ID,
+    legacyGaMeasurementId: import.meta.env.VITE_GA_MEASUREMENT_ID,
+    gtmId: import.meta.env.VITE_GTM_ID,
+    gtmEnabled: import.meta.env.VITE_GTM_ENABLED,
+    gtmGa4Id: import.meta.env.VITE_GTM_GA4_ID,
+    counterId: import.meta.env.VITE_COUNTER_ID,
+    legacyCounterDevId: import.meta.env.VITE_COUNTER_DEV_ID,
+    counterUtcOffset: import.meta.env.VITE_COUNTER_UTCOFFSET,
+    analyticsEnabled: import.meta.env.VITE_ANALYTICS_ENABLED,
+  }),
 } as const
