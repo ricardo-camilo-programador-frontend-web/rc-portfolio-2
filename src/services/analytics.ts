@@ -1,3 +1,5 @@
+import { env } from '../constants/env'
+
 interface AnalyticsEvent {
   category: string
   action: string
@@ -9,6 +11,8 @@ type AnalyticsWindow = Window & {
   dataLayer?: Array<unknown>
   gtag?: (...arguments_: Array<unknown>) => void
 }
+
+type ClarityFn = ((...arguments_: Array<unknown>) => void) & { q?: Array<unknown> }
 
 class AnalyticsService {
   private queue: Array<AnalyticsEvent> = []
@@ -78,35 +82,87 @@ class AnalyticsService {
 
   private loadAnalytics(): void {
     if (this.isLoaded || this.isLoading) return
-
-    const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID
-    if (!measurementId || measurementId === 'undefined') {
-      this.isLoading = false
-      return
-    }
-
     this.isLoading = true
 
-    const gtmScript = document.createElement('script')
-    gtmScript.async = true
-    gtmScript.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`
-    document.head.appendChild(gtmScript)
-    gtmScript.onload = () => {
-      const analyticsWindow = window as AnalyticsWindow
-      analyticsWindow.dataLayer = analyticsWindow.dataLayer || []
-      analyticsWindow.gtag = (...arguments_: Array<unknown>) => {
-        analyticsWindow.dataLayer?.push(arguments_)
-      }
-      analyticsWindow.gtag?.('js', new Date())
-      analyticsWindow.gtag?.('config', measurementId)
-      this.isLoaded = true
-      this.flush()
+    const config = env.analytics
+    if (!config.enabled) {
+      this.isLoading = false
+      return
     }
 
     if (this.loadTimeout) {
       clearTimeout(this.loadTimeout)
       this.loadTimeout = null
     }
+
+    const gtmActive = config.gtmEnabled && config.gtmId !== ''
+    if (gtmActive) {
+      this.injectGtm(config.gtmId)
+    }
+
+    const gtagHandledByGtm = gtmActive && config.gtmGa4Id === config.ga4Id
+    if (config.ga4Id !== '' && !gtagHandledByGtm) {
+      this.injectGa4(config.ga4Id)
+    }
+
+    this.injectClarity(config.clarityId)
+    this.injectCounter(config.counterId, config.counterUtcOffset)
+  }
+
+  private injectGtm(containerId: string): void {
+    const analyticsWindow = window as AnalyticsWindow
+    analyticsWindow.dataLayer = analyticsWindow.dataLayer || []
+    analyticsWindow.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' })
+    const script = document.createElement('script')
+    script.async = true
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${containerId}`
+    document.head.appendChild(script)
+  }
+
+  private injectGa4(measurementId: string): void {
+    const analyticsWindow = window as AnalyticsWindow
+    analyticsWindow.dataLayer = analyticsWindow.dataLayer || []
+    if (!analyticsWindow.gtag) {
+      analyticsWindow.gtag = (...arguments_: Array<unknown>) => {
+        analyticsWindow.dataLayer?.push(arguments_)
+      }
+    }
+    analyticsWindow.gtag?.('js', new Date())
+    analyticsWindow.gtag?.('config', measurementId)
+    const script = document.createElement('script')
+    script.async = true
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`
+    document.head.appendChild(script)
+    this.isLoaded = true
+    this.flush()
+  }
+
+  private injectClarity(clarityId: string): void {
+    if (clarityId === '') return
+    const clarityWindow = window as Window & { clarity?: ClarityFn }
+    if (!clarityWindow.clarity) {
+      const clarityFn: ClarityFn = (...arguments_: Array<unknown>): void => {
+        if (!clarityFn.q) {
+          clarityFn.q = []
+        }
+        clarityFn.q.push(arguments_)
+      }
+      clarityWindow.clarity = clarityFn
+    }
+    const script = document.createElement('script')
+    script.async = true
+    script.src = `https://www.clarity.ms/tag/${clarityId}`
+    document.head.appendChild(script)
+  }
+
+  private injectCounter(counterId: string, utcOffset: string): void {
+    if (counterId === '') return
+    const script = document.createElement('script')
+    script.async = true
+    script.src = 'https://cdn.counter.dev/script.js'
+    script.dataset.id = counterId
+    script.dataset.utcoffset = utcOffset
+    document.head.appendChild(script)
   }
 
   track(event: AnalyticsEvent): void {
@@ -134,8 +190,10 @@ class AnalyticsService {
     if (this.isLoaded && analyticsWindow.gtag) {
       events.forEach(event => {
         analyticsWindow.gtag?.('event', event.action, {
-          ['event_category']: event.category,
-          ...(event.label ? { ['event_label']: event.label } : {}),
+          // biome-ignore lint/style/useNamingConvention: GA4 API requires snake_case payload keys
+          event_category: event.category,
+          // biome-ignore lint/style/useNamingConvention: GA4 API requires snake_case payload keys
+          ...(event.label ? { event_label: event.label } : {}),
           ...(event.value !== undefined ? { value: event.value } : {}),
         })
       })
