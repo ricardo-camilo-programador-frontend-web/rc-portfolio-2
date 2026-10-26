@@ -30,3 +30,4 @@ dist-ssr
 
 # knip dead-code detection artifacts
 .knip/
+.worktrees/
