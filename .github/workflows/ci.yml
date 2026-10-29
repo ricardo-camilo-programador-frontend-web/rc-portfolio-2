@@ -105,7 +105,12 @@ jobs:
           FAILED=0
 
           for COMMIT in $(git rev-list --no-merges "$(git merge-base origin/$GITHUB_BASE_REF $GITHUB_SHA)..$GITHUB_SHA"); do
+            AUTHOR=$(git log -1 --format="%an" "$COMMIT")
             MSG=$(git log -1 --format="%s" "$COMMIT")
+            if [[ "$AUTHOR" == *"[bot]"* ]]; then
+              echo "  ⏭ $MSG (auto-generated commit, skipped)"
+              continue
+            fi
             if ! echo "$MSG" | grep -qE "$PATTERN"; then
               echo "  ❌ Invalid commit: $MSG"
               echo "      Expected: :emoji: type(scope): description or :emoji: type: description"

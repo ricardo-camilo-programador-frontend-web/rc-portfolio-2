@@ -59,7 +59,7 @@ Este projeto usa variaveis de ambiente com prefixo `VITE_` (padrao Vite). Copie 
 |----------|-----------|---------|
 | `VITE_PORTFOLIO_URL` | URL do portfolio | `https://ricardo-camilo-dev-frontend-web.netlify.app/` |
 | `VITE_GITHUB_URL` | Perfil GitHub | `https://github.com/ricardo-camilo-programador-frontend-web` |
-| `VITE_LINKEDIN_URL` | Perfil LinkedIn | `https://www.linkedin.com/in/ricardo-camilo-...` |
+| `VITE_LINKEDIN_URL` | Perfil LinkedIn | `https://www.linkedin.com/in/ricardo-camilo-programador-frontend-web-developer` |
 | `VITE_X_URL` | Perfil X (Twitter) | `https://x.com/Ricardo50993066` |
 | `VITE_INSTAGRAM_URL` | Perfil Instagram | `https://www.instagram.com/ricardo.camilo.dev/` |
 | `VITE_YOUTUBE_URL` | Canal YouTube | `https://www.youtube.com/@ricardocamilodev` |
