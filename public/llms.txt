@@ -18,7 +18,7 @@ Ricardo builds performant, accessible, and scalable web applications. Expert in 
 ## Links
 
 - [GitHub Repositories](https://github.com/ricardo-camilo-programador-frontend-web): Open-source code and project repositories
-- [LinkedIn Profile](https://www.linkedin.com/in/ricardo-camilo-frontend-web-developer/): Professional network profile
+- [LinkedIn Profile](https://www.linkedin.com/in/ricardo-camilo-programador-frontend-web-developer/): Professional network profile
 - [Instagram](https://instagram.com/ricardo.camilo.dev/): Development and design content
 - [Source Code](https://github.com/ricardo-camilo-programador-frontend-web/rc-portfolio-2): This portfolio's source code
 
